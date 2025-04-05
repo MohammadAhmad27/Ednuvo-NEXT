@@ -12,7 +12,7 @@ const ServiceCardComponent = ({ card }: ServiceCardProps) => {
         src={card?.coverImg}
         alt="cover-image"
         width={100}
-        height={200}
+        height={100}
         className="object-cover w-full rounded-t-xl"
       />
       <div className="px-4 py-3 flex flex-col gap-1">

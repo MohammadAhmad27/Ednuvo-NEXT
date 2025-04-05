@@ -1,6 +1,8 @@
+import Navbar from "@/shared/Navbar";
 import Hero from "@/components/Landing/Hero";
 import PopularServices from "@/components/Landing/PopularServices";
-import Navbar from "@/shared/Navbar";
+import NeedSomething from "@/components/Landing/NeedSomething";
+import Categories from "@/components/Landing/Categories";
 
 const page = () => {
   return (
@@ -8,6 +10,8 @@ const page = () => {
       <Navbar />
       <Hero />
       <PopularServices />
+      <NeedSomething />
+      <Categories />
     </>
   );
 };

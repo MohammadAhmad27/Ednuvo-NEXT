@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import ServiceSlider from "../ui/Slider/Service-Slider";
+import ServiceSlider from "../ui/Sliders/Service-Slider";
 import { serviceButtons, serviceDataMap } from "@/app/content";
 
 const PopularServices = () => {
@@ -8,11 +8,11 @@ const PopularServices = () => {
   const cardData = serviceDataMap[activeButton] || [];
 
   return (
-    <div className="w-full bg-white px-20 py-20 -mt-20 z-10 rounded-tl-[60px] space-y-10">
+    <div className="w-full bg-white px-20 pt-20 pb-14 -mt-20 z-10 rounded-tl-[60px] space-y-10">
       {/* Header */}
       <div className="w-full flex justify-between items-center gap-2">
         <div className="flex flex-col">
-          <h2 className="text-[26px] font-extrabold text-lightblack">
+          <h2 className="text-[26px] font-extrabold text-lightblack capitalize">
             Popular Services
           </h2>
           <p className="text-[18px] font-normal text-darkgray">

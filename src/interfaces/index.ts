@@ -36,3 +36,21 @@ export interface ServiceCard {
   price: number;
   currency: string;
 }
+
+export interface StaticContentCard {
+  id: number;
+  icon: string;
+  title: string;
+  desc: string;
+}
+
+export interface StaticImages {
+  id: number;
+  icon: string;
+}
+
+export interface StaticTestimonials {
+  id: number;
+  icon: string;
+  desc: string;
+}

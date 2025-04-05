@@ -1,4 +1,11 @@
-import { StatsData, ServiceButton, ServiceCard } from "@/interfaces";
+import {
+  StatsData,
+  ServiceButton,
+  ServiceCard,
+  StaticContentCard,
+  StaticImages,
+  StaticTestimonials,
+} from "@/interfaces";
 
 export const statsData: StatsData[] = [
   {
@@ -500,3 +507,65 @@ export const serviceDataMap: Record<string, ServiceCard[]> = {
   "Cleaning Services": cleaningServices,
   "Tiling & Flooring Services": tilingFlooringServices,
 };
+
+export const staticContentData: StaticContentCard[] = [
+  {
+    id: 1,
+    icon: "/landing/needsomething/search.svg",
+    title: "Post A Job",
+    desc: "Post your job for free and let skilled professionals come to you with offers.",
+  },
+  {
+    id: 2,
+    icon: "/landing/needsomething/freelancer.svg",
+    title: "Choose Freelancers",
+    desc: "Browse through verified service providers, check reviews, and select the best freelancer.",
+  },
+  {
+    id: 3,
+    icon: "/landing/needsomething/safety.svg",
+    title: "Pay Safely",
+    desc: "Your money is only released once the job is done to your satisfaction.",
+  },
+];
+
+export const imagesData: StaticImages[] = [
+  {
+    id: 1,
+    icon: "/landing/categories/plumbing.svg",
+  },
+  {
+    id: 2,
+    icon: "/landing/categories/electric.svg",
+  },
+  {
+    id: 3,
+    icon: "/landing/categories/cleaning.svg",
+  },
+  {
+    id: 4,
+    icon: "/landing/categories/carpentry.svg",
+  },
+  {
+    id: 5,
+    icon: "/landing/categories/tiling.svg",
+  },
+];
+
+export const staticTestimonials: StaticTestimonials[] = [
+  {
+    id: 1,
+    icon: "/landing/categories/check-circle.svg",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
+  },
+  {
+    id: 2,
+    icon: "/landing/categories/check-circle.svg",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
+  },
+  {
+    id: 3,
+    icon: "/landing/categories/check-circle.svg",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing",
+  },
+];

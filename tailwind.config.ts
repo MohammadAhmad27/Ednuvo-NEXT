@@ -22,6 +22,7 @@ const config: Config = {
         lightblack: "#222222",
         primary: "#1F4B3F",
         secondary: "#5BBB7B",
+        lightgreen: "#EEF8F2",
       },
       boxShadow: {
         grayshadow: "1px 6px 20px 0px #E9E9E98C",
