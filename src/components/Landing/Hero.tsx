@@ -1,8 +1,7 @@
 "use client";
-import React from "react";
 import Image from "next/image";
 import CountUp from "react-countup";
-import { statsData } from "@/constants";
+import { statsData } from "@/app/content";
 
 const Hero = () => {
   return (
@@ -76,7 +75,9 @@ const Hero = () => {
               height={20}
             />
           </div>
-          <p className="text-[12px] font-semibold text-lightblack">Proof of Quality</p>
+          <p className="text-[12px] font-semibold text-lightblack">
+            Proof of Quality
+          </p>
         </div>
         {/* 2nd */}
         <div className="absolute top-[187px] right-[-130px] bg-white flex items-center gap-3 rounded-xl p-3 min-w-[250px]">
@@ -88,11 +89,15 @@ const Hero = () => {
               height={20}
             />
           </div>
-          <p className="text-[12px] font-semibold text-lightblack">Safe and Secure</p>
+          <p className="text-[12px] font-semibold text-lightblack">
+            Safe and Secure
+          </p>
         </div>
         {/* 3rd */}
         <div className="absolute bottom-[-15px] right-44 bg-white flex items-center gap-5 rounded-xl p-3">
-          <p className="text-[12px] font-semibold text-lightblack">300+ Professionals</p>
+          <p className="text-[12px] font-semibold text-lightblack">
+            300+ Professionals
+          </p>
           <Image
             src="/landing/hero/icon-group.svg"
             alt="group-icon"

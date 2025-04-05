@@ -1,14 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "swiper/css";
-@import "swiper/css/navigation";
-@import "swiper/css/pagination";
 
 :root {
   --background: #FFFFFF;
   --foreground: #222222;
-} 
+}
 
 body {
   color: var(--foreground);
@@ -19,19 +16,4 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-
-.swiper-pagination {
-  margin-top: 25px; /* Move dots lower */
-  position: relative !important;
-}
-
-.swiper-pagination-bullet {
-  background: #6B7177 !important; /* Inactive dot color */
-  opacity: 1;
-}
-
-.swiper-pagination-bullet-active {
-  background: #1F4B3F !important; /* Active dot color */
 }

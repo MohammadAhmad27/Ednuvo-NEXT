@@ -1,4 +1,4 @@
-import { AuthButton, NavigationItem, StatsData } from "@/interfaces";
+import { AuthButton, NavigationItem } from "@/interfaces";
 
 export const navigation: NavigationItem[] = [
   {
@@ -40,31 +40,3 @@ export const authButtons: AuthButton[] = [
     href: "#",
   },
 ];
-
-export const statsData: StatsData[] = [
-  {
-    id: 1,
-    value: 100,
-    suffix: "+",
-    label: "Total Providers",
-  },
-  {
-    id: 2,
-    value: 200,
-    suffix: "+",
-    label: "Job Posted",
-  },
-  {
-    id: 3,
-    value: 200,
-    suffix: "+",
-    label: "Project Completed",
-  },
-  {
-    id: 4,
-    value: 100,
-    suffix: "+",
-    label: "Positive Reviews",
-  },
-];
-
