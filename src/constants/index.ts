@@ -38,12 +38,12 @@ export const authButtons: AuthButton[] = [
   {
     id: 1,
     label: "Log In",
-    href: "#",
+    href: "/login",
   },
   {
     id: 2,
     label: "Sign Up",
-    href: "/register",
+    href: "/signup",
   },
 ];
 

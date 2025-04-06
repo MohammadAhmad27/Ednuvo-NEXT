@@ -1,12 +1,16 @@
 "use client";
+import { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { registerCardData } from "@/app/register/content";
-import Slider from "../ui/Sliders/Slider";
-import RegisterCardComponent from "../ui/Cards/Register-Card";
-import RoleSelectorCard from "../ui/Cards/Role-Selector-Card";
+import Slider from "@/components/ui/Sliders/Slider";
+import RegisterCardComponent from "@/components/ui/Cards/Register-Card";
 
-const Register = () => {
+interface RegisterProps {
+  component: ReactNode;
+}
+
+const Register = ({ component }: RegisterProps) => {
   return (
     <div className="min-h-screen w-screen bg-lightgreen flex justify-between gap-2 py-4 pl-8 pr-4">
       {/* left */}
@@ -30,11 +34,8 @@ const Register = () => {
         </div>
       </div>
       {/* right */}
-      <div className="w-1/2 bg-white border border-[#E5E5E5] shadow-grayshadow4 flex flex-col gap-10 justify-center items-center px-4 rounded-[32px]">
-        <h1 className="text-[32px] font-semibold text-black text-center max-w-[500px]">
-          Join As A Service Provider Or Service Requester
-        </h1>
-        <RoleSelectorCard />
+      <div className="w-1/2 bg-white border border-[#E5E5E5] shadow-grayshadow4 flex flex-col justify-center items-center rounded-[32px] p-4">
+        {component && component}
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ interface ServiceCardProps {
 }
 const RegisterCardComponent = ({ card }: ServiceCardProps) => {
   return (
-    <div className="flex justify-center items-center">
+    <div className="w-full flex justify-center items-center">
       <div className="flex flex-col gap-10">
         <Image
           src={card?.coverImg}

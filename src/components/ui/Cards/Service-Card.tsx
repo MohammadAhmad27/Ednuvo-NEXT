@@ -7,7 +7,7 @@ interface ServiceCardProps {
 
 const ServiceCardComponent = ({ card }: ServiceCardProps) => {
   return (
-    <div className="h-full bg-white border border-gray shadow-grayshadow rounded-xl cursor-pointer">
+    <div className="w-full h-full bg-white border border-gray shadow-grayshadow rounded-xl cursor-pointer">
       <Image
         src={card?.coverImg}
         alt="cover-image"

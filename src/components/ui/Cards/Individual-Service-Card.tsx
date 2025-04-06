@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const IndividualServiceCard = () => {
   return (
-    <div className="bg-white shadow-grayshadow2 flex flex-col gap-2 justify-center items-center rounded-xl px-2 py-6">
+    <div className="w-full bg-white shadow-grayshadow2 flex flex-col gap-2 justify-center items-center rounded-xl px-2 py-6">
       <Image
         src="/landing/popularservices/user.svg"
         alt="user-icon"
