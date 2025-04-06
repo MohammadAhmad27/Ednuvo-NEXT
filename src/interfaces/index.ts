@@ -25,4 +25,5 @@ export interface SocialIcons {
   id: number;
   icon: string;
   href: string;
+  label: string;
 }

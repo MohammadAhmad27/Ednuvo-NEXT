@@ -58,10 +58,12 @@ const Footer = () => {
                 href={social?.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={social?.label}
+                title={social?.label}
               >
                 <Image
                   src={social?.icon}
-                  alt="social-icon"
+                  alt={social?.label}
                   width={20}
                   height={20}
                   className="object-cover"
@@ -71,7 +73,13 @@ const Footer = () => {
           </div>
 
           {/* App Store Button */}
-          <a href="#" target="_blank" rel="noopener noreferrer">
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Download on the App Store"
+            title="Download on the App Store"
+          >
             <Image
               src="/footer/app-store.svg"
               alt="app-store-icon"

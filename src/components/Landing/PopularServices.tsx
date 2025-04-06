@@ -1,7 +1,9 @@
 "use client";
 import { useState } from "react";
-import ServiceSlider from "../ui/Sliders/Service-Slider";
+import Slider from "../ui/Sliders/Slider";
 import { serviceButtons, serviceDataMap } from "@/app/(main)/content";
+import ServiceCardComponent from "../ui/Cards/Service-Card";
+import { ServiceCard } from "@/interfaces/Landing";
 
 const PopularServices = () => {
   const [activeButton, setActiveButton] = useState(serviceButtons[0]?.label);
@@ -19,7 +21,6 @@ const PopularServices = () => {
             Most viewed and all-time top-selling services
           </p>
         </div>
-
         {/* Service Tabs */}
         <div className="flex items-center gap-6">
           {serviceButtons?.map((button) => (
@@ -37,9 +38,12 @@ const PopularServices = () => {
           ))}
         </div>
       </div>
-
-      {/* Swiper Section */}
-      <ServiceSlider cards={cardData} />
+      {/* Slider Section */}
+      <Slider
+        cards={cardData}
+        renderCard={(card) => <ServiceCardComponent card={card} />}
+        itemsPerSlide={4}
+      />
     </div>
   );
 };

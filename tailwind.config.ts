@@ -28,6 +28,7 @@ const config: Config = {
         grayshadow: "1px 6px 20px 0px #E9E9E98C",
         grayshadow2: "0px 4px 32px 0px #E9E9E9BF",
         grayshadow3: "0.63px 3.75px 12.5px 0px #E9E9E98C",
+        grayshadow4: "0px 4px 134px 0px #46B7D11F",
       },
       backgroundImage: {
         "btn-gradient":

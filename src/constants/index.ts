@@ -43,7 +43,7 @@ export const authButtons: AuthButton[] = [
   {
     id: 2,
     label: "Sign Up",
-    href: "#",
+    href: "/register",
   },
 ];
 
@@ -91,9 +91,9 @@ export const bottomLinks: BottomLinks[] = [
 ];
 
 export const socialIcons: SocialIcons[] = [
-  { id: 1, icon: "/footer/youtube.svg", href: "#" },
-  { id: 2, icon: "/footer/facebook.svg", href: "#" },
-  { id: 3, icon: "/footer/twitter.svg", href: "#" },
-  { id: 4, icon: "/footer/instagram.svg", href: "#" },
-  { id: 5, icon: "/footer/linkedin.svg", href: "#" },
+  { id: 1, icon: "/footer/youtube.svg", href: "#", label: "Youtube" },
+  { id: 2, icon: "/footer/facebook.svg", href: "#", label: "Facebook" },
+  { id: 3, icon: "/footer/twitter.svg", href: "#", label: "Twitter" },
+  { id: 4, icon: "/footer/instagram.svg", href: "#", label: "Instagram" },
+  { id: 5, icon: "/footer/linkedin.svg", href: "#", label: "LinkedIn" },
 ];

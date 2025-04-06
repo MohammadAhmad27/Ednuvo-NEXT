@@ -9,7 +9,7 @@ const Navbar = () => {
       <div className="flex items-center gap-8">
         <Link href="/">
           <Image
-            src="/navbar/ednuvo-logo.svg"
+            src="/navbar/ednuvo-light.svg"
             alt="Ednuvo-logo"
             width={70}
             height={70}
