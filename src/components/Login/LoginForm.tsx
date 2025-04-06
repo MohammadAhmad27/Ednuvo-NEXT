@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
 import MUITextField from "../ui/TextField";
-import { signUpButtons } from "@/app/signup/content";
 import Image from "next/image";
 import Link from "next/link";
+import { signUpButtons } from "@/app/signup/content";
 
-const SignUpForm = () => {
+const LoginForm = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -21,11 +21,20 @@ const SignUpForm = () => {
   return (
     <div className="w-full flex flex-col justify-center items-center gap-4">
       <div className="space-y-3">
-        <h1 className="text-[32px] font-semibold text-black text-center max-w-[500px]">
-          Create Your Account
-        </h1>
+        <div className="flex justify-center items-center gap-2">
+          <h1 className="text-[32px] font-semibold text-black text-center max-w-[500px]">
+            Welcome Back
+          </h1>
+          <Image
+            src="/login/hand.svg"
+            alt="hand-icon"
+            width={40}
+            height={40}
+            className="object-cover"
+          />
+        </div>
         <p className="text-[16px] font-medium text-darkgray text-center max-w-[400px]">
-          Sign up now and experience seamless hiring and freelancing!
+          Login now and experience seamless hiring and freelancing!
         </p>
       </div>
       <form
@@ -50,37 +59,37 @@ const SignUpForm = () => {
           showPassword={showPassword}
           setShowPassword={setShowPassword}
         />
-        <p className="texr-[12px] font-normal text-[#AAAAAA]">
-          Use 8+ characters with a mix of uppercase, lowercase, numbers, and
-          special symbols (e.g., !@#$).
-        </p>
-        <div className="flex justify-start items-center gap-2">
-          <input
-            type="checkbox"
-            id="check"
-            checked={isChecked}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setIsChecked(e.target.checked)
-            }
-            className="cursor-pointer"
-          />
-          <label
-            htmlFor="check"
-            className="text-[12px] font-normal text-lightblack cursor-pointer"
+        <div className="flex justify-between items-center gap-2">
+          <div className="flex justify-start items-center gap-2">
+            <input
+              type="checkbox"
+              id="check"
+              checked={isChecked}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setIsChecked(e.target.checked)
+              }
+              className="cursor-pointer"
+            />
+            <label
+              htmlFor="check"
+              className="text-[12px] font-normal text-lightblack cursor-pointer"
+            >
+              Remember me
+            </label>
+          </div>
+          <Link
+            href="/forgot-password"
+            className="text-[14px] font-normal text-[#45B7D1]"
           >
-            By clicking on “Create Account” you{" "}
-            <Link href="#" className="text-secondary">
-              agree to terms and privacy policy
-            </Link>{" "}
-            of Ednuvo
-          </label>
+            Forgot Password?
+          </Link>
         </div>
         <button
           type="submit"
           className="w-full text-[18px] font-medium text-white text-center bg-secondary rounded-full p-2"
           disabled={isLoading}
         >
-          {isLoading ? "Loading..." : "Sign Up"}
+          {isLoading ? "Loading..." : "Login"}
         </button>
       </form>
       <div className="flex items-center gap-2 w-full max-w-[550px]">
@@ -120,13 +129,13 @@ const SignUpForm = () => {
         ))}
       </div>
       <p className="flex items-center gap-[6px] text-[14px] font-normal text-[#101828] mt-[2px]">
-        Already have an account?
-        <Link href="/login" className="text-secondary">
-          Login
+        Don't have an account?
+        <Link href="/signup" className="text-secondary">
+          SignUp
         </Link>
       </p>
     </div>
   );
 };
 
-export default SignUpForm;
+export default LoginForm;
