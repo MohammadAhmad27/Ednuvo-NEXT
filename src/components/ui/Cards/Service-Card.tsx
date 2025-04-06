@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ServiceCard } from "@/interfaces";
+import { ServiceCard } from "@/interfaces/Landing";
 
 interface ServiceCardProps {
   card: ServiceCard;
@@ -24,7 +24,13 @@ const ServiceCardComponent = ({ card }: ServiceCardProps) => {
         </p>
         <div className="flex items-center gap-2 mt-[2px]">
           <div className="flex items-center gap-1">
-            <Image src={card?.starImg} alt="rating" width={20} height={20} />
+            <Image
+              src={card?.starImg}
+              alt="rating"
+              width={20}
+              height={20}
+              className="object-cover"
+            />
             <p className="text-[14px] font-normal text-lightblack">
               {card?.rating}
             </p>

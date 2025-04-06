@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import ServiceSlider from "../ui/Sliders/Service-Slider";
-import { serviceButtons, serviceDataMap } from "@/app/content";
+import { serviceButtons, serviceDataMap } from "@/app/(main)/content";
 
 const PopularServices = () => {
   const [activeButton, setActiveButton] = useState(serviceButtons[0]?.label);
@@ -12,7 +12,7 @@ const PopularServices = () => {
       {/* Header */}
       <div className="w-full flex justify-between items-center gap-2">
         <div className="flex flex-col">
-          <h2 className="text-[26px] font-extrabold text-lightblack capitalize">
+          <h2 className="text-[26px] font-extrabold text-lightblack">
             Popular Services
           </h2>
           <p className="text-[18px] font-normal text-darkgray">

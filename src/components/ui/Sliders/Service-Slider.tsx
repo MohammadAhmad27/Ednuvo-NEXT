@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import ServiceCardComponent from "../Cards/Service-Card";
 import { chunkArray } from "@/utils/services-array";
-import { ServiceCard } from "@/interfaces";
+import { ServiceCard } from "@/interfaces/Landing";
 import { Swiper as SwiperType } from "swiper";
 
 interface ServiceSliderProps {

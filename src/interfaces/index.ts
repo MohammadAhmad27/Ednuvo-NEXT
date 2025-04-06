@@ -9,48 +9,20 @@ export interface AuthButton {
   label: string;
   href: string;
 }
-
-export interface StatsData {
+export interface FooterSection {
   id: number;
-  value: number;
-  suffix: string;
-  label: string;
+  title: string;
+  items: string[];
 }
 
-export interface ServiceButton {
+export interface BottomLinks {
   id: number;
   label: string;
+  href: string;
 }
 
-export interface ServiceCard {
-  id: number;
-  coverImg: string;
-  title: string;
-  description: string;
-  starImg: string;
-  rating: number;
-  reviews: number;
-  userImg: string;
-  username: string;
-  startingAt: string;
-  price: number;
-  currency: string;
-}
-
-export interface StaticContentCard {
+export interface SocialIcons {
   id: number;
   icon: string;
-  title: string;
-  desc: string;
-}
-
-export interface StaticImages {
-  id: number;
-  icon: string;
-}
-
-export interface StaticTestimonials {
-  id: number;
-  icon: string;
-  desc: string;
+  href: string;
 }

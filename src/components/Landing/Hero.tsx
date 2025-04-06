@@ -1,14 +1,14 @@
 "use client";
 import Image from "next/image";
 import CountUp from "react-countup";
-import { statsData } from "@/app/content";
+import { statsData } from "@/app/(main)/content";
 
 const Hero = () => {
   return (
     <div className="w-full bg-primary overflow-hidden flex justify-between items-start gap-10 bg-[url(/landing/hero/lining-group.svg)] bg-cover bg-no-repeat px-20 pt-10 pb-40">
       <div className="w-3/5 flex flex-col gap-4">
-        <h1 className="text-[60px] font-extrabold text-white leading-none capitalize max-w-[800px]">
-          Find the expert service providers for your home
+        <h1 className="text-[60px] font-extrabold text-white leading-none max-w-[800px]">
+          Find The Expert Service Providers For Your Home
         </h1>
         <p className="text-[18px] text-white font-normal max-w-[740px]">
           Work with talented people at the most affordable price to get the most
@@ -20,7 +20,7 @@ const Hero = () => {
             alt="search-icon"
             width={20}
             height={20}
-            className="pl-1"
+            className="object-cover pl-1"
           />
           <input
             type="text"
@@ -73,6 +73,7 @@ const Hero = () => {
               alt="bulb-icon"
               width={20}
               height={20}
+              className="object-cover"
             />
           </div>
           <p className="text-[12px] font-semibold text-lightblack">
@@ -87,6 +88,7 @@ const Hero = () => {
               alt="tick-icon"
               width={20}
               height={20}
+              className="object-cover"
             />
           </div>
           <p className="text-[12px] font-semibold text-lightblack">
@@ -103,6 +105,7 @@ const Hero = () => {
             alt="group-icon"
             width={100}
             height={100}
+            className="object-cover"
           />
         </div>
       </div>

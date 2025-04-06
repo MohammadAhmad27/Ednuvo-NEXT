@@ -1,13 +1,13 @@
 import Image from "next/image";
-import { staticContentData } from "@/app/content";
+import { staticContentData } from "@/app/(main)/content";
 
 const NeedSomething = () => {
   return (
-    <div className="relative w-full">
+    <div className="relative w-full overflow-hidden">
       <div className="w-full bg-lightgreen flex justify-between items-start gap-2 pl-20 pt-20 pb-10">
         <div className="flex flex-col">
-          <h2 className="text-[26px] font-extrabold text-lightblack capitalize">
-            Need something done in your home?
+          <h2 className="text-[26px] font-extrabold text-lightblack">
+            Need something Done In Your Home?
           </h2>
           <p className="text-[18px] font-normal text-darkgray">
             Most viewed and all-time top-selling services
@@ -32,7 +32,7 @@ const NeedSomething = () => {
               alt="icon"
               width={20}
               height={20}
-              className="mb-1"
+              className="object-cover mb-1"
             />
             <h3 className="text-[18px] font-semibold text-lightblack leading-none">
               {item?.title}
