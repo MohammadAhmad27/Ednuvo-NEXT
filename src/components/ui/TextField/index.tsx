@@ -1,6 +1,6 @@
 import { VisibilityOutlined, VisibilityOffOutlined } from "@mui/icons-material";
 import { TextField, IconButton, InputAdornment } from "@mui/material";
-import { ChangeEvent } from "react";
+import { ChangeEvent, ReactNode } from "react";
 
 interface MUITextFieldProps {
   label: string;
@@ -9,6 +9,9 @@ interface MUITextFieldProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   showPassword?: boolean;
   setShowPassword?: (show: boolean) => void;
+  placeholder?: string | number;
+  startAdornment?: ReactNode;
+  endAdornment?: ReactNode;
 }
 
 const MUITextField = ({
@@ -18,33 +21,56 @@ const MUITextField = ({
   onChange,
   showPassword = false,
   setShowPassword,
+  placeholder,
+  startAdornment,
+  endAdornment,
 }: MUITextFieldProps) => {
+  const isPassword = type === "password";
+  const isNumber = type === "number";
+
   return (
     <TextField
       label={label}
       variant="outlined"
-      type={type === "password" && showPassword ? "text" : type}
+      type={isPassword && showPassword ? "text" : type}
       value={value}
       onChange={onChange}
+      placeholder={placeholder?.toString()}
       fullWidth
       size="medium"
-      InputProps={
-        type === "password"
+      inputMode={isNumber ? "numeric" : undefined}
+      InputProps={{
+        startAdornment: startAdornment ? (
+          <InputAdornment position="start">{startAdornment}</InputAdornment>
+        ) : undefined,
+        endAdornment: isPassword ? (
+          <InputAdornment position="end">
+            <IconButton
+              onClick={() => setShowPassword?.(!showPassword)}
+              edge="end"
+            >
+              {showPassword ? (
+                <VisibilityOffOutlined className="text-[#1E293B]" />
+              ) : (
+                <VisibilityOutlined className="text-[#1E293B]" />
+              )}
+            </IconButton>
+          </InputAdornment>
+        ) : endAdornment ? (
+          <InputAdornment position="end">{endAdornment}</InputAdornment>
+        ) : undefined,
+        ...(isNumber && {
+          inputMode: "numeric",
+        }),
+      }}
+      inputProps={
+        isNumber
           ? {
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    onClick={() => setShowPassword?.(!showPassword)}
-                    edge="end"
-                  >
-                    {showPassword ? (
-                      <VisibilityOffOutlined className="text-[#1E293B]" />
-                    ) : (
-                      <VisibilityOutlined className="text-[#1E293B]" />
-                    )}
-                  </IconButton>
-                </InputAdornment>
-              ),
+              inputMode: "numeric",
+              pattern: "[0-9]*",
+              style: {
+                MozAppearance: "textfield", // Firefox
+              },
             }
           : undefined
       }
@@ -61,7 +87,9 @@ const MUITextField = ({
           "&:hover fieldset": {
             borderColor: "#E9E9E9",
           },
-          "&.Mui-focused fieldset": { borderColor: "#E9E9E9" },
+          "&.Mui-focused fieldset": {
+            borderColor: "#E9E9E9",
+          },
         },
         "& .MuiInputLabel-root": {
           color: "#7D8BB7",
@@ -82,6 +110,18 @@ const MUITextField = ({
         },
         "& input:-webkit-autofill": {
           WebkitTextFillColor: "#222222 !important",
+        },
+        // Hide arrows in Chrome/Safari
+        "& input[type=number]": {
+          MozAppearance: "textfield", // Firefox
+        },
+        "& input[type=number]::-webkit-outer-spin-button": {
+          WebkitAppearance: "none",
+          margin: 0,
+        },
+        "& input[type=number]::-webkit-inner-spin-button": {
+          WebkitAppearance: "none",
+          margin: 0,
         },
       }}
     />

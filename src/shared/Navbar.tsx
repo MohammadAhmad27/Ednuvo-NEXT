@@ -13,7 +13,7 @@ const Navbar = () => {
             alt="Ednuvo-logo"
             width={70}
             height={70}
-            className="object-cover cursor-pointer"
+            className="object-cover"
           />
         </Link>
 
@@ -21,7 +21,7 @@ const Navbar = () => {
           {navigation?.map((item) => (
             <li key={item?.id}>
               <Link href={item?.href}>
-                <p className="text-[16px] font-medium text-white cursor-pointer">
+                <p className="text-[16px] font-medium text-white">
                   {item?.label}
                 </p>
               </Link>
@@ -32,7 +32,7 @@ const Navbar = () => {
       {/* Right Side: Auth Links */}
       <div className="flex items-center gap-5">
         <Link href="#">
-          <p className="text-[16px] font-medium text-white mr-4 cursor-pointer">
+          <p className="text-[16px] font-medium text-white mr-4">
             Become a Service Provider
           </p>
         </Link>
@@ -41,7 +41,7 @@ const Navbar = () => {
             <li key={item?.id}>
               <Link href={item?.href}>
                 <p
-                  className={`text-[16px] font-medium cursor-pointer ${
+                  className={`text-[16px] font-medium ${
                     item?.label === "Sign Up"
                       ? "text-lightblack bg-white px-5 py-2 rounded-full"
                       : "text-white"
