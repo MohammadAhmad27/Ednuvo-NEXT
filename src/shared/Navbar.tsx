@@ -4,7 +4,7 @@ import { authButtons, navigation } from "@/constants";
 
 const Navbar = () => {
   return (
-    <nav className="w-full bg-primary flex justify-between items-center gap-2 border-b-[1px] border-gray px-20 py-4">
+    <nav className="w-full overflow-hidden bg-primary flex justify-between items-center gap-2 border-b-[1px] border-gray px-20 py-4">
       {/* Left Side: Logo + Navigation Links */}
       <div className="flex items-center gap-8">
         <Link href="/">

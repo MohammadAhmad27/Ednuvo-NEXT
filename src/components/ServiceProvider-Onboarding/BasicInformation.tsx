@@ -1,10 +1,7 @@
 "use client";
-
 import { useState } from "react";
-import { InputAdornment } from "@mui/material";
 import Image from "next/image";
 import MUITextField from "../ui/TextField";
-import { LocationOn } from "@mui/icons-material";
 
 interface BasicInformationProps {
   formData: {
@@ -46,7 +43,6 @@ export default function BasicInformation({
         Let's start by setting up your profile. Enter your name, address, and
         phone number to help clients identify and contact you.
       </p>
-
       <div className="flex justify-center gap-2 mb-5">
         <div className="relative">
           <Image
@@ -84,7 +80,7 @@ export default function BasicInformation({
           label="First Name"
           placeholder="Enter your first name"
           type="text"
-          value={formData.firstName}
+          value={formData?.firstName}
           onChange={(e) => onChange({ firstName: e.target.value })}
         />
 
@@ -92,17 +88,16 @@ export default function BasicInformation({
           label="Last Name"
           placeholder="Enter your last name"
           type="text"
-          value={formData.lastName}
+          value={formData?.lastName}
           onChange={(e) => onChange({ lastName: e.target.value })}
         />
       </div>
-
       <div className="w-full flex justify-between items-center gap-4">
         <MUITextField
           label="Address"
           placeholder="Villa 23, Street 12, Al Muruj District, Riyadh"
           type="text"
-          value={formData.address}
+          value={formData?.address}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             onChange({ address: e.target.value })
           }
@@ -120,7 +115,7 @@ export default function BasicInformation({
           label="Phone Number"
           placeholder="123445"
           type="number"
-          value={formData.phoneNumber.toString()}
+          value={formData?.phoneNumber?.toString()}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             onChange({ phoneNumber: e.target.value })
           }
@@ -135,7 +130,7 @@ export default function BasicInformation({
               />
               <div className="flex items-center gap-2 mr-[18px]">
                 <span className="text-[16px] font-normal text-lightblack">
-                  {formData.countryCode}
+                  {formData?.countryCode}
                 </span>
                 <span className="w-[1px] h-5 bg-[#E0E0E0]" />
               </div>

@@ -12,6 +12,8 @@ interface MUITextFieldProps {
   placeholder?: string | number;
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
+  multiline?: boolean,
+  rows?: number
 }
 
 const MUITextField = ({
@@ -24,6 +26,8 @@ const MUITextField = ({
   placeholder,
   startAdornment,
   endAdornment,
+  multiline= false,
+  rows = 0
 }: MUITextFieldProps) => {
   const isPassword = type === "password";
   const isNumber = type === "number";
@@ -38,6 +42,8 @@ const MUITextField = ({
       placeholder={placeholder?.toString()}
       fullWidth
       size="medium"
+      multiline={multiline}
+      rows={multiline ? rows : undefined}
       inputMode={isNumber ? "numeric" : undefined}
       InputProps={{
         startAdornment: startAdornment ? (

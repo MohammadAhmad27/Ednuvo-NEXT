@@ -4,7 +4,7 @@ import { bottomLinks, footerData, socialIcons } from "@/constants";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-primary rounded-tr-[60px] -mt-24 z-10 px-20 pt-20 pb-5">
+    <footer className="w-full overflow-hidden bg-primary rounded-tr-[60px] -mt-24 z-10 px-20 pt-20 pb-5">
       {/* Top Section */}
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         {footerData?.map((section) => (

@@ -143,7 +143,7 @@ const ProfileStepper = () => {
   const handleFormChange = (data: Partial<typeof formData>) => {
     setFormData((prev) => ({ ...prev, ...data }));
   };
-
+console.log("formData:", formData);
   const CurrentStepComponent = steps[activeStep].component;
 
   return (
