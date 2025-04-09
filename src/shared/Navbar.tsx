@@ -31,7 +31,7 @@ const Navbar = () => {
       </div>
       {/* Right Side: Auth Links */}
       <div className="flex items-center gap-5">
-        <Link href="#">
+        <Link href="/service-provider-onboarding">
           <p className="text-[16px] font-medium text-white mr-4">
             Become a Service Provider
           </p>

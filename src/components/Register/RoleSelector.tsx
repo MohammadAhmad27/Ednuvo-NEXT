@@ -19,6 +19,7 @@ const RoleSelectorCard = () => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
+    console.log("Selected role:", event.target.value);
   };
 
   return (

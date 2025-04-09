@@ -1,16 +1,17 @@
 "use client";
 
-import React, { useState, forwardRef } from "react";
+import React, { forwardRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 
 interface DatePickerProps {
-  selectedDate?: any;
+  selectedDate: any;
   minDate?: Date;
   maxDate?: Date;
   onChange: (date: any) => void;
   placeholder?: string;
+  mode?: "date" | "time";
 }
 
 const DateRangePicker: React.FC<DatePickerProps> = ({
@@ -19,6 +20,7 @@ const DateRangePicker: React.FC<DatePickerProps> = ({
   maxDate,
   onChange,
   placeholder = "Select date",
+  mode = "date",
 }) => {
   const CustomInput = forwardRef<
     HTMLInputElement,
@@ -45,13 +47,17 @@ const DateRangePicker: React.FC<DatePickerProps> = ({
 
   return (
     <DatePicker
-      dateFormat="yyyy/MM/dd"
+      dateFormat={mode === "time" ? "hh:mm aa" : "yyyy/MM/dd"}
       selected={selectedDate}
-      onChange={(date: any) => onChange(date)}
-      minDate={minDate}
-      maxDate={maxDate}
+      onChange={onChange}
       customInput={<CustomInput />}
-      showDisabledMonthNavigation
+      minDate={mode === "date" ? minDate : undefined}
+      maxDate={mode === "date" ? maxDate : undefined}
+      showTimeSelect={mode === "time"}
+      showTimeSelectOnly={mode === "time"}
+      timeIntervals={5}
+      timeCaption="Time"
+      showDisabledMonthNavigation={mode === "date"}
     />
   );
 };

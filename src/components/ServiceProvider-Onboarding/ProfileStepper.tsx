@@ -66,7 +66,6 @@ const ColorlibStepIconRoot = styled("div")<{
     color: "#FFFFFF",
     fontSize: 24,
     fontWeight: 400,
-    boxShadow: "0 4px 10px 0 rgba(76, 175, 80, .25)",
   }),
   ...(ownerState.completed && {
     backgroundColor: "#5BBB7B",
@@ -143,8 +142,10 @@ const ProfileStepper = () => {
   const handleFormChange = (data: Partial<typeof formData>) => {
     setFormData((prev) => ({ ...prev, ...data }));
   };
-console.log("formData:", formData);
+
   const CurrentStepComponent = steps[activeStep].component;
+
+  console.log("formData:", formData);
 
   return (
     <div className="pt-14 px-4 pb-8">

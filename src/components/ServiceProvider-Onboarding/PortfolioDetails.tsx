@@ -29,7 +29,6 @@ export default function PortfolioDetails({
     setSelectedSkills(updatedSkills);
     onChange({ ...formData, skills: updatedSkills });
   };
-  console.log("selectedskills", selectedSkills);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -57,15 +56,20 @@ export default function PortfolioDetails({
   const [startDate, setStartDate] = useState<Date>(today);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
-  const handleStartDateChange = (date: Date) => {
-    setStartDate(date);
-    if (endDate && endDate < date) {
-      setEndDate(null);
-    }
-  };
-  const handleEndDateChange = (date: Date) => {
-    setEndDate(date);
-  };
+const handleStartDateChange = (date: Date) => {
+  setStartDate(date);
+  onChange({ ...formData, startDate: date });
+
+  if (endDate && endDate < date) {
+    setEndDate(null);
+    onChange({ ...formData, startDate: date, endDate: null });
+  }
+};
+
+const handleEndDateChange = (date: Date) => {
+  setEndDate(date);
+  onChange({ ...formData, endDate: date });
+};
 
   return (
     <div>
@@ -137,15 +141,15 @@ export default function PortfolioDetails({
           placeholder="Enter project title"
           type="text"
           value={formData?.title}
-          onChange={(e) => onChange({ ...formData, title: e.target.value })}
+          onChange={(e) => onChange({ ...formData, projectTitle: e.target.value })}
         />
         <MUITextField
           label="Project Description"
-          placeholder="Enter project details"
+          placeholder="Enter project description"
           type="text"
           value={formData?.description}
           onChange={(e) =>
-            onChange({ ...formData, description: e.target.value })
+            onChange({ ...formData, projectDescription: e.target.value })
           }
           multiline
           rows={4}

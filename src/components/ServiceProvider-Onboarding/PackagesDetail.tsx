@@ -1,15 +1,9 @@
 "use client";
-import {
-  Typography,
-  TextField,
-  Grid,
-  Button,
-  Card,
-  CardContent,
-  IconButton,
-  InputAdornment,
-} from "@mui/material";
-import { Add, Delete } from "@mui/icons-material";
+
+import { pricingModes } from "@/app/service-provider-onboarding/content";
+import MUIAutoComplete from "../ui/AutoComplete";
+import MUITextField from "../ui/TextField";
+import { Add } from "@mui/icons-material";
 
 interface PackagesDetailProps {
   formData: any;
@@ -20,183 +14,84 @@ export default function PackagesDetail({
   formData,
   onChange,
 }: PackagesDetailProps) {
-  const packages = formData.packages || [];
-
-  const handleAddPackage = () => {
-    const newPackages = [
-      ...packages,
-      { name: "", description: "", price: "", features: [] },
-    ];
-    onChange({ packages: newPackages });
-  };
-
-  const handleRemovePackage = (index: number) => {
-    const newPackages = [...packages];
-    newPackages.splice(index, 1);
-    onChange({ packages: newPackages });
-  };
-
-  const handlePackageChange = (index: number, field: string, value: any) => {
-    const newPackages = [...packages];
-    newPackages[index] = {
-      ...newPackages[index],
-      [field]: value,
-    };
-    onChange({ packages: newPackages });
-  };
-
-  const handleAddFeature = (packageIndex: number) => {
-    const newPackages = [...packages];
-    newPackages[packageIndex].features = [
-      ...newPackages[packageIndex].features,
-      "",
-    ];
-    onChange({ packages: newPackages });
-  };
-
-  const handleFeatureChange = (
-    packageIndex: number,
-    featureIndex: number,
-    value: string
-  ) => {
-    const newPackages = [...packages];
-    newPackages[packageIndex].features[featureIndex] = value;
-    onChange({ packages: newPackages });
-  };
-
-  const handleRemoveFeature = (packageIndex: number, featureIndex: number) => {
-    const newPackages = [...packages];
-    newPackages[packageIndex].features.splice(featureIndex, 1);
-    onChange({ packages: newPackages });
-  };
-
   return (
     <div>
-      <Typography variant="body1" className="text-center mb-6">
-        Create service packages to offer clients different options at various
-        price points.
-      </Typography>
-
-      <Grid container spacing={3}>
-        {packages.map((pkg: any, index: number) => (
-          <Grid size={{ xs: 12 }} key={index}>
-            <Card className="relative">
-              <IconButton
-                className="absolute top-2 right-2 z-10"
-                size="small"
-                onClick={() => handleRemovePackage(index)}
-              >
-                <Delete fontSize="small" />
-              </IconButton>
-              <CardContent>
-                <Grid container spacing={2}>
-                  <Grid size={{ xs: 12, md: 6 }}>
-                    <TextField
-                      fullWidth
-                      placeholder="Package Name"
-                      value={pkg.name}
-                      onChange={(e) =>
-                        handlePackageChange(index, "name", e.target.value)
-                      }
-                      variant="outlined"
-                      className="mb-2"
-                    />
-                  </Grid>
-                  <Grid size={{ xs: 12, md: 6 }}>
-                    <TextField
-                      fullWidth
-                      placeholder="Price"
-                      value={pkg.price}
-                      onChange={(e) =>
-                        handlePackageChange(index, "price", e.target.value)
-                      }
-                      variant="outlined"
-                      className="mb-2"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">$</InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
-                  <Grid size={{ xs: 12 }}>
-                    <TextField
-                      fullWidth
-                      multiline
-                      rows={2}
-                      placeholder="Package Description"
-                      value={pkg.description}
-                      onChange={(e) =>
-                        handlePackageChange(
-                          index,
-                          "description",
-                          e.target.value
-                        )
-                      }
-                      variant="outlined"
-                      className="mb-2"
-                    />
-                  </Grid>
-                  <Grid size={{ xs: 12 }}>
-                    <Typography variant="body2" className="mb-2">
-                      Features
-                    </Typography>
-                    {pkg.features.map(
-                      (feature: string, featureIndex: number) => (
-                        <div key={featureIndex} className="flex mb-2">
-                          <TextField
-                            fullWidth
-                            placeholder="Feature"
-                            value={feature}
-                            onChange={(e) =>
-                              handleFeatureChange(
-                                index,
-                                featureIndex,
-                                e.target.value
-                              )
-                            }
-                            variant="outlined"
-                            size="small"
-                          />
-                          <IconButton
-                            size="small"
-                            onClick={() =>
-                              handleRemoveFeature(index, featureIndex)
-                            }
-                            className="ml-2"
-                          >
-                            <Delete fontSize="small" />
-                          </IconButton>
-                        </div>
-                      )
-                    )}
-                    <Button
-                      variant="text"
-                      startIcon={<Add />}
-                      onClick={() => handleAddFeature(index)}
-                      className="mt-1"
-                      size="small"
-                    >
-                      Add Feature
-                    </Button>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-        <Grid size={{ xs: 12 }}>
-          <Button
-            variant="outlined"
-            startIcon={<Add />}
-            onClick={handleAddPackage}
-            className="mt-2"
-            fullWidth
-          >
-            Add Package
-          </Button>
-        </Grid>
-      </Grid>
+      <p className="text-[14px] text-primary font-normal text-center mb-10">
+        Showcase your work by uploading project images, descriptions, and
+        relevant tags. This helps clients understand your expertise.
+      </p>
+      <div className="w-full space-y-4 mb-6">
+        <MUITextField
+          label="Project Title"
+          placeholder="Enter package title"
+          type="text"
+          value={formData?.title}
+          onChange={(e) =>
+            onChange({ ...formData, packageTitle: e.target.value })
+          }
+        />
+        <MUITextField
+          label="Project Description"
+          placeholder="Enter package details"
+          type="text"
+          value={formData?.description}
+          onChange={(e) =>
+            onChange({ ...formData, packageDescription: e.target.value })
+          }
+          multiline
+          rows={4}
+        />
+      </div>
+      <div className="flex flex-col gap-1 justify-start items-start mb-6">
+        <label className="text-[14px] font-normal text-lightblack">
+          Category
+        </label>
+        <p className="text-[14px] font-normal text-darkgray">
+          Select a category so it’s easy for clients to find your project.
+        </p>
+        <button className="text-[14px] font-normal text-secondary mt-1">
+          Browse all categories
+        </button>
+      </div>
+      <div className="w-full flex justify-between items-center gap-2 mb-5">
+        <MUIAutoComplete
+          width="50%"
+          options={pricingModes}
+          onChange={(_: React.SyntheticEvent, newValue: string | null) =>
+            onChange({ ...formData, pricingMode: newValue ?? "" })
+          }
+          placeholder="Fixed Price (e.g SAR 150 per project)"
+          label="Pricing Modes"
+        />
+        <div className="w-1/2">
+          <MUITextField
+            label="Package Price"
+            placeholder="Enter package price"
+            type="number"
+            value={formData?.packagePrice}
+            onChange={(e) =>
+              onChange({ ...formData, packagePrice: e.target.value })
+            }
+          />
+        </div>
+      </div>
+      <div className="w-full mb-6">
+        <MUITextField
+          label="Requirements"
+          placeholder="Enter quirements"
+          type="text"
+          value={formData?.requirements}
+          onChange={(e) =>
+            onChange({ ...formData, requirements: e.target.value })
+          }
+          multiline
+          rows={4}
+        />
+      </div>
+      <button className="flex items-center justify-center gap-1 rounded-full bg-secondary text-white py-[5px] px-4">
+        <Add sx={{ fontSize: 17, color: "#FFFFFF" }} />
+        Add Another Package
+      </button>
     </div>
   );
 }
