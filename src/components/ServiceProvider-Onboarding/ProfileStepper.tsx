@@ -116,19 +116,75 @@ const steps = [
 const ProfileStepper = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
   const [formData, setFormData] = useState<{
+    // Basic Information
     firstName: string;
     lastName: string;
     address: string;
     phoneNumber: number | string;
     countryCode: string;
     photo: File | null;
+
+    // Service & Experience
+    serviceCategories: string[];
+    experienceLevel: string;
+    startTime: Date | null;
+    endTime: Date | null;
+
+    // Portfolio Details
+    projectTitle: string;
+    projectDescription: string;
+    skills: string[];
+    images: File[];
+    startDate: Date;
+    endDate: Date | null;
+
+    // Packages Detail
+    packages: Array<{
+      title: string;
+      description: string;
+      pricingMode: string;
+      price: string;
+      requirements: string;
+    }>;
+
+    // Verification Document
+    verificationDocument: File[];
   }>({
+    // Basic Information
     firstName: "",
     lastName: "",
     address: "",
     phoneNumber: "",
     countryCode: "+966",
     photo: null,
+
+    // Service & Experience
+    serviceCategories: [],
+    experienceLevel: "",
+    startTime: null,
+    endTime: null,
+
+    // Portfolio Details
+    projectTitle: "",
+    projectDescription: "",
+    skills: [] as string[],
+    images: [] as File[],
+    startDate: new Date(),
+    endDate: null as Date | null,
+
+    // Packages Detail
+    packages: [
+      {
+        title: "",
+        description: "",
+        pricingMode: "",
+        price: "",
+        requirements: "",
+      },
+    ],
+
+    // Verification Document
+    verificationDocument: [] as File[],
   });
 
   const handleNext = () => {
@@ -139,7 +195,7 @@ const ProfileStepper = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleFormChange = (data: Partial<typeof formData>) => {
+  const handleFormChange = (data: any) => {
     setFormData((prev) => ({ ...prev, ...data }));
   };
 
@@ -192,7 +248,7 @@ const ProfileStepper = () => {
           onClick={handleNext}
           className="bg-primary text-[14px] font-medium text-white border border-primary rounded-full px-6 py-2"
         >
-          {activeStep === steps.length - 1 ? "Finish" : "Next & Save"}
+          {activeStep === steps.length - 1 ? "Submit for verification" : "Next & Save"}
         </button>
       </div>
     </div>

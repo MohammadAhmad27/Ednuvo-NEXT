@@ -7,7 +7,13 @@ import MUIAutoComplete from "../ui/AutoComplete";
 import DateRangePicker from "../ui/DatePicker";
 
 interface ServiceExperienceProps {
-  formData: any;
+  formData: {
+    serviceCategories: string[];
+    experienceLevel: string;
+    startTime: Date | null;
+    endTime: Date | null;
+    [key: string]: any;
+  };
   onChange: (data: any) => void;
 }
 
@@ -16,11 +22,11 @@ export default function ServiceExperience({
   onChange,
 }: ServiceExperienceProps) {
   const handleStartTimeChange = (date: Date | null) => {
-    onChange({ ...formData, startTime: date });
+    onChange({ startTime: date });
   };
 
   const handleEndTimeChange = (date: Date | null) => {
-    onChange({ ...formData, endTime: date });
+    onChange({ endTime: date });
   };
 
   return (
@@ -34,8 +40,9 @@ export default function ServiceExperience({
           width="50%"
           multiple
           options={serviceCategories}
+          value={formData.serviceCategories || []}
           onChange={(_: React.SyntheticEvent, newValue: string[] | null) =>
-            onChange({ ...formData, serviceCategories: newValue ?? [] })
+            onChange({ serviceCategories: newValue ?? [] })
           }
           placeholder="Select service"
           label="Select Services You Provide"
@@ -43,8 +50,9 @@ export default function ServiceExperience({
         <MUIAutoComplete
           width="50%"
           options={experienceLevel}
+          value={formData.experienceLevel || ""} 
           onChange={(_: React.SyntheticEvent, newValue: string | null) =>
-            onChange({ ...formData, experienceLevel: newValue ?? "" })
+            onChange({ experienceLevel: newValue ?? "" })
           }
           placeholder="Entry level (0 to 2 Years)"
           label="Your Experience Level"
@@ -56,9 +64,7 @@ export default function ServiceExperience({
             Start Time
           </label>
           <DateRangePicker
-            selectedDate={
-              formData?.startTime ? new Date(formData.startTime) : null
-            }
+            selectedDate={formData.startTime}
             onChange={handleStartTimeChange}
             mode="time"
             placeholder="Select start time"
@@ -70,7 +76,7 @@ export default function ServiceExperience({
             End Time
           </label>
           <DateRangePicker
-            selectedDate={formData?.endTime ? new Date(formData.endTime) : null}
+            selectedDate={formData.endTime}
             onChange={handleEndTimeChange}
             mode="time"
             placeholder="Select end time"

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import MUITextField from "../ui/TextField";
 
@@ -20,6 +20,18 @@ export default function BasicInformation({
   onChange,
 }: BasicInformationProps) {
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (formData.photo && !photoPreview) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (e.target?.result) {
+          setPhotoPreview(e.target.result as string);
+        }
+      };
+      reader.readAsDataURL(formData.photo);
+    }
+  }, [formData.photo, photoPreview]);
 
   const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {

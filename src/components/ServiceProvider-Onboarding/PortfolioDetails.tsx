@@ -1,13 +1,20 @@
 "use client";
-
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MUITextField from "../ui/TextField";
 import { skillsList } from "@/app/service-provider-onboarding/content";
 import DateRangePicker from "../ui/DatePicker";
 
 interface PortfolioDetailsProps {
-  formData: any;
+  formData: {
+    projectTitle: string;
+    projectDescription: string;
+    skills: string[];
+    images: File[];
+    startDate: Date;
+    endDate: Date | null;
+    [key: string]: any;
+  };
   onChange: (data: any) => void;
 }
 
@@ -16,10 +23,15 @@ export default function PortfolioDetails({
   onChange,
 }: PortfolioDetailsProps) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [images, setImages] = useState<File[]>([]);
+  const [images, setImages] = useState<File[]>(formData.images || []);
   const [selectedSkills, setSelectedSkills] = useState<string[]>(
-    formData?.skills || skillsList?.slice(0, 4)
+    formData.skills || skillsList?.slice(0, 4)
   );
+
+  useEffect(() => {
+    setImages(formData.images || []);
+    setSelectedSkills(formData.skills || skillsList?.slice(0, 4));
+  }, [formData.images, formData.skills]);
 
   const toggleSkill = (skill: string) => {
     const updatedSkills = selectedSkills?.includes(skill)
@@ -27,7 +39,7 @@ export default function PortfolioDetails({
       : [...selectedSkills, skill];
 
     setSelectedSkills(updatedSkills);
-    onChange({ ...formData, skills: updatedSkills });
+    onChange({ skills: updatedSkills });
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,11 +49,9 @@ export default function PortfolioDetails({
         file?.type?.startsWith("image/")
       );
 
-      setImages((prev) => [...prev, ...imageFiles]);
-      onChange({
-        ...formData,
-        images: [...(formData?.images || []), ...imageFiles],
-      });
+      const newImages = [...images, ...imageFiles];
+      setImages(newImages);
+      onChange({ images: newImages });
     }
   };
 
@@ -49,27 +59,17 @@ export default function PortfolioDetails({
     fileInputRef?.current?.click();
   };
 
-  const today = new Date();
-  const maxAllowedDate = new Date();
-  maxAllowedDate.setDate(today.getDate() + 1360);
+  const handleStartDateChange = (date: Date) => {
+    onChange({ startDate: date });
 
-  const [startDate, setStartDate] = useState<Date>(today);
-  const [endDate, setEndDate] = useState<Date | null>(null);
+    if (formData.endDate && formData.endDate < date) {
+      onChange({ startDate: date, endDate: null });
+    }
+  };
 
-const handleStartDateChange = (date: Date) => {
-  setStartDate(date);
-  onChange({ ...formData, startDate: date });
-
-  if (endDate && endDate < date) {
-    setEndDate(null);
-    onChange({ ...formData, startDate: date, endDate: null });
-  }
-};
-
-const handleEndDateChange = (date: Date) => {
-  setEndDate(date);
-  onChange({ ...formData, endDate: date });
-};
+  const handleEndDateChange = (date: Date) => {
+    onChange({ endDate: date });
+  };
 
   return (
     <div>
@@ -121,7 +121,7 @@ const handleEndDateChange = (date: Date) => {
           {images.map((file, index) => {
             const url = URL.createObjectURL(file);
             return (
-              <div key={index} className="w-[50px] h-[50px] relative rounded">
+              <div key={index} className="w-[0px] h-[50px] relative rounded">
                 <Image
                   src={url}
                   alt={`uploaded-${index}`}
@@ -134,29 +134,25 @@ const handleEndDateChange = (date: Date) => {
         </div>
       )}
 
-      {/* Project Details Form */}
       <div className="w-full space-y-4 mb-6">
         <MUITextField
           label="Project Title"
           placeholder="Enter project title"
           type="text"
-          value={formData?.title}
-          onChange={(e) => onChange({ ...formData, projectTitle: e.target.value })}
+          value={formData.projectTitle}
+          onChange={(e) => onChange({ projectTitle: e.target.value })}
         />
         <MUITextField
           label="Project Description"
           placeholder="Enter project description"
           type="text"
-          value={formData?.description}
-          onChange={(e) =>
-            onChange({ ...formData, projectDescription: e.target.value })
-          }
+          value={formData.projectDescription}
+          onChange={(e) => onChange({ projectDescription: e.target.value })}
           multiline
           rows={4}
         />
       </div>
 
-      {/* Skill Selection Section */}
       <div className="flex flex-col justify-start gap-2 bg-white">
         <label className="text-[14px] text-lightblack font-normal">
           Choose Relevant Skills
@@ -186,10 +182,10 @@ const handleEndDateChange = (date: Date) => {
             Project Start Date
           </label>
           <DateRangePicker
-            selectedDate={startDate}
+            selectedDate={formData.startDate}
             onChange={handleStartDateChange}
-            minDate={today}
-            maxDate={maxAllowedDate}
+            minDate={new Date()}
+            maxDate={new Date(Date.now() + 1360 * 24 * 60 * 60 * 1000)}
             placeholder="Select start date"
           />
         </div>
@@ -198,10 +194,10 @@ const handleEndDateChange = (date: Date) => {
             Project Completion Date
           </label>
           <DateRangePicker
-            selectedDate={endDate}
+            selectedDate={formData.endDate}
             onChange={handleEndDateChange}
-            minDate={startDate}
-            maxDate={maxAllowedDate}
+            minDate={formData.startDate}
+            maxDate={new Date(Date.now() + 1360 * 24 * 60 * 60 * 1000)}
             placeholder="Select end date"
           />
         </div>

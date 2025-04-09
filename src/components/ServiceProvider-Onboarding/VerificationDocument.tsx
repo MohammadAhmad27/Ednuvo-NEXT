@@ -1,114 +1,121 @@
-"use client"
-import { useState } from "react"
-import {
-  Typography,
-  Grid,
-  Button,
-  Card,
-  CardContent,
-  FormControl,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-  Box,
-  IconButton,
-} from "@mui/material"
-import { CloudUpload, CheckCircle, Delete } from "@mui/icons-material"
+"use client";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 interface VerificationDocumentProps {
-  formData: any
-  onChange: (data: any) => void
+  formData: {
+    verificationDocument: File[];
+    [key: string]: any;
+  };
+  onChange: (data: any) => void;
 }
 
-export default function VerificationDocument({ formData, onChange }: VerificationDocumentProps) {
-  const [documentType, setDocumentType] = useState(formData.documentType || "id")
-  const [file, setFile] = useState<File | null>(null)
-  const [fileName, setFileName] = useState("")
+export default function VerificationDocument({
+  formData,
+  onChange,
+}: VerificationDocumentProps) {
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [documents, setDocuments] = useState<File[]>(
+    formData.verificationDocument || []
+  );
 
-  const handleDocumentTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value
-    setDocumentType(value)
-    onChange({ documentType: value })
-  }
+  useEffect(() => {
+    setDocuments(formData.verificationDocument || []);
+  }, [formData.verificationDocument]);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const selectedFile = event.target.files[0]
-      setFile(selectedFile)
-      setFileName(selectedFile.name)
-      onChange({ verificationDocument: selectedFile })
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const selectedFiles = Array.from(e.target.files);
+      const imageFiles = selectedFiles.filter((file) =>
+        file?.type?.startsWith("image/")
+      );
+
+      const totalFiles = documents.length + imageFiles.length;
+      if (totalFiles > 2) {
+        const allowedFiles = imageFiles.slice(0, 2 - documents.length);
+        const newDocuments = [...documents, ...allowedFiles];
+        setDocuments(newDocuments);
+        onChange({ verificationDocument: newDocuments });
+      } else {
+        const newDocuments = [...documents, ...imageFiles];
+        setDocuments(newDocuments);
+        onChange({ verificationDocument: newDocuments });
+      }
     }
-  }
+  };
 
-  const handleRemoveFile = () => {
-    setFile(null)
-    setFileName("")
-    onChange({ verificationDocument: null })
-  }
+  const handleDivClick = () => {
+    fileInputRef?.current?.click();
+  };
 
   return (
     <div>
-      <Typography variant="body1" className="text-center mb-6">
-        Please upload a verification document to complete your profile.
-      </Typography>
+      <p className="text-[14px] text-primary font-normal mb-8">
+        For trust and credibility, upload your verification documents. This
+        ensures a safe and professional marketplace for all
+      </p>
+      <div className="flex flex-col justify-start gap-2">
+        <label className="text-[14px] text-lightblack font-normal">
+          Select front and back image of your Saudi identification card
+        </label>
+        <input
+          type="file"
+          placeholder="hidden"
+          accept="image/*"
+          multiple
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          className="hidden"
+        />
+        <div
+          className="flex flex-col justify-center items-center p-4 border border-[#E9E9E9] border-dashed rounded-xl cursor-pointer mb-8"
+          onClick={handleDivClick}
+        >
+          <Image
+            src="/service-provider-onboarding/upload.svg"
+            alt="upload-icon"
+            width={30}
+            height={30}
+            className="object-cover"
+          />
+          <p className="text-[14px] font-normal text-darkgray mt-2 text-center">
+            <span className="font-medium text-secondary">
+              Upload images of your documents
+            </span>{" "}
+            or drag and drop
+          </p>
+          <p className="text-[12px] font-normal text-darkgray">
+            PNG, JPG, JPEG only
+          </p>
+        </div>
+      </div>
 
-      <Grid container spacing={3}>
-      <Grid size={{ xs: 12 }}>
-
-          <Card>
-            <CardContent>
-              <Typography variant="body2" className="mb-3">
-                Document Type
-              </Typography>
-              <FormControl component="fieldset">
-                <RadioGroup row value={documentType} onChange={handleDocumentTypeChange}>
-                  <FormControlLabel value="id" control={<Radio />} label="ID Card" />
-                  <FormControlLabel value="passport" control={<Radio />} label="Passport" />
-                  <FormControlLabel value="license" control={<Radio />} label="Professional License" />
-                </RadioGroup>
-              </FormControl>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid size={{ xs: 12 }}>
-
-          <Card className="border-dashed border-2 border-gray-300">
-            <CardContent className="flex flex-col items-center justify-center p-6">
-              {!file ? (
-                <>
-                  <CloudUpload className="text-gray-400 text-5xl mb-3" />
-                  <Typography variant="body1" className="mb-3 text-center">
-                    Drag and drop your document here or click to browse
-                  </Typography>
-                  <Typography variant="body2" className="text-gray-500 mb-4 text-center">
-                    Supported formats: PDF, JPG, PNG (Max size: 5MB)
-                  </Typography>
-                  <Button component="label" variant="contained" className="bg-[#2e5c41] hover:bg-[#224431]">
-                    Upload Document
-                    <input type="file" hidden accept=".pdf,.jpg,.jpeg,.png" onChange={handleFileChange} />
-                  </Button>
-                </>
-              ) : (
-                <Box className="w-full">
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded mb-2">
-                    <div className="flex items-center">
-                      <CheckCircle className="text-green-500 mr-2" />
-                      <Typography variant="body2">{fileName}</Typography>
-                    </div>
-                    <IconButton size="small" onClick={handleRemoveFile}>
-                      <Delete fontSize="small" />
-                    </IconButton>
-                  </div>
-                  <Typography variant="body2" className="text-center text-gray-500">
-                    Document uploaded successfully
-                  </Typography>
-                </Box>
-              )}
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
+      {/* Preview uploaded documents */}
+      {documents?.length > 0 && (
+        <div className="mb-8">
+          <h3 className="text-[16px] font-medium text-lightblack mb-3">
+            Uploaded Documents
+          </h3>
+          <div className="flex flex-wrap gap-4">
+            {documents.map((file, index) => {
+              const url = URL.createObjectURL(file);
+              return (
+                <div
+                  key={index}
+                  className="w-[100px] h-[100px] relative rounded"
+                >
+                  <Image
+                    src={url}
+                    alt={`document-${index}`}
+                    fill
+                    className="object-cover rounded"
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
-  )
+  );
 }
-

@@ -1,3 +1,4 @@
+"use client";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Chip from "@mui/material/Chip";
@@ -12,6 +13,7 @@ interface BaseProps {
 type MultiProps = BaseProps & {
   multiple: true;
   defaultValue?: string[];
+  value?: string[]; 
   onChange: (
     event: React.SyntheticEvent,
     value: string[],
@@ -23,6 +25,7 @@ type MultiProps = BaseProps & {
 type SingleProps = BaseProps & {
   multiple?: false;
   defaultValue?: string;
+  value?: string; 
   onChange: (
     event: React.SyntheticEvent,
     value: string | null,
@@ -40,6 +43,7 @@ const MUIAutoComplete = ({
   placeholder,
   multiple = false,
   defaultValue,
+  value,
   onChange,
 }: AutoCompleteProps) => {
   return (
@@ -47,8 +51,9 @@ const MUIAutoComplete = ({
       disablePortal
       multiple={multiple}
       options={options}
-      defaultValue={defaultValue as any} // acceptable casting here
-      onChange={onChange as any} // safely handled due to proper prop types
+      defaultValue={defaultValue as any}
+      value={value as any} 
+      onChange={onChange as any}
       sx={{
         width: width,
         "& .MuiAutocomplete-inputRoot .MuiAutocomplete-input": {
