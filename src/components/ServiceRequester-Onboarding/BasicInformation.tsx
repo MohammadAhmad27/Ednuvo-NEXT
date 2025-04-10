@@ -87,7 +87,7 @@ export default function BasicInformation({
       <p className="text-[14px] font-normal text-[#181D27] text-center mb-8">
         Upload Photo
       </p>
-      <div className="w-full flex justify-between items-center gap-4 mb-6">
+      <div className="w-full flex justify-between items-center gap-4 mb-8">
         <MUITextField
           label="First Name"
           placeholder="Enter your first name"
@@ -104,51 +104,67 @@ export default function BasicInformation({
           onChange={(e) => onChange({ lastName: e.target.value })}
         />
       </div>
-      <div className="w-full flex justify-between items-center gap-4">
-        <MUITextField
-          label="Address"
-          placeholder="Villa 23, Street 12, Al Muruj District, Riyadh"
-          type="text"
-          value={formData?.address}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            onChange({ address: e.target.value })
-          }
-          endAdornment={
+      <div className="w-full flex justify-between items-start gap-4">
+        <div className="space-y-2 w-1/2">
+          <MUITextField
+            label="Address"
+            placeholder="Villa 23, Street 12, Al Muruj District, Riyadh"
+            type="text"
+            value={formData?.address}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              onChange({ address: e.target.value })
+            }
+            endAdornment={
+              <Image
+                src="/service-provider-onboarding/location.svg"
+                alt="location-marker"
+                width={20}
+                height={20}
+                className="object-cover"
+              />
+            }
+          />
+          <div className="flex justify-start items-center gap-2">
             <Image
-              src="/service-provider-onboarding/location.svg"
+              src="/service-requester-onboarding/marker.svg"
               alt="location-marker"
               width={20}
               height={20}
               className="object-cover"
             />
-          }
-        />
-        <MUITextField
-          label="Phone Number"
-          placeholder="123445"
-          type="number"
-          value={formData?.phoneNumber?.toString()}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            onChange({ phoneNumber: e.target.value })
-          }
-          startAdornment={
-            <div className="flex items-center gap-[4px]">
-              <Image
-                src="/service-provider-onboarding/saudi-flag.svg"
-                alt="saudi-flag"
-                width={20}
-                height={20}
-                className="object-cover mr-"
-              />
-              <div className="flex items-center gap-2 mr-[18px]">
-                <span className="text-[16px] font-normal text-lightblack">
-                  {formData?.countryCode}
-                </span>
-                <span className="w-[1px] h-5 bg-[#E0E0E0]" />
+            <span className="text-[14px] font-medium text-secondary">
+              Choose on map
+            </span>
+          </div>
+        </div>
+        <div className="w-1/2">
+          <MUITextField
+            label="Phone Number"
+            placeholder="123445"
+            type="number"
+            value={formData?.phoneNumber?.toString()}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              onChange({ phoneNumber: e.target.value })
+            }
+            startAdornment={
+              <div className="flex items-center gap-[4px]">
+                <Image
+                  src="/service-provider-onboarding/saudi-flag.svg"
+                  alt="saudi-flag"
+                  width={20}
+                  height={20}
+                  className="object-cover mr-"
+                />
+                <div className="flex items-center gap-2 mr-[18px]">
+                  <span className="text-[16px] font-normal text-lightblack">
+                    {formData?.countryCode}
+                  </span>
+                  <span className="w-[1px] h-5 bg-[#E0E0E0]" />
+                </div>
               </div>
-            </div>
-          }
-        />
+            }
+          />
+        </div>
       </div>
     </div>
   );

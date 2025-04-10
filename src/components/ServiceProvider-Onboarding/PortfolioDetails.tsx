@@ -121,7 +121,7 @@ export default function PortfolioDetails({
           {images.map((file, index) => {
             const url = URL.createObjectURL(file);
             return (
-              <div key={index} className="w-[0px] h-[50px] relative rounded">
+              <div key={index} className="w-[50px] h-[50px] relative rounded">
                 <Image
                   src={url}
                   alt={`uploaded-${index}`}
@@ -153,11 +153,11 @@ export default function PortfolioDetails({
         />
       </div>
 
-      <div className="flex flex-col justify-start gap-2 bg-white">
+      <div className="flex flex-col justify-start gap-2">
         <label className="text-[14px] text-lightblack font-normal">
           Choose Relevant Skills
         </label>
-        <div className="flex flex-wrap gap-3 mt-2 mb-8">
+        <div className="flex flex-wrap gap-3 mb-8">
           {skillsList?.map((skill) => {
             const isSelected = selectedSkills?.includes(skill);
             return (
@@ -168,7 +168,7 @@ export default function PortfolioDetails({
                   isSelected
                     ? "bg-secondary text-white"
                     : "bg-white text-secondary"
-                } py-2 px-5`}
+                } py-1 px-4`}
               >
                 {skill}
               </button>

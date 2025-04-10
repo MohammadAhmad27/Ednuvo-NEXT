@@ -35,7 +35,7 @@ export default function ServiceExperience({
         Tell us about the services you provide and your level of experience.
         This helps us match you with the right clients.
       </p>
-      <div className="w-full flex justify-between items-center gap-4 mb-10">
+      <div className="w-full flex justify-between items-center gap-4 mb-6">
         <MUIAutoComplete
           width="50%"
           multiple
@@ -50,7 +50,7 @@ export default function ServiceExperience({
         <MUIAutoComplete
           width="50%"
           options={experienceLevel}
-          value={formData.experienceLevel || ""} 
+          value={formData.experienceLevel || ""}
           onChange={(_: React.SyntheticEvent, newValue: string | null) =>
             onChange({ experienceLevel: newValue ?? "" })
           }

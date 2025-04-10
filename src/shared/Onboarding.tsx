@@ -18,7 +18,7 @@ const Onboarding = ({ component }: RegisterProps) => {
           className="object-cover"
         />
       </Link>
-      <div className="min-h-full md:px-[90px] pb-[136px] z-50">
+      <div className="min-h-full w-full max-w-5xl mx-auto pb-[136px] z-50">
         <div className="h-full w-full overflow-auto bg-white border border-[#E5E5E5] shadow-grayshadow4 rounded-[32px]">
           <div className="min-h-full flex flex-col items-center max-w-5xl mx-auto">
             {component && component}

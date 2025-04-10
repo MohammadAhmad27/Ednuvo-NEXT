@@ -11,6 +11,7 @@ interface PackageData {
   description: string;
   pricingMode: string;
   price: string;
+  category: string;
   requirements: string;
 }
 
@@ -33,6 +34,7 @@ export default function PackagesDetail({
         description: "",
         pricingMode: "",
         price: "",
+        category: "",
         requirements: "",
       },
     ]
@@ -53,6 +55,7 @@ export default function PackagesDetail({
         description: "",
         pricingMode: "",
         price: "",
+        category: "",
         requirements: "",
       },
     ];
@@ -147,7 +150,7 @@ export default function PackagesDetail({
             </button>
           </div>
 
-          <div className="w-full flex justify-between items-center gap-2 mb-5">
+          <div className="w-full flex justify-between items-center gap-4 mb-6">
             <MUIAutoComplete
               width="50%"
               options={pricingModes}
@@ -187,13 +190,13 @@ export default function PackagesDetail({
         </div>
       ))}
 
-        <button
-          onClick={handleAddPackage}
-          className="flex items-center justify-center gap-1 rounded-full bg-secondary text-white py-[5px] px-4"
-        >
-          <Add sx={{ fontSize: 17, color: "#FFFFFF" }} />
-          Add Another Package
-        </button>
+      <button
+        onClick={handleAddPackage}
+        className="flex items-center justify-center gap-1 rounded-full bg-secondary text-white py-[5px] px-4"
+      >
+        <Add sx={{ fontSize: 17, color: "#FFFFFF" }} />
+        Add Another Package
+      </button>
     </div>
   );
 }

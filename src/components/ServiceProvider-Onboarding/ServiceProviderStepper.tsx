@@ -114,7 +114,7 @@ const steps = [
   },
 ];
 
-const ProfileStepper = () => {
+const ServiceProviderSteps = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -147,6 +147,7 @@ const ProfileStepper = () => {
       description: string;
       pricingMode: string;
       price: string;
+      category: string;
       requirements: string;
     }>;
 
@@ -182,6 +183,7 @@ const ProfileStepper = () => {
         description: "",
         pricingMode: "",
         price: "",
+        category: "",
         requirements: "",
       },
     ],
@@ -212,7 +214,7 @@ const ProfileStepper = () => {
 
   return (
     <>
-      <div className="pt-14 px-4 pb-8">
+      <div className="pt-14 px-16 pb-8">
         <h1 className="text-[24px] font-semibold text-[#222222] text-center mb-6">
           Profile Creation Steps
         </h1>
@@ -273,4 +275,4 @@ const ProfileStepper = () => {
   );
 };
 
-export default ProfileStepper;
+export default ServiceProviderSteps;
