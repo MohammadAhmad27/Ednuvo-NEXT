@@ -132,8 +132,8 @@ const ServiceProviderSteps = () => {
     // Service & Experience
     serviceCategories: string[];
     experienceLevel: string;
-    startTime: Date | null;
-    endTime: Date | null;
+    startTime: Dayjs | null;
+    endTime: Dayjs | null;
 
     // Portfolio Details
     projectTitle: string;
@@ -167,8 +167,8 @@ const ServiceProviderSteps = () => {
     // Service & Experience
     serviceCategories: [],
     experienceLevel: "",
-    startTime: null,
-    endTime: null,
+    startTime: null as Dayjs | null,
+    endTime: null as Dayjs | null,
 
     // Portfolio Details
     projectTitle: "",

@@ -3,13 +3,15 @@ import {
   serviceCategories,
 } from "@/app/service-provider-onboarding/content";
 import MUIAutoComplete from "../ui/AutoComplete";
+import MUITimePicker from "../ui/TimePicker";
+import dayjs, { Dayjs } from "dayjs";
 
 interface ServiceExperienceProps {
   formData: {
     serviceCategories: string[];
     experienceLevel: string;
-    startTime: Date | null;
-    endTime: Date | null;
+    startTime: Dayjs | null;
+    endTime: Dayjs | null;
     [key: string]: any;
   };
   onChange: (data: any) => void;
@@ -19,6 +21,13 @@ export default function ServiceExperience({
   formData,
   onChange,
 }: ServiceExperienceProps) {
+  const handleStartTimeChange = (date: Dayjs | null) => {
+    onChange({ startTime: date ? date.toDate() : null });
+  };
+
+  const handleEndTimeChange = (date: Dayjs | null) => {
+    onChange({ endTime: date ? date.toDate() : null });
+  };
 
   return (
     <div>
@@ -50,29 +59,21 @@ export default function ServiceExperience({
         />
       </div>
       <div className="w-full flex justify-between items-center gap-4">
-        {/* <div className="w-1/2 flex flex-col">
-          <label className="text-[14px] text-lightblack font-normal">
-            Start Time
-          </label>
-          <DateRangePicker
-            selectedDate={formData.startTime}
+        <div className="w-1/2 flex flex-col">
+          <MUITimePicker
+            value={formData.startTime ? dayjs(formData.startTime) : null}
             onChange={handleStartTimeChange}
-            mode="time"
-            placeholder="Select start time"
+            label="Start Time"
           />
-        </div> */}
+        </div>
 
-        {/* <div className="w-1/2 flex flex-col">
-          <label className="text-[14px] text-lightblack font-normal">
-            End Time
-          </label>
-          <DateRangePicker
-            selectedDate={formData.endTime}
+        <div className="w-1/2 flex flex-col">
+          <MUITimePicker
+            value={formData.endTime ? dayjs(formData.endTime) : null}
             onChange={handleEndTimeChange}
-            mode="time"
-            placeholder="Select end time"
+            label="End Time"
           />
-        </div> */}
+        </div>
       </div>
     </div>
   );
