@@ -33,7 +33,7 @@ export default function PortfolioDetails({
       {
         projectTitle: "",
         projectDescription: "",
-        skills: skillsList?.slice(0, 4),
+        skills: [],
         images: [],
         startDate: null,
         endDate: null,
@@ -56,7 +56,7 @@ export default function PortfolioDetails({
       {
         projectTitle: "",
         projectDescription: "",
-        skills: skillsList?.slice(0, 4),
+        skills: [],
         images: [],
         startDate: null,
         endDate: null,

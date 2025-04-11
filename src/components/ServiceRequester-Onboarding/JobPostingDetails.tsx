@@ -37,12 +37,12 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [images, setImages] = useState<File[]>(formData.imagesList || []);
   const [selectedCategories, setSelectedCategories] = useState<string[]>(
-    formData.categoriesList || categories?.slice(0, 4)
+    formData.categoriesList || []
   );
 
   useEffect(() => {
     setImages(formData.imagesList || []);
-    setSelectedCategories(formData.categoriesList || categories?.slice(0, 4));
+    setSelectedCategories(formData.categoriesList || []);
   }, [formData.imagesList, formData.categoriesList]);
 
   const toggleCategory = (category: string) => {
