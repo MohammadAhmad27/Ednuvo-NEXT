@@ -68,7 +68,7 @@ export default function VerificationDocument({
           className="hidden"
         />
         <div
-          className="flex flex-col justify-center items-center p-4 border border-[#E9E9E9] border-dashed rounded-xl cursor-pointer mb-8"
+          className="flex flex-col justify-center items-center p-4 border border-gray border-dashed rounded-xl cursor-pointer mb-8"
           onClick={handleDivClick}
         >
           <Image

@@ -137,7 +137,7 @@ const ServiceRequesterSteps = () => {
     cardNumber: number | String;
     expiration: Date | null;
     cvv: number | String;
-    country: string[];
+    country: string;
   }>({
     // Basic Information
     firstName: "",
@@ -162,12 +162,12 @@ const ServiceRequesterSteps = () => {
     imagesList: [] as File[],
 
     // Payment Method Detais
-    paymentMethod: "",
+    paymentMethod: "razorpay",
     billedTo: "",
     cardNumber: "",
     expiration: null,
     cvv: "",
-    country: [] as string[],
+    country: "",
   });
 
   const handleNext = () => {

@@ -93,7 +93,7 @@ export default function BasicInformation({
           placeholder="Enter your first name"
           type="text"
           value={formData?.firstName}
-          onChange={(e) => onChange({ firstName: e.target.value })}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange({ firstName: e.target.value })}
         />
 
         <MUITextField
@@ -101,7 +101,7 @@ export default function BasicInformation({
           placeholder="Enter your last name"
           type="text"
           value={formData?.lastName}
-          onChange={(e) => onChange({ lastName: e.target.value })}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange({ lastName: e.target.value })}
         />
       </div>
       <div className="w-full flex justify-between items-center gap-4">

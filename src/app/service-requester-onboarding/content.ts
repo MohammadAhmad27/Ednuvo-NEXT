@@ -43,27 +43,29 @@ export const categories = [
 
 export const paymentMethodImages = [
   {
-    id: 1,
+    label: "razorpay",
     icon: "/service-requester-onboarding/razorpay.svg",
   },
   {
-    id: 2,
+    label: "mastercard",
     icon: "/service-requester-onboarding/mastercard.svg",
   },
   {
-    id: 3,
+    label: "visa",
     icon: "/service-requester-onboarding/visa.svg",
   },
   {
-    id: 4,
+    label: "paypal",
     icon: "/service-requester-onboarding/paypal.svg",
   },
   {
-    id: 5,
+    label: "stripe",
     icon: "/service-requester-onboarding/stripe.svg",
   },
   {
-    id: 6,
+    label: "upi",
     icon: "/service-requester-onboarding/upi.svg",
   },
 ];
+
+export const countries = ["Saudi Arabia", "UAE", "OMAN", "Qatar", "Bahrain"];

@@ -87,14 +87,18 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
           placeholder="Enter job title"
           type="text"
           value={formData.jobTitle}
-          onChange={(e) => onChange({ jobTitle: e.target.value })}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            onChange({ jobTitle: e.target.value })
+          }
         />
         <MUITextField
           label="Job Description"
           placeholder="Enter job description"
           type="text"
           value={formData.jobDescription}
-          onChange={(e) => onChange({ jobDescription: e.target.value })}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            onChange({ jobDescription: e.target.value })
+          }
           multiline
           rows={4}
         />
@@ -192,7 +196,7 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
           label="Experience Level"
         />
 
-        <div className="W-1/2 flex flex-col justify-start gap-1 mb-1">
+        <div className="W-1/2 flex flex-col justify-start gap-1 mb-2">
           <label className="text-[14px] text-lightblack font-normal">
             Project Start Date
           </label>
@@ -245,7 +249,7 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
           className="hidden"
         />
         <div
-          className="flex flex-col justify-center items-center p-4 border border-[#E9E9E9] border-dashed rounded-xl cursor-pointer"
+          className="flex flex-col justify-center items-center p-4 border border-gray border-dashed rounded-xl cursor-pointer"
           onClick={handleDivClick}
         >
           <Image

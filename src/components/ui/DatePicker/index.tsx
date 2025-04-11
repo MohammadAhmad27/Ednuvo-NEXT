@@ -28,7 +28,7 @@ const DateRangePicker: React.FC<DatePickerProps> = ({
     { value?: string; onClick?: () => void }
   >(({ value, onClick }, ref) => (
     <div
-      className="w-full rounded-xl text-[14px] font-medium cursor-pointer border-[1px] bg-[#FFFFFF] border-[#E9E9E9] px-2 py-[8px]"
+      className="w-full rounded-xl text-[14px] font-medium cursor-pointer border-[1px] bg-[#FFFFFF] border-gray px-2 py-[8px]"
       onClick={onClick}
       ref={ref}
     >

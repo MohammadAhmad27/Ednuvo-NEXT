@@ -93,7 +93,7 @@ export default function PortfolioDetails({
           className="hidden"
         />
         <div
-          className="flex flex-col justify-center items-center p-4 border border-[#E9E9E9] border-dashed rounded-xl cursor-pointer mb-8"
+          className="flex flex-col justify-center items-center p-4 border border-gray border-dashed rounded-xl cursor-pointer mb-8"
           onClick={handleDivClick}
         >
           <Image
@@ -140,14 +140,14 @@ export default function PortfolioDetails({
           placeholder="Enter project title"
           type="text"
           value={formData.projectTitle}
-          onChange={(e) => onChange({ projectTitle: e.target.value })}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange({ projectTitle: e.target.value })}
         />
         <MUITextField
           label="Project Description"
           placeholder="Enter project description"
           type="text"
           value={formData.projectDescription}
-          onChange={(e) => onChange({ projectDescription: e.target.value })}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange({ projectDescription: e.target.value })}
           multiline
           rows={4}
         />

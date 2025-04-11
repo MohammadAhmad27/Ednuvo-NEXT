@@ -121,7 +121,7 @@ export default function PackagesDetail({
               placeholder="Enter package title"
               type="text"
               value={pkg.title}
-              onChange={(e) =>
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 handlePackageChange(index, "title", e.target.value)
               }
             />
@@ -130,7 +130,7 @@ export default function PackagesDetail({
               placeholder="Enter package details"
               type="text"
               value={pkg.description}
-              onChange={(e) =>
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 handlePackageChange(index, "description", e.target.value)
               }
               multiline
@@ -167,7 +167,7 @@ export default function PackagesDetail({
                 placeholder="Enter package price"
                 type="number"
                 value={pkg.price}
-                onChange={(e) =>
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   handlePackageChange(index, "price", e.target.value)
                 }
               />
@@ -180,7 +180,7 @@ export default function PackagesDetail({
               placeholder="Enter requirements"
               type="text"
               value={pkg.requirements}
-              onChange={(e) =>
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 handlePackageChange(index, "requirements", e.target.value)
               }
               multiline
