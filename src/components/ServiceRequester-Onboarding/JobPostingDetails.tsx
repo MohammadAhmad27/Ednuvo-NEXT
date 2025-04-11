@@ -196,7 +196,7 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
           label="Experience Level"
         />
 
-        <div className="W-1/2 flex flex-col justify-start gap-1 mb-2">
+        <div className="w-1/2 flex flex-col justify-start gap-1 mb-2">
           <label className="text-[14px] text-lightblack font-normal">
             Project Start Date
           </label>

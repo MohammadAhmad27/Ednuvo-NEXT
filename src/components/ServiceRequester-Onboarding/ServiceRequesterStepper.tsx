@@ -8,6 +8,7 @@ import BasicInformation from "./BasicInformation";
 import ApplicationSubmission from "../ui/Dialogs/ApplicationSubmission";
 import JobPostingDetails from "./JobPostingDetails";
 import PaymentMethodDetails from "./PaymentMethodDetails";
+import { navigationButtons } from "@/app/service-requester-onboarding/content";
 
 // Custom connector centered vertically
 const CustomConnector = styled(StepConnector)(() => ({
@@ -134,9 +135,9 @@ const ServiceRequesterSteps = () => {
     // Job Posting Details
     paymentMethod: string;
     billedTo: string;
-    cardNumber: number | String;
+    cardNumber: number | string;
     expiration: Date | null;
-    cvv: number | String;
+    cvv: number | string;
     country: string;
   }>({
     // Basic Information
@@ -248,6 +249,9 @@ const ServiceRequesterSteps = () => {
       <ApplicationSubmission
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
+        title="Profile Created Successfully"
+        desc="Your profile has been successfully created! Our team will review your details to ensure they meet our platform’s standards. You can now explore and connect with top-rated freelancers for your service needs."
+        buttons={navigationButtons}
       />
     </>
   );

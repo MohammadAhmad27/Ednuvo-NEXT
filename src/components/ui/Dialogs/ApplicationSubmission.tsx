@@ -8,17 +8,28 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 
+interface buttonItem {
+  label: string;
+  href: string;
+}
+
 const ApplicationSubmission = ({
   isModalOpen,
   setIsModalOpen,
+  title,
+  desc,
+  buttons,
 }: {
   isModalOpen: boolean;
   setIsModalOpen: (open: boolean) => void;
+  title: string;
+  desc: string;
+  buttons: buttonItem[];
 }) => {
   const router = useRouter();
   const handleLater = () => {
     setIsModalOpen(false);
-    router.push("/");
+    router.push(buttons[0].href);
   };
 
   const handleTakeTest = () => {
@@ -79,19 +90,16 @@ const ApplicationSubmission = ({
         <Image
           src="/service-provider-onboarding/verified.svg"
           alt="verified-icon"
-          width={100}
-          height={100}
+          width={90}
+          height={90}
           className="object-cover"
         />
-        <h3 className="text-[24px] font-semibold text-lightblack">
+        <h3 className="text-[24px] font-semibold text-lightblack mt-1">
           {" "}
-          Application Submitted for Review
+          {title}
         </h3>
         <p className="text-[18px] font-normal text-lightblack text-justify">
-          Your application has been submitted for approval. Our team will review
-          your details to ensure they meet our platform’s criteria. While you
-          wait, please complete a short test to verify your expertise in your
-          selected services.
+          {desc}
         </p>
       </DialogContent>
       <DialogActions className="flex justify-center pb-6 px-6">
@@ -99,13 +107,13 @@ const ApplicationSubmission = ({
           onClick={handleLater}
           className="text-[14px] font-medium rounded-full px-8 py-[6px] border border-primary bg-white text-primary"
         >
-          Later
+          {buttons[0].label}
         </button>
         <button
           onClick={handleTakeTest}
           className="text-[14px] font-medium rounded-full px-6 py-2 bg-primary text-white"
         >
-          Take Test
+          {buttons[1].label}
         </button>
       </DialogActions>
     </Dialog>

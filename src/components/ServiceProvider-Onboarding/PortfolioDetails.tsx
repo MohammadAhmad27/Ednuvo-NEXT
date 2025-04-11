@@ -177,7 +177,7 @@ export default function PortfolioDetails({
         </div>
       </div>
       <div className="w-full flex justify-between items-center gap-2">
-        <div className="flex flex-col justify-start gap-2">
+        <div className="w-full flex flex-col justify-start gap-2">
           <label className="text-[14px] text-lightblack font-normal">
             Project Start Date
           </label>
@@ -189,7 +189,7 @@ export default function PortfolioDetails({
             placeholder="Select start date"
           />
         </div>
-        <div className="flex flex-col justify-start gap-2">
+        <div className="w-full flex flex-col justify-start gap-2">
           <label className="text-[14px] text-lightblack font-normal">
             Project Completion Date
           </label>

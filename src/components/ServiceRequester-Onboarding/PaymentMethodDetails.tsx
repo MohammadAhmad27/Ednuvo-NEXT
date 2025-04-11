@@ -13,9 +13,9 @@ interface PaymentMethodDetailsProps {
   formData: {
     paymentMethod: string;
     billedTo: string;
-    cardNumber: number | String;
+    cardNumber: number | string;
     expiration: Date | null;
-    cvv: number | String;
+    cvv: number | string;
     country: string;
     [key: string]: any;
   };
@@ -41,31 +41,36 @@ const PaymentMethodDetails = ({
           Payment Method
         </label>
         <div className="flex flex-wrap items-stretch gap-4">
-          {paymentMethodImages?.map((item) => (
-            <div className="relative">
+          {paymentMethodImages?.map((item) => {
+            const isSelected = formData.paymentMethod === item.label;
+            return (
               <div
                 key={item.label}
-                className="flex items-center justify-center bg-white border border-gray rounded-md px-4 py-4"
+                className={`relative flex items-center justify-center px-4 py-2 border rounded-md cursor-pointer
+                  ${ isSelected ? "bg-lightgreen border-secondary" : "bg-white border-gray"}`}
+                onClick={() => onChange({ paymentMethod: item.label })}
               >
                 <Image
                   src={item?.icon}
-                  alt="icon"
+                  alt={`${item.label}-icon`}
                   width={75}
                   height={75}
                   className="object-cover"
                 />
+                {isSelected && (
+                  <div className="absolute -top-[6px] -right-[6px]">
+                    <Image
+                      src="/service-requester-onboarding/check.svg"
+                      alt="check-icon"
+                      width={16}
+                      height={16}
+                      className="object-cover"
+                    />
+                  </div>
+                )}
               </div>
-              <div className="absolute -top-1 -right-[6px]">
-                <Image
-                  src="/service-requester-onboarding/check.svg"
-                  alt="check-icon"
-                  width={15}
-                  height={15}
-                  className="object-cover"
-                />
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
       <div className="w-full space-y-6 mb-6">
@@ -73,9 +78,9 @@ const PaymentMethodDetails = ({
           label="Billed To"
           placeholder="Account Name"
           type="text"
-          value={formData.paymentMethod}
+          value={formData.billedTo}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            onChange({ paymentMethod: e.target.value })
+            onChange({ billedTo: e.target.value })
           }
         />
         <MUITextField
@@ -88,8 +93,8 @@ const PaymentMethodDetails = ({
           }
         />
       </div>
-      <div className="w-full flex justify-between itms-center gap-4 mb-6">
-        <div className="W-1/2 flex flex-col justify-start gap-1 mb-2">
+      <div className="w-full flex justify-between items-center gap-4 mb-6">
+        <div className="w-1/2 flex flex-col justify-start gap-1 mb-2">
           <label className="text-[14px] text-lightblack font-normal">
             Expiration
           </label>

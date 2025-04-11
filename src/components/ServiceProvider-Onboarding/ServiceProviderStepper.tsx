@@ -10,6 +10,7 @@ import StepConnector, {
   stepConnectorClasses,
 } from "@mui/material/StepConnector";
 import ApplicationSubmission from "../ui/Dialogs/ApplicationSubmission";
+import { navigationButtons } from "@/app/service-provider-onboarding/content";
 
 // Custom connector centered vertically
 const CustomConnector = styled(StepConnector)(() => ({
@@ -270,6 +271,9 @@ const ServiceProviderSteps = () => {
       <ApplicationSubmission
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
+        title="Application Submitted for Review"
+        desc="Your application has been submitted for approval. Our team will review your details to ensure they meet our platform’s criteria. While you wait, please complete a short test to verify your expertise in your selected services."
+        buttons={navigationButtons}
       />
     </>
   );

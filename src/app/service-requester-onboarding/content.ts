@@ -69,3 +69,14 @@ export const paymentMethodImages = [
 ];
 
 export const countries = ["Saudi Arabia", "UAE", "OMAN", "Qatar", "Bahrain"];
+
+export const navigationButtons = [
+  {
+    label: "Go to dashboard",
+    href: "/",
+  },
+  {
+    label: "Eplore Experts",
+    href: "/explore-experts",
+  },
+];

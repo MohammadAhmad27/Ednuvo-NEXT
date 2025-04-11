@@ -19,7 +19,15 @@ export const skillsList = [
   "Glass & Metal Work",
 ];
 
-export const pricingModes = [
-  "Fixed Price",
-  "Unit Price",
+export const pricingModes = ["Fixed Price", "Unit Price"];
+
+export const navigationButtons = [
+  {
+    label: "Later",
+    href: "/",
+  },
+  {
+    label: "Take the test",
+    href: "/test",
+  },
 ];
