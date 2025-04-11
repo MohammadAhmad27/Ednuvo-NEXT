@@ -13,7 +13,7 @@ interface PaymentMethodDetailsProps {
     paymentMethod: string;
     billedTo: string;
     cardNumber: number | string;
-    expiration: Dayjs | null;
+    expiration: Date | null;
     cvv: number | string;
     country: string;
     [key: string]: any;

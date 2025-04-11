@@ -59,7 +59,7 @@ const MUIAutoComplete = ({
           minWidth: "80px",
         },
         "& .MuiAutocomplete-endAdornment": {
-          right: "7px !important",
+          right: "4px !important",
         },
         "& .MuiSvgIcon-root": {
           color: "#606163",

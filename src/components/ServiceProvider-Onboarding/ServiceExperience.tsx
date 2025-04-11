@@ -10,8 +10,8 @@ interface ServiceExperienceProps {
   formData: {
     serviceCategories: string[];
     experienceLevel: string;
-    startTime: Dayjs | null;
-    endTime: Dayjs | null;
+    startTime: Date | null;
+    endTime: Date | null;
     [key: string]: any;
   };
   onChange: (data: any) => void;

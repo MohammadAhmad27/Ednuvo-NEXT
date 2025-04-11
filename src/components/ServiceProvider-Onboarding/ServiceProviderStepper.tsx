@@ -11,7 +11,6 @@ import StepConnector, {
 } from "@mui/material/StepConnector";
 import ApplicationSubmission from "../ui/Dialogs/ApplicationSubmission";
 import { navigationButtons } from "@/app/service-provider-onboarding/content";
-import { Dayjs } from "dayjs";
 
 // Custom connector centered vertically
 const CustomConnector = styled(StepConnector)(() => ({
@@ -132,16 +131,18 @@ const ServiceProviderSteps = () => {
     // Service & Experience
     serviceCategories: string[];
     experienceLevel: string;
-    startTime: Dayjs | null;
-    endTime: Dayjs | null;
+    startTime: Date | null;
+    endTime: Date | null;
 
     // Portfolio Details
-    projectTitle: string;
-    projectDescription: string;
-    skills: string[];
-    images: File[];
-    startDate: Dayjs | null;
-    endDate: Dayjs | null;
+    portfolios: Array<{
+      projectTitle: string;
+      projectDescription: string;
+      skills: string[];
+      images: File[];
+      startDate: Date | null;
+      endDate: Date | null;
+    }>;
 
     // Packages Detail
     packages: Array<{
@@ -167,16 +168,20 @@ const ServiceProviderSteps = () => {
     // Service & Experience
     serviceCategories: [],
     experienceLevel: "",
-    startTime: null as Dayjs | null,
-    endTime: null as Dayjs | null,
+    startTime: null as Date | null,
+    endTime: null as Date | null,
 
     // Portfolio Details
-    projectTitle: "",
-    projectDescription: "",
-    skills: [] as string[],
-    images: [] as File[],
-    startDate: null as Dayjs | null,
-    endDate: null as Dayjs | null,
+    portfolios: [
+      {
+        projectTitle: "",
+        projectDescription: "",
+        skills: [] as string[],
+        images: [] as File[],
+        startDate: null as Date | null,
+        endDate: null as Date | null,
+      },
+    ],
 
     // Packages Detail
     packages: [

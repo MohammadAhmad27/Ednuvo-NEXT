@@ -25,7 +25,7 @@ interface JobDetailsProps {
     budgetMode: string;
     totalBudget: number | string;
     experienceLevel: string;
-    jobStartDate: Dayjs | null;
+    jobStartDate: Date | null;
     categoriesList: string[];
     imagesList: File[];
     [key: string]: any;

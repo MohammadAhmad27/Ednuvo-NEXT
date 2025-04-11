@@ -9,7 +9,6 @@ import ApplicationSubmission from "../ui/Dialogs/ApplicationSubmission";
 import JobPostingDetails from "./JobPostingDetails";
 import PaymentMethodDetails from "./PaymentMethodDetails";
 import { navigationButtons } from "@/app/service-requester-onboarding/content";
-import { Dayjs } from "dayjs";
 
 // Custom connector centered vertically
 const CustomConnector = styled(StepConnector)(() => ({
@@ -129,7 +128,7 @@ const ServiceRequesterSteps = () => {
     budgetMode: string;
     totalBudget: number | string;
     experienceLevel: string;
-    jobStartDate: Dayjs | null;
+    jobStartDate: Date | null;
     categoriesList: string[];
     imagesList: File[];
 
@@ -137,7 +136,7 @@ const ServiceRequesterSteps = () => {
     paymentMethod: string;
     billedTo: string;
     cardNumber: number | string;
-    expiration: Dayjs | null;
+    expiration: Date | null;
     cvv: number | string;
     country: string;
   }>({
@@ -159,7 +158,7 @@ const ServiceRequesterSteps = () => {
     budgetMode: "",
     totalBudget: "",
     experienceLevel: "",
-    jobStartDate: null as Dayjs | null,
+    jobStartDate: null as Date| null,
     categoriesList: [] as string[],
     imagesList: [] as File[],
 
@@ -167,7 +166,7 @@ const ServiceRequesterSteps = () => {
     paymentMethod: "razorpay",
     billedTo: "",
     cardNumber: "",
-    expiration: null as Dayjs | null,
+    expiration: null as Date | null,
     cvv: "",
     country: "",
   });
