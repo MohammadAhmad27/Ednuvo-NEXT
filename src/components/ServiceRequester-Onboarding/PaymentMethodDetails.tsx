@@ -1,20 +1,19 @@
-"use client";
-import { useState, useEffect } from "react";
 import {
   countries,
   paymentMethodImages,
 } from "@/app/service-requester-onboarding/content";
 import Image from "next/image";
 import MUITextField from "../ui/TextField";
-import DateRangePicker from "../ui/DatePicker";
 import MUIAutoComplete from "../ui/AutoComplete";
+import dayjs, { Dayjs } from "dayjs";
+import MUIDatePicker from "../ui/DatePicker";
 
 interface PaymentMethodDetailsProps {
   formData: {
     paymentMethod: string;
     billedTo: string;
     cardNumber: number | string;
-    expiration: Date | null;
+    expiration: Dayjs | null;
     cvv: number | string;
     country: string;
     [key: string]: any;
@@ -26,10 +25,6 @@ const PaymentMethodDetails = ({
   formData,
   onChange,
 }: PaymentMethodDetailsProps) => {
-  const handleStartDateChange = (date: Date) => {
-    onChange({ expiration: date });
-  };
-
   return (
     <div>
       <p className="text-[14px] text-primary font-normal mb-8">
@@ -47,7 +42,11 @@ const PaymentMethodDetails = ({
               <div
                 key={item.label}
                 className={`relative flex items-center justify-center px-4 py-2 border rounded-md cursor-pointer
-                  ${ isSelected ? "bg-lightgreen border-secondary" : "bg-white border-gray"}`}
+                  ${
+                    isSelected
+                      ? "bg-lightgreen border-secondary"
+                      : "bg-white border-gray"
+                  }`}
                 onClick={() => onChange({ paymentMethod: item.label })}
               >
                 <Image
@@ -94,16 +93,15 @@ const PaymentMethodDetails = ({
         />
       </div>
       <div className="w-full flex justify-between items-center gap-4 mb-6">
-        <div className="w-1/2 flex flex-col justify-start gap-1 mb-2">
-          <label className="text-[14px] text-lightblack font-normal">
-            Expiration
-          </label>
-          <DateRangePicker
-            selectedDate={formData.expiration}
-            onChange={handleStartDateChange}
-            minDate={new Date()}
-            maxDate={new Date(Date.now() + 1360 * 24 * 60 * 60 * 1000)}
-            placeholder="MM/YY"
+        <div className="w-1/2 flex flex-col">
+          <MUIDatePicker
+            value={formData.expiration ? dayjs(formData.expiration) : null}
+            onChange={(date: Dayjs | null) =>
+              onChange({ expiration: date ? date.toDate() : null })
+            }
+            label="Expiration"
+            views={["year", "month"]}
+            format="YYYY/MM"
           />
         </div>
         <div className="w-1/2">

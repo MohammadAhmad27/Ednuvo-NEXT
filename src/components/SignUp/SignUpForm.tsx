@@ -4,6 +4,7 @@ import MUITextField from "../ui/TextField";
 import { signUpButtons } from "@/app/signup/content";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const SignUpForm = () => {
   const [email, setEmail] = useState<string>("");
@@ -11,12 +12,17 @@ const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // setIsLoading(true);
+    setIsLoading(true);
     console.log("email: ", email);
     console.log("password: ", password);
+    setTimeout(() => {
+      setIsLoading(false);
+      router.push("/register");
+    }, 3000);
   };
 
   return (

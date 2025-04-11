@@ -3,7 +3,8 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import MUITextField from "../ui/TextField";
 import { skillsList } from "@/app/service-provider-onboarding/content";
-import DateRangePicker from "../ui/DatePicker";
+import dayjs, { Dayjs } from "dayjs";
+import MUIDatePicker from "../ui/DatePicker";
 
 interface PortfolioDetailsProps {
   formData: {
@@ -11,8 +12,8 @@ interface PortfolioDetailsProps {
     projectDescription: string;
     skills: string[];
     images: File[];
-    startDate: Date;
-    endDate: Date | null;
+    startDate: Dayjs | null;
+    endDate: Dayjs | null;
     [key: string]: any;
   };
   onChange: (data: any) => void;
@@ -59,16 +60,16 @@ export default function PortfolioDetails({
     fileInputRef?.current?.click();
   };
 
-  const handleStartDateChange = (date: Date) => {
-    onChange({ startDate: date });
+  const handleStartDateChange = (date: Dayjs | null) => {
+    onChange({ startDate: date ? date.toDate() : null });
 
-    if (formData.endDate && formData.endDate < date) {
-      onChange({ startDate: date, endDate: null });
-    }
+    // if (formData.endDate && formData.endDate < date) {
+    //   onChange({ startDate: date, endDate: null });
+    // }
   };
 
-  const handleEndDateChange = (date: Date) => {
-    onChange({ endDate: date });
+  const handleEndDateChange = (date: Dayjs | null) => {
+    onChange({ endDate: date ? date.toDate() : null });
   };
 
   return (
@@ -140,14 +141,18 @@ export default function PortfolioDetails({
           placeholder="Enter project title"
           type="text"
           value={formData.projectTitle}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange({ projectTitle: e.target.value })}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            onChange({ projectTitle: e.target.value })
+          }
         />
         <MUITextField
           label="Project Description"
           placeholder="Enter project description"
           type="text"
           value={formData.projectDescription}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange({ projectDescription: e.target.value })}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            onChange({ projectDescription: e.target.value })
+          }
           multiline
           rows={4}
         />
@@ -177,28 +182,18 @@ export default function PortfolioDetails({
         </div>
       </div>
       <div className="w-full flex justify-between items-center gap-2">
-        <div className="w-full flex flex-col justify-start gap-2">
-          <label className="text-[14px] text-lightblack font-normal">
-            Project Start Date
-          </label>
-          <DateRangePicker
-            selectedDate={formData.startDate}
+        <div className="w-full flex flex-col">
+          <MUIDatePicker
+            value={formData.startDate ? dayjs(formData.startDate) : null}
             onChange={handleStartDateChange}
-            minDate={new Date()}
-            maxDate={new Date(Date.now() + 1360 * 24 * 60 * 60 * 1000)}
-            placeholder="Select start date"
+            label="Project Start Date"
           />
         </div>
-        <div className="w-full flex flex-col justify-start gap-2">
-          <label className="text-[14px] text-lightblack font-normal">
-            Project Completion Date
-          </label>
-          <DateRangePicker
-            selectedDate={formData.endDate}
+        <div className="w-full flex flex-col">
+          <MUIDatePicker
+            value={formData.endDate ? dayjs(formData.endDate) : null}
             onChange={handleEndDateChange}
-            minDate={formData.startDate}
-            maxDate={new Date(Date.now() + 1360 * 24 * 60 * 60 * 1000)}
-            placeholder="Select end date"
+            label="Project Completion Date"
           />
         </div>
       </div>

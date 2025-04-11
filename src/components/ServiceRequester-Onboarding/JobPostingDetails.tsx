@@ -11,7 +11,8 @@ import {
 } from "@/app/service-requester-onboarding/content";
 import Image from "next/image";
 import { pricingModes } from "@/app/service-provider-onboarding/content";
-import DateRangePicker from "../ui/DatePicker";
+import MUIDatePicker from "../ui/DatePicker";
+import dayjs, { Dayjs } from "dayjs";
 
 interface JobDetailsProps {
   formData: {
@@ -24,7 +25,7 @@ interface JobDetailsProps {
     budgetMode: string;
     totalBudget: number | string;
     experienceLevel: string;
-    jobStartDate: Date | null;
+    jobStartDate: Dayjs | null;
     categoriesList: string[];
     imagesList: File[];
     [key: string]: any;
@@ -68,10 +69,6 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
 
   const handleDivClick = () => {
     fileInputRef?.current?.click();
-  };
-
-  const handleStartDateChange = (date: Date) => {
-    onChange({ jobStartDate: date });
   };
 
   return (
@@ -186,7 +183,7 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
       {/* 4th */}
       <div className="w-full flex items-center gap-4 mb-6">
         <MUIAutoComplete
-          width="49%"
+          width="50%"
           options={experienceLevel}
           value={formData.experienceLevel || ""}
           onChange={(_: React.SyntheticEvent, newValue: string | null) =>
@@ -196,16 +193,11 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
           label="Experience Level"
         />
 
-        <div className="w-1/2 flex flex-col justify-start gap-1 mb-2">
-          <label className="text-[14px] text-lightblack font-normal">
-            Project Start Date
-          </label>
-          <DateRangePicker
-            selectedDate={formData.jobStartDate}
-            onChange={handleStartDateChange}
-            minDate={new Date()}
-            maxDate={new Date(Date.now() + 1360 * 24 * 60 * 60 * 1000)}
-            placeholder="Select start date"
+        <div className="w-1/2 flex flex-col">
+          <MUIDatePicker
+            value={formData.jobStartDate ? dayjs(formData.jobStartDate) : null}
+            onChange={(date: Dayjs | null) => onChange({ jobStartDate: date ? date.toDate() : null })}
+            label="Job Start Date"
           />
         </div>
       </div>

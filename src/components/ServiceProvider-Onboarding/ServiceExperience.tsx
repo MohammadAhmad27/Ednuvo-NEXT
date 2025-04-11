@@ -1,10 +1,8 @@
-"use client";
 import {
   experienceLevel,
   serviceCategories,
 } from "@/app/service-provider-onboarding/content";
 import MUIAutoComplete from "../ui/AutoComplete";
-import DateRangePicker from "../ui/DatePicker";
 
 interface ServiceExperienceProps {
   formData: {
@@ -21,13 +19,6 @@ export default function ServiceExperience({
   formData,
   onChange,
 }: ServiceExperienceProps) {
-  const handleStartTimeChange = (date: Date | null) => {
-    onChange({ startTime: date });
-  };
-
-  const handleEndTimeChange = (date: Date | null) => {
-    onChange({ endTime: date });
-  };
 
   return (
     <div>
@@ -59,7 +50,7 @@ export default function ServiceExperience({
         />
       </div>
       <div className="w-full flex justify-between items-center gap-4">
-        <div className="flex flex-col justify-start gap-2 w-full">
+        {/* <div className="w-1/2 flex flex-col">
           <label className="text-[14px] text-lightblack font-normal">
             Start Time
           </label>
@@ -69,9 +60,9 @@ export default function ServiceExperience({
             mode="time"
             placeholder="Select start time"
           />
-        </div>
+        </div> */}
 
-        <div className="flex flex-col justify-start gap-2 w-full">
+        {/* <div className="w-1/2 flex flex-col">
           <label className="text-[14px] text-lightblack font-normal">
             End Time
           </label>
@@ -81,7 +72,7 @@ export default function ServiceExperience({
             mode="time"
             placeholder="Select end time"
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

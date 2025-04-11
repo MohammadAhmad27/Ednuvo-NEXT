@@ -7,6 +7,7 @@ import FormControl from "@mui/material/FormControl";
 import { Box, Paper, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const StyledRadio = styled(Radio)(() => ({
   color: "#5BBB7B",
@@ -14,13 +15,11 @@ const StyledRadio = styled(Radio)(() => ({
     color: "#5BBB7B",
   },
 }));
+
 const RoleSelectorCard = () => {
   const [value, setValue] = React.useState("provider");
+  const router = useRouter(); 
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-    console.log("Selected role:", event.target.value);
-  };
 
   return (
     <Box className="w-full flex flex-col justify-center items-center gap-10">
@@ -30,7 +29,6 @@ const RoleSelectorCard = () => {
       <FormControl>
         <RadioGroup
           value={value}
-          onChange={handleChange}
           sx={{
             maxWidth: 430,
             display: "flex",
@@ -38,14 +36,23 @@ const RoleSelectorCard = () => {
             gap: 2,
           }}
         >
-          {/* 1st div */}
+          {/* Provider */}
           <Paper
             elevation={0}
             sx={{
               paddingX: 3,
               paddingY: 2,
               borderRadius: 3,
-              border: "1px solid #E9E9E9",
+              border: value === "provider" ? "1px solid #5BBB7B" : "1px solid #E9E9E9",
+              backgroundColor: value === "provider" ? "#EEF8F2" : "inherit",
+              cursor: "pointer",
+              "&:hover": {
+                border: "1px solid #5BBB7B",
+              },
+            }}
+            onClick={() => {
+              setValue("provider");
+              router.push("/service-provider-onboarding");
             }}
           >
             <FormControlLabel
@@ -65,7 +72,7 @@ const RoleSelectorCard = () => {
                     alt="user-icon"
                     width={30}
                     height={30}
-                    className="object-cover "
+                    className="object-cover"
                   />
                   <Box>
                     <Typography
@@ -91,16 +98,33 @@ const RoleSelectorCard = () => {
                   </Box>
                 </Box>
               }
+              // sx={{ 
+              //   width: "100%",
+              //   margin: 0,
+              //   "& .MuiFormControlLabel-label": {
+              //     width: "100%"
+              //   }
+              // }}
             />
           </Paper>
-          {/* 2nd div */}
+
+          {/* Requester */}
           <Paper
             elevation={0}
             sx={{
               paddingX: 3,
               paddingY: 2,
               borderRadius: 3,
-              border: "1px solid #E9E9E9",
+              border: value === "requester" ? "1px solid #5BBB7B" : "1px solid #E9E9E9",
+              backgroundColor: value === "requester" ? "#EEF8F2" : "inherit",
+              cursor: "pointer",
+              "&:hover": {
+                border: "1px solid #5BBB7B",
+              },
+            }}
+            onClick={() => {
+              setValue("requester");
+              router.push("/service-requester-onboarding");
             }}
           >
             <FormControlLabel
@@ -120,7 +144,7 @@ const RoleSelectorCard = () => {
                     alt="user-icon"
                     width={30}
                     height={30}
-                    className="object-cover "
+                    className="object-cover"
                   />
                   <Box>
                     <Typography
@@ -146,6 +170,13 @@ const RoleSelectorCard = () => {
                   </Box>
                 </Box>
               }
+              // sx={{ 
+              //   width: "100%",
+              //   margin: 0,
+              //   "& .MuiFormControlLabel-label": {
+              //     width: "100%"
+              //   }
+              // }}
             />
           </Paper>
         </RadioGroup>

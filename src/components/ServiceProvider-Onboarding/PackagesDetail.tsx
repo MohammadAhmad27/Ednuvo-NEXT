@@ -1,5 +1,4 @@
 "use client";
-
 import { pricingModes } from "@/app/service-provider-onboarding/content";
 import MUIAutoComplete from "../ui/AutoComplete";
 import MUITextField from "../ui/TextField";

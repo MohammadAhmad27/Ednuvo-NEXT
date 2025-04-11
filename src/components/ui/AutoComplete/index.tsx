@@ -1,4 +1,3 @@
-"use client";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Chip from "@mui/material/Chip";
@@ -60,7 +59,7 @@ const MUIAutoComplete = ({
           minWidth: "80px",
         },
         "& .MuiAutocomplete-endAdornment": {
-          right: "1px !important",
+          right: "7px !important",
         },
         "& .MuiSvgIcon-root": {
           color: "#606163",
@@ -99,7 +98,7 @@ const MUIAutoComplete = ({
               },
             },
             "& .MuiInputLabel-root": {
-              color: "#7D8BB7",
+              color: "#222222",
               fontSize: "16px",
               fontWeight: "500",
             },
@@ -115,9 +114,10 @@ const MUIAutoComplete = ({
               fontSize: "16px",
               fontWeight: "500",
             },
-            "& input:-webkit-autofill": {
-              WebkitTextFillColor: "#222222 !important",
-            },
+              "& input:-webkit-autofill": {
+                boxShadow: "0 0 0 1000px white inset !important",
+                WebkitTextFillColor: "#222222 !important",
+              },
             "& input[type=number]": {
               MozAppearance: "textfield",
             },

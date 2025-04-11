@@ -1,66 +1,32 @@
-"use client";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { Dayjs } from "dayjs";
 
-import React, { forwardRef } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import DateRangeIcon from "@mui/icons-material/DateRange";
-import "./datepicker.css";
-
-interface DatePickerProps {
-  selectedDate: any;
-  minDate?: Date;
-  maxDate?: Date;
-  onChange: (date: any) => void;
-  placeholder?: string;
-  mode?: "date" | "time";
+interface MUIDatePickerProps {
+  value: Dayjs | null;
+  onChange: (date: Dayjs | null) => void;
+  label: string;
+  views?: ("year" | "month" | "day")[];
+  format?: string;
 }
 
-const DateRangePicker: React.FC<DatePickerProps> = ({
-  selectedDate,
-  minDate,
-  maxDate,
+export default function MUIDatePicker({
+  value,
   onChange,
-  placeholder = "Select date",
-  mode = "date",
-}) => {
-  const CustomInput = forwardRef<
-    HTMLInputElement,
-    { value?: string; onClick?: () => void }
-  >(({ value, onClick }, ref) => (
-    <div
-      className="w-full rounded-xl text-[14px] font-medium cursor-pointer border-[1px] bg-[#FFFFFF] border-gray px-2 py-[8px]"
-      onClick={onClick}
-      ref={ref}
-    >
-      <div className="flex gap-2 items-center w-full">
-        <DateRangeIcon className="text-[#606163]" sx={{ fontSize: 17 }} />
-        <input
-          type="text"
-          value={value}
-          readOnly
-          className="border-none bg-transparent outline-none w-full"
-          placeholder={placeholder}
-        />
-      </div>
-    </div>
-  ));
-  CustomInput.displayName = "CustomInput";
-
+  label,
+  views = ["year", "month", "day"],
+  format = "YYYY/MM/DD",
+}: MUIDatePickerProps) {
   return (
-    <DatePicker
-      dateFormat={mode === "time" ? "hh:mm aa" : "yyyy/MM/dd"}
-      selected={selectedDate}
-      onChange={onChange}
-      customInput={<CustomInput />}
-      minDate={mode === "date" ? minDate : undefined}
-      maxDate={mode === "date" ? maxDate : undefined}
-      showTimeSelect={mode === "time"}
-      showTimeSelectOnly={mode === "time"}
-      timeIntervals={5}
-      timeCaption="Time"
-      showDisabledMonthNavigation={mode === "date"}
-    />
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DatePicker
+        value={value}
+        onChange={onChange}
+        label={label}
+        views={views}
+        format={format}
+      />
+    </LocalizationProvider>
   );
-};
-
-export default DateRangePicker;
+}

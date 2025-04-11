@@ -11,6 +11,7 @@ import StepConnector, {
 } from "@mui/material/StepConnector";
 import ApplicationSubmission from "../ui/Dialogs/ApplicationSubmission";
 import { navigationButtons } from "@/app/service-provider-onboarding/content";
+import { Dayjs } from "dayjs";
 
 // Custom connector centered vertically
 const CustomConnector = styled(StepConnector)(() => ({
@@ -139,8 +140,8 @@ const ServiceProviderSteps = () => {
     projectDescription: string;
     skills: string[];
     images: File[];
-    startDate: Date;
-    endDate: Date | null;
+    startDate: Dayjs | null;
+    endDate: Dayjs | null;
 
     // Packages Detail
     packages: Array<{
@@ -174,8 +175,8 @@ const ServiceProviderSteps = () => {
     projectDescription: "",
     skills: [] as string[],
     images: [] as File[],
-    startDate: new Date(),
-    endDate: null as Date | null,
+    startDate: null as Dayjs | null,
+    endDate: null as Dayjs | null,
 
     // Packages Detail
     packages: [

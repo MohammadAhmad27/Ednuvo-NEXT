@@ -13,11 +13,11 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^7.0.1",
     "@mui/material": "^7.0.1",
-    "date-fns": "^4.1.0",
+    "@mui/x-date-pickers": "^7.28.3",
+    "dayjs": "^1.11.13",
     "next": "^14",
     "react": "^18",
     "react-countup": "^6.5.3",
-    "react-datepicker": "^8.2.1",
     "react-dom": "^18",
     "swiper": "^11.2.6"
   },

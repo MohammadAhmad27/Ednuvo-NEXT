@@ -12,8 +12,8 @@ interface MUITextFieldProps {
   placeholder?: string | number;
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
-  multiline?: boolean,
-  rows?: number
+  multiline?: boolean;
+  rows?: number;
 }
 
 const MUITextField = ({
@@ -26,8 +26,8 @@ const MUITextField = ({
   placeholder,
   startAdornment,
   endAdornment,
-  multiline= false,
-  rows = 0
+  multiline = false,
+  rows = 0,
 }: MUITextFieldProps) => {
   const isPassword = type === "password";
   const isNumber = type === "number";
@@ -81,7 +81,7 @@ const MUITextField = ({
           : undefined
       }
       sx={{
-        backgroundColor: "#FFFFFFF",
+        backgroundColor: "#FFFFFFF !important",
         borderRadius: "6px",
         "& .MuiOutlinedInput-root": {
           borderRadius: "6px",
@@ -98,7 +98,7 @@ const MUITextField = ({
           },
         },
         "& .MuiInputLabel-root": {
-          color: "#7D8BB7",
+          color: "#222222",
           fontSize: "16px",
           fontWeight: "500",
         },
@@ -115,6 +115,7 @@ const MUITextField = ({
           fontWeight: "500",
         },
         "& input:-webkit-autofill": {
+          boxShadow: "0 0 0 1000px white inset !important",
           WebkitTextFillColor: "#222222 !important",
         },
         // Hide arrows in Chrome/Safari
