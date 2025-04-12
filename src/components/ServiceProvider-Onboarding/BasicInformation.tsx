@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import MUITextField from "../ui/TextField";
+import MapComponent from "../ui/MapComponent";
 
 interface BasicInformationProps {
   formData: {
@@ -93,7 +94,9 @@ export default function BasicInformation({
           placeholder="Enter your first name"
           type="text"
           value={formData?.firstName}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange({ firstName: e.target.value })}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            onChange({ firstName: e.target.value })
+          }
         />
 
         <MUITextField
@@ -101,10 +104,12 @@ export default function BasicInformation({
           placeholder="Enter your last name"
           type="text"
           value={formData?.lastName}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange({ lastName: e.target.value })}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            onChange({ lastName: e.target.value })
+          }
         />
       </div>
-      <div className="w-full flex justify-between items-center gap-4">
+      <div className="w-full flex justify-between items-center gap-4 mb-6">
         <MUITextField
           label="Address"
           placeholder="Villa 23, Street 12, Al Muruj District, Riyadh"
@@ -150,6 +155,7 @@ export default function BasicInformation({
           }
         />
       </div>
+      <MapComponent address={formData.address} />
     </div>
   );
 }
