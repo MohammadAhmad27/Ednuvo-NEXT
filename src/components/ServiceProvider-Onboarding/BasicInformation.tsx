@@ -2,7 +2,22 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import MUITextField from "../ui/TextField";
-import MapComponent from "../ui/MapComponent";
+import dynamic from "next/dynamic";
+import { Skeleton } from "@mui/material";
+
+const MapComponent = dynamic(() => import("../ui/MapComponent"), {
+  ssr: false,
+  loading: () => (
+    <p className="">
+      {" "}
+      <Skeleton
+        sx={{ width: "100%", height: "300px" }}
+        animation="wave"
+        variant="rectangular"
+      />
+    </p>
+  ),
+});
 
 interface BasicInformationProps {
   formData: {

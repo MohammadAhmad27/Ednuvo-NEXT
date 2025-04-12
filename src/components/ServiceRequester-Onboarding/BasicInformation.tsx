@@ -2,6 +2,22 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import MUITextField from "../ui/TextField";
+import dynamic from "next/dynamic";
+import { Skeleton } from "@mui/material";
+
+const MapComponent = dynamic(() => import("../ui/MapComponent"), {
+  ssr: false,
+  loading: () => (
+    <p className="">
+      {" "}
+      <Skeleton
+        sx={{ width: "100%", height: "300px" }}
+        animation="wave"
+        variant="rectangular"
+      />
+    </p>
+  ),
+});
 
 interface BasicInformationProps {
   formData: {
@@ -93,7 +109,9 @@ export default function BasicInformation({
           placeholder="Enter your first name"
           type="text"
           value={formData?.firstName}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange({ firstName: e.target.value })}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            onChange({ firstName: e.target.value })
+          }
         />
 
         <MUITextField
@@ -101,11 +119,13 @@ export default function BasicInformation({
           placeholder="Enter your last name"
           type="text"
           value={formData?.lastName}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange({ lastName: e.target.value })}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            onChange({ lastName: e.target.value })
+          }
         />
       </div>
-      <div className="w-full flex justify-between items-start gap-4">
-        <div className="space-y-2 w-1/2">
+      <div className="w-full flex justify-between items-start gap-4 mb-6">
+        <div className="w-1/2">
           <MUITextField
             label="Address"
             placeholder="Villa 23, Street 12, Al Muruj District, Riyadh"
@@ -124,7 +144,7 @@ export default function BasicInformation({
               />
             }
           />
-          <div className="flex justify-start items-center gap-2">
+          {/* <div className="flex justify-start items-center gap-2">
             <Image
               src="/service-requester-onboarding/marker.svg"
               alt="location-marker"
@@ -135,7 +155,7 @@ export default function BasicInformation({
             <span className="text-[14px] font-medium text-secondary">
               Choose on map
             </span>
-          </div>
+          </div> */}
         </div>
         <div className="w-1/2">
           <MUITextField
@@ -166,6 +186,7 @@ export default function BasicInformation({
           />
         </div>
       </div>
+      <MapComponent address={formData.address} />
     </div>
   );
 }
