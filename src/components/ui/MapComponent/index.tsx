@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import Map, {
   Marker,
   MapRef,
-  FullscreenControl,
   NavigationControl,
+  GeolocateControl,
 } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
@@ -60,7 +60,11 @@ export default function MapComponent({ address }: MapComponentProps) {
         mapStyle="mapbox://styles/mapbox/streets-v11"
         style={{ width: "100%", height: "300px", borderRadius: "12px" }}
       >
-        <FullscreenControl position="top-right" />
+        <GeolocateControl
+          position="top-right"
+          trackUserLocation
+          showUserLocation
+        />
         <NavigationControl position="top-left" />
         {marker && (
           <Marker longitude={marker[0]} latitude={marker[1]} color="#FF0000" />

@@ -74,7 +74,7 @@ export default function BasicInformation({
       <div className="flex justify-center gap-2 mb-5">
         <div className="relative">
           <Image
-            src={photoPreview || "/service-provider-onboarding/placeholder.svg"}
+            src={photoPreview || "/service-provider-onboarding/profile.svg"}
             width={100}
             height={100}
             alt="Profile-Photo"
