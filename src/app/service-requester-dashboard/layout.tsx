@@ -1,4 +1,4 @@
-import Sidebar from "@/components/ServiceRequester-Dashboard/Sidebar";
+import Sidebar from "@/shared/Sidebar";
 
 export default function RootLayout({
   children,

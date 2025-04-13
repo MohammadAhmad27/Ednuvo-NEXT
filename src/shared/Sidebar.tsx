@@ -7,7 +7,7 @@ import Link from "next/link";
 const Sidebar = () => {
   const [activeButton, setActveButton] = useState(menuLinks[0].links[0]);
   return (
-    <div className="w-full h-screen overfllow-x-hidden overflow-y-auto flex flex-col gap-8 bg-white px-5 py-8">
+    <div className="w-full h-screen overflow-x-hidden overflow-y-auto flex flex-col gap-8 bg-white px-5 py-8">
       {/* logo */}
       <Link href="/" className="w-fit mx-auto">
         <Image
@@ -22,7 +22,7 @@ const Sidebar = () => {
       <div className="w-full flex flex-col gap-3 justify-center items-center border border-gray rounded-xl px-10 py-4">
         <Image
           src="/service-provider-onboarding/profile.svg"
-          alt="Ednuvo-logo"
+          alt="Profile-photo"
           width={80}
           height={80}
           className="object-cover"

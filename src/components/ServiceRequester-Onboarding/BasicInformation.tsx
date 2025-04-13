@@ -77,7 +77,7 @@ export default function BasicInformation({
             src={photoPreview || "/service-provider-onboarding/profile.svg"}
             width={100}
             height={100}
-            alt="Profile-Photo"
+            alt="Profile-photo"
             className="object-cover rounded-full"
           />
           <div className="absolute -bottom-2 right-2 p-1 flex items-center justify-center rounded-full bg-primary size-8">
