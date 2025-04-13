@@ -1,3 +1,4 @@
+import Header from "@/shared/Header";
 import Sidebar from "@/shared/Sidebar";
 
 export default function RootLayout({
@@ -10,7 +11,8 @@ export default function RootLayout({
       <div className="w-[250px]">
       <Sidebar />
       </div>
-      <div className="flex-1">
+      <div className="flex-1 overflow-hidden">
+      <Header />
       {children}
       </div>
     </div>

@@ -1,11 +1,5 @@
-import Header from "@/shared/Header"
-
 const page = () => {
-  return (
-    <div className='w-full overflow-hidden'>
-      <Header />
-    </div>
-  )
-}
+  return <div className="w-full overflow-hidden bg-lightgreen rounded-tl-[40px] pl-5 py-5 pr-12"></div>;
+};
 
-export default page
+export default page;

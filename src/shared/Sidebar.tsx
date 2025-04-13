@@ -1,11 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { menuLinks } from "@/app/service-requester-dashboard/content";
 import Image from "next/image";
 import Link from "next/link";
 
 const Sidebar = () => {
-  const [activeButton, setActveButton] = useState(menuLinks[0].links[0]);
+  const searchParams = useSearchParams();
+  const activeTab = searchParams.get("view");
+
   return (
     <div className="w-full h-screen overflow-x-hidden overflow-y-auto flex flex-col gap-8 bg-white px-5 py-8">
       {/* logo */}
@@ -41,36 +43,37 @@ const Sidebar = () => {
             <h3 className="pl-4 text-[14px] font-medium text-lightblack">
               {item?.title}
             </h3>
-            <ul className="w-full flex flex-col justify-start items-start gap-2">
-              {item?.links?.map((subItem) => (
-                <li
-                  key={subItem?.id}
-                  onClick={() => setActveButton(subItem)}
-                  className={`w-full flex gap-2 ${
-                    activeButton === subItem ? "bg-secondary" : "bg-white"
-                  } cursor-pointer rounded-full pl-4 py-[10px]`}
-                >
-                  <Image
-                    src={
-                      activeButton === subItem ? subItem?.icon2 : subItem?.icon
-                    }
-                    alt="icon"
-                    width={18}
-                    height={18}
-                    className="object-cover"
-                  />
-                  <p
-                    className={`text-[14px] ${
-                      activeButton === subItem
-                        ? "font-semibold text-white"
-                        : "font-medium text-[#8A8A8A]"
-                    }`}
+            <div className="w-full flex flex-col justify-start items-start gap-2">
+              {item?.links?.map((subItem) => {
+                const isActive = activeTab === subItem.label.toLowerCase();
+                return (
+                  <Link
+                    key={subItem?.id}
+                    href={`/service-requester-dashboard${subItem?.url}`}
+                    className={`w-full flex gap-2 items-center ${
+                      isActive ? "bg-secondary" : "bg-white"
+                    } cursor-pointer rounded-full pl-4 py-[10px]`}
                   >
-                    {subItem?.label}
-                  </p>
-                </li>
-              ))}
-            </ul>
+                    <Image
+                      src={isActive ? subItem?.icon2 : subItem?.icon}
+                      alt="icon"
+                      width={18}
+                      height={18}
+                      className="object-cover"
+                    />
+                    <p
+                      className={`text-[14px] ${
+                        isActive
+                          ? "font-semibold text-white"
+                          : "font-medium text-[#8A8A8A]"
+                      }`}
+                    >
+                      {subItem?.label}
+                    </p>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         ))}
       </div>
