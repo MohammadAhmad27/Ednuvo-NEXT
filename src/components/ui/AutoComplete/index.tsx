@@ -7,12 +7,13 @@ interface BaseProps {
   label: string;
   width: string;
   placeholder?: string | number;
+  variant?: "default" | "green";
 }
 
 type MultiProps = BaseProps & {
   multiple: true;
   defaultValue?: string[];
-  value?: string[]; 
+  value?: string[];
   onChange: (
     event: React.SyntheticEvent,
     value: string[],
@@ -24,7 +25,7 @@ type MultiProps = BaseProps & {
 type SingleProps = BaseProps & {
   multiple?: false;
   defaultValue?: string;
-  value?: string; 
+  value?: string;
   onChange: (
     event: React.SyntheticEvent,
     value: string | null,
@@ -39,19 +40,22 @@ const MUIAutoComplete = ({
   options,
   label = "",
   width,
+  variant = "default",
   placeholder,
   multiple = false,
   defaultValue,
   value,
   onChange,
 }: AutoCompleteProps) => {
+  const isGreen = variant === "green";
+  const themeColor = isGreen ? "#1F4B3F" : "#222222";
   return (
     <Autocomplete
       disablePortal
       multiple={multiple}
       options={options}
       defaultValue={defaultValue as any}
-      value={value as any} 
+      value={value as any}
       onChange={onChange as any}
       sx={{
         width: width,
@@ -62,7 +66,7 @@ const MUIAutoComplete = ({
           right: "4px !important",
         },
         "& .MuiSvgIcon-root": {
-          color: "#606163",
+          color: isGreen ? "#1F4B3F" : "#606163",
         },
       }}
       renderTags={(value: readonly string[], getTagProps) =>
@@ -78,46 +82,46 @@ const MUIAutoComplete = ({
         <TextField
           {...params}
           label={label}
-          size="medium"
+          size={isGreen ? "small" : "medium"}
           placeholder={placeholder?.toString()}
           sx={{
             backgroundColor: "#FFFFFFF",
-            borderRadius: "6px",
+            borderRadius: isGreen ? 100 : "6px",
             "& .MuiOutlinedInput-root": {
-              borderRadius: "6px",
+              borderRadius: isGreen ? 100 : "6px",
               fontWeight: "500",
               fontSize: "16px",
               "& fieldset": {
-                borderColor: "#E9E9E9",
+                borderColor: isGreen ? "#1F4B3F" : "#E9E9E9",
               },
               "&:hover fieldset": {
-                borderColor: "#E9E9E9",
+                borderColor: isGreen ? "#1F4B3F" : "#E9E9E9",
               },
               "&.Mui-focused fieldset": {
-                borderColor: "#E9E9E9",
+                borderColor: isGreen ? "#1F4B3F" : "#E9E9E9",
               },
             },
             "& .MuiInputLabel-root": {
-              color: "#222222",
+              color: themeColor,
               fontSize: "16px",
               fontWeight: "500",
             },
             "& .MuiInputLabel-root.Mui-focused, & .MuiInputLabel-root.MuiFormLabel-filled":
               {
-                color: "#222222",
+                color: themeColor,
               },
             "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
-              color: "#222222",
+              color: themeColor,
             },
             "& .MuiOutlinedInput-input": {
-              color: "#222222",
+              color: themeColor,
               fontSize: "16px",
               fontWeight: "500",
             },
-              "& input:-webkit-autofill": {
-                boxShadow: "0 0 0 1000px white inset !important",
-                WebkitTextFillColor: "#222222 !important",
-              },
+            "& input:-webkit-autofill": {
+              boxShadow: "0 0 0 1000px white inset !important",
+              WebkitTextFillColor: `${themeColor} !important`,
+            },
             "& input[type=number]": {
               MozAppearance: "textfield",
             },

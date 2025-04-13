@@ -238,3 +238,12 @@ export const expertsCardData: ExpertsCard[] = [
     button: "Send Job Request",
   },
 ];
+
+
+export const searchOptions = [
+  "Rating",
+  "Reviews",
+  "Price",
+  "Newest",
+  "Oldest",
+];

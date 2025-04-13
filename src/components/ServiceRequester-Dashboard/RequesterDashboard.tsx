@@ -1,5 +1,7 @@
 import Image from "next/image";
 import ExpertsCardComponent from "../ui/Cards/Experts-Card";
+import { searchOptions } from "@/app/service-requester-dashboard/content";
+import MUIAutoComplete from "../ui/AutoComplete";
 
 const Dashboard = () => {
   const value: number = 80;
@@ -39,15 +41,15 @@ const Dashboard = () => {
           <h2 className="text-[22px] font-semibold text-black">
             Top 10 Matched Service Providers for Your Request
           </h2>
-          <div className="relative max-lg:hidden">
+          <div className="relative group max-lg:hidden">
             <Image
               src="/service-requester-dashboard/smartai.svg"
               alt="icon"
               width={20}
               height={20}
-              className="object-cover"
+              className="object-cover cursor-pointer"
             />
-            <p className="absolute -top-[25px] -right-[97px] bg-white px-2 py-1 text-center text-nowrap text-[10px] font-normal text-black rounded-full">
+            <p className="invisible group-hover:visible absolute -top-[25px] -right-[97px] bg-white px-2 py-1 text-center text-nowrap text-[10px] font-normal text-black rounded-full">
               Powered by Smart AI
             </p>
           </div>
@@ -60,12 +62,20 @@ const Dashboard = () => {
         <p></p>
       </div>
       {/* Card Component */}
-      <div className="w-full flex flex-col gap-4">
+      <div className="w-full flex flex-col gap-5">
         <div className="w-full flex gap-2 justify-between items-center">
           <p className="text-[16px] font-normal text-darkgray">10 Results</p>
-          <div className="flex items-center gap-3">
-            <p className="text-[16px] font-normal text-darkgray">Sort by:</p>
-            Recent Listings
+          <div className="flex items-center gap-5">
+            <p className="text-[16px] font-normal text-darkgray text-nowrap">
+              Sort by:
+            </p>
+            <MUIAutoComplete
+              options={searchOptions}
+              label="Search by"
+              width="100%"
+              variant="green"
+              onChange={(e: any) => console.log(e.target.value)}
+            />
           </div>
         </div>
         <div className="w-full h-full">
