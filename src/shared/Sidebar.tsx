@@ -1,10 +1,11 @@
 "use client";
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { menuLinks } from "@/app/service-requester-dashboard/content";
 import Image from "next/image";
 import Link from "next/link";
 
-const Sidebar = () => {
+const SidebarContent = () => {
   const searchParams = useSearchParams();
   const activeTab = searchParams.get("view");
 
@@ -20,6 +21,7 @@ const Sidebar = () => {
           className="object-cover"
         />
       </Link>
+
       {/* profile */}
       <div className="w-full flex flex-col gap-3 justify-center items-center border border-gray rounded-xl px-10 py-4">
         <Image
@@ -36,6 +38,7 @@ const Sidebar = () => {
           View Profile
         </button>
       </div>
+
       {/* links */}
       <div className="w-full flex flex-col justify-start items-start gap-5">
         {menuLinks?.map((item) => (
@@ -78,6 +81,14 @@ const Sidebar = () => {
         ))}
       </div>
     </div>
+  );
+};
+
+const Sidebar = () => {
+  return (
+    <Suspense fallback={<div className="px-5 py-8">Loading...</div>}>
+      <SidebarContent />
+    </Suspense>
   );
 };
 

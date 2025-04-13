@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import RequesterDashboard from "@/components/ServiceRequester-Dashboard/RequesterDashboard";
@@ -43,7 +42,7 @@ const PageContent = () => {
 
 const page = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div className="pl-5 py-5 pr-12">Loading...</div>}>
       <PageContent />
     </Suspense>
   );
