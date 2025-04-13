@@ -34,3 +34,10 @@ export interface ExpertsCard {
   skills: Skill[];
   button: string;
 }
+
+export interface AnalyticsCard {
+  id: number;
+  label: string;
+  value: number;
+  unit?: string;
+}

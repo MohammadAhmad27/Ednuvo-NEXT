@@ -1,4 +1,5 @@
 import {
+  AnalyticsCard,
   ExpertsCard,
   MenuSection,
 } from "@/interfaces/Service-Requester-Dashboard";
@@ -246,4 +247,29 @@ export const searchOptions = [
   "Price",
   "Newest",
   "Oldest",
+];
+
+export const analyticsCardData: AnalyticsCard[] = [
+  {
+    id: 1,
+    label: "Posted Jobs",
+    value: 12,
+  },
+  {
+    id: 2,
+    label: "On Going Contracts",
+    value: 7,
+  },
+  {
+    id: 3,
+    label: "Order Completion Rate",
+    value: 99,
+    unit: "%"
+  },
+  {
+    id: 4,
+    label: "Total Spendings",
+    value: 500,
+    unit: "SAR"
+  }
 ];
