@@ -1,10 +1,10 @@
 import { RegisterCard } from "@/interfaces/Register";
 import Image from "next/image";
 
-interface ServiceCardProps {
+interface RegisterCardProps {
   card: RegisterCard;
 }
-const RegisterCardComponent = ({ card }: ServiceCardProps) => {
+const RegisterCardComponent = ({ card }: RegisterCardProps) => {
   return (
     <div className="w-full flex justify-center items-center">
       <div className="flex flex-col gap-10">

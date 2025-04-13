@@ -34,7 +34,7 @@ const ClientComponent = () => {
   }, [tab, router]);
 
   return (
-    <div className="w-full overflow-hidden bg-lightgreen rounded-tl-[40px] pl-5 py-5 pr-12">
+    <div className="w-full h-full overflow-x-hidden overflow-y-auto bg-lightgreen rounded-tl-[40px] pl-6 py-5 pr-12">
       <RenderTabComponent tab={tab} />
     </div>
   );

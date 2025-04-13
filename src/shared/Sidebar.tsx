@@ -29,7 +29,7 @@ const SidebarContent = () => {
           alt="Profile-photo"
           width={80}
           height={80}
-          className="object-cover"
+          className="object-cover rounded-full"
         />
         <h1 className="text-[14px] font-medium text-lightblack">
           Hassan Al-Omari

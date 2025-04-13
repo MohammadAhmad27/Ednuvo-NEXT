@@ -23,12 +23,14 @@ const config: Config = {
         primary: "#1F4B3F",
         secondary: "#5BBB7B",
         lightgreen: "#EEF8F2",
+        green: "#17DB94",
       },
       boxShadow: {
         grayshadow: "1px 6px 20px 0px #E9E9E98C",
         grayshadow2: "0px 4px 32px 0px #E9E9E9BF",
         grayshadow3: "0.63px 3.75px 12.5px 0px #E9E9E98C",
         grayshadow4: "0px 4px 134px 0px #46B7D11F",
+        greenshadow: "0px 2px 20px 0px #5BBB7B33",
       },
       backgroundImage: {
         "btn-gradient":
