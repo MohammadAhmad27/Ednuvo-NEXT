@@ -78,7 +78,7 @@ export default function BasicInformation({
             width={100}
             height={100}
             alt="Profile-Photo"
-            className="object-cover rounded-full size-[100px]"
+            className="object-cover rounded-full"
           />
           <div className="absolute -bottom-2 right-2 p-1 flex items-center justify-center rounded-full bg-primary size-8">
             <label htmlFor="upload-photo" className="cursor-pointer">

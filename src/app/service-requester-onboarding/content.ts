@@ -73,7 +73,7 @@ export const countries = ["Saudi Arabia", "UAE", "OMAN", "Qatar", "Bahrain"];
 export const navigationButtons = [
   {
     label: "Go to dashboard",
-    href: "/",
+    href: "/service-requester-dashboard",
   },
   {
     label: "Eplore Experts",

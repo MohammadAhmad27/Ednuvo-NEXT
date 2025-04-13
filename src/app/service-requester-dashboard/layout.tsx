@@ -1,0 +1,18 @@
+import Sidebar from "@/components/ServiceRequester-Dashboard/Sidebar";
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <div className="w-full flex overflow-hidden">
+      <div className="w-[250px]">
+      <Sidebar />
+      </div>
+      <div className="flex-1">
+      {children}
+      </div>
+    </div>
+  );
+}
