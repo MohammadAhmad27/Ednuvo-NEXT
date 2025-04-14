@@ -15,7 +15,7 @@ const SidebarContent = () => {
       <Link href="/" className="w-fit mx-auto">
         <Image
           src="/register/ednuvo-dark.svg"
-          alt="Ednuvo-logo"
+          alt="ednuvo-logo"
           width={80}
           height={80}
           className="object-cover"
@@ -26,7 +26,7 @@ const SidebarContent = () => {
       <div className="w-full flex flex-col gap-3 justify-center items-center border border-gray rounded-xl px-10 py-4">
         <Image
           src="/service-provider-onboarding/profile.svg"
-          alt="Profile-photo"
+          alt="profile-photo"
           width={80}
           height={80}
           className="object-cover rounded-full"

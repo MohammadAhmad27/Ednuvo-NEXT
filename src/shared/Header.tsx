@@ -6,7 +6,7 @@ const Header = () => {
       <div className="border border-gray rounded-full p-2">
         <Image
           src="/service-requester-dashboard/language.svg"
-          alt="icon"
+          alt="language-icon"
           width={20}
           height={20}
           className="object-cover"
@@ -15,7 +15,7 @@ const Header = () => {
       <div className="border border-gray rounded-full p-2">
         <Image
           src="/service-requester-dashboard/notifications.svg"
-          alt="icon"
+          alt="notifications-icon"
           width={20}
           height={20}
           className="object-cover"
@@ -24,10 +24,10 @@ const Header = () => {
       <div className="flex items-center gap-2">
         <Image
           src="/service-provider-onboarding/profile.svg"
-          alt="icon"
+          alt="user-icon"
           width={37}
           height={37}
-          className="object-cover rounded-full"
+          className="object-cover rounded-full shadow-profileshadow"
         />
         <p className="text-[14px] font-semibold text-lightblack">
           Hassan Al-Omari

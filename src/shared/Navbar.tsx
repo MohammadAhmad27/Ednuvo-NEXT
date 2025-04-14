@@ -10,7 +10,7 @@ const Navbar = () => {
         <Link href="/">
           <Image
             src="/navbar/ednuvo-light.svg"
-            alt="Ednuvo-logo"
+            alt="ednuvo-logo"
             width={70}
             height={70}
             className="object-cover"

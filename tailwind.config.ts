@@ -32,7 +32,9 @@ const config: Config = {
         grayshadow4: "0px 4px 134px 0px #46B7D11F",
         greenshadow: "0px 2px 20px 0px #5BBB7B33",
         blackshadow: "0px 0px 0px 1px #00000014",
+        profileshadow: "0px 4px 24px 0px #00000030",
       },
+
       backgroundImage: {
         "btn-gradient":
           "linear-gradient(46.39deg, #FF7F02 15.25%, #FFC400 72.33%)",

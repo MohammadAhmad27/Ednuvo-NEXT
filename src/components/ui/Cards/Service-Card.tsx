@@ -26,7 +26,7 @@ const ServiceCardComponent = ({ card }: ServiceCardProps) => {
           <div className="flex items-center gap-1">
             <Image
               src={card?.starImg}
-              alt="rating"
+              alt="star-icon"
               width={20}
               height={20}
               className="object-cover"
@@ -44,7 +44,7 @@ const ServiceCardComponent = ({ card }: ServiceCardProps) => {
           <div className="flex items-center gap-2">
             <Image
               src={card?.userImg}
-              alt="user"
+              alt="user-icon"
               width={35}
               height={35}
               className="object-cover rounded-full"

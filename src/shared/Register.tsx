@@ -18,7 +18,7 @@ const Register = ({ component }: RegisterProps) => {
         <Link href="/" className="w-fit">
           <Image
             src="/register/ednuvo-dark.svg"
-            alt="Ednuvo-logo"
+            alt="ednuvo-logo"
             width={80}
             height={80}
             className="object-cover"

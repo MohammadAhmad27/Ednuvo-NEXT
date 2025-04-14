@@ -41,3 +41,18 @@ export interface AnalyticsCard {
   value: number;
   unit?: string;
 }
+
+export interface UserCard {
+  id: number;
+  bgImg: string;
+  heartImg: string;
+  profileImg: string;
+  status: string;
+  name: string;
+  desc: string;
+  starImg: string;
+  rating: number;
+  reviews: number;
+  startingFrom: string;
+  value: number;
+}

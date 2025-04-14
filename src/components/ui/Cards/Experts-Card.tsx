@@ -12,7 +12,7 @@ const ExpertsCardComponent = () => {
           <div className="flex items-center gap-2">
             <Image
               src={item?.profileImg}
-              alt="Profile-photo"
+              alt="profile-photo"
               width={80}
               height={80}
               className="object-cover rounded-full"
@@ -31,7 +31,7 @@ const ExpertsCardComponent = () => {
                     alt="star-icon"
                     width={20}
                     height={20}
-                    className="object-cover rounded-full"
+                    className="object-cover"
                   />
                   <p className="text-[14px] font-normal text-lightblack">
                     {item?.rating}

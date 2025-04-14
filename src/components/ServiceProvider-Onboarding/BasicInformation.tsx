@@ -77,8 +77,8 @@ export default function BasicInformation({
             src={photoPreview || "/service-provider-onboarding/profile.svg"}
             width={100}
             height={100}
-            alt="Profile-photo"
-            className="object-cover rounded-full"
+            alt="profile-photo"
+            className="object-cover rounded-full shadow-profileshadow"
           />
           <div className="absolute -bottom-2 right-2 p-1 flex items-center justify-center rounded-full bg-primary size-8">
             <label htmlFor="upload-photo" className="cursor-pointer">
@@ -93,7 +93,7 @@ export default function BasicInformation({
                 src="/service-provider-onboarding/edit.svg"
                 width={25}
                 height={25}
-                alt="edit"
+                alt="edit-icon"
                 className="object-cover"
               />
             </label>

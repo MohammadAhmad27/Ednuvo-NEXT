@@ -3,7 +3,7 @@ import { analyticsCardData } from "@/app/service-requester-dashboard/content";
 const AnalyticsCardComponent = () => {
   return (
     <div className="bg-white rounded-2xl shadow-blackshadow px-[15px] py-[14px]">
-      <div className="w-full grid grid-cols-4 gap-4">
+      <div className="w-full grid max-md:grid-cols-2 md:grid-cols-4 gap-4">
         {analyticsCardData?.map((item) => (
           <div
             key={item?.id}

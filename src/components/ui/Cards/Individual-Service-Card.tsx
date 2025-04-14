@@ -25,7 +25,7 @@ const IndividualServiceCard = () => {
           <div className="flex items-center gap-1">
             <Image
               src="/landing/popularservices/star.svg"
-              alt="rating"
+              alt="star-icon"
               width={20}
               height={20}
               className="object-cover"
