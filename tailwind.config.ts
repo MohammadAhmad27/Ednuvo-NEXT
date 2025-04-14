@@ -33,6 +33,7 @@ const config: Config = {
         greenshadow: "0px 2px 20px 0px #5BBB7B33",
         blackshadow: "0px 0px 0px 1px #00000014",
         profileshadow: "0px 4px 24px 0px #00000030",
+        searchshadow: "0px 1px 2px 0px #0A0D120D",
       },
 
       backgroundImage: {

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { registerCardData } from "@/app/register/content";
 import Slider from "@/components/ui/Sliders/Slider";
-import RegisterCardComponent from "@/components/ui/Cards/Register-Card";
+import RegisterCardComponent from "@/components/ui/Cards/RegisterCard";
 
 interface RegisterProps {
   component: ReactNode;

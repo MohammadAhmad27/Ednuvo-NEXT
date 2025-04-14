@@ -47,7 +47,7 @@ export interface UserCard {
   bgImg: string;
   heartImg: string;
   profileImg: string;
-  status: string;
+  status: "online" | "offline";
   name: string;
   desc: string;
   starImg: string;
@@ -55,4 +55,19 @@ export interface UserCard {
   reviews: number;
   startingFrom: string;
   value: number;
+}
+
+export interface JobDetailsCard {
+  id: number;
+  title: string;
+  price: string;
+  value: number;
+  duration: string;
+  days: number;
+  orderStarted: string;
+  date: string;
+  provider: string;
+  name: string;
+  status: "Pending" | "Ongoing" | "Completed" | "Cancelled";
+  view: string;
 }

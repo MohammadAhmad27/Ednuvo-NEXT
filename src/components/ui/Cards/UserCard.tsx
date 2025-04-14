@@ -17,13 +17,20 @@ const UserCardComponent = () => {
             className="object-cover w-full h-full rounded-lg"
           />
           <div className="flex items-center gap-2 pl-1">
-            <Image
-              src={item?.profileImg}
-              alt="profile-photo"
-              width={30}
-              height={30}
-              className="object-cover rounded-full shadow-profileshadow"
-            />
+            <div className="relative">
+              <Image
+                src={item?.profileImg}
+                alt="profile-photo"
+                width={30}
+                height={30}
+                className="object-cover rounded-full shadow-profileshadow"
+              />
+              <div
+                className={`absolute bottom-[2px] right-0 w-2 h-2 border border-white ${
+                  item?.status === "online" ? "bg-[#5BBB7B]" : "bg-[#FF0000]"
+                } rounded-full`}
+              />
+            </div>
             <h3 className="text-[12px] font-medium text-lightblack">
               {item?.name}
             </h3>

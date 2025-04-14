@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Slider from "../ui/Sliders/Slider";
 import { serviceButtons, serviceDataMap } from "@/app/(main)/content";
-import ServiceCardComponent from "../ui/Cards/Service-Card";
+import ServiceCardComponent from "../ui/Cards/ServiceCard";
 
 const PopularServices = () => {
   const [activeButton, setActiveButton] = useState(serviceButtons[0]?.label);

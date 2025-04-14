@@ -1,8 +1,8 @@
-import { ProfileCompletionComponent } from "./NewDashboard";
-import AnalyticsCardComponent from "../ui/Cards/Analytics-Card";
-import MUIAutoComplete from "../ui/AutoComplete";
-import { searchOptions } from "@/app/service-requester-dashboard/content";
-import UserCardComponent from "../ui/Cards/User-Card";
+import AnalyticsCardComponent from "../../ui/Cards/AnalyticsCard";
+import MUIAutoComplete from "../../ui/AutoComplete";
+import { searchOptions, userCardData } from "@/app/service-requester-dashboard/content";
+import UserCardComponent from "../../ui/Cards/UserCard";
+import ProfileCompletion from "@/shared/ProfileCompletion";
 
 const DefaultDashboard = () => {
   return (
@@ -16,14 +16,14 @@ const DefaultDashboard = () => {
           Post a Job
         </button>
       </div>
-      <ProfileCompletionComponent />
+      <ProfileCompletion />
       <h2 className="text-[18px] font-semibold text-lightblack">Analytics</h2>
       <AnalyticsCardComponent />
       <div className="w-full bg-white rounded-2xl px-[15px] py-[14px] min-h-20"></div>
       {/* Card Component */}
       <div className="w-full flex flex-col gap-5 mt-1">
         <div className="w-full flex gap-2 justify-between items-center">
-          <p className="text-[16px] font-normal text-darkgray">10 Results</p>
+          <p className="text-[16px] font-normal text-darkgray">{userCardData?.length} Results</p>
           <div className="flex items-center gap-5">
             <p className="text-[16px] font-normal text-darkgray text-nowrap">
               Sort by:

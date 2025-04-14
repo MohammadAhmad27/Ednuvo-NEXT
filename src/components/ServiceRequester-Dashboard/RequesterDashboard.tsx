@@ -1,10 +1,11 @@
-import DefaultDashboard from "./DefaultDashboard";
+import DefaultDashboard from "./sections/DefaultDashboard";
+import NewDashboard from "./sections/NewDashboard";
 
 const Dashboard = () => {
   return (
     <>
-      {/* <NewDashboard /> */}
-      <DefaultDashboard />
+      <NewDashboard />
+      {/* <DefaultDashboard /> */}
     </>
   );
 };
