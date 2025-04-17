@@ -4,6 +4,7 @@ import {
   FeaturedFreelancer,
   JobDetailsCard,
   MenuSection,
+  PackageCard,
   ProfileData,
   SkillsList,
   UserCard,
@@ -607,5 +608,56 @@ export const skillsList: SkillsList[] = [
   {
     id: 6,
     name: "Framework and structural carpentry",
+  },
+];
+
+export const packageCardData: PackageCard[] = [
+  {
+    id: 1,
+    bgImg: "/service-requester-dashboard/cover2.svg",
+    heartImg: "/service-requester-dashboard/heart.svg",
+    desc: "Fast and reliable plumbing solutions at your doorstep!",
+    starImg: "/landing/popularservices/star.svg",
+    rating: 4.7,
+    reviews: 19,
+    startingFrom: "Starting from",
+    value: 100,
+    label: "Send job request"
+  },
+  {
+    id: 2,
+    bgImg: "/service-requester-dashboard/cover3.svg",
+    heartImg: "/service-requester-dashboard/heart.svg",
+    desc: "Fast and reliable plumbing solutions at your doorstep!",
+    starImg: "/landing/popularservices/star.svg",
+    rating: 4.7,
+    reviews: 19,
+    startingFrom: "Starting from",
+    value: 100,
+    label: "Send job request"
+  },
+  {
+    id: 3,
+    bgImg: "/service-requester-dashboard/cover2.svg",
+    heartImg: "/service-requester-dashboard/heart.svg",
+    desc: "Fast and reliable plumbing solutions at your doorstep!",
+    starImg: "/landing/popularservices/star.svg",
+    rating: 4.7,
+    reviews: 19,
+    startingFrom: "Starting from",
+    value: 100,
+    label: "Send job request"
+  },
+  {
+    id: 4,
+    bgImg: "/service-requester-dashboard/cover3.svg",
+    heartImg: "/service-requester-dashboard/heart.svg",
+    desc: "Fast and reliable plumbing solutions at your doorstep!",
+    starImg: "/landing/popularservices/star.svg",
+    rating: 4.7,
+    reviews: 19,
+    startingFrom: "Starting from",
+    value: 100,
+    label: "Send job request"
   },
 ];

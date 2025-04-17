@@ -89,3 +89,16 @@ export interface SkillsList {
 id: number;
 name: string;
 }
+
+export interface PackageCard {
+  id: number;
+  bgImg: string;
+  heartImg: string;
+  desc: string;
+  starImg: string;
+  rating: number;
+  reviews: number;
+  startingFrom: string;
+  value: number;
+  label: string;
+}

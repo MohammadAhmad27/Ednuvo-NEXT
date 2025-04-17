@@ -10,6 +10,7 @@ import MUIBreadCrumbs from "@/components/ui/BreadCrumbs";
 import { UserCard } from "@/interfaces/Service-Requester-Dashboard";
 import Image from "next/image";
 import dayjs from "dayjs";
+import PackageCardComponent from "../ui/Cards/PackageCard";
 
 interface UserProfileProps {
   user?: UserCard;
@@ -225,7 +226,8 @@ const UserProfile = ({ user }: UserProfileProps) => {
       </div>
       {/* packages */}
       <div className="w-full space-y-2 border border-[#DDE1F0] rounded-2xl p-4 mt-6">
-        
+        <h2 className="text-[18px] font-semibold text-[#181D27]">Packages</h2>
+        <PackageCardComponent />
       </div>
     </div>
   );

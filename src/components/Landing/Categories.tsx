@@ -4,7 +4,7 @@ import {
   staticTestimonials,
 } from "@/app/(main)/content";
 import Image from "next/image";
-import IndividualServiceCard from "../ui/Cards/IndividualServieCard";
+import IndividualServiceCard from "../ui/Cards/IndividualServiceCard";
 
 const Categories = () => {
   return (
