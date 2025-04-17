@@ -4,6 +4,7 @@ import {
   featuredFreelancer,
   featuredFreelancerData,
   profileData,
+  reviewsData,
   reviewsSearchOptions,
   skillsList,
 } from "@/app/service-requester-dashboard/content";
@@ -212,7 +213,7 @@ const UserProfile = ({ user }: UserProfileProps) => {
         </div>
       </div>
       {/* skills */}
-      <div className="w-full space-y-2 border border-[#434343] rounded-2xl p-4 mt-6">
+      <div className="w-full space-y-2 border border-[#DDE1F0] rounded-2xl p-4 mt-6">
         <h2 className="text-[18px] font-semibold text-[#181D27]">Skills</h2>
         <div className="w-full flex flex-wrap items-center gap-2">
           {skillsList?.map((item) => (
@@ -239,19 +240,21 @@ const UserProfile = ({ user }: UserProfileProps) => {
           <p className="text-[18px] font-semibold text-secondary">(4.9)</p>
         </div>
         <div className="w-full flex justify-between items-center gap-2">
-          <p className="text-[14px] font-medium text-darkgray">1-5 out of 251 Reviews</p>
+          <p className="text-[14px] font-medium text-darkgray">
+            1-5 out of {reviewsData?.length} Reviews
+          </p>
           <div className="flex items-center gap-5">
-                <p className="text-[16px] font-normal text-darkgray text-nowrap">
-                  Sort by:
-                </p>
-                <MUIAutoComplete
-                  options={reviewsSearchOptions}
-                  label="Search by"
-                  width="100%"
-                  variant="green"
-                  onChange={(e: any) => console.log(e.target.value)}
-                />
-              </div>
+            <p className="text-[16px] font-normal text-darkgray text-nowrap">
+              Sort by:
+            </p>
+            <MUIAutoComplete
+              options={reviewsSearchOptions}
+              label="Search by"
+              width="100%"
+              variant="green"
+              onChange={(e: any) => console.log(e.target.value)}
+            />
+          </div>
         </div>
         <ReviewCardComponent />
       </div>
