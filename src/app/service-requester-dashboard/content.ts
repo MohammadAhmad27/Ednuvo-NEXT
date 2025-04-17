@@ -6,6 +6,7 @@ import {
   MenuSection,
   PackageCard,
   ProfileData,
+  ReviewsCard,
   SkillsList,
   UserCard,
 } from "@/interfaces/Service-Requester-Dashboard";
@@ -622,7 +623,7 @@ export const packageCardData: PackageCard[] = [
     reviews: 19,
     startingFrom: "Starting from",
     value: 100,
-    label: "Send job request"
+    label: "Send job request",
   },
   {
     id: 2,
@@ -634,7 +635,7 @@ export const packageCardData: PackageCard[] = [
     reviews: 19,
     startingFrom: "Starting from",
     value: 100,
-    label: "Send job request"
+    label: "Send job request",
   },
   {
     id: 3,
@@ -646,7 +647,7 @@ export const packageCardData: PackageCard[] = [
     reviews: 19,
     startingFrom: "Starting from",
     value: 100,
-    label: "Send job request"
+    label: "Send job request",
   },
   {
     id: 4,
@@ -658,6 +659,75 @@ export const packageCardData: PackageCard[] = [
     reviews: 19,
     startingFrom: "Starting from",
     value: 100,
-    label: "Send job request"
+    label: "Send job request",
+  },
+];
+
+export const reviewsSearchOptions = [
+  "Most Recent",
+  "Top Rated",
+  "By Skill",
+  "Project Type",
+];
+
+const generateStars = (rating: number): string[] => {
+  const starPath = "/landing/popularservices/star.svg";
+  return Array(rating).fill(starPath);
+};
+
+export const reviewsData: ReviewsCard[] = [
+  {
+    id: 1,
+    img: "/service-requester-dashboard/profile3.svg",
+    name: "Ahmed Al-Farsi",
+    location: "Saudi Arabia",
+    starImg: generateStars(1),
+    rating: 1.0,
+    time: "2 months ago",
+    comment: "Service was okay, but could be improved in terms of timing.",
+  },
+  {
+    id: 2,
+    img: "/service-requester-dashboard/profile3.svg",
+    name: "Ahmed Al-Farsi",
+    location: "Saudi Arabia",
+    starImg: generateStars(2),
+    rating: 2.0,
+    time: "3 weeks ago",
+    comment:
+      "Not fully satisfied. The carpentry work was decent, but delays affected the overall experience.",
+  },
+  {
+    id: 3,
+    img: "/service-requester-dashboard/profile3.svg",
+    name: "Ahmed Al-Farsi",
+    location: "Saudi Arabia",
+    starImg: generateStars(3),
+    rating: 3.0,
+    time: "1 month ago",
+    comment:
+      "Average experience. The work was good, but customer service needs improvement.",
+  },
+  {
+    id: 4,
+    img: "/service-requester-dashboard/profile3.svg",
+    name: "Ahmed Al-Farsi",
+    location: "Saudi Arabia",
+    starImg: generateStars(4),
+    rating: 4.0,
+    time: "2 weeks ago",
+    comment:
+      "Great job overall! Really appreciated the punctuality and attention to detail.",
+  },
+  {
+    id: 5,
+    img: "/service-requester-dashboard/profile3.svg",
+    name: "Ahmed Al-Farsi",
+    location: "Saudi Arabia",
+    starImg: generateStars(5),
+    rating: 5.0,
+    time: "1 week ago",
+    comment:
+      "Outstanding service! Extremely professional and high-quality workmanship.",
   },
 ];

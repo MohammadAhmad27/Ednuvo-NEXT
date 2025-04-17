@@ -86,8 +86,8 @@ export interface FeaturedFreelancer {
 }
 
 export interface SkillsList {
-id: number;
-name: string;
+  id: number;
+  name: string;
 }
 
 export interface PackageCard {
@@ -101,4 +101,14 @@ export interface PackageCard {
   startingFrom: string;
   value: number;
   label: string;
+}
+export interface ReviewsCard {
+  id: number;
+  img: string;
+  name: string;
+  location: string;
+  starImg: string[];
+  rating: number;
+  time: string;
+  comment: string;
 }
