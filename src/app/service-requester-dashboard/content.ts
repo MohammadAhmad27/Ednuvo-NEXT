@@ -1,8 +1,10 @@
 import {
   AnalyticsCard,
   ExpertsCard,
+  FeaturedFreelancer,
   JobDetailsCard,
   MenuSection,
+  ProfileData,
   UserCard,
 } from "@/interfaces/Service-Requester-Dashboard";
 
@@ -526,3 +528,56 @@ export const jobDetailsCardData: JobDetailsCard[] = [
     view: "View",
   },
 ];
+
+export const profileData: ProfileData[] = [
+    {
+      id: 1,
+      img: "/service-requester-dashboard/response-rate.svg",
+      label: "Response Rate",
+      value: 95,
+    },
+    {
+      id: 2,
+      img: "/service-requester-dashboard/total-jobs.svg",
+      label: "Total Jobs",
+      value: 10,
+    },
+    {
+      id: 3,
+      img: "/service-requester-dashboard/completed-jobs.svg",
+      label: "Completed Jobs",
+      value: 8,
+    },
+    {
+      id: 4,
+      img: "/service-requester-dashboard/ongoing-jobs.svg",
+      label: "On Going Jobs",
+      value: 2,
+    },
+  ];
+  
+  export const featuredFreelancer: FeaturedFreelancer[] = [
+    {
+      id: 1,
+      icon: "/service-requester-dashboard/thunder.svg",
+      label: "Highly responsive",
+    },
+    {
+      id: 2,
+      icon: "/service-requester-dashboard/stopwatch.svg",
+      label: "Offers hourly rates",
+    },
+  ];
+  
+  export const featuredFreelancerData: FeaturedFreelancer[] = [
+    {
+      id: 1,
+      icon: "/service-requester-dashboard/save.svg",
+      label: "Save",
+    },
+    {
+      id: 2,
+      icon: "/service-requester-dashboard/share.svg",
+      label: "Share",
+    },
+  ];

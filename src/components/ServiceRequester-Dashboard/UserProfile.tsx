@@ -4,7 +4,7 @@ import {
   featuredFreelancer,
   featuredFreelancerData,
   profileData,
-} from "@/app/service-provider-dashboard/content";
+} from "@/app/service-requester-dashboard/content";
 import MUIBreadCrumbs from "@/components/ui/BreadCrumbs";
 import { UserCard } from "@/interfaces/Service-Requester-Dashboard";
 import Image from "next/image";
@@ -36,7 +36,7 @@ const UserProfile = ({ user }: UserProfileProps) => {
       {/* profile image + cover */}
       <div className="relative w-full rounded-2xl bg-white pb-11 shadow-whiteshadow mt-5">
         <Image
-          src="/service-provider-dashboard/profilecover.svg"
+          src="/service-requester-dashboard/profilecover.svg"
           alt=""
           width={100}
           height={100}
@@ -89,7 +89,7 @@ const UserProfile = ({ user }: UserProfileProps) => {
             {/* 3rd */}
             <div className="flex items-center gap-2">
               <Image
-                src="/service-provider-dashboard/job.svg"
+                src="/service-requester-dashboard/job.svg"
                 alt="location-icon"
                 width={17}
                 height={17}
@@ -157,7 +157,7 @@ const UserProfile = ({ user }: UserProfileProps) => {
             </p>
             <button className="w-full text-[14px] font-medium text-white bg-primary flex items-center justify-center gap-2 text-center rounded-full py-[10px] mt-4">
               <Image
-                src="/service-provider-dashboard/send-icon.svg"
+                src="/service-requester-dashboard/send-icon.svg"
                 alt="send-icon"
                 width={18}
                 height={18}

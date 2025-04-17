@@ -11,7 +11,7 @@ const UserCardComponent = () => {
           key={item?.id}
           className="flex flex-col gap-2 p-2 bg-white border border-[#DDE1F0] shadow-grayshadow rounded-xl cursor-pointer"
           onClick={() =>
-            router.push(`/service-provider-dashboard/profile/${item?.id}`)
+            router.push(`/service-requester-dashboard/profile/${item?.id}`)
           }
         >
           <Image
