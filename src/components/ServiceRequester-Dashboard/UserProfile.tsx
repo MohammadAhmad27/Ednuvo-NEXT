@@ -4,6 +4,7 @@ import {
   featuredFreelancer,
   featuredFreelancerData,
   profileData,
+  skillsList,
 } from "@/app/service-requester-dashboard/content";
 import MUIBreadCrumbs from "@/components/ui/BreadCrumbs";
 import { UserCard } from "@/interfaces/Service-Requester-Dashboard";
@@ -26,7 +27,7 @@ const UserProfile = ({ user }: UserProfileProps) => {
   }, []);
 
   return (
-    <div className="w-full h-full bg-white rounded-2xl px-4 py-5">
+    <div className="w-full bg-white rounded-2xl px-4 py-5">
       <MUIBreadCrumbs
         items={[
           { label: "Dashboard", href: "/service-requester-dashboard" },
@@ -102,7 +103,7 @@ const UserProfile = ({ user }: UserProfileProps) => {
           </div>
         </div>
       </div>
-      {/* data */}
+      {/* profile data */}
       <div className="w-full flex items-center gap-8 my-8">
         {profileData?.map((item) => (
           <div key={item?.id} className="flex items-start gap-2">
@@ -125,11 +126,11 @@ const UserProfile = ({ user }: UserProfileProps) => {
           </div>
         ))}
       </div>
-      {/* About */}
+      {/* about */}
       <div className="w-full flex items-stretch gap-5">
-        {/* 1st */}
+        {/* left */}
         <div className="w-3/4 space-y-1 border border-[#DDE1F0] rounded-2xl p-4">
-          <h2 className="text-[18px] font-semibold text-[#182D27]">About</h2>
+          <h2 className="text-[18px] font-semibold text-[#181D27]">About</h2>
           <p className="text-[14px] font-normal text-darkgray text-justify">
             I am a skilled plumber and carpenter with expertise in designing,
             building, and repairing wooden structures and furniture, as well as
@@ -146,10 +147,10 @@ const UserProfile = ({ user }: UserProfileProps) => {
             functionality, durability, and aesthetics in every service.
           </p>
         </div>
-        {/* 2nd */}
+        {/* right */}
         <div className="w-1/4 flex flex-col border border-[#DDE1F0] rounded-2xl">
           <div className="w-full p-4">
-            <h2 className="text-[18px] font-bold text-[#182D27]">
+            <h2 className="text-[18px] font-bold text-[#181D27]">
               {user?.name}
             </h2>
             <p className="text-[12px] font-normal text-darkgray mt-[1px]">
@@ -205,6 +206,26 @@ const UserProfile = ({ user }: UserProfileProps) => {
             </div>
           </div>
         </div>
+      </div>
+      {/* skills */}
+      <div className="w-full space-y-2 border border-[#DDE1F0] rounded-2xl p-4 mt-6">
+        <h2 className="text-[18px] font-semibold text-[#181D27]">Skills</h2>
+        <div className="w-full flex flex-wrap items-center gap-2">
+          {skillsList?.map((item) => (
+            <div
+              key={item?.id}
+              className="border border-gray rounded-full px-3 py-2"
+            >
+              <p className="text-[12px] font-normal text-darkgray">
+                {item?.name}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* packages */}
+      <div className="w-full space-y-2 border border-[#DDE1F0] rounded-2xl p-4 mt-6">
+        
       </div>
     </div>
   );

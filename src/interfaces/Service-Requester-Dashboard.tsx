@@ -84,3 +84,8 @@ export interface FeaturedFreelancer {
   icon: string;
   label: string;
 }
+
+export interface SkillsList {
+id: number;
+name: string;
+}

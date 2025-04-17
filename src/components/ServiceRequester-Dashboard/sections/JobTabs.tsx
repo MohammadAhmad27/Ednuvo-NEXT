@@ -93,7 +93,7 @@ const JobTabs = () => {
         </div>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <div className="flex-1 mt-4">
+        <div className="flex-1 h-[calc(100vh-275px)] overflow-x-hidden overflow-y-auto mt-8">
           <PastJobs />
         </div>
       </CustomTabPanel>
