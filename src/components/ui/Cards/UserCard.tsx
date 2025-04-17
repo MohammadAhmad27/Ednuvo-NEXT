@@ -1,13 +1,18 @@
 import { userCardData } from "@/app/service-requester-dashboard/content";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const UserCardComponent = () => {
+  const router = useRouter();
   return (
     <div className="w-full h-full grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-7">
       {userCardData?.map((item) => (
         <div
           key={item?.id}
-          className="flex flex-col gap-2 p-2 bg-white border border-[#DDE1F0] shadow-grayshadow rounded-xl"
+          className="flex flex-col gap-2 p-2 bg-white border border-[#DDE1F0] shadow-grayshadow rounded-xl cursor-pointer"
+          onClick={() =>
+            router.push(`/service-provider-dashboard/profile/${item?.id}`)
+          }
         >
           <Image
             src={item?.bgImg}

@@ -64,7 +64,7 @@ const JobTabs = () => {
           }}
         >
           <Tab
-            label="Active Alarms"
+            label="Active Jobs"
             {...a11yProps(0)}
             sx={{
               color: value === 0 ? "#5BBB7B  !important" : "#6B7177",
@@ -74,7 +74,7 @@ const JobTabs = () => {
             }}
           />
           <Tab
-            label="Analytic Dashboard"
+            label="Past Jobs"
             {...a11yProps(1)}
             sx={{
               color: value === 1 ? "#5BBB7B !important" : "#6B7177",

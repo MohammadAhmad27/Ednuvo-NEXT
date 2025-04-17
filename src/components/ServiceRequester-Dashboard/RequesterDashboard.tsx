@@ -4,8 +4,8 @@ import NewDashboard from "./sections/NewDashboard";
 const Dashboard = () => {
   return (
     <>
-      <NewDashboard />
-      {/* <DefaultDashboard /> */}
+      {/* <NewDashboard /> */}
+      <DefaultDashboard />
     </>
   );
 };

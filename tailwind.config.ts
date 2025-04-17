@@ -34,6 +34,7 @@ const config: Config = {
         blackshadow: "0px 0px 0px 1px #00000014",
         profileshadow: "0px 4px 24px 0px #00000030",
         searchshadow: "0px 1px 2px 0px #0A0D120D",
+        whiteshadow: "0px 20px 60px 0px #F1F4F880",
       },
 
       backgroundImage: {
