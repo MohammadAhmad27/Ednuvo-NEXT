@@ -21,7 +21,7 @@ const LoginForm = () => {
     console.log("password: ", password);
     setTimeout(() => {
       setIsLoading(false);
-      router.push("/");
+      router.push("/service-requester-dashboard");
     }, 3000);
   };
 

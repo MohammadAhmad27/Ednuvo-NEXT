@@ -16,8 +16,22 @@ interface JobDetailsProps {
 }
 
 const JobDetails = ({ job }: JobDetailsProps) => {
-  if (!job) return <p>Job not found.</p>;
   const [message, setMessage] = useState("");
+
+  const getStatusClasses = (status: string) => {
+    switch (status) {
+      case "Ongoing":
+        return "text-[#5BBB7B] border-[#5BBB7B]";
+      case "Completed":
+        return "text-[#848991] border-[#848991]";
+      case "Cancelled":
+        return "text-[#EB4335] border-[#EB4335]";
+      default:
+        return;
+    }
+  };
+
+  if (!job) return <p>Job not found.</p>;
 
   return (
     <div className="w-full flex max-md:flex-col gap-4">
@@ -45,7 +59,11 @@ const JobDetails = ({ job }: JobDetailsProps) => {
             <h2 className="text-[16px] font-semibold text-black">
               Order Details
             </h2>
-            <p className="bg-[#BBF7D0] text-[14px] font-semibold text-secondary text-center rounded-full px-2 py-1">
+            <p
+              className={`text-[14px] font-semibold border bg-white text-center rounded-full px-3 py-1 ${getStatusClasses(
+                job?.status
+              )}`}
+            >
               {job?.status}
             </p>
           </div>
@@ -309,7 +327,7 @@ const JobDetails = ({ job }: JobDetailsProps) => {
           </h2>
           <div className="flex items-center gap-2">
             <p>Payment Status</p>
-            <button className="bg-[#BBF7D0] text-[14px] font-semibold text-secondary text-center rounded-full px-2 py-1">
+            <button className="bg-white border border-secondary text-[14px] font-semibold text-secondary text-center rounded-full px-3 py-[2px]">
               Paid
             </button>
           </div>

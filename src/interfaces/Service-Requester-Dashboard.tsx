@@ -68,7 +68,7 @@ export interface JobCard {
   jobStartedDate: string;
   provider: string;
   jobProviderName: string;
-  status: "Pending" | "Ongoing" | "Completed" | "Cancelled";
+  status: "Ongoing" | "Completed" | "Cancelled";
   view: string;
 }
 
@@ -102,6 +102,19 @@ export interface PackageCard {
   value: number;
   label: string;
 }
+
+export interface PortfolioCard {
+  id: number
+  mainImg: string
+  startTime: string
+  projectTitle: string
+  projectDesc: string
+  skills: string[]
+  projectCost: number
+  projectDuration: number
+  label: string
+}
+
 export interface ReviewsCard {
   id: number;
   img: string;

@@ -8,6 +8,7 @@ import {
   JobSupport,
   MenuSection,
   PackageCard,
+  PortfolioCard,
   ProfileData,
   ReviewsCard,
   SkillsList,
@@ -418,7 +419,7 @@ export const activeJobsData: JobCard[] = [
     jobStartedDate: "Feb 20, 2025",
     provider: "Hired Provider",
     jobProviderName: "Layla Al-Sabah",
-    status: "Completed",
+    status: "Ongoing",
     view: "View",
   },
   {
@@ -432,7 +433,7 @@ export const activeJobsData: JobCard[] = [
     jobStartedDate: "Jan 12, 2025",
     provider: "Hired Provider",
     jobProviderName: "Omar Al-Fahad",
-    status: "Pending",
+    status: "Ongoing",
     view: "View",
   },
   {
@@ -446,7 +447,7 @@ export const activeJobsData: JobCard[] = [
     jobStartedDate: "Mar 01, 2025",
     provider: "Hired Provider",
     jobProviderName: "Noor Al-Rashid",
-    status: "Cancelled",
+    status: "Ongoing",
     view: "View",
   },
   {
@@ -474,7 +475,7 @@ export const activeJobsData: JobCard[] = [
     jobStartedDate: "Feb 28, 2025",
     provider: "Hired Provider",
     jobProviderName: "Salma Al-Najjar",
-    status: "Completed",
+    status: "Ongoing",
     view: "View",
   },
   {
@@ -502,7 +503,7 @@ export const activeJobsData: JobCard[] = [
     jobStartedDate: "Mar 02, 2025",
     provider: "Hired Provider",
     jobProviderName: "Fatima Al-Khalifa",
-    status: "Pending",
+    status: "Ongoing",
     view: "View",
   },
   {
@@ -516,7 +517,7 @@ export const activeJobsData: JobCard[] = [
     jobStartedDate: "Feb 15, 2025",
     provider: "Hired Provider",
     jobProviderName: "Khalid Al-Sultan",
-    status: "Completed",
+    status: "Ongoing",
     view: "View",
   },
   {
@@ -617,7 +618,7 @@ export const pastJobsData: JobCard[] = [
     jobStartedDate: "Feb 28, 2025",
     provider: "Hired Provider",
     jobProviderName: "Salma Al-Najjar",
-    status: "Completed",
+    status: "Cancelled",
     view: "View",
   },
   {
@@ -631,7 +632,7 @@ export const pastJobsData: JobCard[] = [
     jobStartedDate: "Mar 06, 2025",
     provider: "Hired Provider",
     jobProviderName: "Ahmed Al-Qassim",
-    status: "Completed",
+    status: "Cancelled",
     view: "View",
   },
   {
@@ -645,7 +646,7 @@ export const pastJobsData: JobCard[] = [
     jobStartedDate: "Mar 02, 2025",
     provider: "Hired Provider",
     jobProviderName: "Fatima Al-Khalifa",
-    status: "Completed",
+    status: "Cancelled",
     view: "View",
   },
   {
@@ -659,7 +660,7 @@ export const pastJobsData: JobCard[] = [
     jobStartedDate: "Feb 15, 2025",
     provider: "Hired Provider",
     jobProviderName: "Khalid Al-Sultan",
-    status: "Completed",
+    status: "Cancelled",
     view: "View",
   },
   {
@@ -673,7 +674,7 @@ export const pastJobsData: JobCard[] = [
     jobStartedDate: "Feb 10, 2025",
     provider: "Hired Provider",
     jobProviderName: "Aisha Al-Hamdan",
-    status: "Completed",
+    status: "Cancelled",
     view: "View",
   },
 ];
@@ -808,6 +809,129 @@ export const packageCardData: PackageCard[] = [
     label: "Send job request",
   },
 ];
+
+export const portfolioData: PortfolioCard[] = [
+  {
+    id: 1,
+    mainImg: "/service-requester-dashboard/portfolio1.svg",
+    startTime: "January 2025",
+    projectTitle: "Plumbing & Carpentry Services",
+    projectDesc:
+      "Experienced in plumbing and carpentry, I provide reliable pipe installations, leak repairs, and drainage solutions, along with custom woodwork, flooring, and furniture repairs. My projects ensure durability, precision, and a professional finish for both residential and commercial spaces.",
+    skills: ["Cleaning & Roofing Services", "Furniture Cleaning & Painting", "Pipe Installation", "Leak Repair"],
+    projectCost: 1000,
+    projectDuration: 10,
+    label: "SAR",
+  },
+  {
+    id: 2,
+    mainImg: "/service-requester-dashboard/portfolio2.svg",
+    startTime: "December 2024",
+    projectTitle: "Bathroom Plumbing Renovation",
+    projectDesc:
+      "Complete bathroom plumbing overhaul for a residential property. Replaced old pipes, installed new fixtures, and ensured proper drainage. The project included installing a new shower system, toilet, and sink with modern fittings.",
+    skills: ["Bathroom Renovation", "Pipe Replacement", "Fixture Installation", "Drainage Solutions"],
+    projectCost: 1500,
+    projectDuration: 7,
+    label: "SAR",
+  },
+  {
+    id: 3,
+    mainImg: "/service-requester-dashboard/portfolio3.svg",
+    startTime: "November 2024",
+    projectTitle: "Commercial Pipe System Installation",
+    projectDesc:
+      "Designed and installed a comprehensive pipe system for a new commercial building. The project involved planning the entire water supply network, ensuring code compliance, and implementing efficient water management solutions.",
+    skills: ["Commercial Plumbing", "System Design", "Code Compliance", "Water Management"],
+    projectCost: 3500,
+    projectDuration: 14,
+    label: "SAR",
+  },
+  {
+    id: 4,
+    mainImg:  "/service-requester-dashboard/portfolio4.svg",
+    startTime: "October 2024",
+    projectTitle: "Industrial Plumbing Maintenance",
+    projectDesc:
+      "Performed regular maintenance and repairs on an industrial plumbing system. The work included inspecting pipes, fixing leaks, replacing worn components, and ensuring the system meets safety standards.",
+    skills: ["Industrial Plumbing", "Maintenance", "Leak Repair", "Safety Compliance"],
+    projectCost: 2000,
+    projectDuration: 5,
+    label: "SAR",
+  },
+  {
+    id: 5,
+    mainImg: "/service-requester-dashboard/cover2.svg",
+    startTime: "September 2024",
+    projectTitle: "Emergency Leak Repair Service",
+    projectDesc:
+      "Provided emergency services for a major water leak in a residential building. Quickly identified the source of the leak, repaired damaged pipes, and implemented preventive measures to avoid future issues.",
+    skills: ["Emergency Repair", "Leak Detection", "Water Damage Prevention", "Rapid Response"],
+    projectCost: 800,
+    projectDuration: 2,
+    label: "SAR",
+  },
+  {
+    id: 6,
+    mainImg: "/service-requester-dashboard/portfolio1.svg",
+    startTime: "August 2024",
+    projectTitle: "Custom Kitchen Cabinetry",
+    projectDesc:
+      "Designed and built custom kitchen cabinets for a modern home. The project included measuring the space, selecting appropriate materials, crafting the cabinets, and installing them with precision.",
+    skills: ["Custom Cabinetry", "Kitchen Renovation", "Woodworking", "Installation"],
+    projectCost: 4500,
+    projectDuration: 12,
+    label: "SAR",
+  },
+  {
+    id: 7,
+    mainImg: "/service-requester-dashboard/portfolio2.svg",
+    startTime: "July 2024",
+    projectTitle: "Hardwood Flooring Installation",
+    projectDesc:
+      "Installed premium hardwood flooring throughout a residential property. The work involved preparing the subfloor, laying the hardwood planks, finishing the surface, and ensuring a seamless appearance.",
+    skills: ["Flooring Installation", "Hardwood Expertise", "Surface Finishing", "Residential Work"],
+    projectCost: 3000,
+    projectDuration: 8,
+    label: "SAR",
+  },
+  {
+    id: 8,
+    mainImg: "/service-requester-dashboard/portfolio3.svg",
+    startTime: "June 2024",
+    projectTitle: "Custom Furniture Creation",
+    projectDesc:
+      "Created bespoke furniture pieces for a high-end client. The project included designing unique tables, chairs, and shelving units according to the client's specifications and aesthetic preferences.",
+    skills: ["Custom Furniture", "Bespoke Design", "Fine Woodworking", "Client Collaboration"],
+    projectCost: 5500,
+    projectDuration: 15,
+    label: "SAR",
+  },
+  {
+    id: 9,
+    mainImg: "/service-requester-dashboard/portfolio4.svg",
+    startTime: "May 2024",
+    projectTitle: "Complete Home Renovation",
+    projectDesc:
+      "Managed a comprehensive home renovation project combining plumbing and carpentry services. The work included bathroom and kitchen updates, flooring replacement, custom built-ins, and plumbing system upgrades.",
+    skills: ["Home Renovation", "Project Management", "Multi-trade Expertise", "Residential Remodeling"],
+    projectCost: 8000,
+    projectDuration: 21,
+    label: "SAR",
+  },
+  {
+    id: 10,
+    mainImg: "/service-requester-dashboard/cover2.svg",
+    startTime: "April 2024",
+    projectTitle: "Office Space Remodeling",
+    projectDesc:
+      "Remodeled a commercial office space with both plumbing and carpentry work. The project involved creating custom partitions, installing new bathroom facilities, and designing an efficient workspace layout.",
+    skills: ["Commercial Remodeling", "Office Design", "Workspace Optimization", "Multi-service Project"],
+    projectCost: 6500,
+    projectDuration: 18,
+    label: "SAR",
+  },
+]
 
 export const reviewsSearchOptions = [
   "Most Recent",

@@ -15,6 +15,7 @@ import dayjs from "dayjs";
 import PackageCardComponent from "../ui/Cards/PackageCard";
 import MUIAutoComplete from "../ui/AutoComplete";
 import ReviewCardComponent from "../ui/Cards/ReviewCard";
+import PortfolioCardComponent from "../ui/Cards/PortfolioCard";
 
 interface UserProfileProps {
   user?: UserCard;
@@ -213,7 +214,7 @@ const UserProfile = ({ user }: UserProfileProps) => {
         </div>
       </div>
       {/* skills */}
-      <div className="w-full space-y-2 border border-[#DDE1F0] rounded-2xl p-4 mt-6">
+      <div className="w-full space-y-3 border border-[#DDE1F0] rounded-2xl p-4 mt-6">
         <h2 className="text-[18px] font-semibold text-[#181D27]">Skills</h2>
         <div className="w-full flex flex-wrap items-center gap-2">
           {skillsList?.map((item) => (
@@ -229,9 +230,14 @@ const UserProfile = ({ user }: UserProfileProps) => {
         </div>
       </div>
       {/* packages */}
-      <div className="w-full space-y-2 border border-[#DDE1F0] rounded-2xl p-4 mt-6">
+      <div className="w-full space-y-3 border border-[#DDE1F0] rounded-2xl p-4 mt-6">
         <h2 className="text-[18px] font-semibold text-[#181D27]">Packages</h2>
         <PackageCardComponent />
+      </div>
+      {/* portfolio */}
+      <div className="w-full space-y-3 border border-[#DDE1F0] rounded-2xl p-4 mt-6">
+        <h2 className="text-[18px] font-semibold text-[#181D27]">Portfolio</h2>
+        <PortfolioCardComponent />
       </div>
       {/* reviews */}
       <div className="w-full flex flex-col gap-2 border border-[#DDE1F0] rounded-2xl p-4 mt-6">

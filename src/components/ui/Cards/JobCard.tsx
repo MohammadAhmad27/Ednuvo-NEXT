@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 
 interface JobDataProps {
   jobData: JobCard[];
-  jobType: "active" | "past"; 
+  jobType: "active" | "past";
 }
 
 const JobCardComponent = ({ jobData, jobType }: JobDataProps) => {
@@ -11,19 +11,17 @@ const JobCardComponent = ({ jobData, jobType }: JobDataProps) => {
   const handleNavigate = (id: number | string) => {
     router.push(`/service-requester-dashboard/${jobType}job/${id}`);
   };
-  
+
   const getStatusClasses = (status: string) => {
     switch (status) {
-      case "Pending":
-        return "bg-yellow-100 text-yellow-700";
       case "Ongoing":
-        return "bg-[#BBF7D0] text-[#5BBB7B]";
+        return "text-[#5BBB7B] border-[#5BBB7B]";
       case "Completed":
-        return "bg-[#FF7F0266] text-[]";
+        return "text-[#848991] border-[#848991]";
       case "Cancelled":
-        return "bg-red-100 text-red-700";
+        return "text-[#EB4335] border-[#EB4335]";
       default:
-        return "bg-gray-100 text-gray-700";
+        return;
     }
   };
 
@@ -58,16 +56,20 @@ const JobCardComponent = ({ jobData, jobType }: JobDataProps) => {
             <p className="text-[16px] font-normal text-darkgray">
               {item?.orderStarted}
             </p>
-            <p className="text-[16px] font-normal text-black">{item?.jobStartedDate}</p>
+            <p className="text-[16px] font-normal text-black">
+              {item?.jobStartedDate}
+            </p>
           </div>
           <div className="flex flex-col justify-center items-center">
             <p className="text-[16px] font-normal text-darkgray">
               {item?.provider}
             </p>
-            <p className="text-[16px] font-normal text-black">{item?.jobProviderName}</p>
+            <p className="text-[16px] font-normal text-black">
+              {item?.jobProviderName}
+            </p>
           </div>
           <p
-            className={`w-1/2 mx-auto flex justify-center items-center rounded-full p-1 text-[14px] font-semibold ${getStatusClasses(
+            className={`w-[45%] mx-auto flex justify-center items-center rounded-full p-1 text-[14px] font-semibold border bg-white ${getStatusClasses(
               item?.status
             )}`}
           >
