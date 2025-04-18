@@ -1,5 +1,5 @@
 import {
-  jobDetailsCardData,
+  activeJobsData,
   searchOptions,
 } from "@/app/service-requester-dashboard/content";
 import MUIAutoComplete from "@/components/ui/AutoComplete";
@@ -9,7 +9,7 @@ import Image from "next/image";
 const ActiveJobs = () => {
   return (
     <>
-      {jobDetailsCardData && jobDetailsCardData?.length ? (
+      {activeJobsData && activeJobsData?.length ? (
         <div className="w-full h-full flex flex-col gap-4">
           {/* Search bar */}
           <div className="w-1/2 flex items-center gap-2 px-4 py-2 rounded-full border border-[#DDE1F0] shadow-searchshadow">
@@ -30,7 +30,7 @@ const ActiveJobs = () => {
           <div className="w-full flex flex-col gap-4">
             <div className="w-full flex gap-2 justify-between items-center">
               <p className="text-[16px] font-normal text-darkgray">
-                {jobDetailsCardData?.length} Results
+                {activeJobsData?.length} Results
               </p>
               <div className="flex items-center gap-5">
                 <p className="text-[16px] font-normal text-darkgray text-nowrap">
@@ -46,7 +46,7 @@ const ActiveJobs = () => {
               </div>
             </div>
             <div className="w-full h-full px-1">
-              <JobDetailsCardComponent />
+              <JobDetailsCardComponent jobData={activeJobsData} />
             </div>
           </div>
         </div>

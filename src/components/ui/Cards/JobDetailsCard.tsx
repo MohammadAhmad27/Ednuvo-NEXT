@@ -1,6 +1,10 @@
-import { jobDetailsCardData } from "@/app/service-requester-dashboard/content";
+import { JobDetailsCard } from "@/interfaces/Service-Requester-Dashboard";
 
-const JobDetailsCardComponent = () => {
+interface JobDataProps {
+  jobData: JobDetailsCard[];
+}
+
+const JobDetailsCardComponent = ({ jobData }: JobDataProps) => {
   const getStatusClasses = (status: string) => {
     switch (status) {
       case "Pending":
@@ -18,7 +22,7 @@ const JobDetailsCardComponent = () => {
 
   return (
     <div className="w-full h-full flex flex-col gap-2">
-      {jobDetailsCardData?.map((item) => (
+      {jobData?.map((item) => (
         <div
           key={item?.id}
           className="bg-[#EEFCEE] rounded-xl p-4 w-full grid grid-cols-7 items-center gap-4"

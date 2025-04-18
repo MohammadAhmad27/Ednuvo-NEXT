@@ -62,7 +62,7 @@ const UserProfile = ({ user }: UserProfileProps) => {
           <p className="text-[16px] font-normal text-[#5BBB7B]">
             Plumber & Carpenter
           </p>
-          <div className="flex gap-5 items-center">
+          <div className="flex flex-wrap gap-5 items-center">
             {/* 1st */}
             <div className="flex items-center gap-2 mt-1">
               <div className="flex items-center gap-1">
@@ -109,7 +109,7 @@ const UserProfile = ({ user }: UserProfileProps) => {
         </div>
       </div>
       {/* profile data */}
-      <div className="w-full flex items-center gap-8 my-8">
+      <div className="w-full flex flex-wrap items-center gap-8 my-8">
         {profileData?.map((item) => (
           <div key={item?.id} className="flex items-start gap-2">
             <Image
@@ -132,9 +132,9 @@ const UserProfile = ({ user }: UserProfileProps) => {
         ))}
       </div>
       {/* about */}
-      <div className="w-full flex items-stretch gap-5">
+      <div className="w-full flex max-md:flex-col items-stretch gap-5">
         {/* left */}
-        <div className="w-3/4 space-y-1 border border-[#DDE1F0] rounded-2xl p-4">
+        <div className="xl:w-3/4 lg:w-2/3 md:w-3/5 max-md:w-full space-y-1 border border-[#DDE1F0] rounded-2xl p-4">
           <h2 className="text-[18px] font-semibold text-[#181D27]">About</h2>
           <p className="text-[14px] font-normal text-darkgray text-justify">
             I am a skilled plumber and carpenter with expertise in designing,
@@ -153,7 +153,7 @@ const UserProfile = ({ user }: UserProfileProps) => {
           </p>
         </div>
         {/* right */}
-        <div className="w-1/4 flex flex-col border border-[#DDE1F0] rounded-2xl">
+        <div className="xl:w-1/4 lg:w-1/3 md:w-2/5 max-md:w-full flex flex-col border border-[#DDE1F0] rounded-2xl">
           <div className="w-full p-4">
             <h2 className="text-[18px] font-bold text-[#181D27]">
               {user?.name}
