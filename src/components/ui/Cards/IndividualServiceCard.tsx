@@ -12,7 +12,7 @@ const IndividualServiceCard = () => {
         alt="user-icon"
         width={50}
         height={50}
-        className="object-cover mb-[2px]"
+        className="object-cover rounded-full mb-[2px]"
       />
       <div className="flex flex-col items-center px-6">
         <h4 className="text-[14px] font-semibold text-lightblack">

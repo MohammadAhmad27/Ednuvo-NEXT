@@ -3,7 +3,9 @@ import {
   ExpertsCard,
   FeaturedFreelancer,
   JobCard,
+  JobRequirements,
   JobServiceDescription,
+  JobSupport,
   MenuSection,
   PackageCard,
   ProfileData,
@@ -719,12 +721,12 @@ export const featuredFreelancer: FeaturedFreelancer[] = [
 export const featuredFreelancerData: FeaturedFreelancer[] = [
   {
     id: 1,
-    icon: "/service-requester-dashboard/save.svg",
+    icon: "/service-requester-dashboard/save-icon.svg",
     label: "Save",
   },
   {
     id: 2,
-    icon: "/service-requester-dashboard/share.svg",
+    icon: "/service-requester-dashboard/share-icon.svg",
     label: "Share",
   },
 ];
@@ -891,5 +893,44 @@ export const jobServiceDescriptionData: JobServiceDescription[] = [
     id: 3,
     icon: "/service-requester-dashboard/check-icon.svg",
     desc: "Connect water supply lines, drainage systems, and gas lines according to building codes and safety regulations.",
+  },
+];
+
+export const jobRequirementsData: JobRequirements[] = [
+  {
+    id: 1,
+    icon: "/service-requester-dashboard/experience.svg",
+    label: "Experience",
+    desc: "Senior Level",
+  },
+  {
+    id: 2,
+    icon: "/service-requester-dashboard/languages.svg",
+    label: "Languages",
+    desc: "Arabic, English, Urdu",
+  },
+  {
+    id: 3,
+    icon: "/service-requester-dashboard/calendar.svg",
+    label: "Project Duration",
+    desc: "3 days",
+  },
+];
+
+export const jobSupportData: JobSupport[] = [
+  {
+    id: 1,
+    icon: "/service-requester-dashboard/question.svg",
+    label: "FAQ's",
+    desc: "Find needed answer.",
+    href: "#",
+    separator: "w-full h-[0.5px] bg-[#0000004D] mt-[4px]",
+  },
+  {
+    id: 2,
+    icon: "/service-requester-dashboard/globe.svg",
+    label: "Resolution Center",
+    desc: "Resolve order issues.",
+    href: "#",
   },
 ];

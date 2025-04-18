@@ -118,3 +118,19 @@ export interface JobServiceDescription {
   icon: string;
   desc: string;
 }
+
+export interface JobRequirements {
+  id: number;
+  icon: string;
+  label: string;
+  desc: string;
+}
+
+export interface JobSupport {
+  id: number;
+  icon: string;
+  label: string;
+  desc: string;
+  href: string;
+  separator?: string
+}
