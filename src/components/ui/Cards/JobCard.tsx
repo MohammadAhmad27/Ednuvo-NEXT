@@ -1,10 +1,17 @@
-import { JobDetailsCard } from "@/interfaces/Service-Requester-Dashboard";
+import { JobCard } from "@/interfaces/Service-Requester-Dashboard";
+import { useRouter } from "next/navigation";
 
 interface JobDataProps {
-  jobData: JobDetailsCard[];
+  jobData: JobCard[];
+  jobType: "active" | "past"; 
 }
 
-const JobDetailsCardComponent = ({ jobData }: JobDataProps) => {
+const JobCardComponent = ({ jobData, jobType }: JobDataProps) => {
+  const router = useRouter();
+  const handleNavigate = (id: number | string) => {
+    router.push(`/service-requester-dashboard/${jobType}job/${id}`);
+  };
+  
   const getStatusClasses = (status: string) => {
     switch (status) {
       case "Pending":
@@ -25,7 +32,8 @@ const JobDetailsCardComponent = ({ jobData }: JobDataProps) => {
       {jobData?.map((item) => (
         <div
           key={item?.id}
-          className="bg-[#EEFCEE] rounded-xl p-4 w-full grid grid-cols-7 items-center gap-4"
+          className="bg-[#EEFCEE] rounded-xl p-4 w-full grid grid-cols-7 items-center gap-4 cursor-pointer"
+          onClick={() => handleNavigate(item?.id)}
         >
           <p className="text-[18px] font-semibold text-lightblack max-w-[250px]">
             {item?.title}
@@ -35,7 +43,7 @@ const JobDetailsCardComponent = ({ jobData }: JobDataProps) => {
               {item?.price}
             </p>
             <p className="text-[16px] font-normal text-black">
-              {item?.value} SAR
+              {item?.jobPrice} SAR
             </p>
           </div>
           <div className="flex flex-col justify-center items-center">
@@ -43,20 +51,20 @@ const JobDetailsCardComponent = ({ jobData }: JobDataProps) => {
               {item?.duration}
             </p>
             <p className="text-[16px] font-normal text-black">
-              {item?.days} days
+              {item?.jobDuration} days
             </p>
           </div>
           <div className="flex flex-col justify-center items-center">
             <p className="text-[16px] font-normal text-darkgray">
               {item?.orderStarted}
             </p>
-            <p className="text-[16px] font-normal text-black">{item?.date}</p>
+            <p className="text-[16px] font-normal text-black">{item?.jobStartedDate}</p>
           </div>
           <div className="flex flex-col justify-center items-center">
             <p className="text-[16px] font-normal text-darkgray">
               {item?.provider}
             </p>
-            <p className="text-[16px] font-normal text-black">{item?.name}</p>
+            <p className="text-[16px] font-normal text-black">{item?.jobProviderName}</p>
           </div>
           <p
             className={`w-1/2 mx-auto flex justify-center items-center rounded-full p-1 text-[14px] font-semibold ${getStatusClasses(
@@ -74,4 +82,4 @@ const JobDetailsCardComponent = ({ jobData }: JobDataProps) => {
   );
 };
 
-export default JobDetailsCardComponent;
+export default JobCardComponent;

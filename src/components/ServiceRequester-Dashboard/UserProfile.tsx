@@ -219,7 +219,7 @@ const UserProfile = ({ user }: UserProfileProps) => {
           {skillsList?.map((item) => (
             <div
               key={item?.id}
-              className="border border-gray rounded-full px-3 py-2"
+              className="border border-gray rounded-full px-2 py-[5px]"
             >
               <p className="text-[12px] font-normal text-darkgray">
                 {item?.name}

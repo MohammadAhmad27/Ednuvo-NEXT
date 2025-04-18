@@ -57,17 +57,17 @@ export interface UserCard {
   value: number;
 }
 
-export interface JobDetailsCard {
+export interface JobCard {
   id: number;
   title: string;
   price: string;
-  value: number;
+  jobPrice: number;
   duration: string;
-  days: number;
+  jobDuration: number;
   orderStarted: string;
-  date: string;
+  jobStartedDate: string;
   provider: string;
-  name: string;
+  jobProviderName: string;
   status: "Pending" | "Ongoing" | "Completed" | "Cancelled";
   view: string;
 }
@@ -111,4 +111,10 @@ export interface ReviewsCard {
   rating: number;
   time: string;
   comment: string;
+}
+
+export interface JobServiceDescription {
+  id: number;
+  icon: string;
+  desc: string;
 }

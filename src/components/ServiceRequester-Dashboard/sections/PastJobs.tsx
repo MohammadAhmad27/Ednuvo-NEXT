@@ -3,7 +3,7 @@ import {
   searchOptions,
 } from "@/app/service-requester-dashboard/content";
 import MUIAutoComplete from "@/components/ui/AutoComplete";
-import JobDetailsCardComponent from "@/components/ui/Cards/JobDetailsCard";
+import JobCardComponent from "@/components/ui/Cards/JobCard";
 import Image from "next/image";
 
 const PastJobs = () => {
@@ -46,7 +46,7 @@ const PastJobs = () => {
               </div>
             </div>
             <div className="w-full h-full px-1">
-              <JobDetailsCardComponent jobData={pastJobsData} />
+              <JobCardComponent jobData={pastJobsData} jobType="past"  />
             </div>
           </div>
         </div>
