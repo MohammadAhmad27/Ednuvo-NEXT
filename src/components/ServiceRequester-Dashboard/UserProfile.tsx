@@ -237,7 +237,7 @@ const UserProfile = ({ user }: UserProfileProps) => {
       {/* portfolio */}
       <div className="w-full space-y-3 border border-[#DDE1F0] rounded-2xl p-4 mt-6">
         <h2 className="text-[18px] font-semibold text-[#181D27]">Portfolio</h2>
-        <PortfolioCardComponent />
+        <PortfolioCardComponent user={user} />
       </div>
       {/* reviews */}
       <div className="w-full flex flex-col gap-2 border border-[#DDE1F0] rounded-2xl p-4 mt-6">

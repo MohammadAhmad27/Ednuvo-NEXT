@@ -1,9 +1,17 @@
 import { useState } from "react";
 import Image from "next/image";
-import { PortfolioCard } from "@/interfaces/Service-Requester-Dashboard";
+import {
+  PortfolioCard,
+  UserCard,
+} from "@/interfaces/Service-Requester-Dashboard";
 import { portfolioData } from "@/app/service-requester-dashboard/content";
+import Link from "next/link";
 
-const PortfolioCardComponent = () => {
+interface UserCardProps {
+  user?: UserCard;
+}
+
+const PortfolioCardComponent = ({ user }: UserCardProps) => {
   const [selectedPortfolio, setSelectedPortfolio] = useState<PortfolioCard>(
     portfolioData[0]
   );
@@ -87,11 +95,15 @@ const PortfolioCardComponent = () => {
         })}
 
         {portfolioData?.length > 4 && (
-          <div className="w-full h-full rounded-[20px] border border-gray flex items-center justify-center">
-            <span className="text-[18px] font-medium text-lightblack">
-              + {portfolioData.length - 4} Projects
-            </span>
-          </div>
+          <Link
+            href={`/service-requester-dashboard/profile/${user?.id}/portfolio`}
+          >
+            <div className="w-full h-full rounded-[20px] border border-gray flex items-center justify-center">
+              <span className="text-[18px] font-medium text-lightblack">
+                + {portfolioData.length - 4} Projects
+              </span>
+            </div>
+          </Link>
         )}
       </div>
     </section>
