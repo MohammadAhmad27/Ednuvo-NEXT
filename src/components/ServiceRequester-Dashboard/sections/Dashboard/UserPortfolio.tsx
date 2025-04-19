@@ -2,9 +2,9 @@ import {
   portfolioData,
 } from "@/app/service-requester-dashboard/content";
 import MUIBreadCrumbs from "@/components/ui/BreadCrumbs";
+import AllPortfolioCardComponent from "@/components/ui/Cards/AllPortfolioCard";
 import { UserCard } from "@/interfaces/Service-Requester-Dashboard";
 import Image from "next/image";
-import AllPortfolioCardComponent from "../ui/Cards/AllPortfolioCard";
 
 interface UserProfileProps {
   user?: UserCard;

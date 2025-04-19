@@ -1,5 +1,5 @@
 import { pastJobsData } from "@/app/service-requester-dashboard/content";
-import JobDetails from "@/components/ServiceRequester-Dashboard/JobDetails";
+import JobDetails from "@/components/ServiceRequester-Dashboard/sections/Jobs/JobDetails";
 
 type PageProps = {
   params: {

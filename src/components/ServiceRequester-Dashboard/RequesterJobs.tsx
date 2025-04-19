@@ -1,4 +1,4 @@
-import JobTabs from "./sections/JobTabs";
+import JobTabs from "./sections/Jobs/JobTabs";
 
 const Jobs = () => {
   return (

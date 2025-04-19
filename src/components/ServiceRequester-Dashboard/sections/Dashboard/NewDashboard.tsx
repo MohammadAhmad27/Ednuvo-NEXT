@@ -1,11 +1,11 @@
 import Image from "next/image";
-import ExpertsCardComponent from "../../ui/Cards/ExpertsCard";
 import {
   expertsCardData,
   searchOptions,
 } from "@/app/service-requester-dashboard/content";
-import MUIAutoComplete from "../../ui/AutoComplete";
 import ProfileCompletion from "@/shared/ProfileCompletion";
+import MUIAutoComplete from "@/components/ui/AutoComplete";
+import ExpertsCardComponent from "@/components/ui/Cards/ExpertsCard";
 
 const NewDashboard = () => {
   return (

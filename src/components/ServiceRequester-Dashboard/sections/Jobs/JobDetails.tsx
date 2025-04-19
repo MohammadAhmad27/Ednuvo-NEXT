@@ -5,10 +5,10 @@ import {
   jobSupportData,
   skillsList,
 } from "@/app/service-requester-dashboard/content";
+import MUITextField from "@/components/ui/TextField";
 import { JobCard } from "@/interfaces/Service-Requester-Dashboard";
 import Image from "next/image";
 import Link from "next/link";
-import MUITextField from "../ui/TextField";
 import { useState } from "react";
 
 interface JobDetailsProps {

@@ -8,6 +8,7 @@ import ProfileSettings from "./ProfileSettings";
 import PasswordAndSecurity from "./Password&Security";
 import NotificationSettings from "./NotificationSettings";
 
+
 function CustomTabPanel(props: any) {
   const { children, value, index, ...other } = props;
 

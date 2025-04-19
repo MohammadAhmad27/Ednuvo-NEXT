@@ -1,7 +1,7 @@
-import AnalyticsCardComponent from "../../ui/Cards/AnalyticsCard";
-import MUIAutoComplete from "../../ui/AutoComplete";
 import { searchOptions, userCardData } from "@/app/service-requester-dashboard/content";
-import UserCardComponent from "../../ui/Cards/UserCard";
+import MUIAutoComplete from "@/components/ui/AutoComplete";
+import AnalyticsCardComponent from "@/components/ui/Cards/AnalyticsCard";
+import UserCardComponent from "@/components/ui/Cards/UserCard";
 import ProfileCompletion from "@/shared/ProfileCompletion";
 
 const DefaultDashboard = () => {

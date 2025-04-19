@@ -1,5 +1,5 @@
 import { userCardData } from "@/app/service-requester-dashboard/content";
-import UserPortfolio from "@/components/ServiceRequester-Dashboard/UserPortfolio";
+import UserPortfolios from "@/components/ServiceRequester-Dashboard/sections/Dashboard/UserPortfolio";
 
 type PageProps = {
   params: {
@@ -12,7 +12,7 @@ const page = ({ params }: PageProps) => {
 
   return (
     <div className="w-full h-full overflow-x-hidden overflow-y-auto bg-lightgreen rounded-tl-[40px] px-5 py-6">
-      <UserPortfolio user={user} />
+      <UserPortfolios user={user} />
     </div>
   );
 };

@@ -1,5 +1,5 @@
-import DefaultDashboard from "./sections/DefaultDashboard";
-import NewDashboard from "./sections/NewDashboard";
+import DefaultDashboard from "./sections/Dashboard/DefaultDashboard";
+
 
 const Dashboard = () => {
   return (

@@ -1,4 +1,4 @@
-import DisputesTable from "./sections/DisputesTable";
+import DisputesTable from "./sections/Disputes/DisputesTable";
 
 const Disputes = () => {
   return (

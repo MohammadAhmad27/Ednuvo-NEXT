@@ -1,5 +1,4 @@
-import React from 'react'
-import SettingTabs from './sections/SettingTabs'
+import SettingTabs from './sections/Settings/SettingTabs'
 
 const RequesterSettings = () => {
   return (

@@ -12,10 +12,10 @@ import MUIBreadCrumbs from "@/components/ui/BreadCrumbs";
 import { UserCard } from "@/interfaces/Service-Requester-Dashboard";
 import Image from "next/image";
 import dayjs from "dayjs";
-import PackageCardComponent from "../ui/Cards/PackageCard";
-import MUIAutoComplete from "../ui/AutoComplete";
-import ReviewCardComponent from "../ui/Cards/ReviewCard";
-import PortfolioCardComponent from "../ui/Cards/PortfolioCard";
+import PackageCardComponent from "@/components/ui/Cards/PackageCard";
+import PortfolioCardComponent from "@/components/ui/Cards/PortfolioCard";
+import MUIAutoComplete from "@/components/ui/AutoComplete";
+import ReviewCardComponent from "@/components/ui/Cards/ReviewCard";
 
 interface UserProfileProps {
   user?: UserCard;
