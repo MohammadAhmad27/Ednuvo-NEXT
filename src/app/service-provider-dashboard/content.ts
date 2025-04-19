@@ -1,4 +1,7 @@
-import { MenuSection } from "@/interfaces/Service-Requester-Dashboard";
+import {
+  AnalyticsCard,
+  MenuSection,
+} from "@/interfaces/Service-Requester-Dashboard";
 
 export const providerMenuLinks: MenuSection[] = [
   {
@@ -75,5 +78,50 @@ export const providerMenuLinks: MenuSection[] = [
         url: "#",
       },
     ],
+  },
+];
+
+export const providerAnalyticsCardData: AnalyticsCard[] = [
+  {
+    id: 1,
+    label: "Completed Orders",
+    value: 20,
+  },
+  {
+    id: 2,
+    label: "Average Selling Price",
+    value: 150,
+    unit: "SAR",
+  },
+  {
+    id: 3,
+    label: "Order Completion Rate",
+    value: 99,
+    unit: "%",
+  },
+  {
+    id: 4,
+    label: "Earning to Date",
+    value: 500,
+    unit: "SAR",
+  },
+];
+
+export const dataFilters = [
+  {
+    id: 1,
+    label: "Last Year",
+  },
+  {
+    id: 2,
+    label: "This Year",
+  },
+  {
+    id: 3,
+    label: "Last 3 Months",
+  },
+  {
+    id: 4,
+    label: "Last 6 Months",
   },
 ];

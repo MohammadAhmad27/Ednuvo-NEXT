@@ -10,8 +10,9 @@ import ExpertsCardComponent from "@/components/ui/Cards/ExpertsCard";
 const NewDashboard = () => {
   return (
     <div className="w-full h-full flex flex-col gap-4 pt-2">
+      {/* actual requester name */}
       <p className="text-[18px] font-normal text-[#2D2D2D]">
-        Welcome, <span className="font-semibold">Hassan Al-Omari</span> Here’s
+        Welcome, <span className="font-semibold">Hassan Al-Omari</span> Here’s 
         your business overview.
       </p>
       <ProfileCompletion />

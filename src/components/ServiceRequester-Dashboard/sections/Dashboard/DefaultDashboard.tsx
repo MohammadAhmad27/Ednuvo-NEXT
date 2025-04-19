@@ -1,4 +1,4 @@
-import { searchOptions, userCardData } from "@/app/service-requester-dashboard/content";
+import { requesterAnalyticsCardData, searchOptions, userCardData } from "@/app/service-requester-dashboard/content";
 import MUIAutoComplete from "@/components/ui/AutoComplete";
 import AnalyticsCardComponent from "@/components/ui/Cards/AnalyticsCard";
 import UserCardComponent from "@/components/ui/Cards/UserCard";
@@ -8,6 +8,7 @@ const DefaultDashboard = () => {
   return (
     <div className="w-full h-full flex flex-col gap-4 pt-2">
       <div className="flex items-center justify-between gap-2">
+      {/* actual requester name */}
         <p className="text-[18px] font-normal text-[#2D2D2D]">
           Welcome, <span className="font-semibold">Hassan Al-Omari</span> Here’s
           your business overview.
@@ -18,7 +19,7 @@ const DefaultDashboard = () => {
       </div>
       <ProfileCompletion />
       <h2 className="text-[18px] font-semibold text-lightblack">Analytics</h2>
-      <AnalyticsCardComponent />
+      <AnalyticsCardComponent analyticsCardData= {requesterAnalyticsCardData} />
       <div className="w-full bg-white rounded-2xl px-[15px] py-[14px] min-h-20"></div>
       {/* Card Component */}
       <div className="w-full flex flex-col gap-5 mt-1">

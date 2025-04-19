@@ -1,7 +1,64 @@
-const ProviderDashboard = () => {
-  return (
-    <div>ProviderDashboard</div>
-  )
-}
+import ProfileCompletion from "@/shared/ProfileCompletion";
+import AnalyticsCardComponent from "../ui/Cards/AnalyticsCard";
+import {
+  dataFilters,
+  providerAnalyticsCardData,
+} from "@/app/service-provider-dashboard/content";
+import OrderOverviewChart from "./sections/Dashboard/OrderOverviewChart";
+import Image from "next/image";
+import { useState } from "react";
 
-export default ProviderDashboard
+const ProviderDashboard = () => {
+  const [activeButton, setActiveButton] = useState(dataFilters[0]?.label);
+  return (
+    <div className="w-full h-full flex flex-col gap-4 pt-2">
+      {/* actual provider name */}
+      <p className="text-[18px] font-normal text-[#2D2D2D]">
+        Welcome, <span className="font-semibold">Saud Al-Faisal</span> Here’s
+        your business overview.
+      </p>
+      <ProfileCompletion />
+      <h2 className="text-[18px] font-semibold text-lightblack">Analytics</h2>
+      <AnalyticsCardComponent analyticsCardData={providerAnalyticsCardData} />
+      <div className="w-full flex max-lg:flex-col items-stretch gap-4 mt-2">
+        {/* left */}
+        <div className="w-2/3 max-lg:w-full bg-white border border-[#00000014] rounded-2xl">
+          <div className="flex max-xl:flex-col justify-between items-center gap-2 px-5 py-5">
+            <div className="flex items-center gap-2">
+              <h3 className="text-[18px] font-semibold text-lightblack">
+                Order Overview
+              </h3>
+              <Image
+                src="/service-requester-dashboard/smartai.svg"
+                alt="icon"
+                width={20}
+                height={20}
+                className="object-cover"
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              {dataFilters?.map((item) => (
+                <button
+                  onClick={() => setActiveButton(item?.label)}
+                  key={item?.id}
+                  className={`text-12px] font-normal text-center rounded-full px-3 py-1 ${
+                    activeButton === item?.label
+                      ? "bg-[#181D27] text-white"
+                      : "text-[#002F10] bg-[#F6F6F6] border border-[#DDE1F0]"
+                  }`}
+                >
+                  {item?.label}
+                </button>
+              ))}
+            </div>
+          </div>
+          <OrderOverviewChart />
+        </div>
+        {/* right */}
+        <div className="w-1/3 max-lg:w-full bg-white border border-[#00000014] rounded-2xl"></div>
+      </div>
+    </div>
+  );
+};
+
+export default ProviderDashboard;

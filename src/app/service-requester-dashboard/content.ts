@@ -254,7 +254,7 @@ export const expertsCardData: ExpertsCard[] = [
 
 export const searchOptions = ["Rating", "Reviews", "Price", "Newest", "Oldest"];
 
-export const analyticsCardData: AnalyticsCard[] = [
+export const requesterAnalyticsCardData: AnalyticsCard[] = [
   {
     id: 1,
     label: "Posted Jobs",
