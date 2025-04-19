@@ -46,6 +46,7 @@ const SignUpForm = () => {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setEmail(e.target.value)
           }
+          placeholder="Enter your email"
         />
         <MUITextField
           label="Password"
@@ -54,6 +55,7 @@ const SignUpForm = () => {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setPassword(e.target.value)
           }
+          placeholder="Enter your password"
           showPassword={showPassword}
           setShowPassword={setShowPassword}
         />

@@ -94,7 +94,7 @@ const SettingTabs = () => {
           />
           <Tab
             label="Password & Security"
-            {...a11yProps(0)}
+            {...a11yProps(2)}
             sx={{
               color: value === 2 ? "#5BBB7B  !important" : "#6B7177",
               fontWeight: 500,
@@ -104,7 +104,7 @@ const SettingTabs = () => {
           />
           <Tab
             label="Notification Settings"
-            {...a11yProps(1)}
+            {...a11yProps(3)}
             sx={{
               color: value === 3 ? "#5BBB7B !important" : "#6B7177",
               fontWeight: 500,
@@ -117,22 +117,22 @@ const SettingTabs = () => {
 
       {/* Tab Panels */}
       <CustomTabPanel value={value} index={0}>
-        <div className="flex-1 h-[calc(100vh-275px)] overflow-x-hidden overflow-y-auto mt-8">
+        <div className="flex-1 h-[calc(100vh-275px)] overflow-x-hidden overflow-y-auto">
           <AccountSettings />
         </div>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <div className="flex-1 h-[calc(100vh-275px)] overflow-x-hidden overflow-y-auto mt-8">
+        <div className="flex-1 h-[calc(100vh-275px)] overflow-x-hidden overflow-y-auto">
           <ProfileSettings />
         </div>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        <div className="flex-1 h-[calc(100vh-275px)] overflow-x-hidden overflow-y-auto mt-8">
+        <div className="flex-1 h-[calc(100vh-275px)] overflow-x-hidden overflow-y-auto">
           <PasswordAndSecurity />
         </div>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
-        <div className="flex-1 h-[calc(100vh-275px)] overflow-x-hidden overflow-y-auto mt-8">
+        <div className="flex-1 h-[calc(100vh-275px)] overflow-x-hidden overflow-y-auto">
           <NotificationSettings />
         </div>
       </CustomTabPanel>

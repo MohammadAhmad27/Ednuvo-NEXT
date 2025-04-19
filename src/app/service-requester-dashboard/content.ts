@@ -1232,3 +1232,18 @@ export const requesterDisputesData: RequesterDisputes[] = [
     status: "Disputed",
   },
 ];
+
+export const accountDeactivationData = [
+  {
+    id: 1,
+    desc: "Your profile and packages won’t be shown on Ednuvo anymore.",
+  },
+  {
+    id: 2,
+    desc: "Active orders will be cancelled.",
+  },
+  {
+    id: 3,
+    desc: "You won’t be able to re-activate your packages.",
+  },
+];
