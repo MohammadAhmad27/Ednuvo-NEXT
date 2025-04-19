@@ -1,11 +1,16 @@
 "use client";
 import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { menuLinks } from "@/app/service-requester-dashboard/content";
 import Image from "next/image";
 import Link from "next/link";
+import { MenuSection } from "@/interfaces/Service-Requester-Dashboard";
 
-const SidebarContent = () => {
+interface SidebarContentProps {
+  menuLinks: MenuSection[];
+  type: string;
+}
+
+const SidebarContent = ({ menuLinks, type }: SidebarContentProps) => {
   const searchParams = useSearchParams();
   const activeTab = searchParams.get("view");
 
@@ -52,7 +57,7 @@ const SidebarContent = () => {
                 return (
                   <Link
                     key={subItem?.id}
-                    href={`/service-requester-dashboard${subItem?.url}`}
+                    href={`/service-${type}-dashboard${subItem?.url}`}
                     className={`w-full flex gap-2 items-center ${
                       isActive ? "bg-secondary" : "bg-white"
                     } cursor-pointer rounded-full pl-4 py-[10px]`}
@@ -84,10 +89,15 @@ const SidebarContent = () => {
   );
 };
 
-const Sidebar = () => {
+interface SidebarProps {
+  menuLinks: MenuSection[];
+  type: string;
+}
+
+const Sidebar = ({ menuLinks, type }: SidebarProps) => {
   return (
     <Suspense fallback={<div className="px-5 py-8">Loading...</div>}>
-      <SidebarContent />
+      <SidebarContent menuLinks={menuLinks} type={type} />
     </Suspense>
   );
 };

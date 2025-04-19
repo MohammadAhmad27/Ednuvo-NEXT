@@ -16,7 +16,7 @@ import {
   UserCard,
 } from "@/interfaces/Service-Requester-Dashboard";
 
-export const menuLinks: MenuSection[] = [
+export const requesterMenuLinks: MenuSection[] = [
   {
     id: 1,
     title: "General",

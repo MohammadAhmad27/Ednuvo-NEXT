@@ -24,7 +24,7 @@ const RenderTabComponent = ({ tab }: { tab: string | null }) => {
   }
 };
 
-const ClientComponent = () => {
+const RequesterClientComponent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const tab = searchParams.get("view");
@@ -43,4 +43,4 @@ const ClientComponent = () => {
   );
 };
 
-export default ClientComponent;
+export default RequesterClientComponent;
