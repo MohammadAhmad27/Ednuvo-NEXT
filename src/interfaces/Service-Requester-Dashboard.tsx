@@ -104,15 +104,15 @@ export interface PackageCard {
 }
 
 export interface PortfolioCard {
-  id: number
-  mainImg: string
-  startTime: string
-  projectTitle: string
-  projectDesc: string
-  skills: string[]
-  projectCost: number
-  projectDuration: number
-  label: string
+  id: number;
+  mainImg: string;
+  startTime: string;
+  projectTitle: string;
+  projectDesc: string;
+  skills: string[];
+  projectCost: number;
+  projectDuration: number;
+  label: string;
 }
 
 export interface ReviewsCard {
@@ -145,5 +145,14 @@ export interface JobSupport {
   label: string;
   desc: string;
   href: string;
-  separator?: string
+  separator?: string;
+}
+
+export interface RequesterDisputes {
+  refNumber: string;
+  employerName: string;
+  date: string;
+  amount: number;
+  currency: string;
+  status: string;
 }
