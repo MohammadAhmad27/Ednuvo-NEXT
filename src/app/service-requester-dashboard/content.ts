@@ -66,8 +66,8 @@ export const menuLinks: MenuSection[] = [
         id: 2,
         icon: "/service-requester-dashboard/setting.svg",
         icon2: "/service-requester-dashboard/setting2.svg",
-        label: "Setting",
-        url: "#",
+        label: "Settings",
+        url: "?view=settings",
       },
       {
         id: 3,

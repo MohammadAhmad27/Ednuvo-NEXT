@@ -69,7 +69,7 @@ const JobCardComponent = ({ jobData, jobType }: JobDataProps) => {
             </p>
           </div>
           <p
-            className={`w-[45%] mx-auto flex justify-center items-center rounded-full p-1 text-[14px] font-semibold border bg-white ${getStatusClasses(
+            className={`w-max mx-auto flex justify-center items-center rounded-full px-4 py-1 text-[14px] font-semibold border bg-white ${getStatusClasses(
               item?.status
             )}`}
           >
