@@ -64,6 +64,7 @@ const SettingTabs = () => {
             "& .MuiTabs-list": {
               display: "flex",
               gap: "40px",
+              overflowX: "auto"
             },
             "& .MuiTab-root": {
               minWidth: "210px",

@@ -59,7 +59,7 @@ const SignUpForm = () => {
           showPassword={showPassword}
           setShowPassword={setShowPassword}
         />
-        <p className="texr-[12px] font-normal text-[#AAAAAA]">
+        <p className="text-[12px] font-normal text-[#AAAAAA]">
           Use 8+ characters with a mix of uppercase, lowercase, numbers, and
           special symbols (e.g., !@#$).
         </p>
