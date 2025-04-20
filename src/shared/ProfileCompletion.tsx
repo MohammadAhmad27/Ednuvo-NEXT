@@ -23,7 +23,7 @@ const ProfileCompletion = () => {
       </p>
       <div className="bg-[#DDE1F0] w-full max-w-[550px] h-2 rounded-full mt-2">
         <div
-          className="bg-green rounded-full h-2"
+          className="bg-[#17DB94] rounded-full h-2"
           style={{ width: `${value}%` }}
         />
       </div>

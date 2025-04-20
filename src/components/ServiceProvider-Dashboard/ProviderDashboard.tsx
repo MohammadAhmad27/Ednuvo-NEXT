@@ -7,6 +7,7 @@ import {
 import OrderOverviewChart from "./sections/Dashboard/OrderOverviewChart";
 import Image from "next/image";
 import { useState } from "react";
+import JobRequestCardComponent from "../ui/Cards/JobRequestCard";
 
 const ProviderDashboard = () => {
   const [activeButton, setActiveButton] = useState(dataFilters[0]?.label);
@@ -22,7 +23,7 @@ const ProviderDashboard = () => {
       <AnalyticsCardComponent analyticsCardData={providerAnalyticsCardData} />
       <div className="w-full flex max-lg:flex-col items-stretch gap-4 mt-2">
         {/* left */}
-        <div className="w-2/3 max-lg:w-full bg-white border border-[#00000014] rounded-2xl">
+        <div className="xl:w-3/4 lg:w-2/3 max-lg:w-full bg-white border border-[#00000014] rounded-2xl">
           <div className="flex max-xl:flex-col justify-between items-center gap-2 px-5 py-5">
             <div className="flex items-center gap-2">
               <h3 className="text-[18px] font-semibold text-lightblack">
@@ -55,7 +56,21 @@ const ProviderDashboard = () => {
           <OrderOverviewChart />
         </div>
         {/* right */}
-        <div className="w-1/3 max-lg:w-full bg-white border border-[#00000014] rounded-2xl"></div>
+        <div className="xl:w-1/4 lg:w-1/3 max-lg:w-full space-y-2 bg-white border border-[#00000014] rounded-2xl p-4">
+          <div className="flex items-center gap-2 mb-4">
+            <h3 className="text-[18px] font-semibold text-lightblack">
+              New Job Request
+            </h3>
+            <Image
+              src="/service-requester-dashboard/smartai.svg"
+              alt="icon"
+              width={20}
+              height={20}
+              className="object-cover"
+            />
+          </div>
+            <JobRequestCardComponent />
+        </div>
       </div>
     </div>
   );

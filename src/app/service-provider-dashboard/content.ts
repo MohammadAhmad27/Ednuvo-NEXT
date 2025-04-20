@@ -1,3 +1,4 @@
+import { JobRequestCard } from "@/interfaces/Service-Provider-Dashboard";
 import {
   AnalyticsCard,
   MenuSection,
@@ -123,5 +124,41 @@ export const dataFilters = [
   {
     id: 4,
     label: "Last 6 Months",
+  },
+];
+
+export const jobRequestCardData: JobRequestCard[] = [
+  {
+    value: 20,
+    time: "6.32",
+    title: "Plumbing Repair for Home",
+    budget: "150 SAR",
+    address: "Villa 23, Street 12, Al Muruj District, Riyadh",
+    image: "/service-requester-dashboard/profile.svg",
+    name: "Ahmad Khan",
+    rating: 4.9,
+    reviews: 20,
+  },
+  {
+    value: 20,
+    time: "3.15",
+    title: "Air Conditioner Maintenance",
+    budget: "200 SAR",
+    address: "Building 5, King Fahd Road, Jeddah",
+    image: "/service-requester-dashboard/profile.svg",
+    name: "Sami Ullah",
+    rating: 4.7,
+    reviews: 35,
+  },
+  {
+    value: 40,
+    time: "8.45",
+    title: "Kitchen Sink Installation",
+    budget: "180 SAR",
+    address: "Flat 8B, Corniche Area, Dammam",
+    image: "/service-requester-dashboard/profile.svg",
+    name: "Fatima Noor",
+    rating: 5.0,
+    reviews: 42,
   },
 ];
