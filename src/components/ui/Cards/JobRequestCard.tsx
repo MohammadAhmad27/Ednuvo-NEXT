@@ -58,7 +58,7 @@ export default function JobRequestCardComponent() {
               className="object-cover rounded-full"
             />
             <div className="flex flex-col gap-[2px]">
-              <h5 className="text-[12px] font-medium text-[#2E302F]">
+              <h5 className="text-[14px] font-medium text-[#2E302F]">
                 {item?.name}
               </h5>
               <div className="flex items-center gap-2">
@@ -83,7 +83,7 @@ export default function JobRequestCardComponent() {
 
           {/* Buttons */}
           <div className="w-full flex justify-between items-center gap-2 mt-[14px] mb-3">
-            <button className="w-1/2 flex justify-center items-center gap-2 text-[14px] font-medium text-[#EB4335] bg-white border border-[#EB4335] rounded-full px-4 py-2">
+            <button className="w-1/2 flex justify-center items-center gap-2 text-[14px] font-medium text-[#EB4335] bg-white border border-[#EB4335] rounded-full px-4 py-[6px]">
               <Image
                 src="/service-provider-dashboard/decline.svg"
                 alt="icon"
@@ -93,7 +93,7 @@ export default function JobRequestCardComponent() {
               />
               Decline
             </button>
-            <button className="w-1/2 flex justify-center items-center gap-2 text-[14px] font-medium text-white bg-primary rounded-full px-4 py-2">
+            <button className="w-1/2 flex justify-center items-center gap-2 text-[14px] font-medium text-white bg-primary rounded-full px-4 py-[6px]">
               <Image
                 src="/service-provider-dashboard/accept.svg"
                 alt="icon"

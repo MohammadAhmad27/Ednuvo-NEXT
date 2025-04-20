@@ -1,6 +1,7 @@
 import ProfileCompletion from "@/shared/ProfileCompletion";
 import AnalyticsCardComponent from "../ui/Cards/AnalyticsCard";
 import {
+  activeOrdersData,
   dataFilters,
   providerAnalyticsCardData,
 } from "@/app/service-provider-dashboard/content";
@@ -8,6 +9,7 @@ import OrderOverviewChart from "./sections/Dashboard/OrderOverviewChart";
 import Image from "next/image";
 import { useState } from "react";
 import JobRequestCardComponent from "../ui/Cards/JobRequestCard";
+import OrderCardComponent from "../ui/Cards/OrderCard";
 
 const ProviderDashboard = () => {
   const [activeButton, setActiveButton] = useState(dataFilters[0]?.label);
@@ -21,7 +23,7 @@ const ProviderDashboard = () => {
       <ProfileCompletion />
       <h2 className="text-[18px] font-semibold text-lightblack">Analytics</h2>
       <AnalyticsCardComponent analyticsCardData={providerAnalyticsCardData} />
-      <div className="w-full flex max-lg:flex-col items-stretch gap-4 mt-2">
+      <div className="w-full flex max-lg:flex-col items-stretch gap-4">
         {/* left */}
         <div className="xl:w-3/4 lg:w-2/3 max-lg:w-full bg-white border border-[#00000014] rounded-2xl">
           <div className="flex max-xl:flex-col justify-between items-center gap-2 px-5 py-5">
@@ -69,8 +71,14 @@ const ProviderDashboard = () => {
               className="object-cover"
             />
           </div>
-            <JobRequestCardComponent />
+          <JobRequestCardComponent />
         </div>
+      </div>
+      <div className="w-full space-y-3 bg-white border border-[#00000014] rounded-2xl px-5 py-4">
+        <h3 className="text-[18px] font-semibold text-lightblack">
+          Active Orders
+        </h3>
+        <OrderCardComponent orderData={activeOrdersData} orderType="active" />
       </div>
     </div>
   );

@@ -9,3 +9,19 @@ export interface JobRequestCard {
   rating: number;
   reviews: number;
 }
+
+export interface OrderCard {
+  id: number;
+  image: string;
+  title: string;
+  requester: string;
+  orderRequesterName: string;
+  price: string;
+  orderPrice: number;
+  duration: string;
+  orderDuration: number;
+  orderStarted: string;
+  orderStartedDate: string;
+  status: "Ongoing" | "Completed" | "Cancelled";
+  view: string;
+}
