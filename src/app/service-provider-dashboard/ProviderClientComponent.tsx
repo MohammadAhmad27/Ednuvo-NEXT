@@ -7,7 +7,7 @@ import ProviderDisputes from "@/components/ServiceProvider-Dashboard/ProviderDis
 import ProviderMessages from "@/components/ServiceProvider-Dashboard/ProviderMessages";
 import ProviderSettings from "@/components/ServiceProvider-Dashboard/ProviderSettings";
 import ProviderEarnings from "@/components/ServiceProvider-Dashboard/ProviderEarnings";
-
+import ProviderBilling from "@/components/ServiceProvider-Dashboard/ProviderBilling";
 
 const RenderTabComponent = ({ tab }: { tab: string | null }) => {
   switch (tab) {
@@ -19,10 +19,12 @@ const RenderTabComponent = ({ tab }: { tab: string | null }) => {
       return <ProviderDisputes />;
     case "messages":
       return <ProviderMessages />;
-      case "earnings":
-        return <ProviderEarnings />;
-      case "settings":
-        return <ProviderSettings />;
+    case "earnings":
+      return <ProviderEarnings />;
+    case "billing":
+      return <ProviderBilling />;
+    case "settings":
+      return <ProviderSettings />;
     default:
       return null;
   }
@@ -32,7 +34,15 @@ const ProviderClientComponent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const tab = searchParams.get("view");
-  const validTabs = ["dashboard", "orders", "disputes", "messages", "earnings", "settings"];
+  const validTabs = [
+    "dashboard",
+    "orders",
+    "disputes",
+    "messages",
+    "earnings",
+    "billing",
+    "settings",
+  ];
 
   useEffect(() => {
     if (!tab || !validTabs.includes(tab)) {

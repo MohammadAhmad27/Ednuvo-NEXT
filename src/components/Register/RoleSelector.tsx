@@ -18,8 +18,15 @@ const StyledRadio = styled(Radio)(() => ({
 
 const RoleSelectorCard = () => {
   const [value, setValue] = React.useState("provider");
-  const router = useRouter(); 
+  const router = useRouter();
 
+  const handleNavigate = () => {
+    if (value === "provider") {
+      router.push("/service-provider-onboarding");
+    } else if (value === "requester") {
+      router.push("/service-requester-onboarding");
+    }
+  };
 
   return (
     <Box className="w-full flex flex-col justify-center items-center gap-10">
@@ -43,21 +50,21 @@ const RoleSelectorCard = () => {
               paddingX: 3,
               paddingY: 2,
               borderRadius: 3,
-              border: value === "provider" ? "1px solid #5BBB7B" : "1px solid #E9E9E9",
+              border:
+                value === "provider"
+                  ? "1px solid #5BBB7B"
+                  : "1px solid #E9E9E9",
               backgroundColor: value === "provider" ? "#EEF8F2" : "inherit",
               cursor: "pointer",
               "&:hover": {
                 border: "1px solid #5BBB7B",
               },
             }}
-            onClick={() => {
-              setValue("provider");
-              router.push("/service-provider-onboarding");
-            }}
+            onClick={() => setValue("provider")}
           >
             <FormControlLabel
               value="provider"
-              control={<StyledRadio />}
+              control={<StyledRadio checked={value === "provider"} />}
               label={
                 <Box
                   sx={{
@@ -98,13 +105,6 @@ const RoleSelectorCard = () => {
                   </Box>
                 </Box>
               }
-              // sx={{ 
-              //   width: "100%",
-              //   margin: 0,
-              //   "& .MuiFormControlLabel-label": {
-              //     width: "100%"
-              //   }
-              // }}
             />
           </Paper>
 
@@ -115,21 +115,21 @@ const RoleSelectorCard = () => {
               paddingX: 3,
               paddingY: 2,
               borderRadius: 3,
-              border: value === "requester" ? "1px solid #5BBB7B" : "1px solid #E9E9E9",
+              border:
+                value === "requester"
+                  ? "1px solid #5BBB7B"
+                  : "1px solid #E9E9E9",
               backgroundColor: value === "requester" ? "#EEF8F2" : "inherit",
               cursor: "pointer",
               "&:hover": {
                 border: "1px solid #5BBB7B",
               },
             }}
-            onClick={() => {
-              setValue("requester");
-              router.push("/service-requester-onboarding");
-            }}
+            onClick={() => setValue("requester")}
           >
             <FormControlLabel
               value="requester"
-              control={<StyledRadio />}
+              control={<StyledRadio checked={value === "requester"} />}
               label={
                 <Box
                   sx={{
@@ -170,17 +170,17 @@ const RoleSelectorCard = () => {
                   </Box>
                 </Box>
               }
-              // sx={{ 
-              //   width: "100%",
-              //   margin: 0,
-              //   "& .MuiFormControlLabel-label": {
-              //     width: "100%"
-              //   }
-              // }}
             />
           </Paper>
         </RadioGroup>
       </FormControl>
+
+      <button
+        onClick={handleNavigate}
+        className="bg-primary rounded-full text-[14px] font-medium text-white text-center px-6 py-2"
+      >
+        Next
+      </button>
     </Box>
   );
 };

@@ -32,7 +32,7 @@ export default function DataTable<T>({
         <thead>
           <tr className="bg-white sticky top-0 z-10">
             {columns?.map((column, index) => (
-              <th key={index} className={`py-3 px-6 text-left text-[14px] font-medium text-[#181D27] ${column.className || ""}`}>
+              <th key={index} className={`py-3 px-6 text-left text-[16px] font-medium text-[#181D27] ${column.className || ""}`}>
                 {column?.header}
               </th>
             ))}

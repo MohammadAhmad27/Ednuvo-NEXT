@@ -60,7 +60,7 @@ export const providerMenuLinks: MenuSection[] = [
         icon: "/service-requester-dashboard/payment.svg",
         icon2: "/service-requester-dashboard/payment2.svg",
         label: "Billing",
-        url: "#",
+        url: "?view=billing",
       },
       {
         id: 2,
