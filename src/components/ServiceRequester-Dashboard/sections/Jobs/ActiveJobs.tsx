@@ -46,7 +46,7 @@ const ActiveJobs = () => {
               </div>
             </div>
             <div className="w-full h-full px-1">
-              <JobCardComponent jobData={activeJobsData} jobType="active"  />
+              <JobCardComponent jobData={activeJobsData} jobType="active" />
             </div>
           </div>
         </div>
@@ -70,10 +70,10 @@ function NoActiveJobs() {
         className="object-cover"
       />
       <h3 className="text-[24px] font-medium text-black leading-tight mt-2">
-        No Active Jobs!
+        No Active Job!
       </h3>
       <p className="text-[16px] font-medium text-darkgray">
-        No posted or active jobs at the moment
+        No active job at the moment
       </p>
       <button className="bg-primary text-[14px] font-medium text-white text-center rounded-full px-8 py-[6px] mt-2">
         Post a Job

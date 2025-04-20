@@ -10,7 +10,7 @@ interface OrderDataProps {
 const OrderCardComponent = ({ orderData, orderType }: OrderDataProps) => {
   const router = useRouter();
   const handleNavigate = (id: number | string) => {
-    router.push(`/service-provider-dashboard/${orderType}job/${id}`);
+    router.push(`/service-provider-dashboard/${orderType}order/${id}`);
   };
 
   const getStatusClasses = (status: string) => {

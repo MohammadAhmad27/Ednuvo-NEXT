@@ -13,7 +13,7 @@ const RenderTabComponent = ({ tab }: { tab: string | null }) => {
   switch (tab) {
     case "dashboard":
       return <ProviderDashboard />;
-    case "jobs":
+    case "orders":
       return <ProviderOrders />;
     case "disputes":
       return <ProviderDisputes />;

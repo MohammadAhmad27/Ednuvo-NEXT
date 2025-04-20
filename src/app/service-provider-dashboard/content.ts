@@ -166,6 +166,8 @@ export const jobRequestCardData: JobRequestCard[] = [
   },
 ];
 
+export const searchOptions = [ "Latest", "Oldest"];
+
 export const activeOrdersData: OrderCard[] = [
   {
     id: 1,

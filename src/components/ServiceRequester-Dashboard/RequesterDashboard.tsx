@@ -1,7 +1,7 @@
 import DefaultDashboard from "./sections/Dashboard/DefaultDashboard";
 
 
-const Dashboard = () => {
+const RequesterDashboard = () => {
   return (
     <>
       {/* <NewDashboard /> */}
@@ -10,4 +10,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default RequesterDashboard;

@@ -1,15 +1,15 @@
 import {
-  pastJobsData,
+  completedOrdersData,
   searchOptions,
-} from "@/app/service-requester-dashboard/content";
+} from "@/app/service-provider-dashboard/content";
 import MUIAutoComplete from "@/components/ui/AutoComplete";
-import JobCardComponent from "@/components/ui/Cards/JobCard";
+import OrderCardComponent from "@/components/ui/Cards/OrderCard";
 import Image from "next/image";
 
-const PastJobs = () => {
+const CompletedOrders = () => {
   return (
     <>
-      {pastJobsData && pastJobsData?.length ? (
+      {completedOrdersData && completedOrdersData?.length ? (
         <div className="w-full h-full flex flex-col gap-4">
           {/* Search bar */}
           <div className="w-1/2 flex items-center gap-2 px-4 py-2 rounded-full border border-[#DDE1F0] shadow-searchshadow">
@@ -30,7 +30,7 @@ const PastJobs = () => {
           <div className="w-full flex flex-col gap-4">
             <div className="w-full flex gap-2 justify-between items-center">
               <p className="text-[16px] font-normal text-darkgray">
-                {pastJobsData?.length} Results
+                {completedOrdersData?.length} Results
               </p>
               <div className="flex items-center gap-5">
                 <p className="text-[16px] font-normal text-darkgray text-nowrap">
@@ -46,20 +46,23 @@ const PastJobs = () => {
               </div>
             </div>
             <div className="w-full h-full px-1">
-              <JobCardComponent jobData={pastJobsData} jobType="past" />
+              <OrderCardComponent
+                orderData={completedOrdersData}
+                orderType="completed"
+              />
             </div>
           </div>
         </div>
       ) : (
         <>
-          <NoPastJobs />
+          <NoCompletedOrders />
         </>
       )}
     </>
   );
 };
 
-function NoPastJobs() {
+function NoCompletedOrders() {
   return (
     <div className="w-full h-full flex flex-col gap-2 justify-center items-center">
       <Image
@@ -70,16 +73,13 @@ function NoPastJobs() {
         className="object-cover"
       />
       <h3 className="text-[24px] font-medium text-black leading-tight mt-2">
-        No Past Job!
+        No Completed Order!
       </h3>
       <p className="text-[16px] font-medium text-darkgray">
-        No posted job at the moment
+        No completed order at the moment
       </p>
-      <button className="bg-primary text-[14px] font-medium text-white text-center rounded-full px-8 py-[6px] mt-2">
-        Post a Job
-      </button>
     </div>
   );
 }
 
-export default PastJobs;
+export default CompletedOrders;
