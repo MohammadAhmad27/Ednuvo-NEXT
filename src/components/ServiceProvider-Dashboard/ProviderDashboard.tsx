@@ -3,7 +3,7 @@ import AnalyticsCardComponent from "../ui/Cards/AnalyticsCard";
 import {
   activeOrdersData,
   dataFilters,
-  providerAnalyticsCardData,
+  providerOrderAnalyticsData,
 } from "@/app/service-provider-dashboard/content";
 import OrderOverviewChart from "./sections/Dashboard/OrderOverviewChart";
 import Image from "next/image";
@@ -22,7 +22,7 @@ const ProviderDashboard = () => {
       </p>
       <ProfileCompletion />
       <h2 className="text-[18px] font-semibold text-lightblack">Analytics</h2>
-      <AnalyticsCardComponent analyticsCardData={providerAnalyticsCardData} />
+      <AnalyticsCardComponent analyticsCardData={providerOrderAnalyticsData} />
       <div className="w-full flex max-lg:flex-col items-stretch gap-4">
         {/* left */}
         <div className="xl:w-3/4 lg:w-2/3 max-lg:w-full bg-white border border-[#00000014] rounded-2xl">

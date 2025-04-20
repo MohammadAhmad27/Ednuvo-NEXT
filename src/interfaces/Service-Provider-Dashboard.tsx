@@ -34,3 +34,11 @@ export interface ProviderDisputes {
   currency: string;
   status: string;
 }
+
+export interface ProviderEarnings {
+  date: string;
+  description: string;
+  from: string;
+  orderId: string;
+  amount: number;
+}

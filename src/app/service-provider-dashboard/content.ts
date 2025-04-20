@@ -2,6 +2,7 @@ import {
   JobRequestCard,
   OrderCard,
   ProviderDisputes,
+  ProviderEarnings,
 } from "@/interfaces/Service-Provider-Dashboard";
 import {
   AnalyticsCard,
@@ -86,7 +87,7 @@ export const providerMenuLinks: MenuSection[] = [
   },
 ];
 
-export const providerAnalyticsCardData: AnalyticsCard[] = [
+export const providerOrderAnalyticsData: AnalyticsCard[] = [
   {
     id: 1,
     label: "Completed Orders",
@@ -748,5 +749,140 @@ export const providerDisputesData: ProviderDisputes[] = [
     amount: 200,
     currency: "SAR",
     status: "Disputed",
+  },
+];
+
+export const providerEarningAnalyticsData: AnalyticsCard[] = [
+  {
+    id: 1,
+    label: "Available Balance",
+    value: 200,
+    unit: "SAR",
+  },
+  {
+    id: 2,
+    label: "Earnings To Date",
+    value: 640,
+    unit: "SAR",
+  },
+  {
+    id: 3,
+    label: "Payment For Active Jobs",
+    value: 140,
+    unit: "SAR",
+  },
+  {
+    id: 4,
+    label: "Payments Being Cleared",
+    value: 300,
+    unit: "SAR",
+  },
+];
+
+export const providerEarningsData: ProviderEarnings[] = [
+  {
+    date: "3/5/2025",
+    description: "Order",
+    from: "Saud Al–Faisal",
+    orderId: "MO21364BFE6C4",
+    amount: 113,
+  },
+  {
+    date: "2/5/2025",
+    description: "Order",
+    from: "Saud Al–Faisal",
+    orderId: "MO719FF4EA781",
+    amount: 230,
+  },
+  {
+    date: "13/4/2025",
+    description: "Order",
+    from: "Saud Al–Faisal",
+    orderId: "MO82070032602",
+    amount: 80,
+  },
+  {
+    date: "25/2/2025",
+    description: "Order",
+    from: "Saud Al–Faisal",
+    orderId: "MO11371D97DC5",
+    amount: 250,
+  },
+  {
+    date: "8/3/2025",
+    description: "Order",
+    from: "Saud Al–Faisal",
+    orderId: "MO719UH2EY267",
+    amount: 270,
+  },
+  {
+    date: "2/5/2025",
+    description: "Order",
+    from: "Saud Al–Faisal",
+    orderId: "MO719FF4EA781",
+    amount: 230,
+  },
+  {
+    date: "3/5/2025",
+    description: "Order",
+    from: "Saud Al–Faisal",
+    orderId: "MO21364BFE6C4",
+    amount: 113,
+  },
+  {
+    date: "13/4/2025",
+    description: "Order",
+    from: "Saud Al–Faisal",
+    orderId: "MO82070032602",
+    amount: 80,
+  },
+  {
+    date: "25/2/2025",
+    description: "Order",
+    from: "Saud Al–Faisal",
+    orderId: "MO11371D97DC5",
+    amount: 250,
+  },
+  {
+    date: "8/3/2025",
+    description: "Order",
+    from: "Saud Al–Faisal",
+    orderId: "MO719UH2EY267",
+    amount: 270,
+  },
+  {
+    date: "3/5/2025",
+    description: "Order",
+    from: "Saud Al–Faisal",
+    orderId: "MO21364BFE6C4",
+    amount: 113,
+  },
+  {
+    date: "2/5/2025",
+    description: "Order",
+    from: "Saud Al–Faisal",
+    orderId: "MO719FF4EA781",
+    amount: 230,
+  },
+  {
+    date: "13/4/2025",
+    description: "Order",
+    from: "Saud Al–Faisal",
+    orderId: "MO82070032602",
+    amount: 80,
+  },
+  {
+    date: "25/2/2025",
+    description: "Order",
+    from: "Saud Al–Faisal",
+    orderId: "MO11371D97DC5",
+    amount: 250,
+  },
+  {
+    date: "8/3/2025",
+    description: "Order",
+    from: "Saud Al–Faisal",
+    orderId: "MO719UH2EY267",
+    amount: 270,
   },
 ];

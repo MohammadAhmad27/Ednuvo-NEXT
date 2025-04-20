@@ -9,6 +9,7 @@ import MUITextField from "@/components/ui/TextField";
 import { OrderCard } from "@/interfaces/Service-Provider-Dashboard";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 interface OrderDetailsProps {
@@ -17,6 +18,7 @@ interface OrderDetailsProps {
 
 const OrderDetails = ({ order }: OrderDetailsProps) => {
   const [message, setMessage] = useState("");
+  const pathname = usePathname();
 
   const getStatusClasses = (status: string) => {
     switch (status) {
@@ -37,17 +39,44 @@ const OrderDetails = ({ order }: OrderDetailsProps) => {
     <div className="w-full flex max-md:flex-col gap-4">
       {/* left */}
       <div className="xl:w-3/4 lg:w-2/3 md:w-3/5 max-md:w-full flex flex-col gap-3 bg-white rounded-2xl px-4 py-5">
-        {/* message */}
-        <div className="w-full bg-[#F6F6F6] rounded-lg px-5 py-4">
-          <p className="text-[16px] font-semibold text-black">Order Started</p>
-          <p className="text-[14px] font-normal text-black">
-            <span className="font-semibold text-secondary">
-              {order?.orderRequesterName}
-            </span>{" "}
-            sent all the information you need so you can start working on this
-            order. You got this!
-          </p>
-        </div>
+        {/* active order */}
+        {pathname?.includes("activeorder") && (
+          <div className="w-full bg-[#F6F6F6] rounded-lg px-5 py-4">
+            <p className="text-[16px] font-semibold text-black">
+              Order Started
+            </p>
+            <p className="text-[14px] font-normal text-black">
+              <span className="font-semibold text-secondary">
+                {order?.orderRequesterName}
+              </span>{" "}
+              sent all the information you need so you can start working on this
+              order. You got this!
+            </p>
+          </div>
+        )}
+        {/* completed order */}
+        {pathname?.includes("completedorder") && (
+          <div className="w-full bg-[#F6F6F6] rounded-lg px-5 py-4">
+            <p className="text-[16px] font-semibold text-black">
+              Order has been marked as completed
+            </p>
+            <p className="text-[14px] font-normal text-secondary">
+              Great job! You earned {order?.orderPrice} SAR from this order.
+            </p>
+          </div>
+        )}
+        {/* cancelled order */}
+        {pathname?.includes("cancelledorder") && (
+          <div className="w-full bg-[#F6F6F6] rounded-lg px-5 py-4">
+            <p className="text-[16px] font-semibold text-black">
+              Order has been cancelled
+            </p>
+            <p className="text-[14px] font-normal text-[#FF4D4F]">
+              Unfortunately, this order was cancelled. Don’t worry—new
+              opportunities are on the way!
+            </p>
+          </div>
+        )}
         {/* order details */}
         <div className="w-full space-y-2">
           <div className="flex justify-between items-center gap-2">
