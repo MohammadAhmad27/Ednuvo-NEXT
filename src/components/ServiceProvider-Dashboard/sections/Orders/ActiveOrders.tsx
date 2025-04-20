@@ -22,7 +22,7 @@ const ActiveOrders = () => {
             />
             <input
               type="text"
-              placeholder="Search by provider name or service"
+              placeholder="Search by requester name or service"
               className="flex-1 outline-none text-[14px] placeholder:text-[14px] placeholder:font-normal placeholder:text-darkgray"
             />
           </div>

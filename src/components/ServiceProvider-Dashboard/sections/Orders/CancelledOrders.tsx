@@ -22,7 +22,7 @@ const CancelledOrders = () => {
             />
             <input
               type="text"
-              placeholder="Search by provider name or service"
+              placeholder="Search by requester name or service"
               className="flex-1 outline-none text-[14px] placeholder:text-[14px] placeholder:font-normal placeholder:text-darkgray"
             />
           </div>
@@ -78,7 +78,6 @@ function NoCancelledOrders() {
       <p className="text-[16px] font-medium text-darkgray">
         No cancelled order at the moment
       </p>
-      =
     </div>
   );
 }
