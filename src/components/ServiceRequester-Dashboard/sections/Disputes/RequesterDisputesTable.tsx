@@ -45,7 +45,7 @@ const columns: ColumnDef<RequesterDisputes>[] = [
   },
 ];
 
-export default function PaymentsTable() {
+export default function RequesterDisputesTable() {
   return (
     <DataTable
       data={requesterDisputesData}

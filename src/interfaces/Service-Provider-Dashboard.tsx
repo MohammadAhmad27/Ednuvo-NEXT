@@ -25,3 +25,12 @@ export interface OrderCard {
   status: "Ongoing" | "Completed" | "Cancelled";
   view: string;
 }
+
+export interface ProviderDisputes {
+  refNumber: string;
+  employerName: string;
+  date: string;
+  amount: number;
+  currency: string;
+  status: string;
+}
