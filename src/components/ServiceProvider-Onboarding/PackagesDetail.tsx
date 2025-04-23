@@ -4,7 +4,7 @@ import MUIAutoComplete from "../ui/AutoComplete";
 import MUITextField from "../ui/TextField";
 import { Add, Delete } from "@mui/icons-material";
 import { useEffect, useState } from "react";
-import BrowseAllCategories from "../ui/Dialogs/AllCategories";
+import BrowseAllCategories from "../ui/Dialogs/AllCategoriesDialog";
 
 interface PackageData {
   title: string;

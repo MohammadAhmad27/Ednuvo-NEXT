@@ -107,6 +107,7 @@ export interface PortfolioCard {
   id: number;
   mainImg: string;
   startTime: string;
+  endTime: string;
   projectTitle: string;
   projectDesc: string;
   skills: string[];

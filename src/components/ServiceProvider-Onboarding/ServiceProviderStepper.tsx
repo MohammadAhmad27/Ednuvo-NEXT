@@ -9,7 +9,7 @@ import VerificationDocument from "./VerificationDocument";
 import StepConnector, {
   stepConnectorClasses,
 } from "@mui/material/StepConnector";
-import ApplicationSubmission from "../ui/Dialogs/ApplicationSubmission";
+import ApplicationSubmission from "../ui/Dialogs/ApplicationSubmissionDialog";
 import { navigationButtons } from "@/app/service-provider-onboarding/content";
 
 // Custom connector centered vertically

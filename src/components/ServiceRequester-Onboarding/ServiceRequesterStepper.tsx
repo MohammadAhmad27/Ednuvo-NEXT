@@ -5,7 +5,7 @@ import StepConnector, {
   stepConnectorClasses,
 } from "@mui/material/StepConnector";
 import BasicInformation from "./BasicInformation";
-import ApplicationSubmission from "../ui/Dialogs/ApplicationSubmission";
+import ApplicationSubmission from "../ui/Dialogs/ApplicationSubmissionDialog";
 import JobPostingDetails from "./JobPostingDetails";
 import PaymentMethodDetails from "./PaymentMethodDetails";
 import { navigationButtons } from "@/app/service-requester-onboarding/content";

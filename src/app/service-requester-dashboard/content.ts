@@ -815,7 +815,8 @@ export const portfolioData: PortfolioCard[] = [
   {
     id: 1,
     mainImg: "/service-requester-dashboard/portfolio1.svg",
-    startTime: "January 2025",
+    startTime: "10 January, 2025",
+    endTime: "30 February, 2025",
     projectTitle: "Plumbing & Carpentry Services",
     projectDesc:
       "Experienced in plumbing and carpentry, I provide reliable pipe installations, leak repairs, and drainage solutions, along with custom woodwork, flooring, and furniture repairs. My projects ensure durability, precision, and a professional finish for both residential and commercial spaces.",
@@ -832,7 +833,8 @@ export const portfolioData: PortfolioCard[] = [
   {
     id: 2,
     mainImg: "/service-requester-dashboard/portfolio2.svg",
-    startTime: "December 2024",
+    startTime: "5 December, 2024",
+    endTime: "10 March, 2025",
     projectTitle: "Bathroom Plumbing Renovation",
     projectDesc:
       "Complete bathroom plumbing overhaul for a residential property. Replaced old pipes, installed new fixtures, and ensured proper drainage. The project included installing a new shower system, toilet, and sink with modern fittings.",
@@ -849,7 +851,8 @@ export const portfolioData: PortfolioCard[] = [
   {
     id: 3,
     mainImg: "/service-requester-dashboard/portfolio3.svg",
-    startTime: "November 2024",
+    startTime: "9 November, 2024",
+    endTime: "3 April, 2025",
     projectTitle: "Commercial Pipe System Installation",
     projectDesc:
       "Designed and installed a comprehensive pipe system for a new commercial building. The project involved planning the entire water supply network, ensuring code compliance, and implementing efficient water management solutions.",
@@ -866,7 +869,8 @@ export const portfolioData: PortfolioCard[] = [
   {
     id: 4,
     mainImg: "/service-requester-dashboard/portfolio4.svg",
-    startTime: "October 2024",
+    startTime: "15 October, 2024",
+    endTime: "16 November, 2024",
     projectTitle: "Industrial Plumbing Maintenance",
     projectDesc:
       "Performed regular maintenance and repairs on an industrial plumbing system. The work included inspecting pipes, fixing leaks, replacing worn components, and ensuring the system meets safety standards.",
@@ -883,7 +887,8 @@ export const portfolioData: PortfolioCard[] = [
   {
     id: 5,
     mainImg: "/service-requester-dashboard/cover2.svg",
-    startTime: "September 2024",
+    startTime: "29 September, 2024",
+    endTime: "13 February, 2025",
     projectTitle: "Emergency Leak Repair Service",
     projectDesc:
       "Provided emergency services for a major water leak in a residential building. Quickly identified the source of the leak, repaired damaged pipes, and implemented preventive measures to avoid future issues.",
@@ -900,7 +905,8 @@ export const portfolioData: PortfolioCard[] = [
   {
     id: 6,
     mainImg: "/service-requester-dashboard/portfolio1.svg",
-    startTime: "August 2024",
+    startTime: "12 August, 2024",
+    endTime: "30 April, 2025",
     projectTitle: "Custom Kitchen Cabinetry",
     projectDesc:
       "Designed and built custom kitchen cabinets for a modern home. The project included measuring the space, selecting appropriate materials, crafting the cabinets, and installing them with precision.",
@@ -917,7 +923,8 @@ export const portfolioData: PortfolioCard[] = [
   {
     id: 7,
     mainImg: "/service-requester-dashboard/portfolio2.svg",
-    startTime: "July 2024",
+    startTime: "7 July, 2024",
+    endTime: "19 October, 2025",
     projectTitle: "Hardwood Flooring Installation",
     projectDesc:
       "Installed premium hardwood flooring throughout a residential property. The work involved preparing the subfloor, laying the hardwood planks, finishing the surface, and ensuring a seamless appearance.",
@@ -934,7 +941,8 @@ export const portfolioData: PortfolioCard[] = [
   {
     id: 8,
     mainImg: "/service-requester-dashboard/portfolio3.svg",
-    startTime: "June 2024",
+    startTime: "6 June, 2024",
+    endTime: "20 August, 2025",
     projectTitle: "Custom Furniture Creation",
     projectDesc:
       "Created bespoke furniture pieces for a high-end client. The project included designing unique tables, chairs, and shelving units according to the client's specifications and aesthetic preferences.",
@@ -951,7 +959,8 @@ export const portfolioData: PortfolioCard[] = [
   {
     id: 9,
     mainImg: "/service-requester-dashboard/portfolio4.svg",
-    startTime: "May 2024",
+    startTime: "4 May, 2024",
+    endTime: "17 December, 2025",
     projectTitle: "Complete Home Renovation",
     projectDesc:
       "Managed a comprehensive home renovation project combining plumbing and carpentry services. The work included bathroom and kitchen updates, flooring replacement, custom built-ins, and plumbing system upgrades.",
@@ -968,7 +977,8 @@ export const portfolioData: PortfolioCard[] = [
   {
     id: 10,
     mainImg: "/service-requester-dashboard/cover2.svg",
-    startTime: "April 2024",
+    startTime: "1 April, 2024",
+    endTime: "13 February, 2025",
     projectTitle: "Office Space Remodeling",
     projectDesc:
       "Remodeled a commercial office space with both plumbing and carpentry work. The project involved creating custom partitions, installing new bathroom facilities, and designing an efficient workspace layout.",
