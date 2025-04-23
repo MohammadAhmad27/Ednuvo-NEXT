@@ -1106,7 +1106,7 @@ export const jobSupportData: JobSupport[] = [
     icon: "/service-requester-dashboard/globe.svg",
     label: "Resolution Center",
     desc: "Resolve order issues.",
-    href: "#",
+    href: "/resolution-center",
   },
 ];
 
