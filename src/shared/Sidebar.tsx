@@ -53,11 +53,17 @@ const SidebarContent = ({ menuLinks, type }: SidebarContentProps) => {
             </h3>
             <div className="w-full flex flex-col justify-start items-start gap-2">
               {item?.links?.map((subItem) => {
-                const isActive = activeTab === subItem.label.toLowerCase();
+                const isActive =
+                  activeTab ===
+                  subItem?.label?.toLowerCase().replace(/\s+/g, "");
                 return (
                   <Link
                     key={subItem?.id}
-                    href={`/service-${type}-dashboard${subItem?.url}`}
+                    href={`${
+                      type === "admin"
+                        ? `/admin${subItem?.url}`
+                        : `/service-${type}-dashboard${subItem?.url}`
+                    }`}
                     className={`w-full flex gap-2 items-center ${
                       isActive ? "bg-secondary" : "bg-white"
                     } cursor-pointer rounded-full pl-4 py-[10px]`}
