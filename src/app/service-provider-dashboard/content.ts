@@ -6,6 +6,7 @@ import {
 } from "@/interfaces/Service-Provider-Dashboard";
 import {
   AnalyticsCard,
+  FAQ,
   MenuSection,
 } from "@/interfaces/Service-Requester-Dashboard";
 
@@ -74,7 +75,7 @@ export const providerMenuLinks: MenuSection[] = [
         icon: "/service-requester-dashboard/faq.svg",
         icon2: "/service-requester-dashboard/faq2.svg",
         label: "FAQs",
-        url: "#",
+        url: "?view=faqs",
       },
       {
         id: 4,
@@ -884,5 +885,38 @@ export const providerEarningsData: ProviderEarnings[] = [
     from: "Saud Al–Faisal",
     orderId: "MO719UH2EY267",
     amount: 270,
+  },
+];
+
+export const providerFaqData: FAQ[] = [
+  {
+    id: 1,
+    title: "How do I find and apply for service requests?",
+    desc: "Once your account is verified, you can browse available jobs in your category from the 'Browse Jobs' section. Simply click 'Apply' on jobs that match your skills and submit a proposal to the requester.",
+  },
+  {
+    id: 2,
+    title: "What is the verification process for service providers?",
+    desc: "All service providers are required to complete a profile verification which includes identity verification, skill assessment, and portfolio submission. This builds trust and improves your chances of getting hired.",
+  },
+  {
+    id: 3,
+    title: "How do I get paid for completed jobs?",
+    desc: "Payments are securely processed through the platform. Once a job is marked complete and approved by the requester, funds will be released to your wallet. You can then withdraw to your preferred payment method.",
+  },
+  {
+    id: 4,
+    title: "What should I do if a requester is unresponsive?",
+    desc: "If a requester does not respond after you’ve applied or during a job, you can report the issue from the job page. Our support team will look into the matter and help facilitate communication or reassign the task.",
+  },
+  {
+    id: 5,
+    title: "Can I cancel a job after accepting it?",
+    desc: "Yes, but cancellations may affect your reliability rating. If you must cancel, communicate with the requester first and explain the situation. Repeated cancellations without valid reasons may result in penalties.",
+  },
+  {
+    id: 6,
+    title: "How can I improve my chances of getting hired?",
+    desc: "Maintain a complete and professional profile, respond quickly to job postings, provide competitive quotes, and build a strong reputation by delivering high-quality work and earning positive reviews.",
   },
 ];

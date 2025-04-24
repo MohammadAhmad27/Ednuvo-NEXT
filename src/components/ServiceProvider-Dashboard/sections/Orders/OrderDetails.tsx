@@ -306,41 +306,49 @@ const OrderDetails = ({ order }: OrderDetailsProps) => {
         <div className="w-full flex flex-col gap-4 bg-white rounded-2xl px-4 py-3">
           <h2 className="text-[18px] font-semibold text-black">Support</h2>
           <div className="flex flex-col gap-3">
-            {jobSupportData?.map((item) => (
-              <>
-                <Link
-                  key={item?.id}
-                  href={item?.href}
-                  className="flex justify-between items-center gap-2"
-                >
-                  <div className="flex items-center gap-2">
+            {jobSupportData?.map((item) => {
+              const isOrderDetailsPage = pathname.startsWith(
+                "/service-provider-dashboard"
+              );
+              const href = isOrderDetailsPage
+                ? "/service-provider-dashboard?view=faqs"
+                : item.href;
+              return (
+                <>
+                  <Link
+                    key={item?.id}
+                    href={href}
+                    className="flex justify-between items-center gap-2"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Image
+                        src={item?.icon}
+                        alt="icon"
+                        width={23}
+                        height={23}
+                        className="object-cover"
+                      />
+                      <div className="flex flex-col">
+                        <h3 className="text-[14px] font-semibold text-[#323232]">
+                          {item?.label}
+                        </h3>
+                        <p className="text-[12px] font-normal text-[#8A8A8A]">
+                          {item?.desc}
+                        </p>
+                      </div>
+                    </div>
                     <Image
-                      src={item?.icon}
-                      alt="icon"
-                      width={23}
-                      height={23}
+                      src="/service-requester-dashboard/forward-icon.svg"
+                      alt="forward-icon"
+                      width={10}
+                      height={10}
                       className="object-cover"
                     />
-                    <div className="flex flex-col">
-                      <h3 className="text-[14px] font-semibold text-[#323232]">
-                        {item?.label}
-                      </h3>
-                      <p className="text-[12px] font-normal text-[#8A8A8A]">
-                        {item?.desc}
-                      </p>
-                    </div>
-                  </div>
-                  <Image
-                    src="/service-requester-dashboard/forward-icon.svg"
-                    alt="forward-icon"
-                    width={10}
-                    height={10}
-                    className="object-cover"
-                  />
-                </Link>
-                {item?.separator && <div className={`${item?.separator}`} />}
-              </>
-            ))}
+                  </Link>
+                  {item?.separator && <div className={`${item?.separator}`} />}
+                </>
+              );
+            })}
           </div>
         </div>
       </div>

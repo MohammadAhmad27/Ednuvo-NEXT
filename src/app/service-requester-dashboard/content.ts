@@ -1,6 +1,7 @@
 import {
   AnalyticsCard,
   ExpertsCard,
+  FAQ,
   FeaturedFreelancer,
   JobCard,
   JobRequirements,
@@ -74,7 +75,7 @@ export const requesterMenuLinks: MenuSection[] = [
         icon: "/service-requester-dashboard/faq.svg",
         icon2: "/service-requester-dashboard/faq2.svg",
         label: "FAQs",
-        url: "#",
+        url: "?view=faqs",
       },
       {
         id: 4,
@@ -1108,7 +1109,7 @@ export const jobSupportData: JobSupport[] = [
     icon: "/service-requester-dashboard/question.svg",
     label: "FAQ's",
     desc: "Find needed answer.",
-    href: "#",
+    href: "/service-requester-dashboard?view=faqs",
     separator: "w-full h-[0.5px] bg-[#0000004D] mt-[4px]",
   },
   {
@@ -1255,5 +1256,38 @@ export const accountDeactivationData = [
   {
     id: 3,
     desc: "You won’t be able to re-activate your packages.",
+  },
+];
+
+export const requesterFaqData: FAQ[] = [
+  {
+    id: 1,
+    title: "How do I post a new service request?",
+    desc: "To post a service request, simply log in to your account, go to the 'Post a Job' section, select the category of service (e.g., plumbing, electrical), fill in the job details, and submit. Service providers in your area will be notified instantly.",
+  },
+  {
+    id: 2,
+    title: "Can I contact a service provider before hiring them?",
+    desc: "Yes, you can chat with service providers through our in-app messaging system once they express interest in your job post. This helps you clarify job details before making a hiring decision.",
+  },
+  {
+    id: 3,
+    title: "How do I know if a service provider is qualified?",
+    desc: "All service providers undergo a verification process, which includes skill assessments and identity verification. You can also view their ratings, reviews, and past work on their profiles before hiring.",
+  },
+  {
+    id: 4,
+    title: "What should I do if a service provider doesn’t show up?",
+    desc: "If a provider fails to show up or communicate, please report the issue through the 'Help & Support' section. Our support team will investigate and assist you with finding a replacement as soon as possible.",
+  },
+  {
+    id: 5,
+    title: "How is payment handled for services?",
+    desc: "Payment is handled securely through our platform. You only pay once the job is completed and you're satisfied with the service. For larger jobs, milestone payments can also be arranged.",
+  },
+  {
+    id: 6,
+    title: "Can I cancel a service request after posting?",
+    desc: "Yes, you can cancel a request at any time before the job is accepted. If a provider has already been hired, please communicate with them directly or contact support to help with the cancellation process.",
   },
 ];

@@ -8,6 +8,7 @@ import ProviderMessages from "@/components/ServiceProvider-Dashboard/ProviderMes
 import ProviderSettings from "@/components/ServiceProvider-Dashboard/ProviderSettings";
 import ProviderEarnings from "@/components/ServiceProvider-Dashboard/ProviderEarnings";
 import ProviderBilling from "@/components/ServiceProvider-Dashboard/ProviderBilling";
+import ProviderFaqs from "@/components/ServiceProvider-Dashboard/ProviderFaqs";
 
 const RenderTabComponent = ({ tab }: { tab: string | null }) => {
   switch (tab) {
@@ -25,6 +26,8 @@ const RenderTabComponent = ({ tab }: { tab: string | null }) => {
       return <ProviderBilling />;
     case "settings":
       return <ProviderSettings />;
+      case "faqs":
+        return <ProviderFaqs />;
     default:
       return null;
   }
@@ -42,6 +45,7 @@ const ProviderClientComponent = () => {
     "earnings",
     "billing",
     "settings",
+    "faqs",
   ];
 
   useEffect(() => {

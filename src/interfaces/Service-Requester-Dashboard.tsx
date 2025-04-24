@@ -157,3 +157,9 @@ export interface RequesterDisputes {
   currency: string;
   status: string;
 }
+
+export interface FAQ {
+  id: number;
+  title: string;
+  desc: string;
+}

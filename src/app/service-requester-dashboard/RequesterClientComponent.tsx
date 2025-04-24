@@ -6,6 +6,7 @@ import RequesterJobs from "@/components/ServiceRequester-Dashboard/RequesterJobs
 import RequesterDisputes from "@/components/ServiceRequester-Dashboard/RequesterDisputes";
 import RequesterMessages from "@/components/ServiceRequester-Dashboard/RequesterMessages";
 import RequesterSettings from "@/components/ServiceRequester-Dashboard/RequesterSettings";
+import RequesterFaqs from "@/components/ServiceRequester-Dashboard/RequesterFaqs";
 
 const RenderTabComponent = ({ tab }: { tab: string | null }) => {
   switch (tab) {
@@ -17,8 +18,10 @@ const RenderTabComponent = ({ tab }: { tab: string | null }) => {
       return <RequesterDisputes />;
     case "messages":
       return <RequesterMessages />;
-      case "settings":
-        return <RequesterSettings />;
+    case "settings":
+      return <RequesterSettings />;
+      case "faqs":
+        return <RequesterFaqs />;
     default:
       return null;
   }
@@ -28,7 +31,7 @@ const RequesterClientComponent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const tab = searchParams.get("view");
-  const validTabs = ["dashboard", "jobs", "disputes", "messages", "settings"];
+  const validTabs = ["dashboard", "jobs", "disputes", "messages", "settings", "faqs"];
 
   useEffect(() => {
     if (!tab || !validTabs.includes(tab)) {
