@@ -10,7 +10,7 @@ interface TestQuestionsTableProps {
 const columns: ColumnDef<TestQuestions>[] = [
   {
     header: "Question",
-    accessorKey: "question",
+    cell: (row) => <p className="max-w-[250px]">{row?.question}</p>,
   },
   {
     header: "Service Category",
@@ -21,14 +21,14 @@ const columns: ColumnDef<TestQuestions>[] = [
     cell: (row) => (
       <div className="flex flex-col gap-1">
         {row?.options?.map((opt) => (
-          <span key={opt.label}>{`${opt.label} ${opt.value}`}</span>
+          <p key={opt?.label} className="max-w-[250px]">{`${opt?.label} ${opt?.value}`}</p>
         ))}
       </div>
     ),
   },
   {
     header: "Correct Answer",
-    accessorKey: "correctAnswer",
+    cell: (row) => <p className="max-w-[250px]">{row?.correctAnswer}</p>,
   },
   {
     header: "Action",

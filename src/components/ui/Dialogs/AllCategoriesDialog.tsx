@@ -42,7 +42,7 @@ interface BrowseAllCategoriesProps {
               backgroundColor: "#FFFFFF",
               color: "#222222",
               borderRadius: "32px",
-              boxShadow: "box-shadow: 0px 81.09px 76.98px 0px #0000000A",
+              boxShadow: "0px 81.09px 76.98px 0px #0000000A",
               border: "none",
               padding: "0px",
             },

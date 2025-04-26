@@ -4,7 +4,7 @@ import { ChangeEvent, ReactNode } from "react";
 
 interface MUITextFieldProps {
   label: string;
-  type: string;
+  type?: string;
   value: string | number;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   showPassword?: boolean;
@@ -18,7 +18,7 @@ interface MUITextFieldProps {
 
 const MUITextField = ({
   label,
-  type,
+  type = "text",
   value,
   onChange,
   showPassword = false,

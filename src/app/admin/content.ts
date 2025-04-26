@@ -306,7 +306,7 @@ export const pendingUsersData: PendingUsers[] = [
 
 export const testQuestionsOptions = ["Category"];
 
-export const testquestionsData: TestQuestions[] = [
+export const testQuestionsData: TestQuestions[] = [
   {
     question: "What does a P-trap do in plumbing?",
     serviceCategory: "Plumber",
