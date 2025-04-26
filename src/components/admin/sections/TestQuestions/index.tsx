@@ -1,13 +1,13 @@
-import { pendingUsersData, searchOptions } from "@/app/admin/content";
+import { testquestionsData, testQuestionsOptions } from "@/app/admin/content";
 import MUIAutoComplete from "@/components/ui/AutoComplete";
-import PendingUsersTable from "@/components/ui/Table/PendingUsersTable";
+import TestQuestionsTable from "@/components/ui/Table/TestQuestionsTable";
 import Image from "next/image";
 
-const PendingUsers = () => {
+const TestQuestions = () => {
   return (
     <>
-      { pendingUsersData && pendingUsersData?.length ? (
-        <div className="w-full h-full flex flex-col gap-6">
+      {testquestionsData && testquestionsData?.length ? (
+        <div className="w-full h-[calc(100vh-200px)] flex flex-col gap-6">
           <div className="flex justify-between items-center gap-2">
             {/* Search bar */}
             <div className="w-1/2 flex items-center gap-2 px-4 py-2 rounded-full border border-[#DDE1F0] shadow-searchshadow">
@@ -20,35 +20,47 @@ const PendingUsers = () => {
               />
               <input
                 type="text"
-                placeholder="Search by name, category and location"
+                placeholder="Search by category"
                 className="flex-1 outline-none text-[14px] placeholder:text-[14px] placeholder:font-normal placeholder:text-darkgray"
               />
             </div>
-            <div>
-              <MUIAutoComplete
-                options={searchOptions}
-                label="Search by"
-                width="100%"
-                variant="green"
-                onChange={(e: any) => console.log(e.target.value)}
-              />
+            <div className="w-1/2 flex justify-end items-center gap-2">
+              <div className="w-1/5">
+                <MUIAutoComplete
+                  options={testQuestionsOptions}
+                  label="Search by"
+                  width="100%"
+                  variant="green"
+                  onChange={(e: any) => console.log(e.target.value)}
+                />
+              </div>
+              <button className="w-max text-nowrap flex items-center gap-2 text-[14px] font-medium text-white pl-[13px] pr-4 py-2 bg-primary rounded-full">
+                <Image
+                  src="/admin/add.svg"
+                  alt="add-icon"
+                  width={20}
+                  height={20}
+                  className="object-cover"
+                />
+                Add Question
+              </button>
             </div>
           </div>
           {/* Card Component */}
           <div className="flex-1 overflow-auto border border-[#DDE1F0] rounded-xl shadow-searchshadow">
-           <PendingUsersTable data={pendingUsersData} />
+            <TestQuestionsTable data={testquestionsData} />
           </div>
         </div>
       ) : (
         <>
-          <NoPendingUsers />
+          <NoTestQuestions />
         </>
       )}
     </>
   );
 };
 
-function NoPendingUsers() {
+function NoTestQuestions() {
   return (
     <div className="w-full h-full flex flex-col gap-2 justify-center items-center">
       <Image
@@ -59,15 +71,13 @@ function NoPendingUsers() {
         className="object-cover"
       />
       <h3 className="text-[24px] font-medium text-black leading-tight mt-2">
-        No Pending User!
+        No Test Question!
       </h3>
       <p className="text-[16px] font-medium text-darkgray">
-        No pending user at the moment
+        No test question at the moment
       </p>
     </div>
   );
 }
 
-export default PendingUsers;
-
-
+export default TestQuestions;

@@ -10,7 +10,6 @@ interface ServiceRequesterTableProps {
 const columns: ColumnDef<ServiceRequesters>[] = [
   {
     header: "Name",
-    accessorKey: "name",
     cell: (requester) => (
       <div className="flex items-center gap-2">
         <Image

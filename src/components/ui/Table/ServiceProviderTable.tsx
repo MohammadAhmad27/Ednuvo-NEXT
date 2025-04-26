@@ -10,7 +10,6 @@ interface ServiceProviderTableProps {
 const columns: ColumnDef<ServiceProviders>[] = [
   {
     header: "Name",
-    accessorKey: "name",
     cell: (provider) => (
       <div className="flex items-center gap-2">
         <Image

@@ -10,7 +10,6 @@ interface PendingUsersTableProps {
 const columns: ColumnDef<PendingUsers>[] = [
   {
     header: "Name",
-    accessorKey: "name",
     cell: (user) => (
       <div className="flex items-center gap-2">
         <Image

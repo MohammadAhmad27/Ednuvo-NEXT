@@ -106,17 +106,17 @@ const UserTabs = () => {
 
       {/* Tab Panels */}
       <CustomTabPanel value={value} index={0}>
-        <div className="flex-1 h-[calc(100vh-275px)] overflow-x-hidden overflow-y-auto mt-8">
+        <div className="flex-1 h-[calc(100vh-275px)] overflow-auto mt-8">
           <ServiceProviders />
         </div>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <div className="flex-1 h-[calc(100vh-275px)] overflow-x-hidden overflow-y-auto mt-8">
+        <div className="flex-1 h-[calc(100vh-275px)] overflow-auto mt-8">
           <ServiceRequesters />
         </div>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        <div className="flex-1 h-[calc(100vh-275px)] overflow-x-hidden overflow-y-auto mt-8">
+        <div className="flex-1 h-[calc(100vh-275px)] overflow-auto mt-8">
           <PendingUsers />
         </div>
       </CustomTabPanel>

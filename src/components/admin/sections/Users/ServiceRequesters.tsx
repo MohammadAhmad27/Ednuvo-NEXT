@@ -35,7 +35,7 @@ const ServiceRequesters = () => {
             </div>
           </div>
           {/* Card Component */}
-          <div className="w-full h-full px-1">
+          <div className="flex-1 overflow-auto border border-[#DDE1F0] rounded-xl shadow-searchshadow">
            <ServiceRequesterTable data={serviceRequestersData} />
           </div>
         </div>

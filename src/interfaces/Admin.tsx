@@ -38,3 +38,13 @@ export interface PendingUsers {
   profileCompletion: number;
   dateOfSignup: string;
 }
+
+export interface TestQuestions {
+  question: string;
+  serviceCategory: string;
+  options: {
+    label: string;
+    value: string;
+  }[];
+  correctAnswer: string;
+}

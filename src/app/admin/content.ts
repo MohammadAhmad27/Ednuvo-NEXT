@@ -2,6 +2,7 @@ import {
   PendingUsers,
   ServiceProviders,
   ServiceRequesters,
+  TestQuestions,
   UserRequestCard,
 } from "@/interfaces/Admin";
 import {
@@ -300,5 +301,171 @@ export const pendingUsersData: PendingUsers[] = [
     testReviewStatus: "Not Reviewed",
     profileCompletion: 70,
     dateOfSignup: "12 March, 2025",
+  },
+];
+
+export const testQuestionsOptions = ["Category"];
+
+export const testquestionsData: TestQuestions[] = [
+  {
+    question: "What does a P-trap do in plumbing?",
+    serviceCategory: "Plumber",
+    options: [
+      {
+        label: "A)",
+        value: "Increases pressure",
+      },
+      {
+        label: "B)",
+        value: "Stops bad smells",
+      },
+      {
+        label: "C)",
+        value: "Speeds up drainage",
+      },
+      {
+        label: "D)",
+        value: "Stores water",
+      },
+    ],
+    correctAnswer: "B) Stops bad smells",
+  },
+  {
+    question: "Which tool is commonly used to tighten or loosen pipes?",
+    serviceCategory: "Plumber",
+    options: [
+      {
+        label: "A)",
+        value: "Hammer",
+      },
+      {
+        label: "B)",
+        value: "Wrench",
+      },
+      {
+        label: "C)",
+        value: "Saw",
+      },
+      {
+        label: "D)",
+        value: "Pliers",
+      },
+    ],
+    correctAnswer: "B) Wrench",
+  },
+  {
+    question: "What is the purpose of using a primer before painting?",
+    serviceCategory: "Painter",
+    options: [
+      {
+        label: "A)",
+        value: "To add color to the paint",
+      },
+      {
+        label: "B)",
+        value: "To make the paint dry faster",
+      },
+      {
+        label: "C)",
+        value: "To help the paint adhere better and last longer",
+      },
+      {
+        label: "D)",
+        value: "To make the surface rough",
+      },
+    ],
+    correctAnswer: "C) To help the paint adhere better and last longer",
+  },
+  {
+    question: "Which type of paint is best for painting outdoor surfaces because of its durability?",
+    serviceCategory: "Painter",
+    options: [
+      {
+        label: "A)",
+        value: "Watercolor",
+      },
+      {
+        label: "B)",
+        value: "Acrylic",
+      },
+      {
+        label: "C)",
+        value: "Oil-based",
+      },
+      {
+        label: "D)",
+        value: "Latex",
+      },
+    ],
+    correctAnswer: "C) Oil-based",
+  },
+  {
+    question: "What is the primary tool used to drive nails into wood?",
+    serviceCategory: "Carpenter",
+    options: [
+      {
+        label: "A)",
+        value: "Saw",
+      },
+      {
+        label: "B)",
+        value: "Hammer",
+      },
+      {
+        label: "C)",
+        value: "Chisel",
+      },
+      {
+        label: "D)",
+        value: "Plane",
+      },
+    ],
+    correctAnswer: "B) Hammer",
+  },
+  {
+    question: "Which type of saw is best for making curved cuts in wood?",
+    serviceCategory: "Carpenter",
+    options: [
+      {
+        label: "A)",
+        value: "Handsaw",
+      },
+      {
+        label: "B)",
+        value: "Jigsaw",
+      },
+      {
+        label: "C)",
+        value: "Hacksaw",
+      },
+      {
+        label: "D)",
+        value: "Miter saw",
+      },
+    ],
+    correctAnswer: "B) Jigsaw",
+  },
+  {
+    question: "What is the purpose of sandpaper in woodworking?",
+    serviceCategory: "Carpenter",
+    options: [
+      {
+        label: "A)",
+        value: "To cut wood",
+      },
+      {
+        label: "B)",
+        value: "To smooth the surface",
+      },
+      {
+        label: "C)",
+        value: "To join two pieces of wood",
+      },
+      {
+        label: "D)",
+        value: "To measure wood",
+      },
+    ],
+    correctAnswer: "B) To smooth the surface",
   },
 ];
