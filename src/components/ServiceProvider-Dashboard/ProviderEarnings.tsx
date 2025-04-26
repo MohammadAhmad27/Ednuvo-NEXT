@@ -1,6 +1,6 @@
 import { providerEarningAnalyticsData } from "@/app/service-provider-dashboard/content";
 import AnalyticsCardComponent from "../ui/Cards/AnalyticsCard";
-import ProviderEarningsTable from "./sections/Earnings/ProviderEarningsTable";
+import ProviderEarningsTable from "../ui/Tables/ProviderEarningsTable";
 
 const ProviderEarnings = () => {
   return (

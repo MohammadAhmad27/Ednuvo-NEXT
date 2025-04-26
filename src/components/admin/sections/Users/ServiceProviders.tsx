@@ -1,6 +1,6 @@
 import { searchOptions, serviceProvidersData } from "@/app/admin/content";
 import MUIAutoComplete from "@/components/ui/AutoComplete";
-import ServiceProviderTable from "@/components/ui/Table/ServiceProviderTable";
+import ServiceProviderTable from "@/components/ui/Tables/ServiceProviderTable";
 import Image from "next/image";
 
 const ServiceProviders = () => {

@@ -1,6 +1,6 @@
 import { pendingUsersData, searchOptions } from "@/app/admin/content";
 import MUIAutoComplete from "@/components/ui/AutoComplete";
-import PendingUsersTable from "@/components/ui/Table/PendingUsersTable";
+import PendingUsersTable from "@/components/ui/Tables/PendingUsersTable";
 import Image from "next/image";
 
 const PendingUsers = () => {

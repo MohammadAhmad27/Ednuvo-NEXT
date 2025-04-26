@@ -1,7 +1,7 @@
 import { testQuestionsData, testQuestionsOptions } from "@/app/admin/content";
 import MUIAutoComplete from "@/components/ui/AutoComplete";
 import AddQuestionDialog from "@/components/ui/Dialogs/AddQuestionDialog";
-import TestQuestionsTable from "@/components/ui/Table/TestQuestionsTable";
+import TestQuestionsTable from "@/components/ui/Tables/TestQuestionsTable";
 import type { TestQuestions as TestQuestionsType } from "@/interfaces/Admin";
 import Image from "next/image";
 import { useState } from "react";

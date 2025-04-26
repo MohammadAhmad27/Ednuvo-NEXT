@@ -1,6 +1,6 @@
 import { searchOptions, serviceRequestersData } from "@/app/admin/content";
 import MUIAutoComplete from "@/components/ui/AutoComplete";
-import ServiceRequesterTable from "@/components/ui/Table/ServiceRequesterTable";
+import ServiceRequesterTable from "@/components/ui/Tables/ServiceRequesterTable";
 import Image from "next/image";
 
 const ServiceRequesters = () => {

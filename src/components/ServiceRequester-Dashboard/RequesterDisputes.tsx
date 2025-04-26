@@ -1,4 +1,4 @@
-import RequesterDisputesTable from "./sections/Disputes/RequesterDisputesTable";
+import RequesterDisputesTable from "../ui/Tables/RequesterDisputesTable";
 
 const RequesterDisputes = () => {
   return (

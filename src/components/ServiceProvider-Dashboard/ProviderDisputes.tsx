@@ -1,4 +1,4 @@
-import ProviderDisputesTable from "./sections/Disputes/ProviderDisputesTable";
+import ProviderDisputesTable from "../ui/Tables/ProviderDisputesTable";
 
 const ProviderDisputes = () => {
   return (
