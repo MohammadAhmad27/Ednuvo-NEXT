@@ -1,4 +1,4 @@
-import { MenuSection } from "@/interfaces/Service-Requester-Dashboard";
+import { AnalyticsCard, MenuSection } from "@/interfaces/Service-Requester-Dashboard";
 
 export const adminMenuLinks: MenuSection[] = [
   {
@@ -70,3 +70,31 @@ export const adminMenuLinks: MenuSection[] = [
     ],
   },
 ];
+
+export const adminAnalyticsData: AnalyticsCard[] = [
+  {
+    id: 1,
+    label: "Total Registered Users",
+    count: 50,
+    subCards: [
+      { label: "Providers", value: 30 },
+      { label: "Requesters", value: 20 },
+    ],
+  },
+  {
+    id: 2,
+    label: "Pending Provider Approvals",
+    value: 3,
+  },
+  {
+    id: 3,
+    label: "Total Completed Jobs",
+    value: 30,
+  },
+  {
+    id: 4,
+    label: "Total Ongoing Jobs",
+    value: 20,
+  },
+];
+

@@ -38,8 +38,13 @@ export interface ExpertsCard {
 export interface AnalyticsCard {
   id: number;
   label: string;
-  value: number;
+  value?: number;
   unit?: string;
+  count?: number;
+  subCards?: {
+    label: string;
+    value: number;
+  }[];
 }
 
 export interface UserCard {
