@@ -3,7 +3,7 @@ import React from "react"
 import { Accordion, AccordionSummary, AccordionDetails, Typography } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import RemoveIcon from "@mui/icons-material/Remove"
-import { FAQ } from "@/interfaces/Service-Requester-Dashboard"
+import { FAQ } from "@/interfaces/ServiceRequesterDashboard"
 
 interface FAQProps {
   faqData: FAQ[]

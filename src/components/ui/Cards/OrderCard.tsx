@@ -1,4 +1,4 @@
-import { OrderCard } from "@/interfaces/Service-Provider-Dashboard";
+import { OrderCard } from "@/interfaces/ServiceProviderDashboard";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 

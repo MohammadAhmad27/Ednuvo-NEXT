@@ -3,7 +3,7 @@ import Image from "next/image";
 import {
   PortfolioCard,
   UserCard,
-} from "@/interfaces/Service-Requester-Dashboard";
+} from "@/interfaces/ServiceRequesterDashboard";
 import { portfolioData } from "@/app/service-requester-dashboard/content";
 import Link from "next/link";
 

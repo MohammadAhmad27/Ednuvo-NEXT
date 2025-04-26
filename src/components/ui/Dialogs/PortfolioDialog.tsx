@@ -1,4 +1,4 @@
-import { PortfolioCard } from "@/interfaces/Service-Requester-Dashboard";
+import { PortfolioCard } from "@/interfaces/ServiceRequesterDashboard";
 import { Dialog, DialogTitle, DialogContent } from "@mui/material";
 import Image from "next/image";
 

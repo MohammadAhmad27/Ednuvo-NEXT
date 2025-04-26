@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { MenuSection } from "@/interfaces/Service-Requester-Dashboard";
+import { MenuSection } from "@/interfaces/ServiceRequesterDashboard";
 
 interface SidebarContentProps {
   menuLinks: MenuSection[];

@@ -1,4 +1,4 @@
-import { AnalyticsCard } from "@/interfaces/Service-Requester-Dashboard";
+import { AnalyticsCard } from "@/interfaces/ServiceRequesterDashboard";
 
 interface AnalyticsCardProps {
   analyticsCardData: AnalyticsCard[];

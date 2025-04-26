@@ -6,7 +6,7 @@ import {
   skillsList,
 } from "@/app/service-requester-dashboard/content";
 import MUITextField from "@/components/ui/TextField";
-import { OrderCard } from "@/interfaces/Service-Provider-Dashboard";
+import { OrderCard } from "@/interfaces/ServiceProviderDashboard";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

@@ -1,6 +1,6 @@
 
 import { providerDisputesData } from "@/app/service-provider-dashboard/content";
-import { ProviderDisputes } from "@/interfaces/Service-Provider-Dashboard";
+import { ProviderDisputes } from "@/interfaces/ServiceProviderDashboard";
 import DataTable, { type ColumnDef } from "@/shared/DataTable";
 import Image from "next/image";
 

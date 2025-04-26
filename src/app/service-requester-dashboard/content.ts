@@ -15,7 +15,7 @@ import {
   ReviewsCard,
   SkillsList,
   UserCard,
-} from "@/interfaces/Service-Requester-Dashboard";
+} from "@/interfaces/ServiceRequesterDashboard";
 
 export const requesterMenuLinks: MenuSection[] = [
   {

@@ -1,5 +1,5 @@
 "use client";
-import { PortfolioCard } from "@/interfaces/Service-Requester-Dashboard";
+import { PortfolioCard } from "@/interfaces/ServiceRequesterDashboard";
 import Image from "next/image";
 import PortfolioDialog from "../Dialogs/PortfolioDialog";
 import { useState } from "react";

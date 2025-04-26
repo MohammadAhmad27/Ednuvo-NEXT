@@ -7,7 +7,7 @@ import ProfileCompletion from "@/shared/ProfileCompletion";
 import MUIAutoComplete from "@/components/ui/AutoComplete";
 import ExpertsCardComponent from "@/components/ui/Cards/ExpertsCard";
 
-const NewDashboard = () => {
+const ExpertsDashboard = () => {
   return (
     <div className="w-full h-full flex flex-col gap-4 pt-2">
       {/* actual requester name */}
@@ -68,4 +68,4 @@ const NewDashboard = () => {
   );
 };
 
-export default NewDashboard;
+export default ExpertsDashboard;

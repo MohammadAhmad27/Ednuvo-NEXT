@@ -8,7 +8,7 @@ import AnalyticsCardComponent from "@/components/ui/Cards/AnalyticsCard";
 import UserCardComponent from "@/components/ui/Cards/UserCard";
 import ProfileCompletion from "@/shared/ProfileCompletion";
 
-const DefaultDashboard = () => {
+const UsersDashboard = () => {
   return (
     <div className="w-full h-full flex flex-col gap-4 pt-2">
       <div className="flex items-center justify-between gap-2">
@@ -52,4 +52,4 @@ const DefaultDashboard = () => {
   );
 };
 
-export default DefaultDashboard;
+export default UsersDashboard;

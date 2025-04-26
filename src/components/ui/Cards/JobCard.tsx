@@ -1,4 +1,4 @@
-import { JobCard } from "@/interfaces/Service-Requester-Dashboard";
+import { JobCard } from "@/interfaces/ServiceRequesterDashboard";
 import { useRouter } from "next/navigation";
 
 interface JobDataProps {

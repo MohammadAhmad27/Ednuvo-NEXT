@@ -9,7 +9,7 @@ import {
   skillsList,
 } from "@/app/service-requester-dashboard/content";
 import MUIBreadCrumbs from "@/components/ui/BreadCrumbs";
-import { UserCard } from "@/interfaces/Service-Requester-Dashboard";
+import { UserCard } from "@/interfaces/ServiceRequesterDashboard";
 import Image from "next/image";
 import dayjs from "dayjs";
 import PackageCardComponent from "@/components/ui/Cards/PackageCard";

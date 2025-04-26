@@ -8,7 +8,7 @@ import {
 import {
   AnalyticsCard,
   MenuSection,
-} from "@/interfaces/Service-Requester-Dashboard";
+} from "@/interfaces/ServiceRequesterDashboard";
 
 export const adminMenuLinks: MenuSection[] = [
   {

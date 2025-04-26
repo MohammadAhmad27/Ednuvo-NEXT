@@ -1,5 +1,5 @@
 import { requesterDisputesData } from "@/app/service-requester-dashboard/content";
-import { RequesterDisputes } from "@/interfaces/Service-Requester-Dashboard";
+import { RequesterDisputes } from "@/interfaces/ServiceRequesterDashboard";
 import DataTable, { type ColumnDef } from "@/shared/DataTable";
 import Image from "next/image";
 

@@ -1,5 +1,5 @@
 import { providerEarningsData } from "@/app/service-provider-dashboard/content";
-import { ProviderEarnings } from "@/interfaces/Service-Provider-Dashboard";
+import { ProviderEarnings } from "@/interfaces/ServiceProviderDashboard";
 import DataTable, { type ColumnDef } from "@/shared/DataTable";
 
 const columns: ColumnDef<ProviderEarnings>[] = [

@@ -3,12 +3,12 @@ import {
   OrderCard,
   ProviderDisputes,
   ProviderEarnings,
-} from "@/interfaces/Service-Provider-Dashboard";
+} from "@/interfaces/ServiceProviderDashboard";
 import {
   AnalyticsCard,
   FAQ,
   MenuSection,
-} from "@/interfaces/Service-Requester-Dashboard";
+} from "@/interfaces/ServiceRequesterDashboard";
 
 export const providerMenuLinks: MenuSection[] = [
   {
