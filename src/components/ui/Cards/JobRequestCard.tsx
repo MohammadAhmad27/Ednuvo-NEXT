@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function JobRequestCardComponent() {
   return (
-    <div className="grid grid-cols-1 h-[518px] overflow-auto">
+    <div className="grid grid-cols-1 max-h-[435px] overflow-auto gap-2">
       {jobRequestCardData?.map((item) => (
         <div className="w-full flex flex-col gap-2 bg-white border border-gray rounded-[10px] p-2">
           {/* Progress + Time */}
@@ -57,7 +57,7 @@ export default function JobRequestCardComponent() {
               height={37}
               className="object-cover rounded-full"
             />
-            <div className="flex flex-col gap-[2px]">
+            <div className="flex flex-col">
               <h5 className="text-[14px] font-medium text-[#2E302F]">
                 {item?.name}
               </h5>
@@ -82,7 +82,7 @@ export default function JobRequestCardComponent() {
           </div>
 
           {/* Buttons */}
-          <div className="w-full flex justify-between items-center gap-2 mt-[14px] mb-3">
+          <div className="w-full flex justify-between items-center gap-2 mt-[14px] mb-2">
             <button className="w-1/2 flex justify-center items-center gap-2 text-[14px] font-medium text-[#EB4335] bg-white border border-[#EB4335] rounded-full px-4 py-[6px]">
               <Image
                 src="/service-provider-dashboard/decline.svg"

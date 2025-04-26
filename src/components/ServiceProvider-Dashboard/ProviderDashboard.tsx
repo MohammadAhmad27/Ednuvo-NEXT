@@ -23,7 +23,7 @@ const ProviderDashboard = () => {
       <ProfileCompletion />
       <h2 className="text-[18px] font-semibold text-lightblack">Analytics</h2>
       <AnalyticsCardComponent analyticsCardData={providerOrderAnalyticsData} />
-      <div className="w-full flex max-lg:flex-col items-stretch gap-4">
+      <div className="w-full flex max-lg:flex-col gap-4">
         {/* left */}
         <div className="xl:w-3/4 lg:w-2/3 max-lg:w-full bg-white border border-[#00000014] rounded-2xl">
           <div className="flex max-xl:flex-col justify-between items-center gap-2 px-5 py-5">
@@ -61,7 +61,7 @@ const ProviderDashboard = () => {
         <div className="xl:w-1/4 lg:w-1/3 max-lg:w-full space-y-2 bg-white border border-[#00000014] rounded-2xl p-4">
           <div className="flex items-center gap-2 mb-4">
             <h3 className="text-[18px] font-semibold text-lightblack">
-              New Job Request
+              New Job Requests
             </h3>
             <Image
               src="/service-requester-dashboard/smartai.svg"

@@ -1,4 +1,8 @@
-import { AnalyticsCard, MenuSection } from "@/interfaces/Service-Requester-Dashboard";
+import { UserRequestCard } from "@/interfaces/Admin";
+import {
+  AnalyticsCard,
+  MenuSection,
+} from "@/interfaces/Service-Requester-Dashboard";
 
 export const adminMenuLinks: MenuSection[] = [
   {
@@ -110,5 +114,35 @@ export const requestesDataFilters = [
   {
     id: 3,
     label: "Last 3 Months",
+  },
+];
+
+export const userRequestCardData: UserRequestCard[] = [
+  {
+    image: "/service-requester-dashboard/profile.svg",
+    name: "Ahmad Khan",
+    icon: "/service-provider-onboarding/location.svg",
+    location: "Riyadh, Saudi Arabia",
+    category: "Plumbing",
+    testScore: 8.5,
+    desc: "Ahmed Al-Faisal has successfully passed the qualification test and is applying as a Plumbing Service Provider.",
+  },
+  {
+    image: "/service-requester-dashboard/profile.svg",
+    name: "Ahmad Khan",
+    icon: "/service-provider-onboarding/location.svg",
+    location: "Riyadh, Saudi Arabia",
+    category: "Plumbing",
+    testScore: 8.5,
+    desc: "Ahmed Al-Faisal has successfully passed the qualification test and is applying as a Plumbing Service Provider.",
+  },
+  {
+    image: "/service-requester-dashboard/profile.svg",
+    name: "Ahmad Khan",
+    icon: "/service-provider-onboarding/location.svg",
+    location: "Riyadh, Saudi Arabia",
+    category: "Plumbing",
+    testScore: 8.5,
+    desc: "Ahmed Al-Faisal has successfully passed the qualification test and is applying as a Plumbing Service Provider.",
   },
 ];

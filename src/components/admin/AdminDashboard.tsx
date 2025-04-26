@@ -3,6 +3,7 @@ import { useState } from "react";
 import { adminAnalyticsData, requestesDataFilters } from "@/app/admin/content";
 import AnalyticsCardComponent from "../ui/Cards/AnalyticsCard";
 import RequestsOverviewChart from "./sections/Dashboard/RequestsOverviewChart";
+import UserRequestCardComponent from "../ui/Cards/UserRequestCard";
 
 const AdminDashboard = () => {
   const [activeButton, setActiveButton] = useState(
@@ -19,7 +20,7 @@ const AdminDashboard = () => {
         Platform Analytics
       </h2>
       <AnalyticsCardComponent analyticsCardData={adminAnalyticsData} />
-      <div className="w-full flex max-lg:flex-col items-stretch gap-4">
+      <div className="w-full flex max-lg:flex-col gap-4">
         {/* left */}
         <div className="xl:w-3/4 lg:w-2/3 max-lg:w-full bg-white border border-[#00000014] rounded-2xl">
           <div className="flex max-xl:flex-col justify-between items-center gap-2 px-5 py-5">
@@ -54,21 +55,15 @@ const AdminDashboard = () => {
           <RequestsOverviewChart />
         </div>
         {/* right */}
-        {/* <div className="xl:w-1/4 lg:w-1/3 max-lg:w-full space-y-2 bg-white border border-[#00000014] rounded-2xl p-4">
-                <div className="flex items-center gap-2 mb-4">
-                  <h3 className="text-[18px] font-semibold text-lightblack">
-                    New Job Request
-                  </h3>
-                  <Image
-                    src="/service-requester-dashboard/smartai.svg"
-                    alt="icon"
-                    width={20}
-                    height={20}
-                    className="object-cover"
-                  />
-                </div>
-                <JobRequestCardComponent />
-              </div> */}
+        <div className="xl:w-1/4 lg:w-1/3 max-lg:w-full space-y-2 bg-white border border-[#00000014] rounded-2xl p-4">
+          <div className="flex justify-between items-center gap-2 mb-4">
+            <h3 className="text-[18px] font-semibold text-lightblack">
+              New User Requests
+            </h3>
+            <p className="text-[14px] font-medium text-secondary">View All</p>
+          </div>
+          <UserRequestCardComponent />
+        </div>
       </div>
     </div>
   );
