@@ -19,13 +19,13 @@ const columns: ColumnDef<ProviderDisputes>[] = [
   },
   {
     header: "Amount",
-    cell: (payment) => `${payment.amount} ${payment.currency}`,
+    cell: (payment) => `${payment?.amount} ${payment?.currency}`,
   },
   {
     header: "Status",
     cell: (payment) => (
-      <span className="bg-secondary text-[14px] font-normal text-white px-2 py-1 rounded-md">
-        {payment.status}
+      <span className="w-max bg-secondary text-[14px] font-normal text-white px-2 py-1 rounded-md">
+        {payment?.status}
       </span>
     ),
   },

@@ -21,7 +21,7 @@ const columns: ColumnDef<ProviderEarnings>[] = [
   },
   {
     header: "Amount",
-    cell: (earning) => `${earning.amount} SAR`,
+    cell: (earning) => `${earning?.amount} SAR`,
   },
 ];
 

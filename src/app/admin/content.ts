@@ -1,4 +1,9 @@
-import { UserRequestCard } from "@/interfaces/Admin";
+import {
+  PendingUsers,
+  ServiceProviders,
+  ServiceRequesters,
+  UserRequestCard,
+} from "@/interfaces/Admin";
 import {
   AnalyticsCard,
   MenuSection,
@@ -144,5 +149,156 @@ export const userRequestCardData: UserRequestCard[] = [
     category: "Plumbing",
     testScore: 8.5,
     desc: "Ahmed Al-Faisal has successfully passed the qualification test and is applying as a Plumbing Service Provider.",
+  },
+];
+
+export const searchOptions = ["Name", "Category", "Location"];
+
+export const serviceProvidersData: ServiceProviders[] = [
+  {
+    name: "Khalid Saeed",
+    image: "/service-requester-dashboard/profile.svg",
+    location: "Riyadh",
+    serviceCategory: "Plumber",
+    earnings: 113,
+    totalJobsCompleted: 2,
+    status: "Active",
+  },
+  {
+    name: "Faris Al-Tamimi",
+    image: "/service-requester-dashboard/profile.svg",
+    location: "Jeddah",
+    serviceCategory: "Electrician",
+    earnings: 324,
+    totalJobsCompleted: 3,
+    status: "Suspended",
+  },
+  {
+    name: "Nadir Al-Shehri",
+    image: "/service-requester-dashboard/profile.svg",
+    location: "Dammam",
+    serviceCategory: "Cleaner",
+    earnings: 214,
+    totalJobsCompleted: 9,
+    status: "Suspended",
+  },
+  {
+    name: "Samir Mansour",
+    image: "/service-requester-dashboard/profile.svg",
+    location: "Riyadh",
+    serviceCategory: "Painter",
+    earnings: 121,
+    totalJobsCompleted: 11,
+    status: "Active",
+  },
+  {
+    name: "Yasir Al-Bakri",
+    image: "/service-requester-dashboard/profile.svg",
+    location: "Jeddah",
+    serviceCategory: "Cleaner",
+    earnings: 140,
+    totalJobsCompleted: 7,
+    status: "Active",
+  },
+];
+
+export const serviceRequestersData: ServiceRequesters[] = [
+  {
+    name: "Khalid Saeed",
+    image: "/service-requester-dashboard/profile.svg",
+    location: "Riyadh",
+    totalJobsPosted: 7,
+    completedJobs: 5,
+    pendingRequests: 3,
+    spending: 113,
+    status: "Active",
+  },
+  {
+    name: "Faris Al-Tamimi",
+    image: "/service-requester-dashboard/profile.svg",
+    location: "Jeddah",
+    totalJobsPosted: 11,
+    completedJobs: 8,
+    pendingRequests: 3,
+    spending: 324,
+    status: "Suspended",
+  },
+  {
+    name: "Nadir Al-Shehri",
+    image: "/service-requester-dashboard/profile.svg",
+    location: "Dammam",
+    totalJobsPosted: 21,
+    completedJobs: 20,
+    pendingRequests: 1,
+    spending: 214,
+    status: "Suspended",
+  },
+  {
+    name: "Samir Mansour",
+    image: "/service-requester-dashboard/profile.svg",
+    location: "Riyadh",
+    totalJobsPosted: 6,
+    completedJobs: 4,
+    pendingRequests: 2,
+    spending: 121,
+    status: "Active",
+  },
+  {
+    name: "Yasir Al-Bakri",
+    image: "/service-requester-dashboard/profile.svg",
+    location: "Jeddah",
+    totalJobsPosted: 14,
+    completedJobs: 8,
+    pendingRequests: 6,
+    spending: 140,
+    status: "Active",
+  },
+];
+
+export const pendingUsersData: PendingUsers[] = [
+  {
+    name: "Khalid Saeed",
+    image: "/service-requester-dashboard/profile.svg",
+    serviceCategory: "Plumber",
+    testScore: 60,
+    testReviewStatus: "Reviewed",
+    profileCompletion: 60,
+    dateOfSignup: "10 Feb, 2025",
+  },
+  {
+    name: "Faris Al-Tamimi",
+    image: "/service-requester-dashboard/profile.svg",
+    serviceCategory: "Electrician",
+    testScore: 78,
+    testReviewStatus: "Reviewed",
+    profileCompletion: 80,
+    dateOfSignup: "20 March, 2025",
+  },
+  {
+    name: "Nadir Al-Shehri",
+    image: "/service-requester-dashboard/profile.svg",
+    serviceCategory: "Cleaner",
+    testScore: 89,
+    testReviewStatus: "Reviewed",
+    profileCompletion: 100,
+    dateOfSignup: "03 Jan, 2025",
+  },
+  {
+    name: "Samir Mansour",
+    image: "/service-requester-dashboard/profile.svg",
+    serviceCategory: "Painter",
+    testScore: 98,
+    testReviewStatus: "Not Reviewed",
+    profileCompletion: 50,
+    dateOfSignup: "17 Feb, 2025",
+  },
+  {
+    name: "Yasir Al-Bakri",
+    image: "/service-requester-dashboard/profile.svg",
+    serviceCategory: "Cleaner",
+    testScore: 75,
+    testReviewStatus: "Not Reviewed",
+    profileCompletion: 70,
+    dateOfSignup: "12 March, 2025",
   },
 ];
