@@ -98,3 +98,17 @@ export const adminAnalyticsData: AnalyticsCard[] = [
   },
 ];
 
+export const requestesDataFilters = [
+  {
+    id: 1,
+    label: "Last Year",
+  },
+  {
+    id: 2,
+    label: "This Year",
+  },
+  {
+    id: 3,
+    label: "Last 3 Months",
+  },
+];

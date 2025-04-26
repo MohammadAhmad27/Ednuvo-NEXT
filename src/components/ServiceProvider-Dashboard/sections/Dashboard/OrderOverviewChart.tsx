@@ -102,7 +102,7 @@ export default function OrderOverviewChart() {
           width: 2,
           color: "#5BBB7B",
           shadowColor: "#8979FF66",
-          shadowBlur: 4,
+          shadowBlur: 3,
           shadowOffsetX: 0,
           shadowOffsetY: 3,
         },

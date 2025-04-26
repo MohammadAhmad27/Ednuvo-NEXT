@@ -2,7 +2,7 @@ import ProfileCompletion from "@/shared/ProfileCompletion";
 import AnalyticsCardComponent from "../ui/Cards/AnalyticsCard";
 import {
   activeOrdersData,
-  dataFilters,
+  ordersDataFilters,
   providerOrderAnalyticsData,
 } from "@/app/service-provider-dashboard/content";
 import OrderOverviewChart from "./sections/Dashboard/OrderOverviewChart";
@@ -12,7 +12,7 @@ import JobRequestCardComponent from "../ui/Cards/JobRequestCard";
 import OrderCardComponent from "../ui/Cards/OrderCard";
 
 const ProviderDashboard = () => {
-  const [activeButton, setActiveButton] = useState(dataFilters[0]?.label);
+  const [activeButton, setActiveButton] = useState(ordersDataFilters[0]?.label);
   return (
     <div className="w-full h-full flex flex-col gap-4 pt-2">
       {/* actual provider name */}
@@ -40,7 +40,7 @@ const ProviderDashboard = () => {
               />
             </div>
             <div className="flex items-center gap-2">
-              {dataFilters?.map((item) => (
+              {ordersDataFilters?.map((item) => (
                 <button
                   onClick={() => setActiveButton(item?.label)}
                   key={item?.id}

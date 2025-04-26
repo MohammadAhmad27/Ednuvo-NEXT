@@ -114,7 +114,7 @@ export const providerOrderAnalyticsData: AnalyticsCard[] = [
   },
 ];
 
-export const dataFilters = [
+export const ordersDataFilters = [
   {
     id: 1,
     label: "Last Year",
