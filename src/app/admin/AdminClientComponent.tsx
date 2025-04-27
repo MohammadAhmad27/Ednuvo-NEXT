@@ -2,9 +2,9 @@
 import { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import AdminDashboard from "@/components/Admin/AdminDashboard";
-import AdminJobs from "@/components/Admin/AdminJobs";
-import AdminDisputes from "@/components/Admin/AdminDisputes";
 import AdminUsers from "@/components/Admin/AdminUsers";
+import AdminDisputes from "@/components/Admin/AdminDisputes";
+import AdminJobs from "@/components/Admin/AdminJobs";
 import AdminCategory from "@/components/Admin/AdminCategory";
 import AdminTestQuestions from "@/components/Admin/AdminTestQuestions";
 import AdminSettings from "@/components/Admin/AdminSettings";
