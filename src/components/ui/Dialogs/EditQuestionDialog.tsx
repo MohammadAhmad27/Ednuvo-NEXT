@@ -1,85 +1,92 @@
-import { useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogActions,
-} from "@mui/material";
+import { useState, useEffect } from "react";
+import { Dialog, DialogContent, DialogTitle, DialogActions } from "@mui/material";
 import type { TestQuestions } from "@/interfaces/Admin";
 import Image from "next/image";
 import MUIAutoComplete from "../AutoComplete";
 import MUITextField from "../TextField";
 
-interface AddQuestionModalProps {
+interface EditQuestionModalProps {
   isModalOpen: boolean;
   setIsModalOpen: (open: boolean) => void;
-  onAddQuestion: (question: TestQuestions) => void;
+  onEditQuestion: (question: TestQuestions) => void;
   serviceCategories: string[];
+  questionData: TestQuestions | null;
 }
 
-const AddQuestionModal = ({
+const defaultOptions = [
+  { label: "A)", value: "" },
+  { label: "B)", value: "" },
+  { label: "C)", value: "" },
+  { label: "D)", value: "" }
+];
+
+const EditQuestionDialog = ({
   isModalOpen,
   setIsModalOpen,
-  onAddQuestion,
+  onEditQuestion,
   serviceCategories,
-}: AddQuestionModalProps) => {
+  questionData,
+}: EditQuestionModalProps) => {
   const [formData, setFormData] = useState<TestQuestions>({
     id: 0,
     question: "",
     serviceCategory: "",
-    options: [
-      { label: "A)", value: "" },
-      { label: "B)", value: "" },
-      { label: "C)", value: "" },
-      { label: "D)", value: "" },
-    ],
+    options: [...defaultOptions],
     correctAnswer: "",
   });
 
-  const handleChange = (field: string, value: string) => {
-    setFormData((prev: any) => ({
+  useEffect(() => {
+    if (questionData) {
+      setFormData({
+        ...questionData,
+        options: questionData.options?.length 
+          ? [...questionData.options] 
+          : [...defaultOptions]
+      });
+    }
+  }, [questionData]);
+
+  const handleChange = (field: keyof TestQuestions, value: string) => {
+    setFormData(prev => ({
       ...prev,
-      [field]: value,
+      [field]: value
     }));
   };
 
-  const handleOptionChange = (label: string, value: string) => {
-    setFormData((prev: any) => ({
-      ...prev,
-      options: prev?.options?.map((opt: any) =>
-        opt.label === label ? { ...opt, value } : opt
-      ),
-    }));
+  const handleOptionChange = (index: number, value: string) => {
+    setFormData(prev => {
+      const newOptions = [...prev.options];
+      newOptions[index] = { ...newOptions[index], value };
+      return { ...prev, options: newOptions };
+    });
   };
 
   const handleSubmit = () => {
     if (
-      !formData.question ||
-      !formData.serviceCategory ||
-      formData.options.some((opt) => !opt.value) ||
-      !formData.correctAnswer
+      !formData.question.trim() || 
+      !formData.serviceCategory.trim() ||
+      formData.options.some(opt => !opt.value.trim()) ||
+      !formData.correctAnswer.trim()
     ) {
       alert("Please fill all fields");
       return;
     }
-    onAddQuestion(formData);
-    setFormData({
-      id: 0,
-      question: "",
-      serviceCategory: "",
-      options: [
-        { label: "A)", value: "" },
-        { label: "B)", value: "" },
-        { label: "C)", value: "" },
-        { label: "D)", value: "" },
-      ],
-      correctAnswer: "",
-    });
+
+    const isValidAnswer = formData.options.some(
+      opt => formData.correctAnswer === `${opt.label} ${opt.value}`
+    );
+
+    if (!isValidAnswer) {
+      alert("Correct answer must match one of the options");
+      return;
+    }
+
+    onEditQuestion(formData);
     setIsModalOpen(false);
   };
 
-  const correctAnswerOptions = formData?.options?.map(
-    (opt: any) => `${opt.label} ${opt.value}`
+  const correctAnswerOptions = formData.options.map(
+    opt => `${opt.label} ${opt.value}`
   );
 
   return (
@@ -120,7 +127,7 @@ const AddQuestionModal = ({
       }}
     >
       <DialogTitle>
-        <h2 className="text-[20px] font-semibold text-black">Add Question</h2>
+        <h2 className="text-[20px] font-semibold text-black">Edit Question</h2>
         <Image
           onClick={() => setIsModalOpen(false)}
           src="/service-provider-onboarding/close.svg"
@@ -154,15 +161,14 @@ const AddQuestionModal = ({
           </div>
 
           <div className="w-full grid grid-cols-2 gap-4">
-            {["A)", "B)", "C)", "D)"].map((label, index) => (
-              <div key={label}>
-                <MUITextField
-                  label={`Option ${label.replace(")", "")}`}
-                  placeholder={label}
-                  value={formData?.options[index]?.value}
-                  onChange={(e) => handleOptionChange(label, e.target.value)}
-                />
-              </div>
+            {formData.options.map((opt, index) => (
+              <MUITextField
+                key={opt.label}
+                label={`Option ${opt.label.replace(")", "")}`}
+                placeholder={opt.label}
+                value={opt?.value}
+                onChange={(e) => handleOptionChange(index, e.target.value)}
+              />
             ))}
           </div>
 
@@ -184,11 +190,11 @@ const AddQuestionModal = ({
           onClick={handleSubmit}
           className="text-[14px] font-medium bg-primary text-white rounded-full px-6 py-2"
         >
-          Add Question
+          Edit Question
         </button>
       </DialogActions>
     </Dialog>
   );
 };
 
-export default AddQuestionModal;
+export default EditQuestionDialog;

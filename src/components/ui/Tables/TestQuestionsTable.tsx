@@ -1,13 +1,14 @@
 import DataTable, { type ColumnDef } from "@/shared/DataTable";
-import Image from "next/image";
 import { Edit, Delete } from "@mui/icons-material";
 import { TestQuestions } from "@/interfaces/Admin";
 
 interface TestQuestionsTableProps {
   data: TestQuestions[];
+  onDelete: (question: string) => void;
+  onEdit: (question: TestQuestions) => void;
 }
 
-const columns: ColumnDef<TestQuestions>[] = [
+const columns = (onDelete: (question: string) => void, onEdit: (question: TestQuestions) => void): ColumnDef<TestQuestions>[] => [
   {
     header: "Question",
     cell: (row) => <p className="max-w-[250px]">{row?.question}</p>,
@@ -32,17 +33,27 @@ const columns: ColumnDef<TestQuestions>[] = [
   },
   {
     header: "Action",
-    cell: () => (
+    cell: (row) => (
       <div className="flex items-center gap-1">
-        <Edit sx={{ fontSize: "20px", cursor: "pointer" }} />
-        <Delete sx={{ fontSize: "20px", cursor: "pointer" }} />
+        <Edit 
+          sx={{ fontSize: "20px", cursor: "pointer" }} 
+          onClick={() => onEdit(row)}
+        />
+        <Delete 
+          sx={{ fontSize: "20px", cursor: "pointer" }} 
+          onClick={() => onDelete(row.question)}
+        />
       </div>
     ),
   },
 ];
 
-const TestQuestionsTable = ({ data }: TestQuestionsTableProps) => {
-  return <DataTable data={data} columns={columns} keyField="question" />;
+const TestQuestionsTable = ({ data, onDelete, onEdit }: TestQuestionsTableProps) => {
+  return <DataTable 
+    data={data} 
+    columns={columns(onDelete, onEdit)} 
+    keyField="question" 
+  />;
 };
 
 export default TestQuestionsTable;

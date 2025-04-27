@@ -308,6 +308,7 @@ export const testQuestionsOptions = ["Category"];
 
 export const testQuestionsData: TestQuestions[] = [
   {
+    id: 1,
     question: "What does a P-trap do in plumbing?",
     serviceCategory: "Plumber",
     options: [
@@ -331,6 +332,7 @@ export const testQuestionsData: TestQuestions[] = [
     correctAnswer: "B) Stops bad smells",
   },
   {
+    id: 2,
     question: "Which tool is commonly used to tighten or loosen pipes?",
     serviceCategory: "Plumber",
     options: [
@@ -354,6 +356,7 @@ export const testQuestionsData: TestQuestions[] = [
     correctAnswer: "B) Wrench",
   },
   {
+    id: 3,
     question: "What is the purpose of using a primer before painting?",
     serviceCategory: "Painter",
     options: [
@@ -377,6 +380,7 @@ export const testQuestionsData: TestQuestions[] = [
     correctAnswer: "C) To help the paint adhere better and last longer",
   },
   {
+    id: 4,
     question: "Which type of paint is best for painting outdoor surfaces because of its durability?",
     serviceCategory: "Painter",
     options: [
@@ -400,6 +404,7 @@ export const testQuestionsData: TestQuestions[] = [
     correctAnswer: "C) Oil-based",
   },
   {
+    id: 5,
     question: "What is the primary tool used to drive nails into wood?",
     serviceCategory: "Carpenter",
     options: [
@@ -423,6 +428,7 @@ export const testQuestionsData: TestQuestions[] = [
     correctAnswer: "B) Hammer",
   },
   {
+    id: 6,
     question: "Which type of saw is best for making curved cuts in wood?",
     serviceCategory: "Carpenter",
     options: [
@@ -446,6 +452,7 @@ export const testQuestionsData: TestQuestions[] = [
     correctAnswer: "B) Jigsaw",
   },
   {
+    id: 7,
     question: "What is the purpose of sandpaper in woodworking?",
     serviceCategory: "Carpenter",
     options: [

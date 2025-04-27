@@ -1,13 +1,16 @@
 import { testQuestionsData, testQuestionsOptions } from "@/app/admin/content";
 import MUIAutoComplete from "@/components/ui/AutoComplete";
 import AddQuestionDialog from "@/components/ui/Dialogs/AddQuestionDialog";
+import EditQuestionDialog from "@/components/ui/Dialogs/EditQuestionDialog";
 import TestQuestionsTable from "@/components/ui/Tables/TestQuestionsTable";
 import type { TestQuestions as TestQuestionsType } from "@/interfaces/Admin";
 import Image from "next/image";
 import { useState } from "react";
 
 const TestQuestions = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+  const [currentQuestion, setCurrentQuestion] = useState<TestQuestionsType | null>(null);
   const [testQuestions, setTestQuestions] =
     useState<TestQuestionsType[]>(testQuestionsData);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -17,7 +20,32 @@ const TestQuestions = () => {
   );
 
   const handleAddQuestion = (newQuestion: TestQuestionsType) => {
-    setTestQuestions((prev) => [...prev, newQuestion]);
+    const nextId = testQuestions?.length > 0 
+      ? Math.max(...testQuestions?.map(q => q.id)) + 1 
+      : 1;
+    
+    const questionWithId = {
+      ...newQuestion,
+      id: nextId
+    };
+    setTestQuestions(prev => [...prev, questionWithId]);
+  };
+
+  const handleEditQuestion = (editedQuestion: TestQuestionsType) => {
+    setTestQuestions((prev) =>
+      prev?.map(q => 
+        q?.id === editedQuestion?.id ? editedQuestion : q
+      )
+    );
+  };
+
+  const handleDeleteQuestion = (question: string) => {
+    setTestQuestions((prev) => prev?.filter((q) => q?.question !== question));
+  };
+
+  const handleEditClick = (question: TestQuestionsType) => {
+    setCurrentQuestion(question);
+    setIsEditModalOpen(true);
   };
 
   const filteredData = testQuestions?.filter(
@@ -62,7 +90,7 @@ const TestQuestions = () => {
                   />
                 </div>
                 <button
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={() => setIsAddModalOpen(true)}
                   className="w-max text-nowrap flex items-center gap-2 text-[14px] font-medium text-white pl-[13px] pr-4 py-2 bg-primary rounded-full"
                 >
                   <Image
@@ -78,12 +106,16 @@ const TestQuestions = () => {
             </div>
             {/* Card Component */}
             <div className="flex-1 overflow-auto border border-[#DDE1F0] rounded-xl shadow-searchshadow">
-              <TestQuestionsTable data={filteredData} />
+              <TestQuestionsTable 
+                data={filteredData} 
+                onDelete={handleDeleteQuestion}
+                onEdit={handleEditClick}
+              />
             </div>
           </div>
           <AddQuestionDialog
-            isModalOpen={isModalOpen}
-            setIsModalOpen={setIsModalOpen}
+            isModalOpen={isAddModalOpen}
+            setIsModalOpen={setIsAddModalOpen}
             onAddQuestion={handleAddQuestion}
             serviceCategories={
               serviceCategories.length
@@ -91,10 +123,21 @@ const TestQuestions = () => {
                 : ["Plumber", "Electrician", "Carpenter"]
             }
           />
+          <EditQuestionDialog
+            isModalOpen={isEditModalOpen}
+            setIsModalOpen={setIsEditModalOpen}
+            onEditQuestion={handleEditQuestion}
+            serviceCategories={
+              serviceCategories.length
+                ? serviceCategories
+                : ["Plumber", "Electrician", "Carpenter"]
+            }
+            questionData={currentQuestion}
+          />
         </>
       ) : (
         <>
-          <NoTestQuestions />
+        <NoTestQuestions />
         </>
       )}
     </>

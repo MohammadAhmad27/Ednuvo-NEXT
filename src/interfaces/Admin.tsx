@@ -40,6 +40,7 @@ export interface PendingUsers {
 }
 
 export interface TestQuestions {
+  id: number;
   question: string;
   serviceCategory: string;
   options: {
