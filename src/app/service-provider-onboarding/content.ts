@@ -28,6 +28,6 @@ export const navigationButtons = [
   },
   {
     label: "Take the test",
-    href: "/test",
+    href: "/verification-test",
   },
 ];

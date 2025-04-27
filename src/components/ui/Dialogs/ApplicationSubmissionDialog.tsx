@@ -33,7 +33,7 @@ const ApplicationSubmission = ({
 
   const handleTakeTest = () => {
     setIsModalOpen(false);
-    // pending
+    router.push(buttons[1].href);
   };
   return (
     <Dialog
@@ -97,7 +97,7 @@ const ApplicationSubmission = ({
           {" "}
           {title}
         </h3>
-        <p className="text-[18px] font-normal text-lightblack text-justify">
+        <p className="text-[18px] font-normal text-lightblack text-center">
           {desc}
         </p>
       </DialogContent>

@@ -30,6 +30,7 @@ const config: Config = {
         grayshadow2: "0px 4px 32px 0px #E9E9E9BF",
         grayshadow3: "0.63px 3.75px 12.5px 0px #E9E9E98C",
         grayshadow4: "0px 4px 134px 0px #46B7D11F",
+        grayShadow5: "0px 0px 25px 0px #E9E9E98C",
         greenshadow: "0px 2px 20px 0px #5BBB7B33",
         blackshadow: "0px 0px 0px 1px #00000014",
         profileshadow: "0px 4px 24px 0px #00000030",

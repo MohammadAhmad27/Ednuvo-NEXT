@@ -1,4 +1,4 @@
-import ForgotPasswordForm from "@/components/Forgot-Password/ForgotPasswordForm";
+import ForgotPasswordForm from "@/components/ForgotPassword/ForgotPasswordForm";
 import Register from "@/shared/Register";
 
 const page = () => {

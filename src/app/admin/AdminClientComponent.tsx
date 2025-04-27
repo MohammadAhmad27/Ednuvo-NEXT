@@ -1,13 +1,13 @@
 "use client";
 import { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import AdminDashboard from "@/components/admin/AdminDashboard";
-import AdminJobs from "@/components/admin/AdminJobs";
-import AdminDisputes from "@/components/admin/AdminDisputes";
-import AdminUsers from "@/components/admin/AdminUsers";
-import AdminCategory from "@/components/admin/AdminCategory";
-import AdminTestQuestions from "@/components/admin/AdminTestQuestions";
-import AdminSettings from "@/components/admin/AdminSettings";
+import AdminDashboard from "@/components/Admin/AdminDashboard";
+import AdminJobs from "@/components/Admin/AdminJobs";
+import AdminDisputes from "@/components/Admin/AdminDisputes";
+import AdminUsers from "@/components/Admin/AdminUsers";
+import AdminCategory from "@/components/Admin/AdminCategory";
+import AdminTestQuestions from "@/components/Admin/AdminTestQuestions";
+import AdminSettings from "@/components/Admin/AdminSettings";
 
 const RenderTabComponent = ({ tab }: { tab: string | null }) => {
   switch (tab) {
