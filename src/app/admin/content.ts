@@ -1,4 +1,5 @@
 import {
+  Category,
   PendingUsers,
   ServiceProviders,
   ServiceRequesters,
@@ -490,5 +491,63 @@ export const testQuestionsData: TestQuestions[] = [
       },
     ],
     correctAnswer: "B) To smooth the surface",
+  },
+];
+
+export const categoryData: Category[] = [
+  {
+    id: 1,
+    category: "Plumber",
+    subcategory: [
+      { id: 1, name: "Leak Repair" },
+      { id: 2, name: "Pipe Installation" },
+      { id: 3, name: "Drain Cleaning" },
+      { id: 4, name: "Water Heater Repair" },
+      { id: 5, name: "Bathroom Fittings" },
+    ],
+  },
+  {
+    id: 2,
+    category: "Electrician",
+    subcategory: [
+      { id: 1, name: "Wiring & Rewiring" },
+      { id: 2, name: "Lighting Installation" },
+      { id: 3, name: "Circuit Breaker Repair" },
+      { id: 4, name: "Ceiling Fan Installation" },
+      { id: 5, name: "Socket & Switch Repair" },
+    ],
+  },
+  {
+    id: 3,
+    category: "Cleaner",
+    subcategory: [
+      { id: 1, name: "Home Deep Cleaning" },
+      { id: 2, name: "Sofa Cleaning" },
+      { id: 3, name: "Carpet Cleaning" },
+      { id: 4, name: "Window Cleaning" },
+      { id: 5, name: "Bathroom Cleaning" },
+    ],
+  },
+  {
+    id: 4,
+    category: "Painter",
+    subcategory: [
+      { id: 1, name: "Interior Painting" },
+      { id: 2, name: "Exterior Painting" },
+      { id: 3, name: "Wallpaper Installation" },
+      { id: 4, name: "Wall Texturing" },
+      { id: 5, name: "Furniture Painting" },
+    ],
+  },
+  {
+    id: 5,
+    category: "Carpenter",
+    subcategory: [
+      { id: 1, name: "Furniture Making" },
+      { id: 2, name: "Door & Window Repair" },
+      { id: 3, name: "Modular Kitchen Installation" },
+      { id: 4, name: "Custom Wardrobes" },
+      { id: 5, name: "Wooden Flooring" },
+    ],
   },
 ];

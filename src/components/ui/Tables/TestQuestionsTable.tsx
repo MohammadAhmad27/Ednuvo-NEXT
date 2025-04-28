@@ -1,6 +1,6 @@
 import DataTable, { type ColumnDef } from "@/shared/DataTable";
-import { Edit, Delete } from "@mui/icons-material";
 import { TestQuestions } from "@/interfaces/Admin";
+import Image from "next/image";
 
 interface TestQuestionsTableProps {
   data: TestQuestions[];
@@ -8,7 +8,10 @@ interface TestQuestionsTableProps {
   onEdit: (question: TestQuestions) => void;
 }
 
-const columns = (onDelete: (question: string) => void, onEdit: (question: TestQuestions) => void): ColumnDef<TestQuestions>[] => [
+const columns = (
+  onDelete: (question: string) => void,
+  onEdit: (question: TestQuestions) => void
+): ColumnDef<TestQuestions>[] => [
   {
     header: "Question",
     cell: (row) => <p className="max-w-[250px]">{row?.question}</p>,
@@ -22,7 +25,10 @@ const columns = (onDelete: (question: string) => void, onEdit: (question: TestQu
     cell: (row) => (
       <div className="flex flex-col gap-1">
         {row?.options?.map((opt) => (
-          <p key={opt?.label} className="max-w-[250px]">{`${opt?.label} ${opt?.value}`}</p>
+          <p
+            key={opt?.label}
+            className="max-w-[250px]"
+          >{`${opt?.label} ${opt?.value}`}</p>
         ))}
       </div>
     ),
@@ -35,12 +41,20 @@ const columns = (onDelete: (question: string) => void, onEdit: (question: TestQu
     header: "Action",
     cell: (row) => (
       <div className="flex items-center gap-1">
-        <Edit 
-          sx={{ fontSize: "20px", cursor: "pointer" }} 
+        <Image
+          src="/admin/edit-icon.svg"
+          alt="edit-icon"
+          width={20}
+          height={20}
+          className="object-cover cursor-pointer"
           onClick={() => onEdit(row)}
         />
-        <Delete 
-          sx={{ fontSize: "20px", cursor: "pointer" }} 
+        <Image
+          src="/admin/delete-icon.svg"
+          alt="delete-icon"
+          width={20}
+          height={20}
+          className="object-cover cursor-pointer"
           onClick={() => onDelete(row.question)}
         />
       </div>
@@ -48,12 +62,14 @@ const columns = (onDelete: (question: string) => void, onEdit: (question: TestQu
   },
 ];
 
-const TestQuestionsTable = ({ data, onDelete, onEdit }: TestQuestionsTableProps) => {
-  return <DataTable 
-    data={data} 
-    columns={columns(onDelete, onEdit)} 
-    keyField="id" 
-  />;
+const TestQuestionsTable = ({
+  data,
+  onDelete,
+  onEdit,
+}: TestQuestionsTableProps) => {
+  return (
+    <DataTable data={data} columns={columns(onDelete, onEdit)} keyField="id" />
+  );
 };
 
 export default TestQuestionsTable;

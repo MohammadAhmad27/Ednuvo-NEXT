@@ -52,3 +52,12 @@ export interface TestQuestions {
   }[];
   correctAnswer: string;
 }
+
+export interface Category {
+  id: number;
+  category: string;
+  subcategory: {
+    id: number;
+    name: string;
+  }[];
+}

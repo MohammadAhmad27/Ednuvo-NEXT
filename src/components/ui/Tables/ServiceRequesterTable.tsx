@@ -1,6 +1,5 @@
 import DataTable, { type ColumnDef } from "@/shared/DataTable";
 import Image from "next/image";
-import { Edit, Delete } from "@mui/icons-material";
 import { ServiceRequesters } from "@/interfaces/Admin";
 
 interface ServiceRequesterTableProps {
@@ -61,8 +60,20 @@ const columns: ColumnDef<ServiceRequesters>[] = [
     header: "Action",
     cell: () => (
       <div className="flex items-center gap-1">
-        <Edit sx={{ fontSize: "20px", cursor: "pointer" }} />
-        <Delete sx={{ fontSize: "20px", cursor: "pointer" }} />
+        <Image
+          src="/admin/edit-icon.svg"
+          alt="edit-icon"
+          width={20}
+          height={20}
+          className="object-cover cursor-pointer"
+        />
+        <Image
+          src="/admin/delete-icon.svg"
+          alt="delete-icon"
+          width={20}
+          height={20}
+          className="object-cover cursor-pointer"
+        />
       </div>
     ),
   },
