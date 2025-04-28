@@ -6,19 +6,30 @@ import {
   skillsList,
 } from "@/app/service-requester-dashboard/content";
 import MUITextField from "@/components/ui/TextField";
-import { JobCard } from "@/interfaces/ServiceRequesterDashboard";
+import {
+  JobCard,
+  ReviewCategory,
+} from "@/interfaces/ServiceRequesterDashboard";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import type React from "react";
+import { Alert, Snackbar } from "@mui/material";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
 
 interface JobDetailsProps {
   job: JobCard;
 }
 
 const JobDetails = ({ job }: JobDetailsProps) => {
-  const [message, setMessage] = useState("");
   const pathname = usePathname();
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
+
+  const handleMarkComplete = () => {
+    setIsCompleted(!isCompleted);
+  };
 
   const getStatusClasses = (status: string) => {
     switch (status) {
@@ -214,58 +225,7 @@ const JobDetails = ({ job }: JobDetailsProps) => {
         </div>
         {/* separator */}
         <div className="w-full h-[0.5px] bg-[#0000004D] mt-[4px]" />
-        <div className="w-full space-y-5 mt-1">
-          <h2 className="text-[16px] font-semibold text-black">
-            Order Activity
-          </h2>
-          <div className="relative w-full">
-            <div className="z-0">
-              <MUITextField
-                type="text"
-                label="Type your message here"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                multiline={true}
-                rows={6}
-              />
-            </div>
-            {/* Floating icons */}
-            <div className="absolute bottom-2 right-3 flex items-center gap-2 z-50">
-              <Image
-                src="/service-requester-dashboard/attachment.svg"
-                alt="attachment-icon"
-                width={15}
-                height={15}
-                className="object-cover cursor-pointer z-50"
-              />
-              <Image
-                src="/service-requester-dashboard/emoji-smile.svg"
-                alt="emoji-smile-icon"
-                width={15}
-                height={15}
-                className="object-cover cursor-pointer mr-[2px] z-50"
-              />
-              <div className="flex items-center gap-1 bg-[#5BBB7B26] rounded px-2 py-1 cursor-pointer z-50">
-                <Image
-                  src="/service-requester-dashboard/camera-video.svg"
-                  alt="camera-video-icon"
-                  width={15}
-                  height={15}
-                  className="object-cover cursor-pointer"
-                />
-                <p className="text-[12px] font-medium text-secondary">
-                  Video Call
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* button */}
-        <div className="flex justify-end items-end">
-          <button className="w-max text-center text-[14px] font-medium text-primary border border-primary rounded-full px-8 py-[6px] mt-1">
-            Send
-          </button>
-        </div>
+        {!isCompleted ? <OrderActivity /> : <ReviewForm />}
       </div>
 
       {/* right */}
@@ -296,8 +256,11 @@ const JobDetails = ({ job }: JobDetailsProps) => {
               </div>
             ))}
           </div>
-          <button className="w-full rounded-full bg-secondary shadow-greenshadow text-[14px] font-medium text-white text-center py-2">
-            Mark As Complete
+          <button
+            onClick={handleMarkComplete}
+            className="w-full rounded-full bg-secondary shadow-greenshadow text-[14px] font-medium text-white text-center py-2"
+          >
+            {isCompleted ? "Mark As Completed" : "Mark As Complete"}
           </button>
         </div>
 
@@ -418,5 +381,215 @@ const JobDetails = ({ job }: JobDetailsProps) => {
     </div>
   );
 };
+
+function OrderActivity() {
+  const [message, setMessage] = useState<string>("");
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    console.log("Message: ", message);
+  };
+
+  return (
+    <form className="w-full space-y-4 mt-1" onSubmit={handleSubmit}>
+      <h2 className="text-[16px] font-semibold text-black">Order Activity</h2>
+      <div className="relative w-full">
+        <div className="z-0">
+          <MUITextField
+            type="text"
+            placeholder="Type your message here"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            multiline={true}
+            rows={6}
+          />
+        </div>
+        <div className="absolute bottom-2 right-3 flex items-center gap-2 z-50">
+          <Image
+            src="/service-requester-dashboard/attachment.svg"
+            alt="attachment-icon"
+            width={15}
+            height={15}
+            className="object-cover cursor-pointer z-50"
+          />
+          <Image
+            src="/service-requester-dashboard/emoji-smile.svg"
+            alt="emoji-smile-icon"
+            width={15}
+            height={15}
+            className="object-cover cursor-pointer mr-[2px] z-50"
+          />
+          <div className="flex items-center gap-1 bg-[#5BBB7B26] rounded px-2 py-1 cursor-pointer z-50">
+            <Image
+              src="/service-requester-dashboard/camera-video.svg"
+              alt="camera-video-icon"
+              width={15}
+              height={15}
+              className="object-cover cursor-pointer"
+            />
+            <p className="text-[12px] font-medium text-secondary">Video Call</p>
+          </div>
+        </div>
+      </div>
+      <div className="flex justify-end items-end">
+        <button
+          type="submit"
+          className="w-max text-center text-[14px] font-medium text-primary border border-primary rounded-full px-8 py-[6px]"
+        >
+          Send
+        </button>
+      </div>
+    </form>
+  );
+}
+
+function ReviewForm() {
+  const [reviewCategories, setReviewCategories] = useState<ReviewCategory[]>([
+    {
+      id: "communication",
+      title: "Communication With Seller",
+      question: "How responsive was the seller during the process?",
+      rating: 0,
+    },
+    {
+      id: "service",
+      title: "Service as Described",
+      question: "Did the result match the Gig's description?",
+      rating: 0,
+    },
+    {
+      id: "recommend",
+      title: "Buy Again or Recommend",
+      question: "Would you recommend buying this Gig?",
+      rating: 0,
+    },
+  ]);
+
+  const [reviewText, setReviewText] = useState<string>("");
+  const [alertOpen, setAlertOpen] = useState<boolean>(false);
+
+  // Handle star rating click
+  const handleRatingChange = (categoryId: string, newRating: number) => {
+    setReviewCategories(
+      reviewCategories?.map((category) =>
+        category?.id === categoryId
+          ? { ...category, rating: newRating }
+          : category
+      )
+    );
+  };
+
+  const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const text = event.target.value;
+    if (text.length <= 700) {
+      setReviewText(text);
+    } else {
+      setReviewText(text.slice(0, 700));
+      setAlertOpen(true);
+    }
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    console.log("Review submitted:", {
+      categories: reviewCategories,
+      reviewText,
+    });
+  };
+
+  return (
+    <div className="w-full mt-1">
+      <h2 className="text-[16px] font-semibold text-black mb-3">
+        Share your experience with the community to help them make better
+        decisions.
+      </h2>
+      <form onSubmit={handleSubmit}>
+        <div className="space-y-2 mb-4">
+          {reviewCategories?.map((category) => (
+            <div
+              key={category?.id}
+              className="flex flex-col lg:flex-row lg:items-center items-start justify-between max-lg:gap-1"
+            >
+              <div>
+                <h2 className="text-[14px] font-medium text-black">
+                  {category?.title}
+                </h2>
+                <p className="text-[13px] font-normal text-[#323232]">
+                  {category?.question}
+                </p>
+              </div>
+              <div className="flex">
+                {[1, 2, 3, 4, 5]?.map((star) => (
+                  <button
+                    key={star}
+                    type="button"
+                    onClick={() => handleRatingChange(category?.id, star)}
+                    className="focus:outline-none"
+                    aria-label={`Rate ${star} stars`}
+                  >
+                    {star <= category?.rating ? (
+                      <StarIcon sx={{ color: "#5BBB7B", fontSize: 25 }} />
+                    ) : (
+                      <StarBorderIcon sx={{ color: "#5BBB7B", fontSize: 25 }} />
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Review Text Field */}
+        <div className="mb-6">
+          <h2 className="text-[16px] font-semibold mb-2">
+            What was it like working with this Seller?
+          </h2>
+          <MUITextField
+            multiline
+            rows={6}
+            value={reviewText}
+            onChange={handleTextChange}
+            placeholder="What did you like or didn't like about this seller's service? Share as many details as you can to help other buyers make the right decision for their needs."
+            endAdornment={
+              <div className="absolute bottom-2 right-4 text-darkgray">
+                {reviewText?.length}/700
+              </div>
+            }
+          />
+        </div>
+
+        {/* Submit Button */}
+        <div className="flex justify-end items-end">
+          <button
+            type="submit"
+            className="w-max text-center text-[14px] font-medium text-primary border border-primary rounded-full px-8 py-[6px]"
+          >
+            Send
+          </button>
+        </div>
+      </form>
+
+      {/* Character Limit Alert */}
+      <Snackbar
+        open={alertOpen}
+        autoHideDuration={6000}
+        onClose={handleAlertClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleAlertClose}
+          severity="warning"
+          sx={{ width: "100%" }}
+        >
+          You can type up to 700 characters only.
+        </Alert>
+      </Snackbar>
+    </div>
+  );
+}
 
 export default JobDetails;

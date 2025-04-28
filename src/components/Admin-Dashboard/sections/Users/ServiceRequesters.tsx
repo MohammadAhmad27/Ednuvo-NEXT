@@ -21,7 +21,7 @@ const ServiceRequesters = () => {
               <input
                 type="text"
                 placeholder="Search by name, category and location"
-                className="flex-1 outline-none text-[14px] placeholder:text-[14px] placeholder:font-normal placeholder:text-darkgray"
+                className="flex-1 outline-none text-[14px] font-normal text-lightblack placeholder:text-[14px] placeholder:font-normal placeholder:text-darkgray"
               />
             </div>
             <div>

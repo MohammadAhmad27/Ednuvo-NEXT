@@ -168,3 +168,10 @@ export interface FAQ {
   title: string;
   desc: string;
 }
+
+export interface ReviewCategory {
+  id: string;
+  title: string;
+  question: string;
+  rating: number;
+}

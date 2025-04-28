@@ -25,7 +25,7 @@ const Hero = () => {
           <input
             type="text"
             placeholder="What are you looking for?"
-            className="w-full outline-none text-[14px] placeholder:text-[16px] placeholder:font-normal placeholder:text-darkgray"
+            className="w-full outline-none text-[14px] font-normal text-lightblack placeholder:text-[14px] placeholder:font-normal placeholder:text-darkgray"
           />
           <button className="bg-secondary text-white text-[16px] font-medium px-5 py-2 rounded-full">
             Search

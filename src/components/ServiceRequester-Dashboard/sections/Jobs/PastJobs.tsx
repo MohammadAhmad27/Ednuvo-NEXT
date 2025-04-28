@@ -23,7 +23,7 @@ const PastJobs = () => {
             <input
               type="text"
               placeholder="Search by provider name or service"
-              className="flex-1 outline-none text-[14px] placeholder:text-[14px] placeholder:font-normal placeholder:text-darkgray"
+              className="flex-1 outline-none text-[14px] font-normal text-lightblack placeholder:text-[14px] placeholder:font-normal placeholder:text-darkgray"
             />
           </div>
           {/* Card Component */}

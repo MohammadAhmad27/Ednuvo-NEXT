@@ -12,14 +12,11 @@ export default function VerificationTest() {
   >({});
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  // Get the current question data
   const question =
-    questions.find((q) => q?.id === currentQuestion) || questions[0];
+    questions?.find((q) => q?.id === currentQuestion) || questions[0];
 
-  // Calculate progress percentage
   const progressPercentage = (currentQuestion / questions?.length) * 100;
 
-  // Handle option selection
   const handleSelectOption = (optionId: string) => {
     setSelectedAnswers({
       ...selectedAnswers,
@@ -27,7 +24,6 @@ export default function VerificationTest() {
     });
   };
 
-  // Handle navigation
   const handlePrevious = () => {
     if (currentQuestion > 1) {
       setCurrentQuestion(currentQuestion - 1);
@@ -44,19 +40,15 @@ export default function VerificationTest() {
     setIsModalOpen(true);
   };
 
-  const closeSuccessModal = () => {
-    setIsModalOpen(false);
-  };
-
   // Calculate the score based on selected answers
-  const calculateScore = () => {
+  const calculatedScore = () => {
     let score = 0;
     Object.entries(selectedAnswers)?.forEach(([questionId, selectedOption]) => {
-      const question = questions.find(
+      const question = questions?.find(
         (q) => q?.id === Number.parseInt(questionId)
       );
       if (question && selectedOption === question?.answer) {
-        score += 10; // Each question is worth 10 marks
+        score += 10; 
       }
     });
     return score;
@@ -77,7 +69,7 @@ export default function VerificationTest() {
         {/* Progress bar */}
         <div className="h-3 w-[82%] mx-auto bg-white border border-gray rounded-full shadow-grayShadow5 mb-2">
           <div
-            className="h-full rounded-full bg-[#FFD54F] transition-all duration-300 ease-in-out"
+            className="h-full rounded-full bg-secondary transition-all duration-300 ease-in-out"
             style={{ width: `${progressPercentage}%` }}
           />
         </div>
@@ -98,9 +90,9 @@ export default function VerificationTest() {
 
           {/* Options */}
           <div className="space-y-3">
-            {question?.options.map((option) => (
+            {question?.options?.map((option) => (
               <div
-                key={option.id}
+                key={option?.id}
                 className={`border rounded-xl py-2 flex items-center justify-between cursor-pointer transition-all
                   ${
                     selectedAnswers[currentQuestion] === option?.id
@@ -158,7 +150,7 @@ export default function VerificationTest() {
             <div></div>
           )}
 
-          {currentQuestion < questions.length ? (
+          {currentQuestion < questions?.length ? (
             <Button
               variant="contained"
               onClick={handleNext}

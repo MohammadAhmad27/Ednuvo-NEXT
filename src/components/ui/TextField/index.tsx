@@ -3,7 +3,7 @@ import { TextField, IconButton, InputAdornment } from "@mui/material";
 import { ChangeEvent, ReactNode } from "react";
 
 interface MUITextFieldProps {
-  label: string;
+  label?: string;
   type?: string;
   value: string | number;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;

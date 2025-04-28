@@ -7,6 +7,7 @@ import MUIAutoComplete from "@/components/ui/AutoComplete";
 import AnalyticsCardComponent from "@/components/ui/Cards/AnalyticsCard";
 import UserCardComponent from "@/components/ui/Cards/UserCard";
 import ProfileCompletion from "@/shared/ProfileCompletion";
+import Image from "next/image";
 
 const UsersDashboard = () => {
   return (
@@ -24,7 +25,35 @@ const UsersDashboard = () => {
       <ProfileCompletion />
       <h2 className="text-[18px] font-semibold text-lightblack">Analytics</h2>
       <AnalyticsCardComponent analyticsCardData={requesterJobAnalyticsData} />
-      <div className="w-full bg-white rounded-2xl px-[15px] py-[14px] min-h-20"></div>
+      <div className="w-full flex items-center gap-2 bg-white rounded-2xl px-[15px] py-[14px]">
+        <div className="w-4/5 flex items-center gap-2 pl-3 pr-1 py-2 ">
+          <Image
+            src="/service-requester-dashboard/search.svg"
+            alt="search-icon"
+            width={20}
+            height={20}
+            className="object-cover"
+          />
+          <input
+            type="text"
+            placeholder="Search by category"
+            className="flex-1 outline-none text-[14px] placeholder:text-[14px] placeholder:font-normal placeholder:text-darkgray"
+          />
+          <button className="bg-primary text-[14px] font-medium text-white text-center rounded-full px-8 py-2">
+            Search Now
+          </button>
+        </div>
+        <button className="flex-1 text-[16px] font-normal text-darkgray bg-[#EEFCEE] rounded-xl px-6 py-3 flex items-center gap-2">
+          <Image
+            src="/service-requester-dashboard/filter.svg"
+            alt="search-icon"
+            width={20}
+            height={20}
+            className="object-cover"
+          />
+          Advance search
+        </button>
+      </div>
       {/* Card Component */}
       <div className="w-full flex flex-col gap-5 mt-1">
         <div className="w-full flex gap-2 justify-between items-center">
