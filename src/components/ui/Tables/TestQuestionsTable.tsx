@@ -52,7 +52,7 @@ const TestQuestionsTable = ({ data, onDelete, onEdit }: TestQuestionsTableProps)
   return <DataTable 
     data={data} 
     columns={columns(onDelete, onEdit)} 
-    keyField="question" 
+    keyField="id" 
   />;
 };
 

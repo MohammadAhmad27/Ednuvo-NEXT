@@ -51,7 +51,7 @@ export default function ProviderDisputesTable() {
     <DataTable
       data={providerDisputesData}
       columns={columns}
-      keyField="refNumber"
+      keyField="id"
     />
   );
 }

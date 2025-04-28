@@ -9,6 +9,7 @@ export interface UserRequestCard {
 }
 
 export interface ServiceProviders {
+  id: number;
   name: string;
   image: string;
   location: string;
@@ -19,6 +20,7 @@ export interface ServiceProviders {
 }
 
 export interface ServiceRequesters {
+  id: number;
   name: string;
   image: string;
   location: string;
@@ -30,6 +32,7 @@ export interface ServiceRequesters {
 }
 
 export interface PendingUsers {
+  id: number;
   name: string;
   image: string;
   serviceCategory: string;

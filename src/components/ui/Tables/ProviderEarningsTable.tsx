@@ -30,7 +30,7 @@ export default function ProviderEarningsTable() {
     <DataTable
       data={providerEarningsData}
       columns={columns}
-      keyField="orderId"
+      keyField="id"
     />
   );
 }

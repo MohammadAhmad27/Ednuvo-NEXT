@@ -69,7 +69,7 @@ const columns: ColumnDef<ServiceRequesters>[] = [
 ];
 
 const ServiceRequesterTable = ({ data }: ServiceRequesterTableProps) => {
-  return <DataTable data={data} columns={columns} keyField="name" />;
+  return <DataTable data={data} columns={columns} keyField="id" />;
 };
 
 export default ServiceRequesterTable;

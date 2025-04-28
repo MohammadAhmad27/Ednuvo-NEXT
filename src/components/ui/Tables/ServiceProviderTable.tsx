@@ -63,7 +63,7 @@ const columns: ColumnDef<ServiceProviders>[] = [
 ];
 
 const ServiceProviderTable = ({ data }: ServiceProviderTableProps) => {
-  return <DataTable data={data} columns={columns} keyField="name" />;
+  return <DataTable data={data} columns={columns} keyField="id" />;
 };
 
 export default ServiceProviderTable;

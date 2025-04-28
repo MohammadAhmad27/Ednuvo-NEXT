@@ -50,7 +50,7 @@ export default function RequesterDisputesTable() {
     <DataTable
       data={requesterDisputesData}
       columns={columns}
-      keyField="refNumber"
+      keyField="id"
     />
   );
 }

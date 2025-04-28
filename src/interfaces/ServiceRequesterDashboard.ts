@@ -155,6 +155,7 @@ export interface JobSupport {
 }
 
 export interface RequesterDisputes {
+  id: number;
   refNumber: string;
   employerName: string;
   date: string;

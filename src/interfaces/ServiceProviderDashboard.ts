@@ -27,6 +27,7 @@ export interface OrderCard {
 }
 
 export interface ProviderDisputes {
+  id: number;
   refNumber: string;
   employerName: string;
   date: string;
@@ -36,6 +37,7 @@ export interface ProviderDisputes {
 }
 
 export interface ProviderEarnings {
+  id: number;
   date: string;
   description: string;
   from: string;

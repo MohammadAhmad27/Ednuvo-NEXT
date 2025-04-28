@@ -1123,6 +1123,7 @@ export const jobSupportData: JobSupport[] = [
 
 export const requesterDisputesData: RequesterDisputes[] = [
   {
+    id: 1,
     refNumber: "11564",
     employerName: "Haider Ali",
     date: "2/5/2025",
@@ -1131,6 +1132,7 @@ export const requesterDisputesData: RequesterDisputes[] = [
     status: "Disputed",
   },
   {
+    id: 2,
     refNumber: "11572",
     employerName: "Farooq Khan",
     date: "13/4/2025",
@@ -1139,6 +1141,7 @@ export const requesterDisputesData: RequesterDisputes[] = [
     status: "Disputed",
   },
   {
+    id: 3,
     refNumber: "11529",
     employerName: "Haider Ali",
     date: "13/4/2025",
@@ -1147,6 +1150,7 @@ export const requesterDisputesData: RequesterDisputes[] = [
     status: "Disputed",
   },
   {
+    id: 4,
     refNumber: "11292",
     employerName: "Farooq Khan",
     date: "13/4/2025",
@@ -1155,6 +1159,7 @@ export const requesterDisputesData: RequesterDisputes[] = [
     status: "Disputed",
   },
   {
+    id: 5,
     refNumber: "13810",
     employerName: "Haider Ali",
     date: "13/4/2025",
@@ -1163,6 +1168,7 @@ export const requesterDisputesData: RequesterDisputes[] = [
     status: "Disputed",
   },
   {
+    id: 6,
     refNumber: "11823",
     employerName: "Sana Mir",
     date: "10/4/2025",
@@ -1171,6 +1177,7 @@ export const requesterDisputesData: RequesterDisputes[] = [
     status: "Disputed",
   },
   {
+    id: 7,
     refNumber: "11756",
     employerName: "Ahmed Raza",
     date: "11/4/2025",
@@ -1179,6 +1186,7 @@ export const requesterDisputesData: RequesterDisputes[] = [
     status: "Disputed",
   },
   {
+    id: 8,
     refNumber: "11478",
     employerName: "Zara Sheikh",
     date: "9/4/2025",
@@ -1187,6 +1195,7 @@ export const requesterDisputesData: RequesterDisputes[] = [
     status: "Disputed",
   },
   {
+    id: 9,
     refNumber: "11634",
     employerName: "Imran Malik",
     date: "12/4/2025",
@@ -1195,6 +1204,7 @@ export const requesterDisputesData: RequesterDisputes[] = [
     status: "Disputed",
   },
   {
+    id: 10,
     refNumber: "11901",
     employerName: "Ayesha Khan",
     date: "8/4/2025",
@@ -1203,6 +1213,7 @@ export const requesterDisputesData: RequesterDisputes[] = [
     status: "Disputed",
   },
   {
+    id: 11,
     refNumber: "11390",
     employerName: "Usman Tariq",
     date: "7/4/2025",
@@ -1211,6 +1222,7 @@ export const requesterDisputesData: RequesterDisputes[] = [
     status: "Disputed",
   },
   {
+    id: 12,
     refNumber: "11127",
     employerName: "Rabia Yousaf",
     date: "6/4/2025",
@@ -1219,6 +1231,7 @@ export const requesterDisputesData: RequesterDisputes[] = [
     status: "Disputed",
   },
   {
+    id: 13,
     refNumber: "12003",
     employerName: "Noman Shah",
     date: "5/4/2025",
@@ -1227,6 +1240,7 @@ export const requesterDisputesData: RequesterDisputes[] = [
     status: "Disputed",
   },
   {
+    id: 14,
     refNumber: "12114",
     employerName: "Laiba Noor",
     date: "4/4/2025",
@@ -1235,6 +1249,7 @@ export const requesterDisputesData: RequesterDisputes[] = [
     status: "Disputed",
   },
   {
+    id: 15,
     refNumber: "12225",
     employerName: "Bilal Ansari",
     date: "3/4/2025",
