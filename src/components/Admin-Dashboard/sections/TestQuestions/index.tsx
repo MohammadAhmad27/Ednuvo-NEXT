@@ -1,6 +1,7 @@
 import { testQuestionsData, testQuestionsOptions } from "@/app/admin/content";
 import MUIAutoComplete from "@/components/ui/AutoComplete";
 import AddQuestionDialog from "@/components/ui/Dialogs/AddQuestionDialog";
+import DeleteQuestionDialog from "@/components/ui/Dialogs/DeleteQuestionDialog";
 import EditQuestionDialog from "@/components/ui/Dialogs/EditQuestionDialog";
 import TestQuestionsTable from "@/components/ui/Tables/TestQuestionsTable";
 import type { TestQuestions as TestQuestionsType } from "@/interfaces/Admin";
@@ -10,6 +11,8 @@ import { useState } from "react";
 const TestQuestions = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
+  const [questionToDelete, setQuestionToDelete] = useState<string | null>(null);
   const [currentQuestion, setCurrentQuestion] = useState<TestQuestionsType | null>(null);
   const [testQuestions, setTestQuestions] =
     useState<TestQuestionsType[]>(testQuestionsData);
@@ -19,6 +22,7 @@ const TestQuestions = () => {
     new Set(testQuestions?.map((q) => q?.serviceCategory))
   );
 
+  // Add Question
   const handleAddQuestion = (newQuestion: TestQuestionsType) => {
     const nextId = testQuestions?.length > 0 
       ? Math.max(...testQuestions?.map(q => q.id)) + 1 
@@ -31,6 +35,7 @@ const TestQuestions = () => {
     setTestQuestions(prev => [...prev, questionWithId]);
   };
 
+  // Edit Question
   const handleEditQuestion = (editedQuestion: TestQuestionsType) => {
     setTestQuestions((prev) =>
       prev?.map(q => 
@@ -39,14 +44,31 @@ const TestQuestions = () => {
     );
   };
 
-  const handleDeleteQuestion = (question: string) => {
-    setTestQuestions((prev) => prev?.filter((q) => q?.question !== question));
-  };
-
   const handleEditClick = (question: TestQuestionsType) => {
     setCurrentQuestion(question);
     setIsEditModalOpen(true);
   };
+
+
+  // Delete Quetion
+  const handleDeleteInitiate = (question: string) => {
+    setQuestionToDelete(question);
+    setIsDeleteDialogOpen(true);
+  };
+
+  const handleDeleteConfirm = () => {
+    if (questionToDelete) {
+      setTestQuestions((prev) => prev?.filter((q) => q?.question !== questionToDelete));
+    }
+    setIsDeleteDialogOpen(false);
+    setQuestionToDelete(null);
+  };
+
+  const handleDeleteCancel = () => {
+    setIsDeleteDialogOpen(false);
+    setQuestionToDelete(null);
+  };
+
 
   const filteredData = testQuestions?.filter(
     (question) =>
@@ -108,7 +130,7 @@ const TestQuestions = () => {
             <div className="flex-1 overflow-auto border border-[#DDE1F0] rounded-xl shadow-searchshadow">
               <TestQuestionsTable 
                 data={filteredData} 
-                onDelete={handleDeleteQuestion}
+                onDelete={handleDeleteInitiate}
                 onEdit={handleEditClick}
               />
             </div>
@@ -133,6 +155,15 @@ const TestQuestions = () => {
                 : ["Plumber", "Electrician", "Carpenter"]
             }
             questionData={currentQuestion}
+          />
+           <DeleteQuestionDialog
+            open={isDeleteDialogOpen}
+            title="Are You Sure?"
+            description="Are you sure you want to delete this question?"
+            onCancel={handleDeleteCancel}
+            onConfirm={handleDeleteConfirm}
+            confirmText="Delete"
+            cancelText="Cancel"
           />
         </>
       ) : (
