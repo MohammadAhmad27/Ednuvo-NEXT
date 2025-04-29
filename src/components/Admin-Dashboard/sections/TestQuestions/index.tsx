@@ -13,7 +13,8 @@ const TestQuestions = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
   const [questionToDelete, setQuestionToDelete] = useState<string | null>(null);
-  const [currentQuestion, setCurrentQuestion] = useState<TestQuestionsType | null>(null);
+  const [currentQuestion, setCurrentQuestion] =
+    useState<TestQuestionsType | null>(null);
   const [testQuestions, setTestQuestions] =
     useState<TestQuestionsType[]>(testQuestionsData);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -24,23 +25,22 @@ const TestQuestions = () => {
 
   // Add Question
   const handleAddQuestion = (newQuestion: TestQuestionsType) => {
-    const nextId = testQuestions?.length > 0 
-      ? Math.max(...testQuestions?.map(q => q.id)) + 1 
-      : 1;
-    
+    const nextId =
+      testQuestions?.length > 0
+        ? Math.max(...testQuestions?.map((q) => q.id)) + 1
+        : 1;
+
     const questionWithId = {
       ...newQuestion,
-      id: nextId
+      id: nextId,
     };
-    setTestQuestions(prev => [...prev, questionWithId]);
+    setTestQuestions((prev) => [...prev, questionWithId]);
   };
 
   // Edit Question
   const handleEditQuestion = (editedQuestion: TestQuestionsType) => {
     setTestQuestions((prev) =>
-      prev?.map(q => 
-        q?.id === editedQuestion?.id ? editedQuestion : q
-      )
+      prev?.map((q) => (q?.id === editedQuestion?.id ? editedQuestion : q))
     );
   };
 
@@ -48,7 +48,6 @@ const TestQuestions = () => {
     setCurrentQuestion(question);
     setIsEditModalOpen(true);
   };
-
 
   // Delete Quetion
   const handleDeleteInitiate = (question: string) => {
@@ -58,7 +57,9 @@ const TestQuestions = () => {
 
   const handleDeleteConfirm = () => {
     if (questionToDelete) {
-      setTestQuestions((prev) => prev?.filter((q) => q?.question !== questionToDelete));
+      setTestQuestions((prev) =>
+        prev?.filter((q) => q?.question !== questionToDelete)
+      );
     }
     setIsDeleteDialogOpen(false);
     setQuestionToDelete(null);
@@ -68,7 +69,6 @@ const TestQuestions = () => {
     setIsDeleteDialogOpen(false);
     setQuestionToDelete(null);
   };
-
 
   const filteredData = testQuestions?.filter(
     (question) =>
@@ -81,96 +81,94 @@ const TestQuestions = () => {
   return (
     <>
       {testQuestions && testQuestions?.length ? (
-        <>
-          <div className="w-full h-[calc(100vh-200px)] flex flex-col gap-6">
-            <div className="flex justify-between items-center gap-2">
-              {/* Search bar */}
-              <div className="w-1/2 flex items-center gap-2 px-4 py-2 rounded-full border border-[#DDE1F0] shadow-searchshadow">
+        <div className="w-full h-[calc(100vh-200px)] flex flex-col gap-6">
+          <div className="flex justify-between items-center gap-2">
+            {/* Search bar */}
+            <div className="w-1/2 flex items-center gap-2 px-4 py-2 rounded-full border border-[#DDE1F0] shadow-searchshadow">
+              <Image
+                src="/service-requester-dashboard/search.svg"
+                alt="search-icon"
+                width={20}
+                height={20}
+                className="object-cover"
+              />
+              <input
+                type="text"
+                placeholder="Search by category"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="flex-1 outline-none text-[14px] font-normal text-lightblack placeholder:text-[14px] placeholder:font-normal placeholder:text-darkgray"
+              />
+            </div>
+            <div className="w-1/2 flex justify-end items-center gap-2">
+              <div className="xl:w-1/4 lg:w-2/5 w-1/2">
+                <MUIAutoComplete
+                  options={testQuestionsOptions}
+                  label="Search by"
+                  width="100%"
+                  variant="green"
+                  onChange={(e: any) => console.log(e.target.value)}
+                />
+              </div>
+              <button
+                onClick={() => setIsAddModalOpen(true)}
+                className="w-max text-nowrap flex items-center gap-2 text-[14px] font-medium text-white pl-[13px] pr-4 py-2 bg-primary rounded-full"
+              >
                 <Image
-                  src="/service-requester-dashboard/search.svg"
-                  alt="search-icon"
+                  src="/admin/add.svg"
+                  alt="add-icon"
                   width={20}
                   height={20}
                   className="object-cover"
                 />
-                <input
-                  type="text"
-                  placeholder="Search by category"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="flex-1 outline-none text-[14px] font-normal text-lightblack placeholder:text-[14px] placeholder:font-normal placeholder:text-darkgray"
-                />
-              </div>
-              <div className="w-1/2 flex justify-end items-center gap-2">
-                <div className="xl:w-1/4 lg:w-2/5 w-1/2">
-                  <MUIAutoComplete
-                    options={testQuestionsOptions}
-                    label="Search by"
-                    width="100%"
-                    variant="green"
-                    onChange={(e: any) => console.log(e.target.value)}
-                  />
-                </div>
-                <button
-                  onClick={() => setIsAddModalOpen(true)}
-                  className="w-max text-nowrap flex items-center gap-2 text-[14px] font-medium text-white pl-[13px] pr-4 py-2 bg-primary rounded-full"
-                >
-                  <Image
-                    src="/admin/add.svg"
-                    alt="add-icon"
-                    width={20}
-                    height={20}
-                    className="object-cover"
-                  />
-                  Add Question
-                </button>
-              </div>
-            </div>
-            {/* Card Component */}
-            <div className="flex-1 overflow-auto border border-[#DDE1F0] rounded-xl shadow-searchshadow">
-              <TestQuestionsTable 
-                data={filteredData} 
-                onDelete={handleDeleteInitiate}
-                onEdit={handleEditClick}
-              />
+                Add Question
+              </button>
             </div>
           </div>
-          <AddQuestionDialog
-            isModalOpen={isAddModalOpen}
-            setIsModalOpen={setIsAddModalOpen}
-            onAddQuestion={handleAddQuestion}
-            serviceCategories={
-              serviceCategories.length
-                ? serviceCategories
-                : ["Plumber", "Electrician", "Carpenter"]
-            }
-          />
-          <EditQuestionDialog
-            isModalOpen={isEditModalOpen}
-            setIsModalOpen={setIsEditModalOpen}
-            onEditQuestion={handleEditQuestion}
-            serviceCategories={
-              serviceCategories.length
-                ? serviceCategories
-                : ["Plumber", "Electrician", "Carpenter"]
-            }
-            questionData={currentQuestion}
-          />
-           <DeleteQuestionDialog
-            open={isDeleteDialogOpen}
-            title="Are You Sure?"
-            description="Are you sure you want to delete this question?"
-            onCancel={handleDeleteCancel}
-            onConfirm={handleDeleteConfirm}
-            confirmText="Delete"
-            cancelText="Cancel"
-          />
-        </>
+          {/* Table */}
+          <div className="flex-1 overflow-auto border border-[#DDE1F0] rounded-xl shadow-searchshadow">
+            <TestQuestionsTable
+              data={filteredData}
+              onDelete={handleDeleteInitiate}
+              onEdit={handleEditClick}
+            />
+          </div>
+        </div>
       ) : (
         <>
-        <NoTestQuestions />
+          <NoTestQuestions />
         </>
       )}
+      <AddQuestionDialog
+        isModalOpen={isAddModalOpen}
+        setIsModalOpen={setIsAddModalOpen}
+        onAddQuestion={handleAddQuestion}
+        serviceCategories={
+          serviceCategories.length
+            ? serviceCategories
+            : ["Plumber", "Electrician", "Carpenter"]
+        }
+      />
+      <EditQuestionDialog
+        isModalOpen={isEditModalOpen}
+        setIsModalOpen={setIsEditModalOpen}
+        onEditQuestion={handleEditQuestion}
+        serviceCategories={
+          serviceCategories.length
+            ? serviceCategories
+            : ["Plumber", "Electrician", "Carpenter"]
+        }
+        questionData={currentQuestion}
+      />
+      <DeleteQuestionDialog
+        open={isDeleteDialogOpen}
+        title="Are You Sure?"
+        description="Are you sure you want to delete this question?"
+        onCancel={handleDeleteCancel}
+        onConfirm={handleDeleteConfirm}
+        confirmText="Delete"
+        cancelText="Cancel"
+      />
     </>
   );
 };
