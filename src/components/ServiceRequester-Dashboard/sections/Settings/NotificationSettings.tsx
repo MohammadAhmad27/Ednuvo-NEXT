@@ -16,12 +16,12 @@ const NotificationSettings = () => {
   console.log(value);
 
   return (
-    <div className="w-full h-full flex flex-col gap-4 px-5 py-10">
+    <div className="w-full h-full flex flex-col gap-4 px-5 py-8">
       {/* 1st */}
       <div className="space-y-4">
-        <h2 className="text-[16px] font-semibold text-lightblack">
+        <h3 className="text-[16px] font-semibold text-lightblack">
           Notifications
-        </h2>
+        </h3>
         <div className="space-y-3">
           <Notification
             title="Enable Desktop Notification"
@@ -53,9 +53,9 @@ const NotificationSettings = () => {
 
       {/* 2nd */}
       <div className="space-y-4">
-        <h2 className="text-[16px] font-semibold text-lightblack">
+        <h3 className="text-[16px] font-semibold text-lightblack">
           Email Notifications
-        </h2>
+        </h3>
         <div className="space-y-3">
           <Notification
             title="Communication Emails"
@@ -71,7 +71,7 @@ const NotificationSettings = () => {
 
       {/* 3rd */}
       <div className="space-y-4">
-        <h2 className="text-[16px] font-semibold text-lightblack">Sounds</h2>
+        <h3 className="text-[16px] font-semibold text-lightblack">Sounds</h3>
         <div>
           <Notification
             title="Disable All Notification Sounds"

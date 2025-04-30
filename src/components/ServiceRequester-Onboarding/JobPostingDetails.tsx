@@ -189,7 +189,7 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
           onChange={(_: React.SyntheticEvent, newValue: string | null) =>
             onChange({ experienceLevel: newValue ?? "" })
           }
-          placeholder="Entry experience level"
+          placeholder="Enter experience level"
           label="Experience Level"
         />
 

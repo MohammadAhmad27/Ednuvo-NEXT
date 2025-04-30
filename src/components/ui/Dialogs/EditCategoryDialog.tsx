@@ -162,10 +162,10 @@ const EditCategoryDialog = ({
       </DialogContent>
       <DialogActions>
         <button
-          className="bg-primary rounded-full text-[16px] font-medium text-white text-center px-8 py-2"
           onClick={handleSave}
+          className="text-[14px] font-medium bg-primary text-white rounded-full px-6 py-2"
         >
-          Edit
+          Edit Category
         </button>
       </DialogActions>
     </Dialog>

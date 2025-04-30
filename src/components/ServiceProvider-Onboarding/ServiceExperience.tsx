@@ -50,7 +50,7 @@ export default function ServiceExperience({
         <MUIAutoComplete
           width="50%"
           options={experienceLevel}
-          value={formData.experienceLevel || ""}
+          value={formData?.experienceLevel || ""}
           onChange={(_: React.SyntheticEvent, newValue: string | null) =>
             onChange({ experienceLevel: newValue ?? "" })
           }
@@ -61,7 +61,7 @@ export default function ServiceExperience({
       <div className="w-full flex justify-between items-center gap-4">
         <div className="w-1/2 flex flex-col">
           <MUITimePicker
-            value={formData.startTime ? dayjs(formData.startTime) : null}
+            value={formData?.startTime ? dayjs(formData.startTime) : null}
             onChange={handleStartTimeChange}
             label="Start Time"
           />
@@ -69,7 +69,7 @@ export default function ServiceExperience({
 
         <div className="w-1/2 flex flex-col">
           <MUITimePicker
-            value={formData.endTime ? dayjs(formData.endTime) : null}
+            value={formData?.endTime ? dayjs(formData.endTime) : null}
             onChange={handleEndTimeChange}
             label="End Time"
           />
