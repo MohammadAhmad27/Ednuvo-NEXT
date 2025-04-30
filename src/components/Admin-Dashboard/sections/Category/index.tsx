@@ -4,11 +4,20 @@ import Image from "next/image";
 import CategoryTable from "@/components/ui/Tables/CategoryTable";
 import type { Category } from "@/interfaces/Admin";
 import AddCategoryDialog from "@/components/ui/Dialogs/AddCategoryDialog";
+import DeleteQuestionDialog from "@/components/ui/Dialogs/DeleteQuestionDialog";
+import EditCategoryDialog from "@/components/ui/Dialogs/EditCategoryDialog";
 
 const Category = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
   const [categoryData, setCategoryData] = useState<Category[]>(initialData);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
+  const [categoryToDelete, setCategoryToDelete] = useState<Category | null>(
+    null
+  );
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState<boolean>(false);
+  const [categoryToEdit, setCategoryToEdit] = useState<Category | null>(null);
 
+  // Add Category
   const handleAddCategory = (newCategory: {
     category: string;
     subcategory: { id: number; name: string }[];
@@ -24,6 +33,41 @@ const Category = () => {
     };
     setCategoryData((prev) => [...prev, formattedCategory]);
   };
+
+  // Delete Category
+  const handleDeleteClick = (category: Category) => {
+    setCategoryToDelete(category);
+    setIsDeleteDialogOpen(true);
+  };
+
+  const handleDeleteCancel = () => {
+    setIsDeleteDialogOpen(false);
+    setCategoryToDelete(null);
+  };
+
+  const handleDeleteConfirm = () => {
+    if (categoryToDelete) {
+      setCategoryData((prev) =>
+        prev?.filter((c) => c?.id !== categoryToDelete?.id)
+      );
+      setIsDeleteDialogOpen(false);
+      setCategoryToDelete(null);
+    }
+  };
+
+  // Edit Category
+  const handleEditClick = (category: Category) => {
+    setCategoryToEdit(category);
+    setIsEditDialogOpen(true);
+  };
+  
+  const handleUpdateCategory = (updated: Category) => {
+    setCategoryData((prev) =>
+      prev?.map((cat) => (cat?.id === updated?.id ? updated : cat))
+    );
+  };
+
+  console.log(categoryData);
   return (
     <>
       {categoryData && categoryData?.length ? (
@@ -62,7 +106,11 @@ const Category = () => {
           </div>
           {/* Table */}
           <div className="flex-1 overflow-auto border border-[#DDE1F0] rounded-xl shadow-searchshadow">
-            <CategoryTable data={categoryData} />
+            <CategoryTable
+              data={categoryData}
+              onDelete={handleDeleteClick}
+              onEdit={handleEditClick}
+            />
           </div>
         </div>
       ) : (
@@ -74,6 +122,21 @@ const Category = () => {
         open={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
         onAddCategory={handleAddCategory}
+      />
+      <DeleteQuestionDialog
+        open={isDeleteDialogOpen}
+        title="Are You Sure?"
+        description="Are you sure you want to delete this category?"
+        onCancel={handleDeleteCancel}
+        onConfirm={handleDeleteConfirm}
+        confirmText="Delete"
+        cancelText="Cancel"
+      />
+      <EditCategoryDialog
+        open={isEditDialogOpen}
+        onClose={() => setIsEditDialogOpen(false)}
+        category={categoryToEdit}
+        onSave={handleUpdateCategory}
       />
     </>
   );
