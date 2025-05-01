@@ -221,7 +221,7 @@ const ServiceProviderSteps = () => {
 
   return (
     <>
-      <div className="pt-14 px-16 pb-8">
+      <div className="flex-1 h-[calc(100vh-170px)] max-w-5xl mx-auto flex flex-col bg-white border border-[#E5E5E5] rounded-[32px] shadow-grayshadow4 pt-14 px-16 pb-8">
         <h1 className="text-[24px] font-semibold text-[#222222] text-center mb-6">
           Profile Creation Steps
         </h1>
@@ -248,7 +248,7 @@ const ServiceProviderSteps = () => {
           ))}
         </Stepper>
 
-        <div className="mb-12">
+        <div className="w-full overflow-y-auto mb-10">
           <CurrentStepComponent
             formData={formData}
             onChange={handleFormChange}

@@ -12,6 +12,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Chip from "@mui/material/Chip";
 import { Alert, Snackbar } from "@mui/material";
+import { portfolioData } from "@/app/service-requester-dashboard/content";
 
 const ProviderProfileSettings = () => {
   const [formData, setFormData] = useState<{
@@ -259,6 +260,44 @@ const ProviderProfileSettings = () => {
                 }}
                 variant="outlined"
               />
+            ))}
+          </div>
+        </div>
+        {/* Portfolio */}
+        <div className="w-full flex flex-col gap-4 mt-14">
+          <div className="w-full flex items-center justify-between gap-2">
+            <h3 className="text-[16px] font-semibold text-lightblack">
+              Portfolio
+            </h3>
+            <button className="bg-primary rounded-full text-center text-[14px] font-medium text-white px-6 py-2">
+              Add New Portfolio
+            </button>
+          </div>
+          <div className="w-full h-full grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+            {portfolioData.slice(0, 4)?.map((item) => (
+              <div
+                key={item?.id}
+                className="flex flex-col gap-2 p-2 bg-white border border-[#DDE1F0] shadow-grayshadow rounded-xl cursor-pointer"
+              >
+                <Image
+                  src={item?.mainImg}
+                  alt="cover-photo"
+                  width={100}
+                  height={100}
+                  className="object-contain w-full rounded-lg"
+                />
+                <div className="my-[2px] pl-1">
+                  <p className="text-[14px] font-normal text-darkgray">
+                    From: {item?.startTime}
+                  </p>
+                  <h3 className="text-[16px] font-semibold text-lightblack">
+                    {item?.projectTitle}
+                  </h3>
+                </div>
+                <p className="text-[14px] font-normal text-[#181818] text-justify px-1">
+                  {item?.projectDesc}
+                </p>
+              </div>
             ))}
           </div>
         </div>

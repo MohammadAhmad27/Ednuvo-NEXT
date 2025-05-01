@@ -57,6 +57,7 @@ export default function MapComponent({ address }: MapComponentProps) {
           latitude: 24.7136,
           zoom: 5,
         }}
+        minZoom={5}
         mapStyle="mapbox://styles/mapbox/streets-v11"
         style={{ width: "100%", height: "300px", borderRadius: "12px" }}
       >
