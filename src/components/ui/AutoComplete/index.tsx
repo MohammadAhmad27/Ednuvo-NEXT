@@ -4,8 +4,8 @@ import Chip from "@mui/material/Chip";
 
 interface BaseProps {
   options: string[];
-  label: string;
   width: string;
+  label?: string;
   placeholder?: string | number;
   variant?: "default" | "green";
 }
@@ -38,9 +38,9 @@ type AutoCompleteProps = MultiProps | SingleProps;
 
 const MUIAutoComplete = ({
   options,
-  label = "",
   width,
   variant = "default",
+  label = "",
   placeholder,
   multiple = false,
   defaultValue,
@@ -74,7 +74,17 @@ const MUIAutoComplete = ({
           <Chip
             label={option}
             {...getTagProps({ index })}
-            className="bg-gray-100"
+            sx={{
+              borderRadius: "9999px",
+              borderColor: "#E9E9E9",
+              "& .MuiChip-deleteIcon": {
+                color: "#757575",
+                "&:hover": {
+                  color: "#424242",
+                },
+              },
+            }}
+            variant="outlined"
           />
         ))
       }

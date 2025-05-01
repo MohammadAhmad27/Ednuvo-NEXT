@@ -1,5 +1,5 @@
 import SettingTabs from "../ServiceRequester-Dashboard/sections/Settings/SettingTabs";
-import ProviderProfileSettngs from "./sections/Settings/ProviderProfileSettngs";
+import ProviderProfileSettngs from "./sections/Settings/ProviderProfileSettings";
 
 const ProviderSettings = () => {
   return (

@@ -62,7 +62,7 @@ const AddQuestionModal = ({
       formData.options.some((opt) => !opt.value) ||
       !formData.correctAnswer
     ) {
-      setSnackMessage("Please fill all fields");
+      setSnackMessage("Please fill all fields!");
       setAlertOpen(true);
       return;
     }

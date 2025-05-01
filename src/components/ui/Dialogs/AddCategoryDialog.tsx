@@ -36,7 +36,7 @@ const AddCategoryDialog = ({
 
   const handleAddSubCategory = () => {
     if (!subCategoryName?.trim()) {
-      setSnackMessage("Please add subcategory name");
+      setSnackMessage("Please add subcategory name!");
       setAlertOpen(true);
       return;
     }
@@ -54,7 +54,7 @@ const AddCategoryDialog = ({
 
   const handleSubmit = () => {
     if (!categoryName?.trim() || subCategories?.length === 0) {
-      setSnackMessage("Please fill all fields");
+      setSnackMessage("Please fill all fields!");
       setAlertOpen(true);
       return;
     }
@@ -152,10 +152,18 @@ const AddCategoryDialog = ({
                 variant="outlined"
                 onDelete={() => handleDeleteSub(sub?.id)}
                 sx={{
-                  "& .MuiChip-label": {
-                    fontSize: 14,
-                    fontWeight: 400,
-                    color: "#6B7177",
+                  borderRadius: "9999px",
+                  borderColor: "#E9E9E9",
+                  // "& .MuiChip-label": {
+                  //   fontSize: 14,
+                  //   fontWeight: 400,
+                  //   color: "#6B7177",
+                  // },
+                  "& .MuiChip-deleteIcon": {
+                    color: "#757575",
+                    "&:hover": {
+                      color: "#424242",
+                    },
                   },
                 }}
               />

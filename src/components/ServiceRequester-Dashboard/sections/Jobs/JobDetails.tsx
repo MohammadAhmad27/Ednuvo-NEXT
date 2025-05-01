@@ -585,7 +585,7 @@ function ReviewForm() {
           severity="warning"
           sx={{ width: "100%" }}
         >
-          You can type up to 700 characters only.
+          You can type up to 700 characters only!
         </Alert>
       </Snackbar>
     </div>

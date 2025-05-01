@@ -76,7 +76,7 @@ const EditQuestionDialog = ({
       formData.options.some((opt) => !opt.value.trim()) ||
       !formData.correctAnswer.trim()
     ) {
-      setSnackMessage("Please fill all fields");
+      setSnackMessage("Please fill all fields!");
       setAlertOpen(true);
       return;
     }
@@ -86,7 +86,7 @@ const EditQuestionDialog = ({
     );
 
     if (!isValidAnswer) {
-      setSnackMessage("Correct answer must match one of the options");
+      setSnackMessage("Correct answer must match one of the options!");
       setAlertOpen(true);
       return;
     }

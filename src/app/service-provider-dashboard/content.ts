@@ -950,3 +950,70 @@ export const providerFaqData: FAQ[] = [
     desc: "Maintain a complete and professional profile, respond quickly to job postings, provide competitive quotes, and build a strong reputation by delivering high-quality work and earning positive reviews.",
   },
 ];
+
+export const providerSkillsList = [
+  // Plumbing
+  "Pipe installation and repair",
+  "Drain cleaning and unclogging",
+  "Water heater installation",
+  "Bathroom and kitchen plumbing",
+  "Leak detection and repair",
+
+  // Electrical
+  "Wiring and rewiring",
+  "Circuit breaker installation",
+  "Lighting installation",
+  "Electrical troubleshooting",
+  "Ceiling fan and switch installation",
+
+  // Carpentry
+  "Cabinetry",
+  "Furniture repair and making",
+  "Wooden flooring installation",
+  "Framing and structural carpentry",
+  "Custom furniture making",
+  "Door/window installation",
+
+  // Cleaning
+  "Residential deep cleaning",
+  "Bathroom and kitchen cleaning",
+  "Carpet and upholstery cleaning",
+  "Move-in/move-out cleaning",
+  "Post-construction cleaning",
+
+  // Painting
+  "Interior painting",
+  "Exterior painting",
+  "Wall priming and plastering",
+  "Textured painting",
+  "Waterproof coating",
+
+  // Tiling & Flooring
+  "Floor tiling",
+  "Wall tiling",
+  "Tile regrouting",
+  "Vinyl and laminate installation",
+
+  // Roofing
+  "Roof repair",
+  "Shingle replacement",
+  "Waterproofing",
+  "Gutter installation and cleaning",
+
+  // Glass & Metal Work
+  "Glass installation",
+  "Window and door fitting",
+  "Metal railing and frame work",
+  "Welding and fabrication"
+];
+
+export const userSkills = [
+  "Pipe installation and repair",
+  "Lighting installation",
+  "Cabinetry",
+  "Residential deep cleaning",
+  "Interior painting",
+  "Floor tiling",
+  "Roof repair",
+  "Glass installation"
+];
