@@ -4,10 +4,12 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import AccountSettings from "./AccountSettings";
-import ProfileSettings from "./ProfileSettings";
 import PasswordAndSecurity from "./Password&Security";
 import NotificationSettings from "./NotificationSettings";
 
+interface Props {
+  component: React.ReactNode;
+}
 
 function CustomTabPanel(props: any) {
   const { children, value, index, ...other } = props;
@@ -39,7 +41,7 @@ function a11yProps(index: number) {
   };
 }
 
-const SettingTabs = () => {
+const SettingTabs = ({ component }: Props) => {
   const [value, setValue] = React.useState(0);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -64,7 +66,7 @@ const SettingTabs = () => {
             "& .MuiTabs-list": {
               display: "flex",
               gap: "40px",
-              overflowX: "auto"
+              overflowX: "auto",
             },
             "& .MuiTab-root": {
               minWidth: "210px",
@@ -125,7 +127,7 @@ const SettingTabs = () => {
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <div className="flex-1 h-[calc(100vh-275px)] overflow-x-hidden overflow-y-auto">
-          <ProfileSettings />
+          {component && component}
         </div>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>

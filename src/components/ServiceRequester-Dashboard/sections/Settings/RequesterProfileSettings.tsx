@@ -1,11 +1,13 @@
-import { serviceCategories } from "@/app/service-provider-onboarding/content";
-import { experienceLevel } from "@/app/service-requester-onboarding/content";
+import {
+  experienceLevel,
+  serviceCategories,
+} from "@/app/service-provider-onboarding/content";
 import MUIAutoComplete from "@/components/ui/AutoComplete";
 import MUITextField from "@/components/ui/TextField";
 import Image from "next/image";
 import { useState } from "react";
 
-const ProfileSettings = () => {
+const RequesterProfileSettings = () => {
   const [formData, setFormData] = useState<{
     photo: File | null;
     firstName: string;
@@ -13,7 +15,7 @@ const ProfileSettings = () => {
     address: string;
     phoneNumber: number | string;
     countryCode: string;
-    service: string;
+    service: string[];
     experienceLevel: string;
     about: string;
   }>({
@@ -23,7 +25,7 @@ const ProfileSettings = () => {
     address: "",
     phoneNumber: "",
     countryCode: "+966",
-    service: "",
+    service: [],
     experienceLevel: "",
     about: "",
   });
@@ -146,18 +148,19 @@ const ProfileSettings = () => {
               }
             />
             <MUIAutoComplete
-              label="Select Service You Provide"
+              label="Select Services You Provide"
               placeholder="Select service"
               width="100%"
+              multiple
               options={serviceCategories}
-              value={formData?.service || ""}
-              onChange={(_: React.SyntheticEvent, newValue: string | null) =>
-                handleFormChange({ service: newValue ?? "" })
+              value={formData?.service || []}
+              onChange={(_: React.SyntheticEvent, newValue: string[] | null) =>
+                handleFormChange({ service: newValue ?? [] })
               }
             />
             <MUIAutoComplete
               label="Your Experience Level"
-              placeholder="Enter experience level"
+              placeholder="Entry level (0 to 2 years)"
               width="100%"
               options={experienceLevel}
               value={formData?.experienceLevel || ""}
@@ -182,8 +185,13 @@ const ProfileSettings = () => {
           }
         />
       </div>
+      {/* Skills */}
+      <div className="w-full space-y-4 mt-6">
+        <h3 className="text-[16px] font-semibold text-lightblack">Skills</h3>
+        {/* start from here */}
+      </div>
     </div>
   );
 };
 
-export default ProfileSettings;
+export default RequesterProfileSettings;
