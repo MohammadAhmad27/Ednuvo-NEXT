@@ -8,6 +8,7 @@ import BrowseAllCategories from "../ui/Dialogs/AllCategoriesDialog";
 import Image from "next/image";
 
 interface PackageData {
+  packageImages: File[];
   title: string;
   description: string;
   pricingMode: string;
@@ -31,8 +32,9 @@ export default function PackagesDetail({
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedPackageIndex, setSelectedPackageIndex] = useState<number>(0);
   const [packages, setPackages] = useState<PackageData[]>(
-    formData.packages || [
+    formData?.packages || [
       {
+        packageImages: [],
         title: "",
         description: "",
         pricingMode: "",
@@ -45,15 +47,16 @@ export default function PackagesDetail({
 
   // Update local state when formData changes
   useEffect(() => {
-    if (formData.packages && formData.packages.length > 0) {
-      setPackages(formData.packages);
+    if (formData?.packages && formData?.packages?.length > 0) {
+      setPackages(formData?.packages);
     }
-  }, [formData.packages]);
+  }, [formData?.packages]);
 
   const handleAddPackage = () => {
     const updatedPackages = [
       ...packages,
       {
+        packageImages: [],
         title: "",
         description: "",
         pricingMode: "",
@@ -67,9 +70,9 @@ export default function PackagesDetail({
   };
 
   const handleRemovePackage = (index: number) => {
-    if (packages.length <= 1) return;
+    if (packages?.length <= 1) return;
     const updatedPackages = [...packages];
-    updatedPackages.splice(index, 1);
+    updatedPackages?.splice(index, 1);
     setPackages(updatedPackages);
     updateFormData(updatedPackages);
   };
@@ -103,7 +106,7 @@ export default function PackagesDetail({
         </p>
         {packages?.map((pkg, index) => (
           <div key={index} className="mb-8">
-            {packages.length > 1 && (
+            {packages?.length > 1 && (
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-[16px] font-medium text-lightblack">
                   Package {index + 1}
@@ -118,60 +121,60 @@ export default function PackagesDetail({
               </div>
             )}
 
-                  {/* Image Upload Section */}
-                      <div className="flex flex-col justify-start gap-2">
-                        <label className="text-[14px] text-lightblack font-normal">
-                        Package Thumbnail
-                        </label>
-                        <input
-                          type="file"
-                          placeholder="hidden"
-                          accept="image/*"
-                          multiple
-                          // ref={(el: any) => (fileInputRefs.current[index] = el)}
-                          // onChange={(e) => handleFileChange(index, e)}
-                          className="hidden"
-                        />
-                        <div
-                          className="flex flex-col justify-center items-center p-4 border border-gray border-dashed rounded-xl cursor-pointer mb-8"
-                          // onClick={() => handleDivClick(index)}
-                        >
-                          <Image
-                            src="/service-provider-onboarding/upload.svg"
-                            alt="upload-icon"
-                            width={30}
-                            height={30}
-                            className="object-cover"
-                          />
-                          <p className="text-[14px] font-normal text-darkgray mt-2 text-center">
-                            <span className="font-medium text-secondary">
-                              Upload images
-                            </span>{" "}
-                            or drag and drop
-                          </p>
-                          <p className="text-[12px] font-normal text-darkgray">
-                            PNG, JPG or JPEG
-                          </p>
-                        </div>
-                      </div>
+            {/* Image Upload Section */}
+            <div className="flex flex-col justify-start gap-2">
+              <label className="text-[14px] text-lightblack font-normal">
+                Package Thumbnail
+              </label>
+              <input
+                type="file"
+                placeholder="hidden"
+                accept="image/*"
+                multiple
+                // ref={(el: any) => (fileInputRefs.current[index] = el)}
+                // onChange={(e) => handleFileChange(index, e)}
+                className="hidden"
+              />
+              <div
+                className="flex flex-col justify-center items-center p-4 border border-gray border-dashed rounded-xl cursor-pointer mb-8"
+                // onClick={() => handleDivClick(index)}
+              >
+                <Image
+                  src="/service-provider-onboarding/upload.svg"
+                  alt="upload-icon"
+                  width={30}
+                  height={30}
+                  className="object-cover"
+                />
+                <p className="text-[14px] font-normal text-darkgray mt-2 text-center">
+                  <span className="font-medium text-secondary">
+                    Upload images
+                  </span>{" "}
+                  or drag and drop
+                </p>
+                <p className="text-[12px] font-normal text-darkgray">
+                  PNG, JPG or JPEG
+                </p>
+              </div>
+            </div>
 
             <div className="w-full space-y-4 mb-6">
               <MUITextField
                 label="Package Title"
                 placeholder="Enter package title"
                 type="text"
-                value={pkg.title}
+                value={pkg?.title}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handlePackageChange(index, "title", e.target.value)
+                  handlePackageChange(index, "title", e?.target?.value)
                 }
               />
               <MUITextField
                 label="Package Description"
                 placeholder="Enter package details"
                 type="text"
-                value={pkg.description}
+                value={pkg?.description}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handlePackageChange(index, "description", e.target.value)
+                  handlePackageChange(index, "description", e?.target?.value)
                 }
                 multiline
                 rows={4}
@@ -200,7 +203,7 @@ export default function PackagesDetail({
               <MUIAutoComplete
                 width="50%"
                 options={pricingModes}
-                value={pkg.pricingMode}
+                value={pkg?.pricingMode}
                 onChange={(_: React.SyntheticEvent, newValue: string | null) =>
                   handlePackageChange(index, "pricingMode", newValue ?? "")
                 }
@@ -212,9 +215,9 @@ export default function PackagesDetail({
                   label="Package Price"
                   placeholder="Enter package price"
                   type="number"
-                  value={pkg.price}
+                  value={pkg?.price}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handlePackageChange(index, "price", e.target.value)
+                    handlePackageChange(index, "price", e?.target?.value)
                   }
                 />
               </div>
@@ -225,9 +228,9 @@ export default function PackagesDetail({
                 label="Requirements"
                 placeholder="Enter requirements"
                 type="text"
-                value={pkg.requirements}
+                value={pkg?.requirements}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handlePackageChange(index, "requirements", e.target.value)
+                  handlePackageChange(index, "requirements", e?.target?.value)
                 }
                 multiline
                 rows={4}

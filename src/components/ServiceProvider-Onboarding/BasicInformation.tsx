@@ -38,30 +38,30 @@ export default function BasicInformation({
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
 
   useEffect(() => {
-    if (formData.photo && !photoPreview) {
+    if (formData?.photo && !photoPreview) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        if (e.target?.result) {
-          setPhotoPreview(e.target.result as string);
+        if (e?.target?.result) {
+          setPhotoPreview(e?.target?.result as string);
         }
       };
-      reader.readAsDataURL(formData.photo);
+      reader?.readAsDataURL(formData?.photo);
     }
-  }, [formData.photo, photoPreview]);
+  }, [formData?.photo, photoPreview]);
 
   const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
+    if (event?.target?.files && event?.target?.files[0]) {
+      const file = event?.target?.files[0];
       onChange({ photo: file });
 
       // Create preview URL
       const reader = new FileReader();
       reader.onload = (e) => {
-        if (e.target?.result) {
-          setPhotoPreview(e.target.result as string);
+        if (e?.target?.result) {
+          setPhotoPreview(e?.target?.result as string);
         }
       };
-      reader.readAsDataURL(file);
+      reader?.readAsDataURL(file);
     }
   };
 
@@ -110,7 +110,7 @@ export default function BasicInformation({
           type="text"
           value={formData?.firstName}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            onChange({ firstName: e.target.value })
+            onChange({ firstName: e?.target?.value })
           }
         />
 
@@ -120,7 +120,7 @@ export default function BasicInformation({
           type="text"
           value={formData?.lastName}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            onChange({ lastName: e.target.value })
+            onChange({ lastName: e?.target?.value })
           }
         />
       </div>
@@ -131,7 +131,7 @@ export default function BasicInformation({
           type="text"
           value={formData?.address}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            onChange({ address: e.target.value })
+            onChange({ address: e?.target?.value })
           }
           endAdornment={
             <Image
@@ -149,7 +149,7 @@ export default function BasicInformation({
           type="number"
           value={formData?.phoneNumber}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            onChange({ phoneNumber: e.target.value })
+            onChange({ phoneNumber: e?.target?.value })
           }
           startAdornment={
             <div className="flex items-center gap-[4px]">
@@ -170,7 +170,7 @@ export default function BasicInformation({
           }
         />
       </div>
-      <MapComponent address={formData.address} />
+      <MapComponent address={formData?.address} />
     </div>
   );
 }

@@ -11,7 +11,7 @@ interface PortfolioData {
   projectTitle: string;
   projectDescription: string;
   skills: string[];
-  images: File[];
+  portfolioImages: File[];
   startDate: Date | null;
   endDate: Date | null;
   projectCost: string | number;
@@ -30,12 +30,12 @@ export default function PortfolioDetails({
   onChange,
 }: PortfolioDetailsProps) {
   const [portfolios, setPortfolios] = useState<PortfolioData[]>(
-    formData.portfolios || [
+    formData?.portfolios || [
       {
         projectTitle: "",
         projectDescription: "",
         skills: [],
-        images: [],
+        portfolioImages: [],
         startDate: null,
         endDate: null,
         projectCost: "",
@@ -45,10 +45,10 @@ export default function PortfolioDetails({
 
   // Update local state when formData changes
   useEffect(() => {
-    if (formData.portfolios && formData.portfolios.length > 0) {
-      setPortfolios(formData.portfolios);
+    if (formData?.portfolios && formData?.portfolios?.length > 0) {
+      setPortfolios(formData?.portfolios);
     }
-  }, [formData.portfolios]);
+  }, [formData?.portfolios]);
 
   const fileInputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -59,7 +59,7 @@ export default function PortfolioDetails({
         projectTitle: "",
         projectDescription: "",
         skills: [],
-        images: [],
+        portfolioImages: [],
         startDate: null,
         endDate: null,
         projectCost: "",
@@ -70,9 +70,9 @@ export default function PortfolioDetails({
   };
 
   const handleRemovePortfolio = (index: number) => {
-    if (portfolios.length <= 1) return;
+    if (portfolios?.length <= 1) return;
     const updatedPortfolios = [...portfolios];
-    updatedPortfolios.splice(index, 1);
+    updatedPortfolios?.splice(index, 1);
     setPortfolios(updatedPortfolios);
     updateFormData(updatedPortfolios);
   };
@@ -87,9 +87,9 @@ export default function PortfolioDetails({
     const updatedPortfolios = [...portfolios];
     const portfolio = updatedPortfolios[index];
 
-    const updatedSkills = portfolio.skills.includes(skill)
-      ? portfolio.skills.filter((s) => s !== skill)
-      : [...portfolio.skills, skill];
+    const updatedSkills = portfolio?.skills?.includes(skill)
+      ? portfolio?.skills?.filter((s) => s !== skill)
+      : [...portfolio?.skills, skill];
 
     updatedPortfolios[index] = {
       ...portfolio,
@@ -104,9 +104,9 @@ export default function PortfolioDetails({
     index: number,
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    if (e.target.files) {
-      const selectedFiles = Array.from(e.target.files);
-      const imageFiles = selectedFiles.filter((file) =>
+    if (e?.target?.files) {
+      const selectedFiles = Array?.from(e?.target?.files);
+      const imageFiles = selectedFiles?.filter((file) =>
         file?.type?.startsWith("image/")
       );
 
@@ -115,7 +115,7 @@ export default function PortfolioDetails({
 
       updatedPortfolios[index] = {
         ...portfolio,
-        images: [...portfolio.images, ...imageFiles],
+        portfolioImages: [...portfolio?.portfolioImages, ...imageFiles],
       };
 
       setPortfolios(updatedPortfolios);
@@ -124,14 +124,14 @@ export default function PortfolioDetails({
   };
 
   const handleDivClick = (index: number) => {
-    fileInputRefs.current[index]?.click();
+    fileInputRefs?.current[index]?.click();
   };
 
   const handleStartDateChange = (index: number, date: Dayjs | null) => {
     const updatedPortfolios = [...portfolios];
     updatedPortfolios[index] = {
       ...updatedPortfolios[index],
-      startDate: date ? date.toDate() : null, // Convert to Date object
+      startDate: date ? date?.toDate() : null, // Convert to Date object
     };
     setPortfolios(updatedPortfolios);
     updateFormData(updatedPortfolios);
@@ -141,7 +141,7 @@ export default function PortfolioDetails({
     const updatedPortfolios = [...portfolios];
     updatedPortfolios[index] = {
       ...updatedPortfolios[index],
-      endDate: date ? date.toDate() : null, // Convert to Date object
+      endDate: date ? date?.toDate() : null, // Convert to Date object
     };
     setPortfolios(updatedPortfolios);
     updateFormData(updatedPortfolios);
@@ -170,7 +170,7 @@ export default function PortfolioDetails({
 
       {portfolios?.map((portfolio, index) => (
         <div key={index} className="mb-8">
-          {portfolios.length > 1 && (
+          {portfolios?.length > 1 && (
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-[16px] font-medium text-lightblack">
                 Portfolio {index + 1}
@@ -223,10 +223,10 @@ export default function PortfolioDetails({
           </div>
 
           {/* Preview uploaded images */}
-          {portfolio?.images?.length > 0 && (
+          {portfolio?.portfolioImages?.length > 0 && (
             <div className="flex flex-wrap justify-center items-center gap-4 mb-8">
-              {portfolio.images.map((file, imgIndex) => {
-                const url = URL.createObjectURL(file);
+              {portfolio?.portfolioImages?.map((file, imgIndex) => {
+                const url = URL?.createObjectURL(file);
                 return (
                   <div
                     key={imgIndex}
@@ -249,21 +249,21 @@ export default function PortfolioDetails({
               label="Project Title"
               placeholder="Enter project title"
               type="text"
-              value={portfolio.projectTitle}
+              value={portfolio?.projectTitle}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                handlePortfolioChange(index, "projectTitle", e.target.value)
+                handlePortfolioChange(index, "projectTitle", e?.target?.value)
               }
             />
             <MUITextField
               label="Project Description"
               placeholder="Enter project description"
               type="text"
-              value={portfolio.projectDescription}
+              value={portfolio?.projectDescription}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 handlePortfolioChange(
                   index,
                   "projectDescription",
-                  e.target.value
+                  e?.target?.value
                 )
               }
               multiline
@@ -277,7 +277,7 @@ export default function PortfolioDetails({
             </label>
             <div className="flex flex-wrap gap-3 mb-8">
               {skillsList?.map((skill) => {
-                const isSelected = portfolio.skills?.includes(skill);
+                const isSelected = portfolio?.skills?.includes(skill);
                 return (
                   <button
                     key={skill}
@@ -296,12 +296,12 @@ export default function PortfolioDetails({
           </div>
           <div className="w-full grid grid-cols-3 gap-2">
             <MUIDatePicker
-              value={portfolio.startDate ? dayjs(portfolio.startDate) : null}
+              value={portfolio?.startDate ? dayjs(portfolio?.startDate) : null}
               onChange={(date) => handleStartDateChange(index, date)}
               label="Project Start Date"
             />
             <MUIDatePicker
-              value={portfolio.endDate ? dayjs(portfolio.endDate) : null}
+              value={portfolio?.endDate ? dayjs(portfolio?.endDate) : null}
               onChange={(date) => handleEndDateChange(index, date)}
               label="Project Completion Date"
             />
@@ -311,7 +311,7 @@ export default function PortfolioDetails({
               type="number"
               value={portfolio?.projectCost}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                handlePortfolioChange(index, "projectCost", e.target.value)
+                handlePortfolioChange(index, "projectCost", e?.target?.value)
               }
             />
           </div>

@@ -37,21 +37,21 @@ const PaymentMethodDetails = ({
         </label>
         <div className="flex flex-wrap items-stretch gap-4">
           {paymentMethodImages?.map((item) => {
-            const isSelected = formData.paymentMethod === item.label;
+            const isSelected = formData?.paymentMethod === item?.label;
             return (
               <div
-                key={item.label}
+                key={item?.label}
                 className={`relative flex items-center justify-center px-4 py-2 border rounded-md cursor-pointer
                   ${
                     isSelected
                       ? "bg-lightgreen border-secondary"
                       : "bg-white border-gray"
                   }`}
-                onClick={() => onChange({ paymentMethod: item.label })}
+                onClick={() => onChange({ paymentMethod: item?.label })}
               >
                 <Image
                   src={item?.icon}
-                  alt={`${item.label}-icon`}
+                  alt={`${item?.label}-icon`}
                   width={75}
                   height={75}
                   className="object-cover"
@@ -77,27 +77,27 @@ const PaymentMethodDetails = ({
           label="Billed To"
           placeholder="Account Name"
           type="text"
-          value={formData.billedTo}
+          value={formData?.billedTo}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            onChange({ billedTo: e.target.value })
+            onChange({ billedTo: e?.target?.value })
           }
         />
         <MUITextField
           label="Card Number"
           placeholder="9683 3663 7310 1268"
           type="number"
-          value={formData.cardNumber}
+          value={formData?.cardNumber}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            onChange({ cardNumber: e.target.value })
+            onChange({ cardNumber: e?.target?.value })
           }
         />
       </div>
       <div className="w-full flex justify-between items-center gap-4 mb-6">
         <div className="w-1/2 flex flex-col">
           <MUIDatePicker
-            value={formData.expiration ? dayjs(formData.expiration) : null}
+            value={formData?.expiration ? dayjs(formData?.expiration) : null}
             onChange={(date: Dayjs | null) =>
-              onChange({ expiration: date ? date.toDate() : null })
+              onChange({ expiration: date ? date?.toDate() : null })
             }
             label="Expiration"
             views={["year", "month"]}
@@ -109,9 +109,9 @@ const PaymentMethodDetails = ({
             label="CVV"
             placeholder="875"
             type="number"
-            value={formData.cvv}
+            value={formData?.cvv}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              onChange({ cvv: e.target.value })
+              onChange({ cvv: e?.target?.value })
             }
           />
         </div>
@@ -119,7 +119,7 @@ const PaymentMethodDetails = ({
       <MUIAutoComplete
         width="100%"
         options={countries}
-        value={formData.country || ""}
+        value={formData?.country || ""}
         onChange={(_: React.SyntheticEvent, newValue: string | null) =>
           onChange({ country: newValue ?? "" })
         }

@@ -139,7 +139,7 @@ const ServiceProviderSteps = () => {
       projectTitle: string;
       projectDescription: string;
       skills: string[];
-      images: File[];
+      portfolioImages: File[];
       startDate: Date | null;
       endDate: Date | null;
       projectCost: string | number;
@@ -147,6 +147,7 @@ const ServiceProviderSteps = () => {
 
     // Packages Detail
     packages: Array<{
+      packageImages: File[];
       title: string;
       description: string;
       pricingMode: string;
@@ -178,7 +179,7 @@ const ServiceProviderSteps = () => {
         projectTitle: "",
         projectDescription: "",
         skills: [] as string[],
-        images: [] as File[],
+        portfolioImages: [] as File[],
         startDate: null as Date | null,
         endDate: null as Date | null,
         projectCost: "",
@@ -188,6 +189,7 @@ const ServiceProviderSteps = () => {
     // Packages Detail
     packages: [
       {
+        packageImages: [] as File[],
         title: "",
         description: "",
         pricingMode: "",

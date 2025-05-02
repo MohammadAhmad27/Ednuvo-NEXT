@@ -22,11 +22,11 @@ export default function ServiceExperience({
   onChange,
 }: ServiceExperienceProps) {
   const handleStartTimeChange = (date: Dayjs | null) => {
-    onChange({ startTime: date ? date.toDate() : null });
+    onChange({ startTime: date ? date?.toDate() : null });
   };
 
   const handleEndTimeChange = (date: Dayjs | null) => {
-    onChange({ endTime: date ? date.toDate() : null });
+    onChange({ endTime: date ? date?.toDate() : null });
   };
 
   return (
@@ -40,7 +40,7 @@ export default function ServiceExperience({
           width="50%"
           multiple
           options={serviceCategories}
-          value={formData.serviceCategories || []}
+          value={formData?.serviceCategories || []}
           onChange={(_: React.SyntheticEvent, newValue: string[] | null) =>
             onChange({ serviceCategories: newValue ?? [] })
           }
@@ -61,7 +61,7 @@ export default function ServiceExperience({
       <div className="w-full flex justify-between items-center gap-4">
         <div className="w-1/2 flex flex-col">
           <MUITimePicker
-            value={formData?.startTime ? dayjs(formData.startTime) : null}
+            value={formData?.startTime ? dayjs(formData?.startTime) : null}
             onChange={handleStartTimeChange}
             label="Start Time"
           />
@@ -69,7 +69,7 @@ export default function ServiceExperience({
 
         <div className="w-1/2 flex flex-col">
           <MUITimePicker
-            value={formData?.endTime ? dayjs(formData.endTime) : null}
+            value={formData?.endTime ? dayjs(formData?.endTime) : null}
             onChange={handleEndTimeChange}
             label="End Time"
           />

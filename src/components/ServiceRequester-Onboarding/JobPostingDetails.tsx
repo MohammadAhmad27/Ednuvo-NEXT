@@ -35,15 +35,15 @@ interface JobDetailsProps {
 
 const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [images, setImages] = useState<File[]>(formData.imagesList || []);
+  const [images, setImages] = useState<File[]>(formData?.imagesList || []);
   const [selectedCategories, setSelectedCategories] = useState<string[]>(
-    formData.categoriesList || []
+    formData?.categoriesList || []
   );
 
   useEffect(() => {
-    setImages(formData.imagesList || []);
-    setSelectedCategories(formData.categoriesList || []);
-  }, [formData.imagesList, formData.categoriesList]);
+    setImages(formData?.imagesList || []);
+    setSelectedCategories(formData?.categoriesList || []);
+  }, [formData?.imagesList, formData?.categoriesList]);
 
   const toggleCategory = (category: string) => {
     const updatedCategories = selectedCategories?.includes(category)
@@ -55,9 +55,9 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const selectedFiles = Array.from(e.target.files);
-      const imageFiles = selectedFiles.filter((file) =>
+    if (e?.target?.files) {
+      const selectedFiles = Array?.from(e?.target?.files);
+      const imageFiles = selectedFiles?.filter((file) =>
         file?.type?.startsWith("image/")
       );
 
@@ -83,18 +83,18 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
           label="Job Title"
           placeholder="Enter job title"
           type="text"
-          value={formData.jobTitle}
+          value={formData?.jobTitle}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            onChange({ jobTitle: e.target.value })
+            onChange({ jobTitle: e?.target?.value })
           }
         />
         <MUITextField
           label="Job Description"
           placeholder="Enter job description"
           type="text"
-          value={formData.jobDescription}
+          value={formData?.jobDescription}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            onChange({ jobDescription: e.target.value })
+            onChange({ jobDescription: e?.target?.value })
           }
           multiline
           rows={4}
@@ -105,7 +105,7 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
         <MUIAutoComplete
           width="50%"
           options={jobCategories}
-          value={formData.jobCategory || ""}
+          value={formData?.jobCategory || ""}
           onChange={(_: React.SyntheticEvent, newValue: string | null) =>
             onChange({ jobCategory: newValue ?? "" })
           }
@@ -115,7 +115,7 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
         <MUIAutoComplete
           width="50%"
           options={jobSubCategories}
-          value={formData.jobSubCategory || ""}
+          value={formData?.jobSubCategory || ""}
           onChange={(_: React.SyntheticEvent, newValue: string | null) =>
             onChange({ jobSubCategory: newValue ?? "" })
           }
@@ -132,7 +132,7 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
             type="text"
             value={formData?.location}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              onChange({ location: e.target.value })
+              onChange({ location: e?.target?.value })
             }
             endAdornment={
               <Image
@@ -148,7 +148,7 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
         <MUIAutoComplete
           width="50%"
           options={jobDuration}
-          value={formData.jobDuration || ""}
+          value={formData?.jobDuration || ""}
           onChange={(_: React.SyntheticEvent, newValue: string | null) =>
             onChange({ jobDuration: newValue ?? "" })
           }
@@ -161,7 +161,7 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
         <MUIAutoComplete
           width="50%"
           options={pricingModes}
-          value={formData.budgetMode || ""}
+          value={formData?.budgetMode || ""}
           onChange={(_: React.SyntheticEvent, newValue: string | null) =>
             onChange({ budgetMode: newValue ?? "" })
           }
@@ -173,9 +173,9 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
             label="Total Budget"
             placeholder="Enter budget"
             type="number"
-            value={formData.totalBudget}
+            value={formData?.totalBudget}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              onChange({ totalBudget: e.target.value })
+              onChange({ totalBudget: e?.target?.value })
             }
           />
         </div>
@@ -185,7 +185,7 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
         <MUIAutoComplete
           width="50%"
           options={experienceLevel}
-          value={formData.experienceLevel || ""}
+          value={formData?.experienceLevel || ""}
           onChange={(_: React.SyntheticEvent, newValue: string | null) =>
             onChange({ experienceLevel: newValue ?? "" })
           }
@@ -195,8 +195,8 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
 
         <div className="w-1/2 flex flex-col">
           <MUIDatePicker
-            value={formData.jobStartDate ? dayjs(formData.jobStartDate) : null}
-            onChange={(date: Dayjs | null) => onChange({ jobStartDate: date ? date.toDate() : null })}
+            value={formData?.jobStartDate ? dayjs(formData?.jobStartDate) : null}
+            onChange={(date: Dayjs | null) => onChange({ jobStartDate: date ? date?.toDate() : null })}
             label="Job Start Date"
           />
         </div>
@@ -267,7 +267,7 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
       {images?.length > 0 && (
         <div className="flex flex-wrap justify-center items-center gap-4 mb-8">
           {images?.map((file, index) => {
-            const url = URL.createObjectURL(file);
+            const url = URL?.createObjectURL(file);
             return (
               <div key={index} className="w-[50px] h-[50px] relative rounded">
                 <Image

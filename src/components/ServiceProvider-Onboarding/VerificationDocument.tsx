@@ -16,23 +16,23 @@ export default function VerificationDocument({
 }: VerificationDocumentProps) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [documents, setDocuments] = useState<File[]>(
-    formData.verificationDocument || []
+    formData?.verificationDocument || []
   );
 
   useEffect(() => {
-    setDocuments(formData.verificationDocument || []);
-  }, [formData.verificationDocument]);
+    setDocuments(formData?.verificationDocument || []);
+  }, [formData?.verificationDocument]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const selectedFiles = Array.from(e.target.files);
-      const imageFiles = selectedFiles.filter((file) =>
+    if (e?.target?.files) {
+      const selectedFiles = Array?.from(e?.target?.files);
+      const imageFiles = selectedFiles?.filter((file) =>
         file?.type?.startsWith("image/")
       );
 
-      const totalFiles = documents.length + imageFiles.length;
+      const totalFiles = documents?.length + imageFiles?.length;
       if (totalFiles > 2) {
-        const allowedFiles = imageFiles.slice(0, 2 - documents.length);
+        const allowedFiles = imageFiles?.slice(0, 2 - documents?.length);
         const newDocuments = [...documents, ...allowedFiles];
         setDocuments(newDocuments);
         onChange({ verificationDocument: newDocuments });
@@ -97,8 +97,8 @@ export default function VerificationDocument({
             Uploaded Documents
           </h3>
           <div className="flex flex-wrap gap-4">
-            {documents.map((file, index) => {
-              const url = URL.createObjectURL(file);
+            {documents?.map((file, index) => {
+              const url = URL?.createObjectURL(file);
               return (
                 <div
                   key={index}
