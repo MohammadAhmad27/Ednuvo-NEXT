@@ -5,7 +5,8 @@ import MUITextField from "../ui/TextField";
 import { skillsList } from "@/app/service-provider-onboarding/content";
 import dayjs, { Dayjs } from "dayjs";
 import MUIDatePicker from "../ui/DatePicker";
-import { Add, Delete } from "@mui/icons-material";
+import { Add, Close, Delete } from "@mui/icons-material";
+import { Tooltip } from "@mui/material";
 
 interface PortfolioData {
   projectTitle: string;
@@ -227,17 +228,55 @@ export default function PortfolioDetails({
             <div className="flex flex-wrap justify-center items-center gap-4 mb-8">
               {portfolio?.portfolioImages?.map((file, imgIndex) => {
                 const url = URL?.createObjectURL(file);
+                const handleDeleteImage = (
+                  portfolioIndex: number,
+                  imageIndex: number
+                ) => {
+                  const updatedPortfolios = [...portfolios];
+                  const updatedImages = updatedPortfolios[
+                    portfolioIndex
+                  ]?.portfolioImages?.filter((_, idx) => idx !== imageIndex);
+
+                  updatedPortfolios[portfolioIndex] = {
+                    ...updatedPortfolios[portfolioIndex],
+                    portfolioImages: updatedImages,
+                  };
+
+                  setPortfolios(updatedPortfolios);
+                  updateFormData(updatedPortfolios);
+                };
                 return (
                   <div
                     key={imgIndex}
-                    className="w-[50px] h-[50px] relative rounded"
+                    className="w-[50px] h-[50px] relative rounded group"
                   >
-                    <Image
-                      src={url}
-                      alt={`uploaded-${imgIndex}`}
-                      fill
-                      className="object-cover rounded"
-                    />
+                    <Tooltip
+                      title={
+                        <p className="text-[10px] font-medium text-white">
+                          {file?.name}
+                        </p>
+                      }
+                      placement="bottom"
+                      arrow
+                    >
+                      <div className="w-full h-full relative">
+                        <Image
+                          src={url}
+                          alt={`uploaded-${imgIndex}`}
+                          fill
+                          className="object-cover rounded hover:grayscale hover:filter"
+                        />
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteImage(index, imgIndex);
+                          }}
+                          className="absolute top-0 right-0 flex justify-center items-center p-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out bg-black/50 rounded-full"
+                        >
+                          <Close sx={{ fontSize: 8, color: "white" }} />
+                        </button>
+                      </div>
+                    </Tooltip>
                   </div>
                 );
               })}

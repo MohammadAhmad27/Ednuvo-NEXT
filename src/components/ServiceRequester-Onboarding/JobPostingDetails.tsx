@@ -13,6 +13,8 @@ import Image from "next/image";
 import { pricingModes } from "@/app/service-provider-onboarding/content";
 import MUIDatePicker from "../ui/DatePicker";
 import dayjs, { Dayjs } from "dayjs";
+import { Tooltip } from "@mui/material";
+import { Close } from "@mui/icons-material";
 
 interface JobDetailsProps {
   formData: {
@@ -195,8 +197,12 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
 
         <div className="w-1/2 flex flex-col">
           <MUIDatePicker
-            value={formData?.jobStartDate ? dayjs(formData?.jobStartDate) : null}
-            onChange={(date: Dayjs | null) => onChange({ jobStartDate: date ? date?.toDate() : null })}
+            value={
+              formData?.jobStartDate ? dayjs(formData?.jobStartDate) : null
+            }
+            onChange={(date: Dayjs | null) =>
+              onChange({ jobStartDate: date ? date?.toDate() : null })
+            }
             label="Job Start Date"
           />
         </div>
@@ -268,14 +274,45 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
         <div className="flex flex-wrap justify-center items-center gap-4 mb-8">
           {images?.map((file, index) => {
             const url = URL?.createObjectURL(file);
+
+            const handleDeleteImage = (index: number) => {
+              const updatedImages = images?.filter((_, i) => i !== index);
+              setImages(updatedImages);
+              onChange({ imagesList: updatedImages });
+            };
+
             return (
-              <div key={index} className="w-[50px] h-[50px] relative rounded">
-                <Image
-                  src={url}
-                  alt={`uploaded-${index}`}
-                  fill
-                  className="object-cover rounded"
-                />
+              <div
+                key={index}
+                className="w-[50px] h-[50px] relative rounded group"
+              >
+                <Tooltip
+                  title={
+                    <p className="text-[10px] font-medium text-white">
+                      {file?.name}
+                    </p>
+                  }
+                  placement="bottom"
+                  arrow
+                >
+                  <div className="w-full h-full relative">
+                    <Image
+                      src={url}
+                      alt={`uploaded-${index}`}
+                      fill
+                      className="object-cover rounded hover:grayscale hover:filter"
+                    />
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeleteImage(index);
+                      }}
+                      className="absolute top-0 right-0 flex justify-center items-center p-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out bg-black/50 rounded-full"
+                    >
+                      <Close sx={{ fontSize: 8, color: "white" }} />
+                    </button>
+                  </div>
+                </Tooltip>
               </div>
             );
           })}

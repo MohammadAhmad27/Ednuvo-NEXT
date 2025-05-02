@@ -2,11 +2,11 @@
 import { pricingModes } from "@/app/service-provider-onboarding/content";
 import MUIAutoComplete from "../ui/AutoComplete";
 import MUITextField from "../ui/TextField";
-import { Add, Delete } from "@mui/icons-material";
+import { Add, Delete, Close } from "@mui/icons-material";
 import { useEffect, useRef, useState } from "react";
 import BrowseAllCategories from "../ui/Dialogs/AllCategoriesDialog";
 import Image from "next/image";
-import { Chip } from "@mui/material";
+import { Chip, Tooltip } from "@mui/material";
 
 interface PackageData {
   packageImages: File[];
@@ -193,17 +193,55 @@ export default function PackagesDetail({
               <div className="flex flex-wrap justify-center items-center gap-4 mb-8">
                 {pkg?.packageImages?.map((file, imgIndex) => {
                   const url = URL?.createObjectURL(file);
+                  const handleDeleteImage = (
+                    packageIndex: number,
+                    imageIndex: number
+                  ) => {
+                    const updatedPackages = [...packages];
+
+                    const updatedImages = updatedPackages[
+                      packageIndex
+                    ]?.packageImages?.filter((_, idx) => idx !== imageIndex);
+
+                    updatedPackages[packageIndex] = {
+                      ...updatedPackages[packageIndex],
+                      packageImages: updatedImages,
+                    };
+                    setPackages(updatedPackages);
+                    updateFormData(updatedPackages);
+                  };
                   return (
                     <div
                       key={imgIndex}
-                      className="w-[50px] h-[50px] relative rounded"
+                      className="w-[50px] h-[50px] relative rounded group"
                     >
-                      <Image
-                        src={url}
-                        alt={`uploaded-${imgIndex}`}
-                        fill
-                        className="object-cover rounded"
-                      />
+                      <Tooltip
+                        title={
+                          <p className="text-[10px] font-medium text-white">
+                            {file?.name}
+                          </p>
+                        }
+                        placement="bottom"
+                        arrow
+                      >
+                        <div className="w-full h-full relative">
+                          <Image
+                            src={url}
+                            alt={`uploaded-${imgIndex}`}
+                            fill
+                            className="object-cover rounded hover:grayscale hover:filter"
+                          />
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDeleteImage(index, imgIndex);
+                            }}
+                            className="absolute top-0 right-0 flex justify-center items-center p-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out bg-black/50 rounded-full"
+                          >
+                            <Close sx={{ fontSize: 8, color: "white" }} />
+                          </button>
+                        </div>
+                      </Tooltip>
                     </div>
                   );
                 })}
