@@ -815,7 +815,13 @@ export const packageCardData: PackageCard[] = [
 export const portfolioData: PortfolioCard[] = [
   {
     id: 1,
-    mainImg: "/service-requester-dashboard/portfolio1.svg",
+    mainImg: [
+      "/service-requester-dashboard/portfolio1.svg",
+      "/service-requester-dashboard/portfolio2.svg",
+      "/service-requester-dashboard/portfolio3.svg",
+      "/service-requester-dashboard/portfolio4.svg",
+      "/service-requester-dashboard/cover2.svg",
+    ],
     startTime: "10 January, 2025",
     endTime: "30 February, 2025",
     projectTitle: "Plumbing & Carpentry Services",
@@ -833,7 +839,13 @@ export const portfolioData: PortfolioCard[] = [
   },
   {
     id: 2,
-    mainImg: "/service-requester-dashboard/portfolio2.svg",
+    mainImg: [
+      "/service-requester-dashboard/portfolio2.svg",
+      "/service-requester-dashboard/portfolio1.svg",
+      "/service-requester-dashboard/portfolio3.svg",
+      "/service-requester-dashboard/portfolio4.svg",
+      "/service-requester-dashboard/cover2.svg",
+    ],
     startTime: "5 December, 2024",
     endTime: "10 March, 2025",
     projectTitle: "Bathroom Plumbing Renovation",
@@ -851,7 +863,13 @@ export const portfolioData: PortfolioCard[] = [
   },
   {
     id: 3,
-    mainImg: "/service-requester-dashboard/portfolio3.svg",
+    mainImg: [
+      "/service-requester-dashboard/portfolio3.svg",
+      "/service-requester-dashboard/portfolio1.svg",
+      "/service-requester-dashboard/portfolio2.svg",
+      "/service-requester-dashboard/portfolio4.svg",
+      "/service-requester-dashboard/cover2.svg",
+    ],
     startTime: "9 November, 2024",
     endTime: "3 April, 2025",
     projectTitle: "Commercial Pipe System Installation",
@@ -869,7 +887,13 @@ export const portfolioData: PortfolioCard[] = [
   },
   {
     id: 4,
-    mainImg: "/service-requester-dashboard/portfolio4.svg",
+    mainImg: [
+      "/service-requester-dashboard/portfolio4.svg",
+      "/service-requester-dashboard/portfolio1.svg",
+      "/service-requester-dashboard/portfolio2.svg",
+      "/service-requester-dashboard/portfolio3.svg",
+      "/service-requester-dashboard/cover2.svg",
+    ],
     startTime: "15 October, 2024",
     endTime: "16 November, 2024",
     projectTitle: "Industrial Plumbing Maintenance",
@@ -887,7 +911,13 @@ export const portfolioData: PortfolioCard[] = [
   },
   {
     id: 5,
-    mainImg: "/service-requester-dashboard/cover2.svg",
+    mainImg: [
+      "/service-requester-dashboard/cover2.svg",
+      "/service-requester-dashboard/portfolio1.svg",
+      "/service-requester-dashboard/portfolio2.svg",
+      "/service-requester-dashboard/portfolio3.svg",
+      "/service-requester-dashboard/portfolio4.svg",
+    ],
     startTime: "29 September, 2024",
     endTime: "13 February, 2025",
     projectTitle: "Emergency Leak Repair Service",
@@ -905,7 +935,13 @@ export const portfolioData: PortfolioCard[] = [
   },
   {
     id: 6,
-    mainImg: "/service-requester-dashboard/portfolio1.svg",
+    mainImg: [
+      "/service-requester-dashboard/portfolio1.svg",
+      "/service-requester-dashboard/portfolio2.svg",
+      "/service-requester-dashboard/portfolio3.svg",
+      "/service-requester-dashboard/portfolio4.svg",
+      "/service-requester-dashboard/cover2.svg",
+    ],
     startTime: "12 August, 2024",
     endTime: "30 April, 2025",
     projectTitle: "Custom Kitchen Cabinetry",
@@ -923,7 +959,13 @@ export const portfolioData: PortfolioCard[] = [
   },
   {
     id: 7,
-    mainImg: "/service-requester-dashboard/portfolio2.svg",
+    mainImg: [
+      "/service-requester-dashboard/portfolio2.svg",
+      "/service-requester-dashboard/portfolio1.svg",
+      "/service-requester-dashboard/portfolio3.svg",
+      "/service-requester-dashboard/portfolio4.svg",
+      "/service-requester-dashboard/cover2.svg",
+    ],
     startTime: "7 July, 2024",
     endTime: "19 October, 2025",
     projectTitle: "Hardwood Flooring Installation",
@@ -941,7 +983,13 @@ export const portfolioData: PortfolioCard[] = [
   },
   {
     id: 8,
-    mainImg: "/service-requester-dashboard/portfolio3.svg",
+    mainImg: [
+      "/service-requester-dashboard/portfolio3.svg",
+      "/service-requester-dashboard/portfolio1.svg",
+      "/service-requester-dashboard/portfolio2.svg",
+      "/service-requester-dashboard/portfolio4.svg",
+      "/service-requester-dashboard/cover2.svg",
+    ],
     startTime: "6 June, 2024",
     endTime: "20 August, 2025",
     projectTitle: "Custom Furniture Creation",
@@ -959,7 +1007,13 @@ export const portfolioData: PortfolioCard[] = [
   },
   {
     id: 9,
-    mainImg: "/service-requester-dashboard/portfolio4.svg",
+    mainImg: [
+      "/service-requester-dashboard/portfolio4.svg",
+      "/service-requester-dashboard/portfolio1.svg",
+      "/service-requester-dashboard/portfolio2.svg",
+      "/service-requester-dashboard/portfolio3.svg",
+      "/service-requester-dashboard/cover2.svg",
+    ],
     startTime: "4 May, 2024",
     endTime: "17 December, 2025",
     projectTitle: "Complete Home Renovation",
@@ -977,7 +1031,13 @@ export const portfolioData: PortfolioCard[] = [
   },
   {
     id: 10,
-    mainImg: "/service-requester-dashboard/cover2.svg",
+    mainImg: [
+      "/service-requester-dashboard/cover2.svg",
+      "/service-requester-dashboard/portfolio1.svg",
+      "/service-requester-dashboard/portfolio2.svg",
+      "/service-requester-dashboard/portfolio3.svg",
+      "/service-requester-dashboard/portfolio4.svg",
+    ],
     startTime: "1 April, 2024",
     endTime: "13 February, 2025",
     projectTitle: "Office Space Remodeling",

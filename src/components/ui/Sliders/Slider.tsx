@@ -19,11 +19,11 @@ const Slider = <T,>({ cards, renderCard, itemsPerSlide }: SliderProps<T>) => {
   const swiperRef = useRef<SwiperType | null>(null);
 
   const handleMouseEnter = () => {
-    swiperRef.current?.autoplay?.stop();
+    swiperRef?.current?.autoplay?.stop();
   };
 
   const handleMouseLeave = () => {
-    swiperRef.current?.autoplay?.start();
+    swiperRef?.current?.autoplay?.start();
   };
 
   const columnClassMap: Record<number, string> = {
@@ -36,7 +36,7 @@ const Slider = <T,>({ cards, renderCard, itemsPerSlide }: SliderProps<T>) => {
   // Dynamic rendering based on itemsPerSlide
   const slides =
     itemsPerSlide === 1
-      ? cards.map((card, index) => (
+      ? cards?.map((card, index) => (
           <SwiperSlide key={index}>
             <div
               onMouseEnter={handleMouseEnter}
@@ -47,14 +47,14 @@ const Slider = <T,>({ cards, renderCard, itemsPerSlide }: SliderProps<T>) => {
             </div>
           </SwiperSlide>
         ))
-      : chunkArray(cards, itemsPerSlide).map((group, index) => (
+      : chunkArray(cards, itemsPerSlide)?.map((group, index) => (
           <SwiperSlide key={index}>
             <div
               className={`w-full grid ${
                 columnClassMap[itemsPerSlide] || "grid-cols-1"
               } items-stretch gap-2`}
             >
-              {group.map((card, i) => (
+              {group?.map((card, i) => (
                 <div
                   key={i}
                   onMouseEnter={handleMouseEnter}

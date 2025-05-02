@@ -110,7 +110,7 @@ export interface PackageCard {
 
 export interface PortfolioCard {
   id: number;
-  mainImg: string;
+  mainImg: string[];
   startTime: string;
   endTime: string;
   projectTitle: string;

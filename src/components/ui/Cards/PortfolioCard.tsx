@@ -21,7 +21,7 @@ const PortfolioCardComponent = ({ user }: UserCardProps) => {
       {/* Featured Portfolio */}
       <div className="w-full flex max-lg:flex-col items-stretch gap-8">
         <Image
-          src={selectedPortfolio?.mainImg}
+          src={selectedPortfolio?.mainImg[0]}
           alt="portfolio-cover"
           width={100}
           height={100}
@@ -83,7 +83,7 @@ const PortfolioCardComponent = ({ user }: UserCardProps) => {
             <Image
               key={portfolio?.id}
               onClick={() => setSelectedPortfolio(portfolio)}
-              src={portfolio.mainImg}
+              src={portfolio?.mainImg[0]}
               alt="portfolio-cover"
               width={200}
               height={200}
@@ -100,7 +100,7 @@ const PortfolioCardComponent = ({ user }: UserCardProps) => {
           >
             <div className="w-full h-full rounded-[20px] border border-gray flex items-center justify-center">
               <span className="text-[18px] font-medium text-lightblack">
-                + {portfolioData.length - 4} Projects
+                + {portfolioData?.length - 4} Projects
               </span>
             </div>
           </Link>

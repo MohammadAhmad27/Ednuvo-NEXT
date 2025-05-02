@@ -39,3 +39,13 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #5bbb7b;
 }
+
+.swiper-pagination-bullet {
+  background-color: #FFFFFF !important;
+  opacity: 0.7 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #1f4b3f !important;
+  opacity: 1 !important;
+}

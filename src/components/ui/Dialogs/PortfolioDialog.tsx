@@ -1,6 +1,14 @@
-import { PortfolioCard } from "@/interfaces/ServiceRequesterDashboard";
+"use client";
+import type { PortfolioCard } from "@/interfaces/ServiceRequesterDashboard";
 import { Dialog, DialogTitle, DialogContent } from "@mui/material";
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+import { useRef } from "react";
 
 const PortfolioDialog = ({
   isModalOpen,
@@ -14,6 +22,9 @@ const PortfolioDialog = ({
   const handleClose = () => {
     setIsModalOpen(false);
   };
+
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
 
   return (
     <Dialog
@@ -58,13 +69,51 @@ const PortfolioDialog = ({
         />
       </DialogTitle>
       <DialogContent>
-        <Image
-          src={portfolio?.mainImg}
-          alt="project-image"
-          width={100}
-          height={100}
-          className="object-cover w-full h-[340px] rounded-2xl"
-        />
+        <div className="relative">
+          <Swiper
+            modules={[Autoplay, Navigation, Pagination]}
+            loop={true}
+            autoplay={{ delay: 4000, disableOnInteraction: false }}
+            pagination={{ clickable: true }}
+            navigation={{
+              prevEl: prevRef.current,
+              nextEl: nextRef.current,
+            }}
+            onBeforeInit={(swiper) => {
+              // Fix navigation refs (Swiper needs them before mount)
+              // @ts-ignore
+              swiper.params.navigation.prevEl = prevRef.current;
+              // @ts-ignore
+              swiper.params.navigation.nextEl = nextRef.current;
+            }}
+            slidesPerView={1}
+            spaceBetween={10}
+          >
+            {portfolio?.mainImg?.map((img, index) => (
+              <SwiperSlide key={index}>
+                <Image
+                  src={img}
+                  alt={`project-image-${index}`}
+                  width={100}
+                  height={100}
+                  className="object-cover w-full h-[340px] rounded-2xl"
+                />
+              </SwiperSlide>
+            ))}
+            <div
+              ref={prevRef}
+              className="absolute left-4 top-1/2 z-10 flex items-center justify-center w-6 h-6 -mt-5 bg-white border border-[#EEF0F1] rounded-full cursor-pointer"
+            >
+              <ChevronLeft className="w-6 h-6 text-[#212223]" />
+            </div>
+            <div
+              ref={nextRef}
+              className="absolute right-4 top-1/2 z-10 flex items-center justify-center w-6 h-6 -mt-5 bg-white border border-[#EEF0F1] rounded-full cursor-pointer"
+            >
+              <ChevronRight className="w-6 h-6 text-[#212223]" />
+            </div>
+          </Swiper>
+        </div>
         <div className="flex items-center gap-2 mt-3">
           <p className="text-[14px] font-medium text-darkgray">From:</p>
           <p className="text-[14px] font-medium text-darkgray">
@@ -111,7 +160,7 @@ const PortfolioDialog = ({
           </div>
           <div className="flex flex-col">
             <p className="text-[12px] font-normal text-darkgray">
-              Project Compeltion Date
+              Project Completion Date
             </p>
             <p className="text-[16px] font-semibold text-lightblack">
               {portfolio?.endTime}
