@@ -142,6 +142,7 @@ const ServiceProviderSteps = () => {
       images: File[];
       startDate: Date | null;
       endDate: Date | null;
+      projectCost: string | number;
     }>;
 
     // Packages Detail
@@ -149,7 +150,7 @@ const ServiceProviderSteps = () => {
       title: string;
       description: string;
       pricingMode: string;
-      price: string;
+      price: string | number;
       category: string;
       requirements: string;
     }>;
@@ -180,6 +181,7 @@ const ServiceProviderSteps = () => {
         images: [] as File[],
         startDate: null as Date | null,
         endDate: null as Date | null,
+        projectCost: "",
       },
     ],
 

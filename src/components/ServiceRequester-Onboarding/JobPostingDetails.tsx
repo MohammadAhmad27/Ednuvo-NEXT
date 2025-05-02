@@ -173,7 +173,7 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
             label="Total Budget"
             placeholder="Enter budget"
             type="number"
-            value={formData.totalBudget.toString()}
+            value={formData.totalBudget}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               onChange({ totalBudget: e.target.value })
             }
@@ -258,7 +258,7 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
             or drag and drop
           </p>
           <p className="text-[12px] font-normal text-darkgray">
-            PNG, JPG, JPEG only
+            PNG, JPG or JPEG
           </p>
         </div>
       </div>

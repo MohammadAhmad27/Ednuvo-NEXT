@@ -5,12 +5,13 @@ import MUITextField from "../ui/TextField";
 import { Add, Delete } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import BrowseAllCategories from "../ui/Dialogs/AllCategoriesDialog";
+import Image from "next/image";
 
 interface PackageData {
   title: string;
   description: string;
   pricingMode: string;
-  price: string;
+  price: string | number;
   category: string;
   requirements: string;
 }
@@ -116,6 +117,43 @@ export default function PackagesDetail({
                 </button>
               </div>
             )}
+
+                  {/* Image Upload Section */}
+                      <div className="flex flex-col justify-start gap-2">
+                        <label className="text-[14px] text-lightblack font-normal">
+                        Package Thumbnail
+                        </label>
+                        <input
+                          type="file"
+                          placeholder="hidden"
+                          accept="image/*"
+                          multiple
+                          // ref={(el: any) => (fileInputRefs.current[index] = el)}
+                          // onChange={(e) => handleFileChange(index, e)}
+                          className="hidden"
+                        />
+                        <div
+                          className="flex flex-col justify-center items-center p-4 border border-gray border-dashed rounded-xl cursor-pointer mb-8"
+                          // onClick={() => handleDivClick(index)}
+                        >
+                          <Image
+                            src="/service-provider-onboarding/upload.svg"
+                            alt="upload-icon"
+                            width={30}
+                            height={30}
+                            className="object-cover"
+                          />
+                          <p className="text-[14px] font-normal text-darkgray mt-2 text-center">
+                            <span className="font-medium text-secondary">
+                              Upload images
+                            </span>{" "}
+                            or drag and drop
+                          </p>
+                          <p className="text-[12px] font-normal text-darkgray">
+                            PNG, JPG or JPEG
+                          </p>
+                        </div>
+                      </div>
 
             <div className="w-full space-y-4 mb-6">
               <MUITextField

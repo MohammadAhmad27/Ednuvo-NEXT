@@ -7,7 +7,7 @@ const AdminSettings = () => {
       <h2 className="text-[18px] font-semibold text-[#2D2D2D]">
         Profile Settings
       </h2>
-      <SettingTabs component={<AdminProfileSettings />} />
+      <SettingTabs />
     </div>
   );
 };

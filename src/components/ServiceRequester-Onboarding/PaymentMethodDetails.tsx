@@ -86,7 +86,7 @@ const PaymentMethodDetails = ({
           label="Card Number"
           placeholder="9683 3663 7310 1268"
           type="number"
-          value={formData.cardNumber.toString()}
+          value={formData.cardNumber}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             onChange({ cardNumber: e.target.value })
           }
@@ -109,7 +109,7 @@ const PaymentMethodDetails = ({
             label="CVV"
             placeholder="875"
             type="number"
-            value={formData.cvv.toString()}
+            value={formData.cvv}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               onChange({ cvv: e.target.value })
             }

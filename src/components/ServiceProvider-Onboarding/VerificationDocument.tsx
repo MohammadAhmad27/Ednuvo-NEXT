@@ -85,7 +85,7 @@ export default function VerificationDocument({
             or drag and drop
           </p>
           <p className="text-[12px] font-normal text-darkgray">
-            PNG, JPG, JPEG only
+          PNG, JPG or JPEG
           </p>
         </div>
       </div>

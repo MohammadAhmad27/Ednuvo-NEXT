@@ -162,7 +162,7 @@ export default function BasicInformation({
             label="Phone Number"
             placeholder="123445"
             type="number"
-            value={formData?.phoneNumber?.toString()}
+            value={formData?.phoneNumber}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               onChange({ phoneNumber: e.target.value })
             }

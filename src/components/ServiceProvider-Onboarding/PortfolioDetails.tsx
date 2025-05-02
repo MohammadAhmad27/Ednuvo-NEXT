@@ -14,6 +14,7 @@ interface PortfolioData {
   images: File[];
   startDate: Date | null;
   endDate: Date | null;
+  projectCost: string | number;
 }
 
 interface PortfolioDetailsProps {
@@ -37,6 +38,7 @@ export default function PortfolioDetails({
         images: [],
         startDate: null,
         endDate: null,
+        projectCost: "",
       },
     ]
   );
@@ -60,6 +62,7 @@ export default function PortfolioDetails({
         images: [],
         startDate: null,
         endDate: null,
+        projectCost: "",
       },
     ];
     setPortfolios(updatedPortfolios);
@@ -214,7 +217,7 @@ export default function PortfolioDetails({
                 or drag and drop
               </p>
               <p className="text-[12px] font-normal text-darkgray">
-                PNG, JPG, JPEG only
+                PNG, JPG or JPEG
               </p>
             </div>
           </div>
@@ -291,21 +294,26 @@ export default function PortfolioDetails({
               })}
             </div>
           </div>
-          <div className="w-full flex justify-between items-center gap-2">
-            <div className="w-full flex flex-col">
-              <MUIDatePicker
-                value={portfolio.startDate ? dayjs(portfolio.startDate) : null}
-                onChange={(date) => handleStartDateChange(index, date)}
-                label="Project Start Date"
-              />
-            </div>
-            <div className="w-full flex flex-col">
-              <MUIDatePicker
-                value={portfolio.endDate ? dayjs(portfolio.endDate) : null}
-                onChange={(date) => handleEndDateChange(index, date)}
-                label="Project Completion Date"
-              />
-            </div>
+          <div className="w-full grid grid-cols-3 gap-2">
+            <MUIDatePicker
+              value={portfolio.startDate ? dayjs(portfolio.startDate) : null}
+              onChange={(date) => handleStartDateChange(index, date)}
+              label="Project Start Date"
+            />
+            <MUIDatePicker
+              value={portfolio.endDate ? dayjs(portfolio.endDate) : null}
+              onChange={(date) => handleEndDateChange(index, date)}
+              label="Project Completion Date"
+            />
+            <MUITextField
+              label="Project Cost"
+              placeholder="Enter project cost"
+              type="number"
+              value={portfolio?.projectCost}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handlePortfolioChange(index, "projectCost", e.target.value)
+              }
+            />
           </div>
         </div>
       ))}
