@@ -3,9 +3,10 @@ import { pricingModes } from "@/app/service-provider-onboarding/content";
 import MUIAutoComplete from "../ui/AutoComplete";
 import MUITextField from "../ui/TextField";
 import { Add, Delete } from "@mui/icons-material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import BrowseAllCategories from "../ui/Dialogs/AllCategoriesDialog";
 import Image from "next/image";
+import { Chip } from "@mui/material";
 
 interface PackageData {
   packageImages: File[];
@@ -52,6 +53,8 @@ export default function PackagesDetail({
     }
   }, [formData?.packages]);
 
+  const fileInputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
   const handleAddPackage = () => {
     const updatedPackages = [
       ...packages,
@@ -97,6 +100,33 @@ export default function PackagesDetail({
     updateFormData(updatedPackages);
   };
 
+  const handleFileChange = (
+    index: number,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (e?.target?.files) {
+      const selectedFiles = Array?.from(e?.target?.files);
+      const imageFiles = selectedFiles?.filter((file) =>
+        file?.type?.startsWith("image/")
+      );
+
+      const updatedPackages = [...packages];
+      const pkg = updatedPackages[index];
+
+      updatedPackages[index] = {
+        ...pkg,
+        packageImages: [...pkg?.packageImages, ...imageFiles],
+      };
+
+      setPackages(updatedPackages);
+      updateFormData(updatedPackages);
+    }
+  };
+
+  const handleDivClick = (index: number) => {
+    fileInputRefs?.current[index]?.click();
+  };
+
   return (
     <>
       <div>
@@ -131,13 +161,13 @@ export default function PackagesDetail({
                 placeholder="hidden"
                 accept="image/*"
                 multiple
-                // ref={(el: any) => (fileInputRefs.current[index] = el)}
-                // onChange={(e) => handleFileChange(index, e)}
+                ref={(el: any) => (fileInputRefs.current[index] = el)}
+                onChange={(e) => handleFileChange(index, e)}
                 className="hidden"
               />
               <div
                 className="flex flex-col justify-center items-center p-4 border border-gray border-dashed rounded-xl cursor-pointer mb-8"
-                // onClick={() => handleDivClick(index)}
+                onClick={() => handleDivClick(index)}
               >
                 <Image
                   src="/service-provider-onboarding/upload.svg"
@@ -157,6 +187,28 @@ export default function PackagesDetail({
                 </p>
               </div>
             </div>
+
+            {/* Preview uploaded images */}
+            {pkg?.packageImages?.length > 0 && (
+              <div className="flex flex-wrap justify-center items-center gap-4 mb-8">
+                {pkg?.packageImages?.map((file, imgIndex) => {
+                  const url = URL?.createObjectURL(file);
+                  return (
+                    <div
+                      key={imgIndex}
+                      className="w-[50px] h-[50px] relative rounded"
+                    >
+                      <Image
+                        src={url}
+                        alt={`uploaded-${imgIndex}`}
+                        fill
+                        className="object-cover rounded"
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            )}
 
             <div className="w-full space-y-4 mb-6">
               <MUITextField
@@ -188,15 +240,36 @@ export default function PackagesDetail({
               <p className="text-[14px] font-normal text-darkgray">
                 Select a category so it's easy for clients to find your project.
               </p>
-              <button
-                className="text-[14px] font-normal text-secondary mt-1"
-                onClick={() => {
-                  setSelectedPackageIndex(index); // Set which package we're editing
-                  setIsModalOpen(true);
-                }}
-              >
-                Browse all categories
-              </button>
+
+              {pkg?.category ? (
+                <div className="mt-2">
+                  <Chip
+                    label={pkg?.category}
+                    onDelete={() => handlePackageChange(index, "category", "")}
+                    sx={{
+                      borderRadius: "9999px",
+                      borderColor: "#E9E9E9",
+                      "& .MuiChip-deleteIcon": {
+                        color: "#757575",
+                        "&:hover": {
+                          color: "#424242",
+                        },
+                      },
+                    }}
+                    variant="outlined"
+                  />
+                </div>
+              ) : (
+                <button
+                  className="text-[14px] font-normal text-secondary mt-1"
+                  onClick={() => {
+                    setSelectedPackageIndex(index);
+                    setIsModalOpen(true);
+                  }}
+                >
+                  Browse all categories
+                </button>
+              )}
             </div>
 
             <div className="w-full flex justify-between items-center gap-4 mb-6">
