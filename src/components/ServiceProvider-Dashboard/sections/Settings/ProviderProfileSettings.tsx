@@ -280,7 +280,7 @@ const ProviderProfileSettings = () => {
                 className="flex flex-col gap-2 p-2 bg-white border border-[#DDE1F0] shadow-grayshadow rounded-xl cursor-pointer"
               >
                 <Image
-                  src={item?.mainImg}
+                  src={item?.mainImg[0]}
                   alt="cover-photo"
                   width={100}
                   height={100}
