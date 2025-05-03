@@ -9,7 +9,7 @@ import {
 import MUIAutoComplete from "@/components/ui/AutoComplete";
 import MUITextField from "@/components/ui/TextField";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Chip from "@mui/material/Chip";
 import { Alert, Snackbar } from "@mui/material";
 import {
@@ -44,9 +44,38 @@ const ProviderProfileSettings = () => {
   const [selectedSkill, setSelectedSkill] = useState<string>("");
   const [alertOpen, setAlertOpen] = useState<boolean>(false);
   const [snackMessage, setSnackMessage] = useState<string>("");
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
 
   const handleFormChange = (data: any) => {
     setFormData((prev) => ({ ...prev, ...data }));
+  };
+
+  useEffect(() => {
+    if (formData?.photo && !photoPreview) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (e?.target?.result) {
+          setPhotoPreview(e?.target?.result as string);
+        }
+      };
+      reader?.readAsDataURL(formData?.photo);
+    }
+  }, [formData?.photo, photoPreview]);
+
+  const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event?.target?.files && event?.target?.files[0]) {
+      const file = event?.target?.files[0];
+      handleFormChange({ photo: file });
+
+      // Create preview URL
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (e?.target?.result) {
+          setPhotoPreview(e?.target?.result as string);
+        }
+      };
+      reader?.readAsDataURL(file);
+    }
   };
 
   console.log("ProfileFormData: ", formData);
@@ -62,7 +91,7 @@ const ProviderProfileSettings = () => {
           <div className="flex justify-center mb-5">
             <div className="relative">
               <Image
-                src="/service-provider-onboarding/profile.svg"
+                src={photoPreview || "/service-provider-onboarding/profile.svg"}
                 width={100}
                 height={100}
                 alt="profile-photo"
@@ -75,7 +104,7 @@ const ProviderProfileSettings = () => {
                     id="upload-photo"
                     type="file"
                     hidden
-                    // onChange={handlePhotoChange}
+                    onChange={handlePhotoChange}
                   />
                   <Image
                     src="/service-provider-onboarding/edit.svg"

@@ -100,7 +100,6 @@ const UserPackages = ({ user }: UserProfileProps) => {
         </p>
         <PackageCardComponent
           packageData={packageCardData}
-          show={false}
           limit={false}
         />
       </div>

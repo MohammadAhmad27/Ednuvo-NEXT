@@ -34,7 +34,7 @@ const SidebarContent = ({ menuLinks, type }: SidebarContentProps) => {
           alt="profile-photo"
           width={80}
           height={80}
-          className="object-cover rounded-full"
+          className="object-cover rounded-full shadow-profileshadow"
         />
         <h1 className="text-[14px] font-medium text-lightblack">
           Hassan Al-Omari

@@ -24,7 +24,7 @@ const Header = () => {
       <div className="flex items-center gap-2">
         <Image
           src="/service-provider-onboarding/profile.svg"
-          alt="user-icon"
+          alt="profile-photo"
           width={37}
           height={37}
           className="object-cover rounded-full shadow-profileshadow"
