@@ -4,7 +4,7 @@ import Image from "next/image";
 import CategoryTable from "@/components/ui/Tables/CategoryTable";
 import type { Category } from "@/interfaces/Admin";
 import AddCategoryDialog from "@/components/ui/Dialogs/AddCategoryDialog";
-import DeleteQuestionDialog from "@/components/ui/Dialogs/DeleteQuestionDialog";
+import DeleteDialog from "@/components/ui/Dialogs/DeleteDialog";
 import EditCategoryDialog from "@/components/ui/Dialogs/EditCategoryDialog";
 
 const Category = () => {
@@ -100,7 +100,7 @@ const Category = () => {
                   height={20}
                   className="object-cover"
                 />
-                Add Category
+                Add New Category
               </button>
             </div>
           </div>
@@ -123,7 +123,7 @@ const Category = () => {
         onClose={() => setIsAddModalOpen(false)}
         onAddCategory={handleAddCategory}
       />
-      <DeleteQuestionDialog
+      <DeleteDialog
         open={isDeleteDialogOpen}
         title="Are You Sure?"
         description="Are you sure you want to delete this category?"

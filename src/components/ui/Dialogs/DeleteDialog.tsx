@@ -11,7 +11,7 @@ interface ConfirmDialogProps {
   cancelText: string;
 }
 
-const DeleteQuestionDialog = ({
+const DeleteDialog = ({
   open,
   title,
   description,
@@ -81,4 +81,4 @@ const DeleteQuestionDialog = ({
   );
 };
 
-export default DeleteQuestionDialog;
+export default DeleteDialog;

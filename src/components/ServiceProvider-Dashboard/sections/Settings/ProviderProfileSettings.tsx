@@ -16,6 +16,12 @@ import {
   packageCardData,
   portfolioData,
 } from "@/app/service-requester-dashboard/content";
+import {
+  PackageCard,
+  PortfolioCard,
+} from "@/interfaces/ServiceRequesterDashboard";
+import AddPackageDialog from "@/components/ui/Dialogs/AddPackageDialog";
+import Link from "next/link";
 
 const ProviderProfileSettings = () => {
   const [formData, setFormData] = useState<{
@@ -29,6 +35,8 @@ const ProviderProfileSettings = () => {
     experienceLevel: string;
     about: string;
     skills: string[];
+    packages: PackageCard[];
+    portfolio: PortfolioCard[];
   }>({
     photo: null,
     firstName: "",
@@ -40,11 +48,27 @@ const ProviderProfileSettings = () => {
     experienceLevel: "",
     about: "",
     skills: userSkills,
+    packages: packageCardData,
+    portfolio: portfolioData,
   });
   const [selectedSkill, setSelectedSkill] = useState<string>("");
   const [alertOpen, setAlertOpen] = useState<boolean>(false);
   const [snackMessage, setSnackMessage] = useState<string>("");
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  // Package
+  const [isAddPackageModalOpen, setIsAddPackageModalOpen] =
+    useState<boolean>(false);
+  const [isEditPackageModalOpen, setIsEditPackageModalOpen] =
+    useState<boolean>(false);
+  const [isDeletePackageModalOpen, setIsDeletePackageModalOpen] =
+    useState<boolean>(false);
+  // Portfolio
+  const [isAddPortfolioModalOpen, setIsAddPortfolioModalOpen] =
+    useState<boolean>(false);
+  const [isEditPortfolioModalOpen, setIsEditPortfolioModalOpen] =
+    useState<boolean>(false);
+  const [isDeletePortfolioModalOpen, setIsDeletePortfolioModalOpen] =
+    useState<boolean>(false);
 
   const handleFormChange = (data: any) => {
     setFormData((prev) => ({ ...prev, ...data }));
@@ -301,7 +325,17 @@ const ProviderProfileSettings = () => {
             <h3 className="text-[16px] font-semibold text-lightblack">
               Packages
             </h3>
-            <button className="bg-primary rounded-full text-center text-[14px] font-medium text-white px-6 py-2">
+            <button
+              onClick={() => setIsAddPackageModalOpen(true)}
+              className="flex items-center gap-2 text-nowrap bg-primary rounded-full text-center text-[14px] font-medium text-white pl-[13px] pr-4 py-2"
+            >
+              <Image
+                src="/admin/add.svg"
+                alt="add-icon"
+                width={20}
+                height={20}
+                className="object-cover"
+              />
               Add New Package
             </button>
           </div>
@@ -351,11 +385,13 @@ const ProviderProfileSettings = () => {
             ))}
           </div>
           {packageCardData && packageCardData?.length > 4 && (
-            <div className="flex justify-center items-center">
-              <button className="w-max bg-white border border-secondary rounded-full text-[16px] font-normal text-primary text-center px-6 py-2">
-                View All
-              </button>
-            </div>
+            <Link href="/service-provider-dashboard/package">
+              <div className="flex justify-center items-center">
+                <button className="w-max bg-white border border-secondary rounded-full text-[16px] font-normal text-primary text-center px-6 py-2">
+                  View All
+                </button>
+              </div>
+            </Link>
           )}
         </div>
         {/* Portfolio */}
@@ -364,7 +400,18 @@ const ProviderProfileSettings = () => {
             <h3 className="text-[16px] font-semibold text-lightblack">
               Portfolios
             </h3>
-            <button className="bg-primary rounded-full text-center text-[14px] font-medium text-white px-6 py-2">
+
+            <button
+              onClick={() => setIsAddPortfolioModalOpen(true)}
+              className="flex items-center gap-2 text-nowrap bg-primary rounded-full text-center text-[14px] font-medium text-white pl-[13px] pr-4 py-2"
+            >
+              <Image
+                src="/admin/add.svg"
+                alt="add-icon"
+                width={20}
+                height={20}
+                className="object-cover"
+              />
               Add New Portfolio
             </button>
           </div>
@@ -413,15 +460,22 @@ const ProviderProfileSettings = () => {
               </div>
             ))}
           </div>
+
           {portfolioData && portfolioData?.length > 4 && (
-            <div className="flex justify-center items-center">
-              <button className="w-max bg-white border border-secondary rounded-full text-[16px] font-normal text-primary text-center px-6 py-2">
-                View All
-              </button>
-            </div>
+            <Link href="/service-provider-dashboard/portfolio">
+              <div className="flex justify-center items-center">
+                <button className="w-max bg-white border border-secondary rounded-full text-[16px] font-normal text-primary text-center px-6 py-2">
+                  View All
+                </button>
+              </div>
+            </Link>
           )}
         </div>
       </div>
+      <AddPackageDialog
+        open={isAddPackageModalOpen}
+        onClose={() => setIsAddPackageModalOpen(true)}
+      />
       <Snackbar
         open={alertOpen}
         autoHideDuration={6000}

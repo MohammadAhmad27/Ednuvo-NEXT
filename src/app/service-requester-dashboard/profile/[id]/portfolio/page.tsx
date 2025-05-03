@@ -1,5 +1,5 @@
 import { userCardData } from "@/app/service-requester-dashboard/content";
-import UserPortfolios from "@/components/ServiceRequester-Dashboard/sections/Dashboard/UserPortfolio";
+import UserPortfolios from "@/components/ServiceRequester-Dashboard/sections/Dashboard/UserPortfolios";
 
 type PageProps = {
   params: {

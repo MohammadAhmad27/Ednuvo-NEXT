@@ -171,12 +171,12 @@ const AddCategoryDialog = ({
           </Box>
         </DialogContent>
         <DialogActions>
-          <button
+          {/* <button
             className="bg-white rounded-full text-[14px] font-medium text-primary border border-primary text-center px-6 py-2"
             onClick={onClose}
           >
             Cancel
-          </button>
+          </button> */}
           <button
             className="bg-primary rounded-full text-[14px] font-medium text-white text-center px-6 py-2"
             onClick={handleSubmit}

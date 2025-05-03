@@ -1,7 +1,7 @@
 import { testQuestionsData, testQuestionsOptions } from "@/app/admin/content";
 import MUIAutoComplete from "@/components/ui/AutoComplete";
 import AddQuestionDialog from "@/components/ui/Dialogs/AddQuestionDialog";
-import DeleteQuestionDialog from "@/components/ui/Dialogs/DeleteQuestionDialog";
+import DeleteDialog from "@/components/ui/Dialogs/DeleteDialog";
 import EditQuestionDialog from "@/components/ui/Dialogs/EditQuestionDialog";
 import TestQuestionsTable from "@/components/ui/Tables/TestQuestionsTable";
 import type { TestQuestions as TestQuestionsType } from "@/interfaces/Admin";
@@ -121,7 +121,7 @@ const TestQuestions = () => {
                   height={20}
                   className="object-cover"
                 />
-                Add Question
+                Add New Question
               </button>
             </div>
           </div>
@@ -160,7 +160,7 @@ const TestQuestions = () => {
         }
         questionData={currentQuestion}
       />
-      <DeleteQuestionDialog
+      <DeleteDialog
         open={isDeleteDialogOpen}
         title="Are You Sure?"
         description="Are you sure you want to delete this question?"
