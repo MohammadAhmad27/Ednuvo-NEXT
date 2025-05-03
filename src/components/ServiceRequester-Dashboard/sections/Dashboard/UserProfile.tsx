@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import {
   featuredFreelancer,
   featuredFreelancerData,
+  packageCardData,
   profileData,
   reviewsData,
   reviewsSearchOptions,
@@ -16,6 +17,7 @@ import PackageCardComponent from "@/components/ui/Cards/PackageCard";
 import PortfolioCardComponent from "@/components/ui/Cards/PortfolioCard";
 import MUIAutoComplete from "@/components/ui/AutoComplete";
 import ReviewCardComponent from "@/components/ui/Cards/ReviewCard";
+import Link from "next/link";
 
 interface UserProfileProps {
   user?: UserCard;
@@ -232,11 +234,22 @@ const UserProfile = ({ user }: UserProfileProps) => {
       {/* packages */}
       <div className="w-full space-y-3 border border-[#DDE1F0] rounded-2xl p-4 mt-6">
         <h2 className="text-[18px] font-semibold text-[#181D27]">Packages</h2>
-        <PackageCardComponent />
+        <PackageCardComponent packageData={packageCardData} />
+        {packageCardData && packageCardData?.length > 4 && (
+          <div className="flex justify-center items-center mt-1">
+            <Link
+              href={`/service-requester-dashboard/profile/${user?.id}/package`}
+            >
+              <button className="w-max bg-white border border-secondary rounded-full text-[16px] font-normal text-primary text-center px-6 py-2">
+                View All
+              </button>
+            </Link>
+          </div>
+        )}
       </div>
       {/* portfolio */}
       <div className="w-full space-y-3 border border-[#DDE1F0] rounded-2xl p-4 mt-6">
-        <h2 className="text-[18px] font-semibold text-[#181D27]">Portfolio</h2>
+        <h2 className="text-[18px] font-semibold text-[#181D27]">Portfolios</h2>
         <PortfolioCardComponent user={user} />
       </div>
       {/* reviews */}

@@ -94,7 +94,7 @@ const PortfolioCardComponent = ({ user }: UserCardProps) => {
           );
         })}
 
-        {portfolioData?.length > 4 && (
+        {portfolioData && portfolioData?.length > 4 && (
           <Link
             href={`/service-requester-dashboard/profile/${user?.id}/portfolio`}
           >

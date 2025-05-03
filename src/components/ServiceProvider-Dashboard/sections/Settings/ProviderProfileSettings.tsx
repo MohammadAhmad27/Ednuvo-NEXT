@@ -12,7 +12,10 @@ import Image from "next/image";
 import { useState } from "react";
 import Chip from "@mui/material/Chip";
 import { Alert, Snackbar } from "@mui/material";
-import { portfolioData } from "@/app/service-requester-dashboard/content";
+import {
+  packageCardData,
+  portfolioData,
+} from "@/app/service-requester-dashboard/content";
 
 const ProviderProfileSettings = () => {
   const [formData, setFormData] = useState<{
@@ -138,7 +141,7 @@ const ProviderProfileSettings = () => {
                 label="Phone Number"
                 placeholder="123445"
                 type="number"
-                value={formData?.phoneNumber?.toString()}
+                value={formData?.phoneNumber}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   handleFormChange({ phoneNumber: e.target.value })
                 }
@@ -185,7 +188,7 @@ const ProviderProfileSettings = () => {
             </div>
           </div>
         </div>
-        {/* Personal Details */}
+        {/* About */}
         <div className="w-full space-y-4 mt-6">
           <h3 className="text-[16px] font-semibold text-lightblack">About</h3>
           <MUITextField
@@ -263,29 +266,110 @@ const ProviderProfileSettings = () => {
             ))}
           </div>
         </div>
+        {/* Packages */}
+        <div className="w-full flex flex-col gap-4 mt-14">
+          <div className="w-full flex items-center justify-between gap-2">
+            <h3 className="text-[16px] font-semibold text-lightblack">
+              Packages
+            </h3>
+            <button className="bg-primary rounded-full text-center text-[14px] font-medium text-white px-6 py-2">
+              Add New Package
+            </button>
+          </div>
+          <div className="w-full h-full grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {packageCardData?.slice(0, 4)?.map((item) => (
+              <div
+                key={item?.id}
+                className="flex flex-col gap-2 p-2 bg-white border border-[#DDE1F0] shadow-grayshadow rounded-xl cursor-pointer"
+              >
+                <div className="relative">
+                  <Image
+                    src={item?.bgImg}
+                    alt="cover-photo"
+                    width={100}
+                    height={100}
+                    className="object-cover w-full h-full rounded-lg"
+                  />
+                  <div className="absolute top-2 right-2 flex items-center gap-2">
+                    <Image
+                      src="/service-provider-dashboard/edit-icon.svg"
+                      alt="edit-icon"
+                      width={25}
+                      height={25}
+                      className="object-cover"
+                    />
+                    <Image
+                      src="/service-provider-dashboard/delete-icon.svg"
+                      alt="delete-icon"
+                      width={25}
+                      height={25}
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+                <p className="text-[14px] font-medium text-[#181818] pl-1">
+                  {item?.desc}
+                </p>
+                <div className="flex items-center gap-2 pl-1">
+                  <p className="text-[14px] font-normal text-darkgray">
+                    {item?.startingFrom}
+                  </p>
+                  <p className="text-[16px] font-semibold text-lightblack">
+                    {item?.value} SAR
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          {packageCardData && packageCardData?.length > 4 && (
+            <div className="flex justify-center items-center">
+              <button className="w-max bg-white border border-secondary rounded-full text-[16px] font-normal text-primary text-center px-6 py-2">
+                View All
+              </button>
+            </div>
+          )}
+        </div>
         {/* Portfolio */}
         <div className="w-full flex flex-col gap-4 mt-14">
           <div className="w-full flex items-center justify-between gap-2">
             <h3 className="text-[16px] font-semibold text-lightblack">
-              Portfolio
+              Portfolios
             </h3>
             <button className="bg-primary rounded-full text-center text-[14px] font-medium text-white px-6 py-2">
               Add New Portfolio
             </button>
           </div>
           <div className="w-full h-full grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-            {portfolioData.slice(0, 4)?.map((item) => (
+            {portfolioData?.slice(0, 4)?.map((item) => (
               <div
                 key={item?.id}
                 className="flex flex-col gap-2 p-2 bg-white border border-[#DDE1F0] shadow-grayshadow rounded-xl cursor-pointer"
               >
-                <Image
-                  src={item?.mainImg[0]}
-                  alt="cover-photo"
-                  width={100}
-                  height={100}
-                  className="object-contain w-full rounded-lg"
-                />
+                <div className="relative">
+                  <Image
+                    src={item?.mainImg[0]}
+                    alt="cover-photo"
+                    width={100}
+                    height={100}
+                    className="object-contain w-full rounded-lg"
+                  />
+                  <div className="absolute top-2 right-2 flex items-center gap-2">
+                    <Image
+                      src="/service-provider-dashboard/edit-icon.svg"
+                      alt="edit-icon"
+                      width={25}
+                      height={25}
+                      className="object-cover"
+                    />
+                    <Image
+                      src="/service-provider-dashboard/delete-icon.svg"
+                      alt="delete-icon"
+                      width={25}
+                      height={25}
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
                 <div className="my-[2px] pl-1">
                   <p className="text-[14px] font-normal text-darkgray">
                     From: {item?.startTime}
@@ -300,6 +384,13 @@ const ProviderProfileSettings = () => {
               </div>
             ))}
           </div>
+          {portfolioData && portfolioData?.length > 4 && (
+            <div className="flex justify-center items-center">
+              <button className="w-max bg-white border border-secondary rounded-full text-[16px] font-normal text-primary text-center px-6 py-2">
+                View All
+              </button>
+            </div>
+          )}
         </div>
       </div>
       <Snackbar

@@ -14,13 +14,22 @@ const UserCardComponent = () => {
             router.push(`/service-requester-dashboard/profile/${item?.id}`)
           }
         >
-          <Image
-            src={item?.bgImg}
-            alt="cover-photo"
-            width={100}
-            height={100}
-            className="object-cover w-full h-full rounded-lg"
-          />
+          <div className="relative">
+            <Image
+              src={item?.bgImg}
+              alt="cover-photo"
+              width={100}
+              height={100}
+              className="object-cover w-full h-full rounded-lg"
+            />
+            <Image
+              src={item?.heartImg}
+              alt="heart-icon"
+              width={25}
+              height={25}
+              className="object-cover absolute top-2 right-2"
+            />
+          </div>
           <div className="flex items-center gap-2 pl-1">
             <div className="relative">
               <Image
