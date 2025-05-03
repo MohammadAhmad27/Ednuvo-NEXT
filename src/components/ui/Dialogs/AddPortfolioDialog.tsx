@@ -11,39 +11,52 @@ import Image from "next/image";
 import MUITextField from "../TextField";
 import MUIAutoComplete from "../AutoComplete";
 import { Alert, Snackbar } from "@mui/material";
-import { pricingModes } from "@/app/service-provider-onboarding/content";
+import {
+  pricingModes,
+  skillsList,
+} from "@/app/service-provider-onboarding/content";
+import MUIDatePicker from "../DatePicker";
+import dayjs, { Dayjs } from "dayjs";
 
 interface AddPackageDialogProps {
   open: boolean;
   onClose: () => void;
 }
 
-const AddPackageDialog = ({ open, onClose }: AddPackageDialogProps) => {
+const AddPortfolioDialog = ({ open, onClose }: AddPackageDialogProps) => {
   const [alertOpen, setAlertOpen] = useState<boolean>(false);
   const [snackMessage, setSnackMessage] = useState<string>("");
   const [formData, setFormData] = useState<{
-    packageImages: File[];
+    portfolioImages: File[];
     title: string;
     description: string;
-    category: string;
-    pricingMode: string;
-    price: string | number;
-    requirements: string;
+    skills: string[];
+    startDate: Date | null;
+    endDate: Date | null;
+    projectCost: string | number;
   }>({
-    packageImages: [] as File[],
+    portfolioImages: [] as File[],
     title: "",
     description: "",
-    category: "",
-    pricingMode: "",
-    price: "",
-    requirements: "",
+    skills: [] as string[],
+    startDate: null as Date | null,
+    endDate: null as Date | null,
+    projectCost: "",
   });
 
   const handleFormChange = (data: any) => {
     setFormData((prev) => ({ ...prev, ...data }));
   };
 
-  console.log("AddPackage: ", formData);
+  const toggleSkill = (skill: string) => {
+    console.log("skill: ", skill);
+  };
+
+  const handleStartDateChange = (date: Dayjs | null) => {};
+
+  const handleEndDateChange = (date: Dayjs | null) => {};
+
+  console.log("AddPortfolio: ", formData);
 
   return (
     <>
@@ -84,7 +97,9 @@ const AddPackageDialog = ({ open, onClose }: AddPackageDialogProps) => {
         }}
       >
         <DialogTitle>
-          <h2 className="text-[20px] font-semibold text-black">Add Package</h2>
+          <h2 className="text-[20px] font-semibold text-black">
+            Add Portfolio
+          </h2>
           <Image
             onClick={onClose}
             src="/service-provider-onboarding/close.svg"
@@ -99,7 +114,7 @@ const AddPackageDialog = ({ open, onClose }: AddPackageDialogProps) => {
           {/* Image Upload Section */}
           <div className="flex flex-col justify-start gap-2">
             <label className="text-[14px] text-lightblack font-normal">
-              Package Images
+              Project Images
             </label>
             <input
               type="file"
@@ -123,7 +138,7 @@ const AddPackageDialog = ({ open, onClose }: AddPackageDialogProps) => {
               />
               <p className="text-[14px] font-normal text-darkgray mt-2 text-center">
                 <span className="font-medium text-secondary">
-                  Upload images
+                  Upload images of your projects
                 </span>{" "}
                 or drag and drop
               </p>
@@ -135,8 +150,8 @@ const AddPackageDialog = ({ open, onClose }: AddPackageDialogProps) => {
           {/* Title & Desription */}
           <div className="w-full space-y-4 mb-4">
             <MUITextField
-              label="Package Title"
-              placeholder="Enter package title"
+              label="Project Title"
+              placeholder="Enter project title"
               type="text"
               value={formData?.title}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -144,8 +159,8 @@ const AddPackageDialog = ({ open, onClose }: AddPackageDialogProps) => {
               }
             />
             <MUITextField
-              label="Package Description"
-              placeholder="Enter package description"
+              label="Project Description"
+              placeholder="Enter project description"
               type="text"
               value={formData?.description}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -155,76 +170,50 @@ const AddPackageDialog = ({ open, onClose }: AddPackageDialogProps) => {
               rows={4}
             />
           </div>
-          {/* Browse All Categories */}
-          <div className="flex flex-col gap-1 justify-start items-start mb-4">
-            <label className="text-[14px] font-normal text-lightblack">
-              Category
+          {/* Skills */}
+          <div className="flex flex-col justify-start gap-2">
+            <label className="text-[14px] text-lightblack font-normal">
+              Choose Relevant Skills
             </label>
-            {/* {pkg?.category ? ( */}
-            {/* <div className="mt-2">
-                  <Chip
-                    label={pkg?.category}
-                    onDelete={() => handlePackageChange(index, "category", "")}
-                    sx={{
-                      borderRadius: "9999px",
-                      borderColor: "#E9E9E9",
-                      "& .MuiChip-deleteIcon": {
-                        color: "#757575",
-                        "&:hover": {
-                          color: "#424242",
-                        },
-                      },
-                    }}
-                    variant="outlined"
-                  />
-                </div> */}
-            {/* ) : ( */}
-            <button
-              className="text-[14px] font-normal text-secondary mt-1"
-              // onClick={() => {
-              //   setSelectedPackageIndex(index);
-              //   setIsModalOpen(true);
-              // }}
-            >
-              Browse all categories
-            </button>
-            {/* )} */}
-          </div>
-          {/* Pricing Mode & Price */}
-          <div className="w-full flex justify-between items-center gap-4 mb-4">
-            <MUIAutoComplete
-              width="50%"
-              options={pricingModes}
-              value={formData?.pricingMode}
-              onChange={(_: React.SyntheticEvent, newValue: string | null) =>
-                handleFormChange({ pricingMode: newValue ?? "" })
-              }
-              placeholder="Fixed Price (e.g SAR 150 per project)"
-              label="Pricing Modes"
-            />
-            <div className="w-1/2">
-              <MUITextField
-                label="Package Price"
-                placeholder="Enter package price"
-                type="number"
-                value={formData?.price}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleFormChange({ price: e?.target?.value })
-                }
-              />
+            <div className="flex flex-wrap gap-3 mb-8">
+              {skillsList?.map((skill) => {
+                const isSelected = formData?.skills?.includes(skill);
+                return (
+                  <button
+                    key={skill}
+                    onClick={() => toggleSkill(skill)}
+                    className={`border-[1px] border-secondary rounded-full ${
+                      isSelected
+                        ? "bg-secondary text-white"
+                        : "bg-white text-secondary"
+                    } py-1 px-4`}
+                  >
+                    {skill}
+                  </button>
+                );
+              })}
             </div>
           </div>
-          <div className="w-full mb-4">
+          {/* Date */}
+          <div className="w-full grid grid-cols-3 gap-2">
+            <MUIDatePicker
+              value={formData?.startDate ? dayjs(formData?.startDate) : null}
+              onChange={(date) => handleStartDateChange(date)}
+              label="Project Start Date"
+            />
+            <MUIDatePicker
+              value={formData?.endDate ? dayjs(formData?.endDate) : null}
+              onChange={(date) => handleEndDateChange(date)}
+              label="Project Completion Date"
+            />
             <MUITextField
-              label="Requirements"
-              placeholder="Enter requirements"
-              type="text"
-              value={formData?.requirements}
+              label="Project Cost"
+              placeholder="Enter project cost"
+              type="number"
+              value={formData?.projectCost}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                handleFormChange({ requirements: e?.target?.value })
+                handleFormChange({ projectCost: e?.target?.value })
               }
-              multiline
-              rows={4}
             />
           </div>
         </DialogContent>
@@ -236,7 +225,7 @@ const AddPackageDialog = ({ open, onClose }: AddPackageDialogProps) => {
             Cancel
           </button>
           <button className="bg-primary rounded-full text-[14px] font-medium text-white text-center px-6 py-2">
-            Add Package
+            Add Portfolio
           </button>
         </DialogActions>
       </Dialog>
@@ -259,4 +248,4 @@ const AddPackageDialog = ({ open, onClose }: AddPackageDialogProps) => {
   );
 };
 
-export default AddPackageDialog;
+export default AddPortfolioDialog;

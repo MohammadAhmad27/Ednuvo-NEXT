@@ -4,7 +4,7 @@ import { Stepper, Step, StepLabel, styled } from "@mui/material";
 import BasicInformation from "./BasicInformation";
 import ServiceExperience from "./ServiceExperience";
 import PortfolioDetails from "./PortfolioDetails";
-import PackagesDetail from "./PackagesDetail";
+import PackageDetails from "./PackageDetails";
 import VerificationDocument from "./VerificationDocument";
 import StepConnector, {
   stepConnectorClasses,
@@ -107,7 +107,7 @@ const steps = [
   },
   {
     label: "Packages Detail",
-    component: PackagesDetail,
+    component: PackageDetails,
   },
   {
     label: "Verification Document",

@@ -22,6 +22,7 @@ import {
 } from "@/interfaces/ServiceRequesterDashboard";
 import AddPackageDialog from "@/components/ui/Dialogs/AddPackageDialog";
 import Link from "next/link";
+import AddPortfolioDialog from "@/components/ui/Dialogs/AddPortfolioDialog";
 
 const ProviderProfileSettings = () => {
   const [formData, setFormData] = useState<{
@@ -474,7 +475,11 @@ const ProviderProfileSettings = () => {
       </div>
       <AddPackageDialog
         open={isAddPackageModalOpen}
-        onClose={() => setIsAddPackageModalOpen(true)}
+        onClose={() => setIsAddPackageModalOpen(false)}
+      />
+           <AddPortfolioDialog
+        open={isAddPortfolioModalOpen}
+        onClose={() => setIsAddPortfolioModalOpen(false)}
       />
       <Snackbar
         open={alertOpen}

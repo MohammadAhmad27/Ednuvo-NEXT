@@ -26,7 +26,7 @@ interface PackagesDetailProps {
   onChange: (data: any) => void;
 }
 
-export default function PackagesDetail({
+export default function PackageDetails({
   formData,
   onChange,
 }: PackagesDetailProps) {
