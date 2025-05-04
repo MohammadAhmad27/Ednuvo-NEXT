@@ -6,7 +6,7 @@ import {
   DialogActions,
 } from "@mui/material";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface BrowseAllCategoriesProps {
     isModalOpen: boolean;
@@ -21,7 +21,14 @@ interface BrowseAllCategoriesProps {
     selectedCategory,
     onSelectCategory,
   }: BrowseAllCategoriesProps) => {
-    const [activeButton, setActiveButton] = useState(selectedCategory || categories[0]);
+    const [activeButton, setActiveButton] = useState(categories[0]);
+  
+    // Reset activeButton when modal opens or when selectedCategory changes
+    useEffect(() => {
+      if (isModalOpen) {
+        setActiveButton(categories[0]);
+      }
+    }, [isModalOpen, selectedCategory]);
   
     const handleLater = () => {
       setIsModalOpen(false);
@@ -29,6 +36,7 @@ interface BrowseAllCategoriesProps {
   
     const handleAddCategory = () => {
       onSelectCategory(activeButton);
+      setIsModalOpen(false);
     };
   
     return (

@@ -23,6 +23,8 @@ import {
 import AddPackageDialog from "@/components/ui/Dialogs/AddPackageDialog";
 import Link from "next/link";
 import AddPortfolioDialog from "@/components/ui/Dialogs/AddPortfolioDialog";
+import PackageCardComponent from "@/components/ui/Cards/PackageCard";
+import AllPortfolioCardComponent from "@/components/ui/Cards/AllPortfolioCard";
 
 const ProviderProfileSettings = () => {
   const [formData, setFormData] = useState<{
@@ -37,7 +39,7 @@ const ProviderProfileSettings = () => {
     about: string;
     skills: string[];
     packages: PackageCard[];
-    portfolio: PortfolioCard[];
+    portfolios: PortfolioCard[];
   }>({
     photo: null,
     firstName: "",
@@ -50,7 +52,7 @@ const ProviderProfileSettings = () => {
     about: "",
     skills: userSkills,
     packages: packageCardData,
-    portfolio: portfolioData,
+    portfolios: portfolioData,
   });
   const [selectedSkill, setSelectedSkill] = useState<string>("");
   const [alertOpen, setAlertOpen] = useState<boolean>(false);
@@ -340,52 +342,13 @@ const ProviderProfileSettings = () => {
               Add New Package
             </button>
           </div>
-          <div className="w-full h-full grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {packageCardData?.slice(0, 4)?.map((item) => (
-              <div
-                key={item?.id}
-                className="flex flex-col gap-2 p-2 bg-white border border-[#DDE1F0] shadow-grayshadow rounded-xl cursor-pointer"
-              >
-                <div className="relative">
-                  <Image
-                    src={item?.bgImg}
-                    alt="cover-photo"
-                    width={100}
-                    height={100}
-                    className="object-cover w-full h-full rounded-lg"
-                  />
-                  <div className="absolute top-2 right-2 flex items-center gap-2">
-                    <Image
-                      src="/service-provider-dashboard/edit-icon.svg"
-                      alt="edit-icon"
-                      width={25}
-                      height={25}
-                      className="object-cover"
-                    />
-                    <Image
-                      src="/service-provider-dashboard/delete-icon.svg"
-                      alt="delete-icon"
-                      width={25}
-                      height={25}
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-                <p className="text-[14px] font-medium text-[#181818] pl-1">
-                  {item?.desc}
-                </p>
-                <div className="flex items-center gap-2 pl-1">
-                  <p className="text-[14px] font-normal text-darkgray">
-                    {item?.startingFrom}
-                  </p>
-                  <p className="text-[16px] font-semibold text-lightblack">
-                    {item?.value} SAR
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-          {packageCardData && packageCardData?.length > 4 && (
+          <PackageCardComponent
+            packageData={formData?.packages}
+            limit={false}
+            show={false}
+            image={false}
+          />
+          {formData?.packages && formData?.packages?.length > 4 && (
             <Link href="/service-provider-dashboard/package">
               <div className="flex justify-center items-center">
                 <button className="w-max bg-white border border-secondary rounded-full text-[16px] font-normal text-primary text-center px-6 py-2">
@@ -416,53 +379,8 @@ const ProviderProfileSettings = () => {
               Add New Portfolio
             </button>
           </div>
-          <div className="w-full h-full grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-            {portfolioData?.slice(0, 4)?.map((item) => (
-              <div
-                key={item?.id}
-                className="flex flex-col gap-2 p-2 bg-white border border-[#DDE1F0] shadow-grayshadow rounded-xl cursor-pointer"
-              >
-                <div className="relative">
-                  <Image
-                    src={item?.mainImg[0]}
-                    alt="cover-photo"
-                    width={100}
-                    height={100}
-                    className="object-contain w-full rounded-lg"
-                  />
-                  <div className="absolute top-2 right-2 flex items-center gap-2">
-                    <Image
-                      src="/service-provider-dashboard/edit-icon.svg"
-                      alt="edit-icon"
-                      width={25}
-                      height={25}
-                      className="object-cover"
-                    />
-                    <Image
-                      src="/service-provider-dashboard/delete-icon.svg"
-                      alt="delete-icon"
-                      width={25}
-                      height={25}
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-                <div className="my-[2px] pl-1">
-                  <p className="text-[14px] font-normal text-darkgray">
-                    From: {item?.startTime}
-                  </p>
-                  <h3 className="text-[16px] font-semibold text-lightblack">
-                    {item?.projectTitle}
-                  </h3>
-                </div>
-                <p className="text-[14px] font-normal text-[#181818] text-justify px-1">
-                  {item?.projectDesc}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {portfolioData && portfolioData?.length > 4 && (
+          <AllPortfolioCardComponent portfolioData={formData?.portfolios} />
+          {formData?.portfolios && formData?.portfolios?.length > 4 && (
             <Link href="/service-provider-dashboard/portfolio">
               <div className="flex justify-center items-center">
                 <button className="w-max bg-white border border-secondary rounded-full text-[16px] font-normal text-primary text-center px-6 py-2">
@@ -476,8 +394,16 @@ const ProviderProfileSettings = () => {
       <AddPackageDialog
         open={isAddPackageModalOpen}
         onClose={() => setIsAddPackageModalOpen(false)}
+        onAddPackage={(newPackage) => {
+          handleFormChange({
+            packages: [...formData?.packages, newPackage],
+          });
+          setSnackMessage("Package added successfully!");
+          setAlertOpen(true);
+        }}
+        currentPackages={formData?.packages}
       />
-           <AddPortfolioDialog
+      <AddPortfolioDialog
         open={isAddPortfolioModalOpen}
         onClose={() => setIsAddPortfolioModalOpen(false)}
       />

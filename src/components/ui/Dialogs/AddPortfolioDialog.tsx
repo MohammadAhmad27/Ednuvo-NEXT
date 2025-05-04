@@ -56,7 +56,7 @@ const AddPortfolioDialog = ({ open, onClose }: AddPackageDialogProps) => {
 
   const handleEndDateChange = (date: Dayjs | null) => {};
 
-  console.log("AddPortfolio: ", formData);
+  // console.log("AddPortfolio: ", formData);
 
   return (
     <>

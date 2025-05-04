@@ -1,26 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
   Chip,
-  Box,
+  Tooltip,
 } from "@mui/material";
 import Image from "next/image";
 import MUITextField from "../TextField";
 import MUIAutoComplete from "../AutoComplete";
 import { Alert, Snackbar } from "@mui/material";
 import { pricingModes } from "@/app/service-provider-onboarding/content";
+import { Close } from "@mui/icons-material";
+import { PackageCard } from "@/interfaces/ServiceRequesterDashboard";
+import BrowseAllCategories from "./AllCategoriesDialog";
 
 interface AddPackageDialogProps {
   open: boolean;
   onClose: () => void;
+  onAddPackage: (newPackage: any) => void;
+  currentPackages: PackageCard[];
 }
 
-const AddPackageDialog = ({ open, onClose }: AddPackageDialogProps) => {
+const AddPackageDialog = ({
+  open,
+  onClose,
+  onAddPackage,
+  currentPackages,
+}: AddPackageDialogProps) => {
   const [alertOpen, setAlertOpen] = useState<boolean>(false);
   const [snackMessage, setSnackMessage] = useState<string>("");
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [isCategoryModalOpen, setIsCategoryModalOpen] =
+    useState<boolean>(false);
   const [formData, setFormData] = useState<{
     packageImages: File[];
     title: string;
@@ -41,6 +54,84 @@ const AddPackageDialog = ({ open, onClose }: AddPackageDialogProps) => {
 
   const handleFormChange = (data: any) => {
     setFormData((prev) => ({ ...prev, ...data }));
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e?.target?.files) {
+      const selectedFiles = Array?.from(e.target.files);
+      const imageFiles = selectedFiles?.filter((file) =>
+        file?.type?.startsWith("image/")
+      );
+
+      setFormData((prev) => ({
+        ...prev,
+        packageImages: [...prev?.packageImages, ...imageFiles],
+      }));
+    }
+  };
+
+  const handleDivClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleDeleteImage = (imageIndex: number) => {
+    const updatedImages = formData?.packageImages?.filter(
+      (_, idx) => idx !== imageIndex
+    );
+    setFormData((prev) => ({
+      ...prev,
+      packageImages: updatedImages,
+    }));
+  };
+
+  const handleAddPackage = () => {
+    // Validate required fields
+    if (
+      !formData?.packageImages ||
+      !formData?.title ||
+      !formData?.description ||
+      !formData?.category ||
+      !formData?.price ||
+      !formData?.pricingMode ||
+      !formData?.requirements
+    ) {
+      setSnackMessage("Please fill all required fields!");
+      setAlertOpen(true);
+      return;
+    }
+
+    // Find the maximum existing ID
+    const maxId = currentPackages?.reduce(
+      (max, pkg) => Math?.max(max, pkg?.id),
+      0
+    );
+
+    // Create new package object matching PackageCard structure
+    const newPackage = {
+      id: maxId + 1,
+      bgImg:
+        formData?.packageImages?.length > 0 &&
+        URL.createObjectURL(formData?.packageImages[0]),
+      desc: formData?.description,
+      startingFrom: "Starting from",
+      value: formData?.price,
+      title: formData?.title,
+      category: formData?.category,
+      requirements: formData?.requirements,
+    };
+
+    onAddPackage(newPackage);
+
+    setFormData({
+      packageImages: [],
+      title: "",
+      description: "",
+      category: "",
+      pricingMode: "",
+      price: "",
+      requirements: "",
+    });
+    onClose();
   };
 
   console.log("AddPackage: ", formData);
@@ -106,13 +197,13 @@ const AddPackageDialog = ({ open, onClose }: AddPackageDialogProps) => {
               placeholder="hidden"
               accept="image/*"
               multiple
-              // ref={(el: any) => (fileInputRefs.current[index] = el)}
-              // onChange={(e) => handleFileChange(index, e)}
+              ref={fileInputRef}
+              onChange={handleFileChange}
               className="hidden"
             />
             <div
-              className="flex flex-col justify-center items-center p-4 border border-gray border-dashed rounded-xl cursor-pointer mb-8"
-              // onClick={() => handleDivClick(index)}
+              className="flex flex-col justify-center items-center p-4 border border-gray border-dashed rounded-xl cursor-pointer mb-4"
+              onClick={handleDivClick}
             >
               <Image
                 src="/service-provider-onboarding/upload.svg"
@@ -131,8 +222,51 @@ const AddPackageDialog = ({ open, onClose }: AddPackageDialogProps) => {
                 PNG, JPG or JPEG
               </p>
             </div>
+
+            {/* Preview uploaded images */}
+            {formData?.packageImages?.length > 0 && (
+              <div className="flex flex-wrap justify-center items-center gap-4 mb-4">
+                {formData?.packageImages?.map((file, imgIndex) => {
+                  const url = URL.createObjectURL(file);
+                  return (
+                    <div
+                      key={imgIndex}
+                      className="w-[50px] h-[50px] relative rounded group"
+                    >
+                      <Tooltip
+                        title={
+                          <p className="text-[10px] font-medium text-white">
+                            {file?.name}
+                          </p>
+                        }
+                        placement="bottom"
+                        arrow
+                      >
+                        <div className="w-[50px] h-[50px] relative">
+                          <Image
+                            src={url}
+                            alt={`uploaded-${imgIndex}`}
+                            fill
+                            className="object-cover rounded hover:grayscale hover:filter"
+                          />
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDeleteImage(imgIndex);
+                            }}
+                            className="absolute top-0 right-0 flex justify-center items-center p-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out bg-black/50 rounded-full"
+                          >
+                            <Close sx={{ fontSize: 8, color: "white" }} />
+                          </button>
+                        </div>
+                      </Tooltip>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
-          {/* Title & Desription */}
+          {/* Title & Description */}
           <div className="w-full space-y-4 mb-4">
             <MUITextField
               label="Package Title"
@@ -160,35 +294,34 @@ const AddPackageDialog = ({ open, onClose }: AddPackageDialogProps) => {
             <label className="text-[14px] font-normal text-lightblack">
               Category
             </label>
-            {/* {pkg?.category ? ( */}
-            {/* <div className="mt-2">
-                  <Chip
-                    label={pkg?.category}
-                    onDelete={() => handlePackageChange(index, "category", "")}
-                    sx={{
-                      borderRadius: "9999px",
-                      borderColor: "#E9E9E9",
-                      "& .MuiChip-deleteIcon": {
-                        color: "#757575",
-                        "&:hover": {
-                          color: "#424242",
-                        },
+            {formData?.category ? (
+              <div className="mt-2">
+                <Chip
+                  label={formData?.category}
+                  onDelete={() => handleFormChange({ category: "" })}
+                  sx={{
+                    borderRadius: "9999px",
+                    borderColor: "#E9E9E9",
+                    "& .MuiChip-deleteIcon": {
+                      color: "#757575",
+                      "&:hover": {
+                        color: "#424242",
                       },
-                    }}
-                    variant="outlined"
-                  />
-                </div> */}
-            {/* ) : ( */}
-            <button
-              className="text-[14px] font-normal text-secondary mt-1"
-              // onClick={() => {
-              //   setSelectedPackageIndex(index);
-              //   setIsModalOpen(true);
-              // }}
-            >
-              Browse all categories
-            </button>
-            {/* )} */}
+                    },
+                  }}
+                  variant="outlined"
+                />
+              </div>
+            ) : (
+              <button
+                className="text-[14px] font-normal text-secondary mt-1"
+                onClick={() => {
+                  setIsCategoryModalOpen(true);
+                }}
+              >
+                Browse all categories
+              </button>
+            )}
           </div>
           {/* Pricing Mode & Price */}
           <div className="w-full flex justify-between items-center gap-4 mb-4">
@@ -235,11 +368,24 @@ const AddPackageDialog = ({ open, onClose }: AddPackageDialogProps) => {
           >
             Cancel
           </button>
-          <button className="bg-primary rounded-full text-[14px] font-medium text-white text-center px-6 py-2">
+          <button
+            className="bg-primary rounded-full text-[14px] font-medium text-white text-center px-6 py-2"
+            onClick={handleAddPackage}
+          >
             Add Package
           </button>
         </DialogActions>
       </Dialog>
+
+      <BrowseAllCategories
+        isModalOpen={isCategoryModalOpen}
+        setIsModalOpen={setIsCategoryModalOpen}
+        selectedCategory={formData?.category || ""}
+        onSelectCategory={(category) => {
+          handleFormChange({ category });
+          setIsCategoryModalOpen(false);
+        }}
+      />
 
       <Snackbar
         open={alertOpen}

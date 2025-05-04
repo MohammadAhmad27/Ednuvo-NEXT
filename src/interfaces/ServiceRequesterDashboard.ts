@@ -106,6 +106,10 @@ export interface PackageCard {
   startingFrom: string;
   value: number;
   label: string;
+  title?: string;
+  category?: string;
+  pricingMode?: string;
+  requirements?: string;
 }
 
 export interface PortfolioCard {

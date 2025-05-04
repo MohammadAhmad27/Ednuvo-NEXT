@@ -26,7 +26,7 @@ const PackageCardComponent = ({
               alt="cover-photo"
               width={100}
               height={100}
-              className="object-cover w-full h-full rounded-lg"
+              className="object-cover w-full h-[300px] rounded-lg"
             />
             {image ? (
               <Image
