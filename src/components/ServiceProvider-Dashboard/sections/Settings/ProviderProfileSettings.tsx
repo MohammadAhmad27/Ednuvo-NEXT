@@ -25,6 +25,7 @@ import Link from "next/link";
 import AddPortfolioDialog from "@/components/ui/Dialogs/AddPortfolioDialog";
 import PackageCardComponent from "@/components/ui/Cards/PackageCard";
 import AllPortfolioCardComponent from "@/components/ui/Cards/AllPortfolioCard";
+import EditPackageDialog from "@/components/ui/Dialogs/EditPackageDialog";
 
 const ProviderProfileSettings = () => {
   const [formData, setFormData] = useState<{
@@ -72,6 +73,9 @@ const ProviderProfileSettings = () => {
     useState<boolean>(false);
   const [isDeletePortfolioModalOpen, setIsDeletePortfolioModalOpen] =
     useState<boolean>(false);
+  const [editingPackage, setEditingPackage] = useState<PackageCard | null>(
+    null
+  );
 
   const handleFormChange = (data: any) => {
     setFormData((prev) => ({ ...prev, ...data }));
@@ -347,6 +351,10 @@ const ProviderProfileSettings = () => {
             limit={false}
             show={false}
             image={false}
+            onEdit={(pkg) => {
+              setEditingPackage(pkg);
+              setIsEditPackageModalOpen(true);
+            }}
           />
           {formData?.packages && formData?.packages?.length > 4 && (
             <Link href="/service-provider-dashboard/package">
@@ -379,7 +387,10 @@ const ProviderProfileSettings = () => {
               Add New Portfolio
             </button>
           </div>
-          <AllPortfolioCardComponent portfolioData={formData?.portfolios} />
+          <AllPortfolioCardComponent
+            portfolioData={formData?.portfolios}
+            limit={true}
+          />
           {formData?.portfolios && formData?.portfolios?.length > 4 && (
             <Link href="/service-provider-dashboard/portfolio">
               <div className="flex justify-center items-center">
@@ -402,6 +413,23 @@ const ProviderProfileSettings = () => {
           setAlertOpen(true);
         }}
         currentPackages={formData?.packages}
+      />
+      <EditPackageDialog
+        open={isEditPackageModalOpen}
+        onClose={() => {
+          setIsEditPackageModalOpen(false);
+          setEditingPackage(null);
+        }}
+        onSave={(updatedPackage) => {
+          handleFormChange({
+            packages: formData?.packages?.map((pkg) =>
+              pkg?.id === updatedPackage?.id ? updatedPackage : pkg
+            ),
+          });
+          setSnackMessage("Package updated successfully!");
+          setAlertOpen(true);
+        }}
+        packageToEdit={editingPackage}
       />
       <AddPortfolioDialog
         open={isAddPortfolioModalOpen}

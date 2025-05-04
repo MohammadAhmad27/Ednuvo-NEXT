@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -16,24 +16,25 @@ import { Close } from "@mui/icons-material";
 import { PackageCard } from "@/interfaces/ServiceRequesterDashboard";
 import BrowseAllCategories from "./AllCategoriesDialog";
 
-interface AddPackageDialogProps {
+interface EditPackageDialogProps {
   open: boolean;
   onClose: () => void;
-  onAddPackage: (newPackage: any) => void;
-  currentPackages: PackageCard[];
+  onSave: (updatedPackage: PackageCard) => void;
+  packageToEdit: PackageCard | null;
 }
 
-const AddPackageDialog = ({
+const EditPackageDialog = ({
   open,
   onClose,
-  onAddPackage,
-  currentPackages,
-}: AddPackageDialogProps) => {
+  onSave,
+  packageToEdit,
+}: EditPackageDialogProps) => {
   const [alertOpen, setAlertOpen] = useState<boolean>(false);
   const [snackMessage, setSnackMessage] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [isCategoryModalOpen, setIsCategoryModalOpen] =
     useState<boolean>(false);
+
   const [formData, setFormData] = useState<{
     packageImages: File[];
     title: string;
@@ -43,7 +44,7 @@ const AddPackageDialog = ({
     price: string | number;
     requirements: string;
   }>({
-    packageImages: [] as File[],
+    packageImages: [],
     title: "",
     description: "",
     category: "",
@@ -51,6 +52,21 @@ const AddPackageDialog = ({
     price: "",
     requirements: "",
   });
+
+  // Initialize form with package data when packageToEdit changes
+  useEffect(() => {
+    if (packageToEdit) {
+      setFormData({
+        packageImages: [],
+        title: packageToEdit?.title || "",
+        description: packageToEdit?.desc || "",
+        category: packageToEdit?.category || "",
+        pricingMode: packageToEdit?.pricingMode || "",
+        price: packageToEdit?.value || "",
+        requirements: packageToEdit?.requirements || "",
+      });
+    }
+  }, [packageToEdit]);
 
   const handleFormChange = (data: any) => {
     setFormData((prev) => ({ ...prev, ...data }));
@@ -84,7 +100,7 @@ const AddPackageDialog = ({
     }));
   };
 
-  const handleAddPackage = () => {
+  const handleSave = () => {
     // Validate required fields
     if (
       !formData?.packageImages ||
@@ -100,42 +116,28 @@ const AddPackageDialog = ({
       return;
     }
 
-    // Find the maximum existing ID
-    const maxId = currentPackages?.reduce(
-      (max, pkg) => Math?.max(max, pkg?.id),
-      0
-    );
+    if (!packageToEdit) return;
 
-    // Create new package object matching PackageCard structure
-    const newPackage = {
-      id: maxId + 1,
+    // Create updated package object
+    const updatedPackage: PackageCard = {
+      ...packageToEdit,
       bgImg:
-        formData?.packageImages?.length > 0 &&
-        URL.createObjectURL(formData?.packageImages[0]),
+        formData?.packageImages?.length > 0
+          ? URL.createObjectURL(formData?.packageImages[0])
+          : packageToEdit?.bgImg,
       title: formData?.title,
       desc: formData?.description,
       category: formData?.category,
       pricingMode: formData?.pricingMode,
-      startingFrom: "Starting from",
       value: formData?.price,
       requirements: formData?.requirements,
     };
 
-    onAddPackage(newPackage);
-
-    setFormData({
-      packageImages: [],
-      title: "",
-      description: "",
-      category: "",
-      pricingMode: "",
-      price: "",
-      requirements: "",
-    });
+    onSave(updatedPackage);
     onClose();
   };
 
-  console.log("AddPackage: ", formData);
+  console.log("EditPackage: ", formData);
 
   return (
     <>
@@ -163,20 +165,20 @@ const AddPackageDialog = ({
             backgroundColor: "#EEFCEE",
           },
           "& .MuiDialogContent-root": {
-            padding: "10px 20px 20px 20px !important",
+            padding: "10px 20px 10px 20px !important",
             display: "flex",
             flexDirection: "column",
           },
           "& .MuiDialogActions-root": {
             padding: "0px 20px 20px 20px !important",
             display: "flex",
-            justifyContent: "center",
+            justifyContent: "end",
             alignItems: "center",
           },
         }}
       >
         <DialogTitle>
-          <h2 className="text-[20px] font-semibold text-black">Add Package</h2>
+          <h2 className="text-[20px] font-semibold text-black">Edit Package</h2>
           <Image
             onClick={onClose}
             src="/service-provider-onboarding/close.svg"
@@ -224,7 +226,23 @@ const AddPackageDialog = ({
               </p>
             </div>
 
-            {/* Preview uploaded images */}
+            {/* Current image preview with tooltip */}
+            {packageToEdit?.bgImg && !formData?.packageImages?.length && (
+              <div className="flex justify-center mb-4">
+                <Tooltip title="Current package image" placement="bottom" arrow>
+                  <div className="w-[100px] h-[100px] relative">
+                    <Image
+                      src={packageToEdit?.bgImg}
+                      alt="current-package"
+                      fill
+                      className="object-cover rounded"
+                    />
+                  </div>
+                </Tooltip>
+              </div>
+            )}
+
+            {/* New uploaded images preview */}
             {formData?.packageImages?.length > 0 && (
               <div className="flex flex-wrap justify-center items-center gap-4 mb-4">
                 {formData?.packageImages?.map((file, imgIndex) => {
@@ -234,15 +252,7 @@ const AddPackageDialog = ({
                       key={imgIndex}
                       className="w-[50px] h-[50px] relative rounded group"
                     >
-                      <Tooltip
-                        title={
-                          <p className="text-[10px] font-medium text-white">
-                            {file?.name}
-                          </p>
-                        }
-                        placement="bottom"
-                        arrow
-                      >
+                      <Tooltip title={file?.name} placement="bottom" arrow>
                         <div className="w-[50px] h-[50px] relative">
                           <Image
                             src={url}
@@ -267,7 +277,8 @@ const AddPackageDialog = ({
               </div>
             )}
           </div>
-          {/* Title & Description */}
+
+          {/* Rest of the form fields */}
           <div className="w-full space-y-4 mb-4">
             <MUITextField
               label="Package Title"
@@ -275,7 +286,7 @@ const AddPackageDialog = ({
               type="text"
               value={formData?.title}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                handleFormChange({ title: e?.target?.value })
+                handleFormChange({ title: e.target.value })
               }
             />
             <MUITextField
@@ -284,12 +295,13 @@ const AddPackageDialog = ({
               type="text"
               value={formData?.description}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                handleFormChange({ description: e?.target?.value })
+                handleFormChange({ description: e.target.value })
               }
               multiline
               rows={4}
             />
           </div>
+
           {/* Browse All Categories */}
           <div className="flex flex-col gap-1 justify-start items-start mb-4">
             <label className="text-[14px] font-normal text-lightblack">
@@ -316,14 +328,13 @@ const AddPackageDialog = ({
             ) : (
               <button
                 className="text-[14px] font-normal text-secondary mt-1"
-                onClick={() => {
-                  setIsCategoryModalOpen(true);
-                }}
+                onClick={() => setIsCategoryModalOpen(true)}
               >
                 Browse all categories
               </button>
             )}
           </div>
+
           {/* Pricing Mode & Price */}
           <div className="w-full flex justify-between items-center gap-4 mb-4">
             <MUIAutoComplete
@@ -343,11 +354,12 @@ const AddPackageDialog = ({
                 type="number"
                 value={formData?.price}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleFormChange({ price: e?.target?.value })
+                  handleFormChange({ price: e.target.value })
                 }
               />
             </div>
           </div>
+
           <div className="w-full mb-4">
             <MUITextField
               label="Requirements"
@@ -355,13 +367,14 @@ const AddPackageDialog = ({
               type="text"
               value={formData?.requirements}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                handleFormChange({ requirements: e?.target?.value })
+                handleFormChange({ requirements: e.target.value })
               }
               multiline
               rows={4}
             />
           </div>
         </DialogContent>
+
         <DialogActions>
           <button
             className="bg-white rounded-full text-[14px] font-medium text-primary border border-primary text-center px-6 py-2"
@@ -371,9 +384,9 @@ const AddPackageDialog = ({
           </button>
           <button
             className="bg-primary rounded-full text-[14px] font-medium text-white text-center px-6 py-2"
-            onClick={handleAddPackage}
+            onClick={handleSave}
           >
-            Add Package
+            Save Changes
           </button>
         </DialogActions>
       </Dialog>
@@ -406,4 +419,4 @@ const AddPackageDialog = ({
   );
 };
 
-export default AddPackageDialog;
+export default EditPackageDialog;

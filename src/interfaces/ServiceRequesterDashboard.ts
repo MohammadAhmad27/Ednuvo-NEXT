@@ -104,7 +104,7 @@ export interface PackageCard {
   rating: number;
   reviews: number;
   startingFrom: string;
-  value: number;
+  value: number | string;
   label: string;
   title?: string;
   category?: string;

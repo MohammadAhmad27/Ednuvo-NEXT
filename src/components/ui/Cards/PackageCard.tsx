@@ -6,11 +6,13 @@ const PackageCardComponent = ({
   show = true,
   limit = true,
   image = true,
+  onEdit,
 }: {
   packageData: PackageCard[];
   show?: boolean;
   limit?: boolean;
   image?: boolean;
+  onEdit?: (pkg: PackageCard) => void;
 }) => {
   const packagesToDisplay = limit ? packageData?.slice(0, 4) : packageData;
   return (
@@ -44,6 +46,10 @@ const PackageCardComponent = ({
                   width={25}
                   height={25}
                   className="object-cover"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onEdit?.(item);
+                  }}
                 />
                 <Image
                   src="/service-provider-dashboard/delete-icon.svg"

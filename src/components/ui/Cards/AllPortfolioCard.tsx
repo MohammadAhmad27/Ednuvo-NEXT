@@ -6,21 +6,27 @@ import { useState } from "react";
 
 const AllPortfolioCardComponent = ({
   portfolioData,
+  limit = false,
 }: {
   portfolioData: PortfolioCard[];
+  limit?: boolean;
 }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [selectedPortfolio, setSelectedPortfolio] = useState<PortfolioCard | null>(null);
+  const [selectedPortfolio, setSelectedPortfolio] =
+    useState<PortfolioCard | null>(null);
 
   const handleCardClick = (item: PortfolioCard) => {
     setSelectedPortfolio(item);
     setIsModalOpen(true);
   };
+  const portfoliosToDisplay = limit
+    ? portfolioData?.slice(0, 4)
+    : portfolioData;
 
   return (
     <>
-      <div className="w-full h-full grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-        {portfolioData?.map((item) => (
+      <div className="w-full h-full grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {portfoliosToDisplay?.map((item) => (
           <div
             key={item?.id}
             onClick={() => handleCardClick(item)}
@@ -31,7 +37,7 @@ const AllPortfolioCardComponent = ({
               alt="cover-photo"
               width={100}
               height={100}
-              className="object-contain w-full rounded-lg"
+              className="object-contain w-full h-[300px] rounded-lg"
             />
             <div className="my-[2px] pl-1">
               <p className="text-[14px] font-normal text-darkgray">
