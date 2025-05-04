@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { PackageCard } from "@/interfaces/ServiceRequesterDashboard";
 import Image from "next/image";
 
@@ -8,12 +8,14 @@ const PackageCardComponent = ({
   limit = true,
   image = true,
   onEdit,
+  onDelete,
 }: {
   packageData: PackageCard[];
   show?: boolean;
   limit?: boolean;
   image?: boolean;
   onEdit?: (pkg: PackageCard) => void;
+  onDelete?: (pkg: PackageCard) => void;
 }) => {
   const packagesToDisplay = limit ? packageData?.slice(0, 4) : packageData;
   return (
@@ -58,6 +60,10 @@ const PackageCardComponent = ({
                   width={25}
                   height={25}
                   className="object-cover"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDelete?.(item);
+                  }}
                 />
               </div>
             )}

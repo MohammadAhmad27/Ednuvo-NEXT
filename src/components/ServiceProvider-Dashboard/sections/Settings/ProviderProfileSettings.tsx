@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   providerSkillsList,
   userSkills,
@@ -27,6 +27,7 @@ import AddPortfolioDialog from "@/components/ui/Dialogs/AddPortfolioDialog";
 import PackageCardComponent from "@/components/ui/Cards/PackageCard";
 import AllPortfolioCardComponent from "@/components/ui/Cards/AllPortfolioCard";
 import EditPackageDialog from "@/components/ui/Dialogs/EditPackageDialog";
+import DeleteDialog from "@/components/ui/Dialogs/DeleteDialog";
 
 const ProviderProfileSettings = () => {
   const [formData, setFormData] = useState<{
@@ -77,9 +78,38 @@ const ProviderProfileSettings = () => {
   const [editingPackage, setEditingPackage] = useState<PackageCard | null>(
     null
   );
+  const [isDeletePackageDialogOpen, setIsDeletePackageDialogOpen] =
+    useState<boolean>(false);
+  const [packageToDelete, setPackageToDelete] = useState<PackageCard | null>(
+    null
+  );
 
   const handleFormChange = (data: any) => {
     setFormData((prev) => ({ ...prev, ...data }));
+  };
+
+  const handleDeletePackageInitiate = (pkg: PackageCard) => {
+    setPackageToDelete(pkg);
+    setIsDeletePackageDialogOpen(true);
+  };
+
+  const handleDeletePackageConfirm = () => {
+    if (packageToDelete) {
+      handleFormChange({
+        packages: formData?.packages?.filter(
+          (pkg) => pkg?.id !== packageToDelete?.id
+        ),
+      });
+      setSnackMessage("Package deleted successfully!");
+      setAlertOpen(true);
+    }
+    setIsDeletePackageDialogOpen(false);
+    setPackageToDelete(null);
+  };
+
+  const handleDeletePackageCancel = () => {
+    setIsDeletePackageDialogOpen(false);
+    setPackageToDelete(null);
   };
 
   useEffect(() => {
@@ -356,6 +386,7 @@ const ProviderProfileSettings = () => {
               setEditingPackage(pkg);
               setIsEditPackageModalOpen(true);
             }}
+            onDelete={handleDeletePackageInitiate}
           />
           {formData?.packages && formData?.packages?.length > 4 && (
             <Link href="/service-provider-dashboard/package">
@@ -431,6 +462,15 @@ const ProviderProfileSettings = () => {
           setAlertOpen(true);
         }}
         packageToEdit={editingPackage}
+      />
+      <DeleteDialog
+        open={isDeletePackageDialogOpen}
+        title="Are You Sure?"
+        description="Are you sure you want to delete this package?"
+        onCancel={handleDeletePackageCancel}
+        onConfirm={handleDeletePackageConfirm}
+        confirmText="Delete"
+        cancelText="Cancel"
       />
       <AddPortfolioDialog
         open={isAddPortfolioModalOpen}
