@@ -1,3 +1,4 @@
+"use client"
 import { PackageCard } from "@/interfaces/ServiceRequesterDashboard";
 import Image from "next/image";
 
