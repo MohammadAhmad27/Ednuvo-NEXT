@@ -1,47 +1,52 @@
-"use client"
-import React, { useState } from "react";
+"use client";
+import React, { useState, useRef } from "react";
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
-  Chip,
-  Box,
+  Tooltip,
 } from "@mui/material";
 import Image from "next/image";
 import MUITextField from "../TextField";
-import MUIAutoComplete from "../AutoComplete";
 import { Alert, Snackbar } from "@mui/material";
-import {
-  pricingModes,
-  skillsList,
-} from "@/app/service-provider-onboarding/content";
+import { skillsList } from "@/app/service-provider-onboarding/content";
 import MUIDatePicker from "../DatePicker";
 import dayjs, { Dayjs } from "dayjs";
+import { Close } from "@mui/icons-material";
+import { PortfolioCard } from "@/interfaces/ServiceRequesterDashboard";
 
-interface AddPackageDialogProps {
+interface AddPortfolioDialogProps {
   open: boolean;
   onClose: () => void;
+  onAddPortfolio: (newPortfolio: PortfolioCard) => void;
+  currentPortfolios: PortfolioCard[];
 }
 
-const AddPortfolioDialog = ({ open, onClose }: AddPackageDialogProps) => {
+const AddPortfolioDialog = ({
+  open,
+  onClose,
+  onAddPortfolio,
+  currentPortfolios,
+}: AddPortfolioDialogProps) => {
   const [alertOpen, setAlertOpen] = useState<boolean>(false);
   const [snackMessage, setSnackMessage] = useState<string>("");
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [formData, setFormData] = useState<{
     portfolioImages: File[];
-    title: string;
-    description: string;
+    projectTitle: string;
+    projectDescription: string;
     skills: string[];
     startDate: Date | null;
     endDate: Date | null;
-    projectCost: string | number;
+    projectCost: string;
   }>({
     portfolioImages: [] as File[],
-    title: "",
-    description: "",
+    projectTitle: "",
+    projectDescription: "",
     skills: [] as string[],
-    startDate: null as Date | null,
-    endDate: null as Date | null,
+    startDate: null,
+    endDate: null,
     projectCost: "",
   });
 
@@ -50,14 +55,101 @@ const AddPortfolioDialog = ({ open, onClose }: AddPackageDialogProps) => {
   };
 
   const toggleSkill = (skill: string) => {
-    console.log("skill: ", skill);
+    const updatedSkills = formData?.skills?.includes(skill)
+      ? formData?.skills?.filter((s) => s !== skill)
+      : [...formData?.skills, skill];
+    handleFormChange({ skills: updatedSkills });
   };
 
-  const handleStartDateChange = (date: Dayjs | null) => {};
+  const handleStartDateChange = (date: Dayjs | null) => {
+    handleFormChange({ startDate: date ? date?.toDate() : null });
+  };
 
-  const handleEndDateChange = (date: Dayjs | null) => {};
+  const handleEndDateChange = (date: Dayjs | null) => {
+    handleFormChange({ endDate: date ? date?.toDate() : null });
+  };
 
-  // console.log("AddPortfolio: ", formData);
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e?.target?.files) {
+      const selectedFiles = Array?.from(e?.target?.files);
+      const imageFiles = selectedFiles?.filter((file) =>
+        file?.type?.startsWith("image/")
+      );
+      handleFormChange({
+        portfolioImages: [...formData.portfolioImages, ...imageFiles],
+      });
+    }
+  };
+
+  const handleDivClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleDeleteImage = (index: number) => {
+    const updatedImages = formData?.portfolioImages?.filter(
+      (_, idx) => idx !== index
+    );
+    handleFormChange({ portfolioImages: updatedImages });
+  };
+
+  const handleAddPortfolio = () => {
+    if (
+      !formData?.portfolioImages ||
+      !formData?.projectTitle ||
+      !formData?.projectDescription ||
+      !formData?.skills ||
+      !formData?.startDate ||
+      !formData?.endDate ||
+      !formData?.projectCost
+    ) {
+      setSnackMessage("Please fill all required fields!");
+      setAlertOpen(true);
+      return;
+    }
+    const maxId = currentPortfolios?.reduce(
+      (max, portfolio) => Math?.max(max, portfolio?.id),
+      0
+    );
+
+    const formatDate = (date: Date | null) =>
+      date ? dayjs(date)?.format("DD MMMM, YYYY") : "";
+
+    // Calculate project duration in days
+    const duration =
+      formData?.startDate && formData?.endDate
+        ? dayjs(formData?.endDate).diff(dayjs(formData?.startDate), "day")
+        : 0;
+
+    const newPortfolio = {
+      id: maxId + 1,
+      mainImg: formData?.portfolioImages?.map((file) =>
+        URL.createObjectURL(file)
+      ),
+      startTime: formatDate(formData?.startDate),
+      endTime: formatDate(formData?.endDate),
+      projectTitle: formData?.projectTitle,
+      projectDesc: formData?.projectDescription,
+      skills: formData?.skills,
+      projectCost: Number(formData?.projectCost),
+      projectDuration: duration,
+      label: "SAR",
+    };
+
+    onAddPortfolio(newPortfolio);
+
+    setFormData({
+      portfolioImages: [],
+      projectTitle: "",
+      projectDescription: "",
+      skills: [],
+      startDate: null,
+      endDate: null,
+      projectCost: "",
+    });
+    onClose();
+  };
+
+  console.log("FormData: ", formData);
 
   return (
     <>
@@ -90,7 +182,7 @@ const AddPortfolioDialog = ({ open, onClose }: AddPackageDialogProps) => {
             flexDirection: "column",
           },
           "& .MuiDialogActions-root": {
-            padding: "0px 20px 20px 20px !important",
+            padding: "10px 20px 20px 20px !important",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -122,13 +214,13 @@ const AddPortfolioDialog = ({ open, onClose }: AddPackageDialogProps) => {
               placeholder="hidden"
               accept="image/*"
               multiple
-              // ref={(el: any) => (fileInputRefs.current[index] = el)}
-              // onChange={(e) => handleFileChange(index, e)}
+              ref={fileInputRef}
+              onChange={handleFileChange}
               className="hidden"
             />
             <div
-              className="flex flex-col justify-center items-center p-4 border border-gray border-dashed rounded-xl cursor-pointer mb-8"
-              // onClick={() => handleDivClick(index)}
+              className="flex flex-col justify-center items-center p-4 border border-gray border-dashed rounded-xl cursor-pointer mb-4"
+              onClick={handleDivClick}
             >
               <Image
                 src="/service-provider-onboarding/upload.svg"
@@ -148,35 +240,80 @@ const AddPortfolioDialog = ({ open, onClose }: AddPackageDialogProps) => {
               </p>
             </div>
           </div>
-          {/* Title & Desription */}
+
+          {/* Preview uploaded images */}
+          {formData?.portfolioImages?.length > 0 && (
+            <div className="flex flex-wrap justify-center items-center gap-4 mb-6">
+              {formData?.portfolioImages?.map((file, index) => {
+                const url = URL.createObjectURL(file);
+                return (
+                  <div
+                    key={index}
+                    className="w-[50px] h-[50px] relative rounded group"
+                  >
+                    <Tooltip
+                      title={
+                        <p className="text-[10px] font-medium text-white">
+                          {file?.name}
+                        </p>
+                      }
+                      placement="bottom"
+                      arrow
+                    >
+                      <div className="w-full h-full relative">
+                        <Image
+                          src={url}
+                          alt={`uploaded-${index}`}
+                          fill
+                          className="object-cover rounded hover:grayscale hover:filter"
+                        />
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteImage(index);
+                          }}
+                          className="absolute top-0 right-0 flex justify-center items-center p-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out bg-black/50 rounded-full"
+                        >
+                          <Close sx={{ fontSize: 8, color: "white" }} />
+                        </button>
+                      </div>
+                    </Tooltip>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Title & Description */}
           <div className="w-full space-y-4 mb-4">
             <MUITextField
               label="Project Title"
               placeholder="Enter project title"
               type="text"
-              value={formData?.title}
+              value={formData?.projectTitle}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                handleFormChange({ title: e?.target?.value })
+                handleFormChange({ projectTitle: e?.target?.value })
               }
             />
             <MUITextField
               label="Project Description"
               placeholder="Enter project description"
               type="text"
-              value={formData?.description}
+              value={formData?.projectDescription}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                handleFormChange({ description: e?.target?.value })
+                handleFormChange({ projectDescription: e?.target?.value })
               }
               multiline
               rows={4}
             />
           </div>
+
           {/* Skills */}
           <div className="flex flex-col justify-start gap-2">
             <label className="text-[14px] text-lightblack font-normal">
               Choose Relevant Skills
             </label>
-            <div className="flex flex-wrap gap-3 mb-8">
+            <div className="flex flex-wrap gap-3 mb-6">
               {skillsList?.map((skill) => {
                 const isSelected = formData?.skills?.includes(skill);
                 return (
@@ -195,16 +332,17 @@ const AddPortfolioDialog = ({ open, onClose }: AddPackageDialogProps) => {
               })}
             </div>
           </div>
-          {/* Date */}
+
+          {/* Date & Cost */}
           <div className="w-full grid grid-cols-3 gap-2">
             <MUIDatePicker
               value={formData?.startDate ? dayjs(formData?.startDate) : null}
-              onChange={(date) => handleStartDateChange(date)}
+              onChange={handleStartDateChange}
               label="Project Start Date"
             />
             <MUIDatePicker
               value={formData?.endDate ? dayjs(formData?.endDate) : null}
-              onChange={(date) => handleEndDateChange(date)}
+              onChange={handleEndDateChange}
               label="Project Completion Date"
             />
             <MUITextField
@@ -225,7 +363,10 @@ const AddPortfolioDialog = ({ open, onClose }: AddPackageDialogProps) => {
           >
             Cancel
           </button>
-          <button className="bg-primary rounded-full text-[14px] font-medium text-white text-center px-6 py-2">
+          <button
+            className="bg-primary rounded-full text-[14px] font-medium text-white text-center px-6 py-2"
+            onClick={handleAddPortfolio}
+          >
             Add Portfolio
           </button>
         </DialogActions>

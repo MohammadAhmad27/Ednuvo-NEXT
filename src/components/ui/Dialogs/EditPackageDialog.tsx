@@ -138,7 +138,7 @@ const EditPackageDialog = ({
     onClose();
   };
 
-  console.log("EditPackage: ", formData);
+  // console.log("EditPackage: ", formData);
 
   return (
     <>

@@ -37,7 +37,7 @@ const AllPortfolioCardComponent = ({
               alt="cover-photo"
               width={100}
               height={100}
-              className="object-contain w-full h-[300px] rounded-lg"
+              className="object-cover w-full h-[300px] rounded-lg"
             />
             <div className="my-[2px] pl-1">
               <p className="text-[14px] font-normal text-darkgray">

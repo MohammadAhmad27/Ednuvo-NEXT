@@ -58,15 +58,22 @@ const ProviderProfileSettings = () => {
     portfolios: portfolioData,
   });
   const [selectedSkill, setSelectedSkill] = useState<string>("");
-  const [alertOpen, setAlertOpen] = useState<boolean>(false);
-  const [snackMessage, setSnackMessage] = useState<string>("");
+  const [alertState, setAlertState] = useState<{
+    open: boolean;
+    message: string;
+    severity: "success" | "warning" | "error" | "info";
+  }>({
+    open: false,
+    message: "",
+    severity: "success",
+  });
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   // Package
   const [isAddPackageModalOpen, setIsAddPackageModalOpen] =
     useState<boolean>(false);
   const [isEditPackageModalOpen, setIsEditPackageModalOpen] =
     useState<boolean>(false);
-  const [isDeletePackageModalOpen, setIsDeletePackageModalOpen] =
+  const [isDeletePackageDialogOpen, setIsDeletePackageDialogOpen] =
     useState<boolean>(false);
   // Portfolio
   const [isAddPortfolioModalOpen, setIsAddPortfolioModalOpen] =
@@ -78,8 +85,6 @@ const ProviderProfileSettings = () => {
   const [editingPackage, setEditingPackage] = useState<PackageCard | null>(
     null
   );
-  const [isDeletePackageDialogOpen, setIsDeletePackageDialogOpen] =
-    useState<boolean>(false);
   const [packageToDelete, setPackageToDelete] = useState<PackageCard | null>(
     null
   );
@@ -100,8 +105,11 @@ const ProviderProfileSettings = () => {
           (pkg) => pkg?.id !== packageToDelete?.id
         ),
       });
-      setSnackMessage("Package deleted successfully!");
-      setAlertOpen(true);
+      setAlertState({
+        open: true,
+        message: "Package deleted successfully!",
+        severity: "success",
+      });
     }
     setIsDeletePackageDialogOpen(false);
     setPackageToDelete(null);
@@ -310,16 +318,21 @@ const ProviderProfileSettings = () => {
               className="bg-primary rounded-full text-[14px] font-medium text-white text-center px-6 py-3"
               onClick={() => {
                 if (!selectedSkill) {
-                  setSnackMessage("Please add a skill!");
-                  setAlertOpen(true);
+                  setAlertState({
+                    open: true,
+                    message: "Please add a skill!",
+                    severity: "warning",
+                  });
                   return;
                 }
 
                 if (formData?.skills?.includes(selectedSkill)) {
-                  setSnackMessage(
-                    "This skill is already added. Please select a different skill!"
-                  );
-                  setAlertOpen(true);
+                  setAlertState({
+                    open: true,
+                    message:
+                      "This skill is already added. Please select a different skill!",
+                    severity: "warning",
+                  });
                   return;
                 }
 
@@ -379,7 +392,7 @@ const ProviderProfileSettings = () => {
           </div>
           <PackageCardComponent
             packageData={formData?.packages}
-            limit={false}
+            // limit={false}
             show={false}
             image={false}
             onEdit={(pkg) => {
@@ -421,7 +434,7 @@ const ProviderProfileSettings = () => {
           </div>
           <AllPortfolioCardComponent
             portfolioData={formData?.portfolios}
-            limit={true}
+            // limit={true}
           />
           {formData?.portfolios && formData?.portfolios?.length > 4 && (
             <Link href="/service-provider-dashboard/portfolio">
@@ -441,8 +454,11 @@ const ProviderProfileSettings = () => {
           handleFormChange({
             packages: [...formData?.packages, newPackage],
           });
-          setSnackMessage("Package added successfully!");
-          setAlertOpen(true);
+          setAlertState({
+            open: true,
+            message: "Package added successfully!",
+            severity: "success",
+          });
         }}
         currentPackages={formData?.packages}
       />
@@ -458,8 +474,11 @@ const ProviderProfileSettings = () => {
               pkg?.id === updatedPackage?.id ? updatedPackage : pkg
             ),
           });
-          setSnackMessage("Package updated successfully!");
-          setAlertOpen(true);
+          setAlertState({
+            open: true,
+            message: "Package updated successfully!",
+            severity: "success",
+          });
         }}
         packageToEdit={editingPackage}
       />
@@ -475,19 +494,30 @@ const ProviderProfileSettings = () => {
       <AddPortfolioDialog
         open={isAddPortfolioModalOpen}
         onClose={() => setIsAddPortfolioModalOpen(false)}
+        onAddPortfolio={(newPortfolio) => {
+          handleFormChange({
+            portfolios: [...formData?.portfolios, newPortfolio],
+          });
+          setAlertState({
+            open: true,
+            message: "Portfolio added successfully!",
+            severity: "success",
+          });
+        }}
+        currentPortfolios={formData?.portfolios}
       />
       <Snackbar
-        open={alertOpen}
+        open={alertState?.open}
         autoHideDuration={6000}
-        onClose={() => setAlertOpen(false)}
+        onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       >
         <Alert
-          onClose={() => setAlertOpen(false)}
-          severity="warning"
+          onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
+          severity={alertState?.severity}
           sx={{ width: "100%" }}
         >
-          {snackMessage}
+          {alertState?.message}
         </Alert>
       </Snackbar>
     </>

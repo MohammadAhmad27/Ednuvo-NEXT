@@ -41,7 +41,7 @@ const AddPackageDialog = ({
     description: string;
     category: string;
     pricingMode: string;
-    price: string | number;
+    price: string;
     requirements: string;
   }>({
     packageImages: [] as File[],
@@ -136,7 +136,7 @@ const AddPackageDialog = ({
     onClose();
   };
 
-  console.log("AddPackage: ", formData);
+  // console.log("AddPackage: ", formData);
 
   return (
     <>
