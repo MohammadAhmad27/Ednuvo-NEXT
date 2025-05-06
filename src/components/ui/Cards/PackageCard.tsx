@@ -27,7 +27,7 @@ const PackageCardComponent = ({
         >
           <div className="relative">
             <Image
-              src={item?.bgImg}
+              src={item?.bgImg[0]}
               alt="cover-photo"
               width={100}
               height={100}

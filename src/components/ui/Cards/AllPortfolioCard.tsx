@@ -8,10 +8,12 @@ const AllPortfolioCardComponent = ({
   portfolioData,
   limit = false,
   image = false,
+  onEdit,
 }: {
   portfolioData: PortfolioCard[];
   limit?: boolean;
   image?: boolean;
+  onEdit?: (portfolio: PortfolioCard) => void;
 }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedPortfolio, setSelectedPortfolio] =
@@ -50,6 +52,10 @@ const AllPortfolioCardComponent = ({
                     width={25}
                     height={25}
                     className="object-cover"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onEdit?.(item);
+                    }}
                   />
                   <Image
                     src="/service-provider-dashboard/delete-icon.svg"

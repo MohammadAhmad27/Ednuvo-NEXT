@@ -97,7 +97,7 @@ export interface SkillsList {
 
 export interface PackageCard {
   id: number;
-  bgImg: string;
+  bgImg: string[];
   heartImg: string;
   desc: string;
   starImg: string;

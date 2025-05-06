@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useRef, useEffect } from "react";
 import {
   Dialog,
@@ -37,7 +37,7 @@ const EditPackageDialog = ({
     useState<boolean>(false);
 
   const [formData, setFormData] = useState<{
-    packageImages: File[];
+    packageImages: (File | string)[];
     title: string;
     description: string;
     category: string;
@@ -58,7 +58,7 @@ const EditPackageDialog = ({
   useEffect(() => {
     if (packageToEdit) {
       setFormData({
-        packageImages: [],
+        packageImages: packageToEdit?.bgImg || [],
         title: packageToEdit?.title || "",
         description: packageToEdit?.desc || "",
         category: packageToEdit?.category || "",
@@ -104,7 +104,7 @@ const EditPackageDialog = ({
   const handleSave = () => {
     // Validate required fields
     if (
-      !formData?.packageImages ||
+      !formData?.packageImages[0] ||
       !formData?.title ||
       !formData?.description ||
       !formData?.category ||
@@ -122,10 +122,10 @@ const EditPackageDialog = ({
     // Create updated package object
     const updatedPackage: PackageCard = {
       ...packageToEdit,
-      bgImg:
-        formData?.packageImages?.length > 0
-          ? URL.createObjectURL(formData?.packageImages[0])
-          : packageToEdit?.bgImg,
+          bgImg: formData?.packageImages?.map((file) => {
+            if (typeof file === "string") return file; // Keep existing URLs
+            return URL.createObjectURL(file); // Create URLs for new files
+          }),
       title: formData?.title,
       desc: formData?.description,
       category: formData?.category,
@@ -227,44 +227,42 @@ const EditPackageDialog = ({
               </p>
             </div>
 
-            {/* Current image preview with tooltip */}
-            {packageToEdit?.bgImg && !formData?.packageImages?.length && (
-              <div className="flex justify-center mb-4">
-                <Tooltip title="Current package image" placement="bottom" arrow>
-                  <div className="w-[100px] h-[100px] relative">
-                    <Image
-                      src={packageToEdit?.bgImg}
-                      alt="current-package"
-                      fill
-                      className="object-cover rounded"
-                    />
-                  </div>
-                </Tooltip>
-              </div>
-            )}
-
-            {/* New uploaded images preview */}
+            {/* Preview uploaded images */}
             {formData?.packageImages?.length > 0 && (
-              <div className="flex flex-wrap justify-center items-center gap-4 mb-4">
-                {formData?.packageImages?.map((file, imgIndex) => {
-                  const url = URL.createObjectURL(file);
+              <div className="flex flex-wrap justify-center items-center gap-4 mb-6">
+                {formData?.packageImages?.map((file, index) => {
+                  const url =
+                    typeof file === "string" ? file : URL.createObjectURL(file);
+                  const fileName =
+                    typeof file === "string"
+                      ? file.split("/").pop() || `image-${index}`
+                      : file.name;
+
                   return (
                     <div
-                      key={imgIndex}
+                      key={index}
                       className="w-[50px] h-[50px] relative rounded group"
                     >
-                      <Tooltip title={file?.name} placement="bottom" arrow>
-                        <div className="w-[50px] h-[50px] relative">
+                      <Tooltip
+                        title={
+                          <p className="text-[10px] font-medium text-white">
+                            {fileName}
+                          </p>
+                        }
+                        placement="bottom"
+                        arrow
+                      >
+                        <div className="w-full h-full relative">
                           <Image
                             src={url}
-                            alt={`uploaded-${imgIndex}`}
+                            alt={`uploaded-${index}`}
                             fill
                             className="object-cover rounded hover:grayscale hover:filter"
                           />
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
-                              handleDeleteImage(imgIndex);
+                              handleDeleteImage(index);
                             }}
                             className="absolute top-0 right-0 flex justify-center items-center p-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out bg-black/50 rounded-full"
                           >

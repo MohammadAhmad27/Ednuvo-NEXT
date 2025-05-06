@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useRef } from "react";
 import {
   Dialog,
@@ -88,7 +88,7 @@ const AddPackageDialog = ({
   const handleAddPackage = () => {
     // Validate required fields
     if (
-      !formData?.packageImages ||
+      !formData?.packageImages[0] ||
       !formData?.title ||
       !formData?.description ||
       !formData?.category ||
@@ -110,9 +110,7 @@ const AddPackageDialog = ({
     // Create new package object matching PackageCard structure
     const newPackage = {
       id: maxId + 1,
-      bgImg:
-        formData?.packageImages?.length > 0 &&
-        URL.createObjectURL(formData?.packageImages[0]),
+      bgImg: formData?.packageImages?.map((file) => URL.createObjectURL(file)),
       title: formData?.title,
       desc: formData?.description,
       category: formData?.category,
@@ -171,7 +169,7 @@ const AddPackageDialog = ({
           "& .MuiDialogActions-root": {
             padding: "0px 20px 20px 20px !important",
             display: "flex",
-            justifyContent: "center",
+            justifyContent: "end",
             alignItems: "center",
           },
         }}

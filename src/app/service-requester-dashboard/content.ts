@@ -764,7 +764,14 @@ export const skillsList: SkillsList[] = [
 export const packageCardData: PackageCard[] = [
   {
     id: 1,
-    bgImg: "/service-requester-dashboard/cover2.svg",
+    bgImg: [
+      "/service-requester-dashboard/cover2.svg",
+      "/service-requester-dashboard/portfolio4.svg",
+      "/service-requester-dashboard/portfolio1.svg",
+      "/service-requester-dashboard/portfolio2.svg",
+      "/service-requester-dashboard/portfolio3.svg",
+      "/service-requester-dashboard/cover2.svg",
+    ],
     heartImg: "/service-requester-dashboard/heart.svg",
     desc: "Fast and reliable plumbing solutions at your doorstep!",
     starImg: "/landing/popularservices/star.svg",
@@ -776,7 +783,14 @@ export const packageCardData: PackageCard[] = [
   },
   {
     id: 2,
-    bgImg: "/service-requester-dashboard/cover3.svg",
+    bgImg: [
+      "/service-requester-dashboard/cover3.svg",
+      "/service-requester-dashboard/portfolio4.svg",
+      "/service-requester-dashboard/portfolio1.svg",
+      "/service-requester-dashboard/portfolio2.svg",
+      "/service-requester-dashboard/portfolio3.svg",
+      "/service-requester-dashboard/cover2.svg",
+    ],
     heartImg: "/service-requester-dashboard/heart.svg",
     desc: "Fast and reliable plumbing solutions at your doorstep!",
     starImg: "/landing/popularservices/star.svg",
@@ -788,7 +802,14 @@ export const packageCardData: PackageCard[] = [
   },
   {
     id: 3,
-    bgImg: "/service-requester-dashboard/cover2.svg",
+    bgImg: [
+      "/service-requester-dashboard/cover2.svg",
+      "/service-requester-dashboard/portfolio4.svg",
+      "/service-requester-dashboard/portfolio1.svg",
+      "/service-requester-dashboard/portfolio2.svg",
+      "/service-requester-dashboard/portfolio3.svg",
+      "/service-requester-dashboard/cover2.svg",
+    ],
     heartImg: "/service-requester-dashboard/heart.svg",
     desc: "Fast and reliable plumbing solutions at your doorstep!",
     starImg: "/landing/popularservices/star.svg",
@@ -800,7 +821,14 @@ export const packageCardData: PackageCard[] = [
   },
   {
     id: 4,
-    bgImg: "/service-requester-dashboard/cover3.svg",
+    bgImg: [
+      "/service-requester-dashboard/cover3.svg",
+      "/service-requester-dashboard/portfolio4.svg",
+      "/service-requester-dashboard/portfolio1.svg",
+      "/service-requester-dashboard/portfolio2.svg",
+      "/service-requester-dashboard/portfolio3.svg",
+      "/service-requester-dashboard/cover2.svg",
+    ],
     heartImg: "/service-requester-dashboard/heart.svg",
     desc: "Fast and reliable plumbing solutions at your doorstep!",
     starImg: "/landing/popularservices/star.svg",
@@ -812,7 +840,14 @@ export const packageCardData: PackageCard[] = [
   },
   {
     id: 5,
-    bgImg: "/service-requester-dashboard/cover2.svg",
+    bgImg: [
+      "/service-requester-dashboard/cover2.svg",
+      "/service-requester-dashboard/portfolio4.svg",
+      "/service-requester-dashboard/portfolio1.svg",
+      "/service-requester-dashboard/portfolio2.svg",
+      "/service-requester-dashboard/portfolio3.svg",
+      "/service-requester-dashboard/cover2.svg",
+    ],
     heartImg: "/service-requester-dashboard/heart.svg",
     desc: "Fast and reliable plumbing solutions at your doorstep!",
     starImg: "/landing/popularservices/star.svg",
@@ -824,7 +859,14 @@ export const packageCardData: PackageCard[] = [
   },
   {
     id: 6,
-    bgImg: "/service-requester-dashboard/cover3.svg",
+    bgImg: [
+      "/service-requester-dashboard/cover3.svg",
+      "/service-requester-dashboard/portfolio4.svg",
+      "/service-requester-dashboard/portfolio1.svg",
+      "/service-requester-dashboard/portfolio2.svg",
+      "/service-requester-dashboard/portfolio3.svg",
+      "/service-requester-dashboard/cover2.svg",
+    ],
     heartImg: "/service-requester-dashboard/heart.svg",
     desc: "Fast and reliable plumbing solutions at your doorstep!",
     starImg: "/landing/popularservices/star.svg",
@@ -836,7 +878,14 @@ export const packageCardData: PackageCard[] = [
   },
   {
     id: 7,
-    bgImg: "/service-requester-dashboard/cover2.svg",
+    bgImg: [
+      "/service-requester-dashboard/cover2.svg",
+      "/service-requester-dashboard/portfolio4.svg",
+      "/service-requester-dashboard/portfolio1.svg",
+      "/service-requester-dashboard/portfolio2.svg",
+      "/service-requester-dashboard/portfolio3.svg",
+      "/service-requester-dashboard/cover2.svg",
+    ],
     heartImg: "/service-requester-dashboard/heart.svg",
     desc: "Fast and reliable plumbing solutions at your doorstep!",
     starImg: "/landing/popularservices/star.svg",
@@ -848,7 +897,14 @@ export const packageCardData: PackageCard[] = [
   },
   {
     id: 8,
-    bgImg: "/service-requester-dashboard/cover3.svg",
+    bgImg: [
+      "/service-requester-dashboard/cover3.svg",
+      "/service-requester-dashboard/portfolio4.svg",
+      "/service-requester-dashboard/portfolio1.svg",
+      "/service-requester-dashboard/portfolio2.svg",
+      "/service-requester-dashboard/portfolio3.svg",
+      "/service-requester-dashboard/cover2.svg",
+    ],
     heartImg: "/service-requester-dashboard/heart.svg",
     desc: "Fast and reliable plumbing solutions at your doorstep!",
     starImg: "/landing/popularservices/star.svg",

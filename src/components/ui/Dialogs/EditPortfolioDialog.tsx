@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -16,24 +16,24 @@ import dayjs, { Dayjs } from "dayjs";
 import { Close } from "@mui/icons-material";
 import { PortfolioCard } from "@/interfaces/ServiceRequesterDashboard";
 
-interface AddPortfolioDialogProps {
+interface EditPortfolioDialogProps {
   open: boolean;
   onClose: () => void;
-  onAddPortfolio: (newPortfolio: PortfolioCard) => void;
-  currentPortfolios: PortfolioCard[];
+  onSave: (updatedPortfolio: PortfolioCard) => void;
+  portfolioToEdit: PortfolioCard | null;
 }
 
-const AddPortfolioDialog = ({
+const EditPortfolioDialog = ({
   open,
   onClose,
-  onAddPortfolio,
-  currentPortfolios,
-}: AddPortfolioDialogProps) => {
+  onSave,
+  portfolioToEdit,
+}: EditPortfolioDialogProps) => {
   const [alertOpen, setAlertOpen] = useState<boolean>(false);
   const [snackMessage, setSnackMessage] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [formData, setFormData] = useState<{
-    portfolioImages: File[];
+    portfolioImages: (File | string)[];
     projectTitle: string;
     projectDescription: string;
     skills: string[];
@@ -41,14 +41,32 @@ const AddPortfolioDialog = ({
     endDate: Date | null;
     projectCost: string;
   }>({
-    portfolioImages: [] as File[],
+    portfolioImages: [],
     projectTitle: "",
     projectDescription: "",
-    skills: [] as string[],
+    skills: [],
     startDate: null,
     endDate: null,
     projectCost: "",
   });
+
+  useEffect(() => {
+    if (portfolioToEdit) {
+      setFormData({
+        portfolioImages: portfolioToEdit?.mainImg || [],
+        projectTitle: portfolioToEdit?.projectTitle || "",
+        projectDescription: portfolioToEdit?.projectDesc || "",
+        skills: portfolioToEdit?.skills || [],
+        startDate: portfolioToEdit?.startTime
+          ? new Date(portfolioToEdit?.startTime)
+          : null,
+        endDate: portfolioToEdit?.endTime
+          ? new Date(portfolioToEdit?.endTime)
+          : null,
+        projectCost: portfolioToEdit?.projectCost?.toString() || "",
+      });
+    }
+  }, [portfolioToEdit]);
 
   const handleFormChange = (data: any) => {
     setFormData((prev) => ({ ...prev, ...data }));
@@ -76,7 +94,7 @@ const AddPortfolioDialog = ({
         file?.type?.startsWith("image/")
       );
       handleFormChange({
-        portfolioImages: [...formData.portfolioImages, ...imageFiles],
+        portfolioImages: [...formData?.portfolioImages, ...imageFiles],
       });
     }
   };
@@ -92,7 +110,7 @@ const AddPortfolioDialog = ({
     handleFormChange({ portfolioImages: updatedImages });
   };
 
-  const handleAddPortfolio = () => {
+  const handleSavePortfolio = () => {
     if (
       !formData?.portfolioImages[0] ||
       !formData?.projectTitle ||
@@ -106,10 +124,6 @@ const AddPortfolioDialog = ({
       setAlertOpen(true);
       return;
     }
-    const maxId = currentPortfolios?.reduce(
-      (max, portfolio) => Math?.max(max, portfolio?.id),
-      0
-    );
 
     const formatDate = (date: Date | null) =>
       date ? dayjs(date)?.format("DD MMMM, YYYY") : "";
@@ -120,11 +134,14 @@ const AddPortfolioDialog = ({
         ? dayjs(formData?.endDate).diff(dayjs(formData?.startDate), "day")
         : 0;
 
-    const newPortfolio = {
-      id: maxId + 1,
-      mainImg: formData?.portfolioImages?.map((file) =>
-        URL.createObjectURL(file)
-      ),
+    const updatedPortfolio = {
+      ...portfolioToEdit,
+      id: portfolioToEdit?.id || 0,
+      mainImg: formData?.portfolioImages?.map((file) => {
+        if (typeof file === "string") return file; // Keep existing URLs
+        return URL.createObjectURL(file); // Create URLs for new files
+      }),
+    
       startTime: formatDate(formData?.startDate),
       endTime: formatDate(formData?.endDate),
       projectTitle: formData?.projectTitle,
@@ -135,21 +152,11 @@ const AddPortfolioDialog = ({
       label: "SAR",
     };
 
-    onAddPortfolio(newPortfolio);
-
-    setFormData({
-      portfolioImages: [],
-      projectTitle: "",
-      projectDescription: "",
-      skills: [],
-      startDate: null,
-      endDate: null,
-      projectCost: "",
-    });
+    onSave(updatedPortfolio);
     onClose();
   };
 
-  // console.log("AddPortfolio: ", formData);
+  // console.log("EditPortfolio: ", formData);
 
   return (
     <>
@@ -191,7 +198,7 @@ const AddPortfolioDialog = ({
       >
         <DialogTitle>
           <h2 className="text-[20px] font-semibold text-black">
-            Add Portfolio
+            Edit Portfolio
           </h2>
           <Image
             onClick={onClose}
@@ -245,7 +252,13 @@ const AddPortfolioDialog = ({
           {formData?.portfolioImages?.length > 0 && (
             <div className="flex flex-wrap justify-center items-center gap-4 mb-6">
               {formData?.portfolioImages?.map((file, index) => {
-                const url = URL.createObjectURL(file);
+                const url =
+                  typeof file === "string" ? file : URL.createObjectURL(file);
+                const fileName =
+                  typeof file === "string"
+                    ? file.split("/").pop() || `image-${index}`
+                    : file.name;
+
                 return (
                   <div
                     key={index}
@@ -254,7 +267,7 @@ const AddPortfolioDialog = ({
                     <Tooltip
                       title={
                         <p className="text-[10px] font-medium text-white">
-                          {file?.name}
+                          {fileName}
                         </p>
                       }
                       placement="bottom"
@@ -365,9 +378,9 @@ const AddPortfolioDialog = ({
           </button>
           <button
             className="bg-primary rounded-full text-[14px] font-medium text-white text-center px-6 py-2"
-            onClick={handleAddPortfolio}
+            onClick={handleSavePortfolio}
           >
-            Add Portfolio
+            Save Changes
           </button>
         </DialogActions>
       </Dialog>
@@ -390,4 +403,4 @@ const AddPortfolioDialog = ({
   );
 };
 
-export default AddPortfolioDialog;
+export default EditPortfolioDialog;

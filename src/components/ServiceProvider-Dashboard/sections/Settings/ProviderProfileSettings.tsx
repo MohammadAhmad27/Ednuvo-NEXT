@@ -28,6 +28,7 @@ import PackageCardComponent from "@/components/ui/Cards/PackageCard";
 import AllPortfolioCardComponent from "@/components/ui/Cards/AllPortfolioCard";
 import EditPackageDialog from "@/components/ui/Dialogs/EditPackageDialog";
 import DeleteDialog from "@/components/ui/Dialogs/DeleteDialog";
+import EditPortfolioDialog from "@/components/ui/Dialogs/EditPortfolioDialog";
 
 const ProviderProfileSettings = () => {
   const [formData, setFormData] = useState<{
@@ -73,7 +74,7 @@ const ProviderProfileSettings = () => {
     useState<boolean>(false);
   const [isEditPackageModalOpen, setIsEditPackageModalOpen] =
     useState<boolean>(false);
-  const [isDeletePackageDialogOpen, setIsDeletePackageDialogOpen] =
+  const [isDeletePackageModalOpen, setIsDeletePackageModalOpen] =
     useState<boolean>(false);
   // Portfolio
   const [isAddPortfolioModalOpen, setIsAddPortfolioModalOpen] =
@@ -88,6 +89,8 @@ const ProviderProfileSettings = () => {
   const [packageToDelete, setPackageToDelete] = useState<PackageCard | null>(
     null
   );
+  const [editingPortfolio, setEditingPortfolio] =
+    useState<PortfolioCard | null>(null);
 
   const handleFormChange = (data: any) => {
     setFormData((prev) => ({ ...prev, ...data }));
@@ -95,7 +98,7 @@ const ProviderProfileSettings = () => {
 
   const handleDeletePackageInitiate = (pkg: PackageCard) => {
     setPackageToDelete(pkg);
-    setIsDeletePackageDialogOpen(true);
+    setIsDeletePackageModalOpen(true);
   };
 
   const handleDeletePackageConfirm = () => {
@@ -111,12 +114,12 @@ const ProviderProfileSettings = () => {
         severity: "success",
       });
     }
-    setIsDeletePackageDialogOpen(false);
+    setIsDeletePackageModalOpen(false);
     setPackageToDelete(null);
   };
 
   const handleDeletePackageCancel = () => {
-    setIsDeletePackageDialogOpen(false);
+    setIsDeletePackageModalOpen(false);
     setPackageToDelete(null);
   };
 
@@ -436,6 +439,10 @@ const ProviderProfileSettings = () => {
             portfolioData={formData?.portfolios}
             // limit={true}
             image={true}
+            onEdit={(portfolio) => {
+              setEditingPortfolio(portfolio);
+              setIsEditPortfolioModalOpen(true);
+            }}
           />
           {formData?.portfolios && formData?.portfolios?.length > 4 && (
             <Link href="/service-provider-dashboard/portfolio">
@@ -484,7 +491,7 @@ const ProviderProfileSettings = () => {
         packageToEdit={editingPackage}
       />
       <DeleteDialog
-        open={isDeletePackageDialogOpen}
+        open={isDeletePackageModalOpen}
         title="Are You Sure?"
         description="Are you sure you want to delete this package?"
         onCancel={handleDeletePackageCancel}
@@ -506,6 +513,28 @@ const ProviderProfileSettings = () => {
           });
         }}
         currentPortfolios={formData?.portfolios}
+      />
+      <EditPortfolioDialog
+        open={isEditPortfolioModalOpen}
+        onClose={() => {
+          setIsEditPortfolioModalOpen(false);
+          setEditingPortfolio(null);
+        }}
+        onSave={(updatedPortfolio) => {
+          handleFormChange({
+            portfolios: formData?.portfolios?.map((portfolio) =>
+              portfolio?.id === updatedPortfolio?.id
+                ? updatedPortfolio
+                : portfolio
+            ),
+          });
+          setAlertState({
+            open: true,
+            message: "Portfolio updated successfully!",
+            severity: "success",
+          });
+        }}
+        portfolioToEdit={editingPortfolio}
       />
       <Snackbar
         open={alertState?.open}
