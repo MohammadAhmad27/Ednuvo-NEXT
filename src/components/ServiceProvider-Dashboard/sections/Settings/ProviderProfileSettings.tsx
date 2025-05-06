@@ -96,6 +96,7 @@ const ProviderProfileSettings = () => {
     setFormData((prev) => ({ ...prev, ...data }));
   };
 
+  // Package Deletion
   const handleDeletePackageInitiate = (pkg: PackageCard) => {
     setPackageToDelete(pkg);
     setIsDeletePackageModalOpen(true);
@@ -121,6 +122,35 @@ const ProviderProfileSettings = () => {
   const handleDeletePackageCancel = () => {
     setIsDeletePackageModalOpen(false);
     setPackageToDelete(null);
+  };
+
+
+  // Portfolio Deletion 
+  const handleDeletePortfolioInitiate = (portfolio: PortfolioCard) => {
+    setEditingPortfolio(portfolio);
+    setIsDeletePortfolioModalOpen(true);
+  };
+
+  const handleDeletePortfolioConfirm = () => {
+    if (editingPortfolio) {
+      handleFormChange({
+        portfolios: formData?.portfolios?.filter(
+          (portfolio) => portfolio?.id !== editingPortfolio?.id
+        ),
+      });
+      setAlertState({
+        open: true,
+        message: "Portfolio deleted successfully!",
+        severity: "success",
+      });
+    }
+    setIsDeletePortfolioModalOpen(false);
+    setEditingPortfolio(null);
+  };
+
+  const handleDeletePortfolioCancel = () => {
+    setIsDeletePortfolioModalOpen(false);
+    setEditingPortfolio(null);
   };
 
   useEffect(() => {
@@ -443,6 +473,7 @@ const ProviderProfileSettings = () => {
               setEditingPortfolio(portfolio);
               setIsEditPortfolioModalOpen(true);
             }}
+            onDelete={handleDeletePortfolioInitiate}
           />
           {formData?.portfolios && formData?.portfolios?.length > 4 && (
             <Link href="/service-provider-dashboard/portfolio">
@@ -536,6 +567,16 @@ const ProviderProfileSettings = () => {
         }}
         portfolioToEdit={editingPortfolio}
       />
+       <DeleteDialog
+        open={isDeletePortfolioModalOpen}
+        title="Are You Sure?"
+        description="Are you sure you want to delete this portfolio?"
+        onCancel={handleDeletePortfolioCancel}
+        onConfirm={handleDeletePortfolioConfirm}
+        confirmText="Delete"
+        cancelText="Cancel"
+      />
+
       <Snackbar
         open={alertState?.open}
         autoHideDuration={6000}
