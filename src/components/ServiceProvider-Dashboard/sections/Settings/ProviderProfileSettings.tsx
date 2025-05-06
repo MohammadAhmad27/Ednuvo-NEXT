@@ -125,7 +125,7 @@ const ProviderProfileSettings = () => {
   };
 
 
-  // Portfolio Deletion 
+  // Portfolio Deletion
   const handleDeletePortfolioInitiate = (portfolio: PortfolioCard) => {
     setEditingPortfolio(portfolio);
     setIsDeletePortfolioModalOpen(true);
@@ -467,7 +467,7 @@ const ProviderProfileSettings = () => {
           </div>
           <AllPortfolioCardComponent
             portfolioData={formData?.portfolios}
-            // limit={true}
+            limit={true}
             image={true}
             onEdit={(portfolio) => {
               setEditingPortfolio(portfolio);
@@ -567,7 +567,7 @@ const ProviderProfileSettings = () => {
         }}
         portfolioToEdit={editingPortfolio}
       />
-       <DeleteDialog
+      <DeleteDialog
         open={isDeletePortfolioModalOpen}
         title="Are You Sure?"
         description="Are you sure you want to delete this portfolio?"
@@ -576,7 +576,6 @@ const ProviderProfileSettings = () => {
         confirmText="Delete"
         cancelText="Cancel"
       />
-
       <Snackbar
         open={alertState?.open}
         autoHideDuration={6000}
