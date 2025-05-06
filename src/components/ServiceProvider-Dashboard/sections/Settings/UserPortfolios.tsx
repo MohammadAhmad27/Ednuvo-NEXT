@@ -103,7 +103,7 @@ const UserPortfolios = () => {
           {" "}
           Showing {portfolioData?.length} Portfolios
         </p>
-        <AllPortfolioCardComponent portfolioData={portfolioData} />
+        <AllPortfolioCardComponent portfolioData={portfolioData} image={true} />
       </div>
     </div>
   );

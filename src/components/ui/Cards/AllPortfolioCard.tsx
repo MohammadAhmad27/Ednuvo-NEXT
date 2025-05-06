@@ -7,9 +7,11 @@ import { useState } from "react";
 const AllPortfolioCardComponent = ({
   portfolioData,
   limit = false,
+  image = false,
 }: {
   portfolioData: PortfolioCard[];
   limit?: boolean;
+  image?: boolean;
 }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedPortfolio, setSelectedPortfolio] =
@@ -32,13 +34,33 @@ const AllPortfolioCardComponent = ({
             onClick={() => handleCardClick(item)}
             className="flex flex-col gap-2 p-2 bg-white border border-[#DDE1F0] shadow-grayshadow rounded-xl cursor-pointer"
           >
-            <Image
-              src={item?.mainImg[0]}
-              alt="cover-photo"
-              width={100}
-              height={100}
-              className="object-cover w-full h-[300px] rounded-lg"
-            />
+            <div className="relative">
+              <Image
+                src={item?.mainImg[0]}
+                alt="cover-photo"
+                width={100}
+                height={100}
+                className="object-cover w-full h-[300px] rounded-lg"
+              />
+              {image && (
+                <div className="absolute top-2 right-2 flex items-center gap-2">
+                  <Image
+                    src="/service-provider-dashboard/edit-icon.svg"
+                    alt="edit-icon"
+                    width={25}
+                    height={25}
+                    className="object-cover"
+                  />
+                  <Image
+                    src="/service-provider-dashboard/delete-icon.svg"
+                    alt="delete-icon"
+                    width={25}
+                    height={25}
+                    className="object-cover"
+                  />
+                </div>
+              )}
+            </div>
             <div className="my-[2px] pl-1">
               <p className="text-[14px] font-normal text-darkgray">
                 From: {item?.startTime}

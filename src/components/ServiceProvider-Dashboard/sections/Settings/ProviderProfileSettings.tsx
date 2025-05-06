@@ -435,6 +435,7 @@ const ProviderProfileSettings = () => {
           <AllPortfolioCardComponent
             portfolioData={formData?.portfolios}
             // limit={true}
+            image={true}
           />
           {formData?.portfolios && formData?.portfolios?.length > 4 && (
             <Link href="/service-provider-dashboard/portfolio">

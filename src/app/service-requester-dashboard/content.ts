@@ -771,7 +771,7 @@ export const packageCardData: PackageCard[] = [
     rating: 4.7,
     reviews: 19,
     startingFrom: "Starting from",
-    value: 100,
+    value: "100",
     label: "Send job request",
   },
   {
@@ -783,7 +783,7 @@ export const packageCardData: PackageCard[] = [
     rating: 4.7,
     reviews: 19,
     startingFrom: "Starting from",
-    value: 100,
+    value: "100",
     label: "Send job request",
   },
   {
@@ -795,7 +795,7 @@ export const packageCardData: PackageCard[] = [
     rating: 4.7,
     reviews: 19,
     startingFrom: "Starting from",
-    value: 100,
+    value: "100",
     label: "Send job request",
   },
   {
@@ -807,7 +807,7 @@ export const packageCardData: PackageCard[] = [
     rating: 4.7,
     reviews: 19,
     startingFrom: "Starting from",
-    value: 100,
+    value: "100",
     label: "Send job request",
   },
   {
@@ -819,7 +819,7 @@ export const packageCardData: PackageCard[] = [
     rating: 4.7,
     reviews: 19,
     startingFrom: "Starting from",
-    value: 100,
+    value: "100",
     label: "Send job request",
   },
   {
@@ -831,7 +831,7 @@ export const packageCardData: PackageCard[] = [
     rating: 4.7,
     reviews: 19,
     startingFrom: "Starting from",
-    value: 100,
+    value: "100",
     label: "Send job request",
   },
   {
@@ -843,7 +843,7 @@ export const packageCardData: PackageCard[] = [
     rating: 4.7,
     reviews: 19,
     startingFrom: "Starting from",
-    value: 100,
+    value: "100",
     label: "Send job request",
   },
   {
@@ -855,7 +855,7 @@ export const packageCardData: PackageCard[] = [
     rating: 4.7,
     reviews: 19,
     startingFrom: "Starting from",
-    value: 100,
+    value: "100",
     label: "Send job request",
   },
 ];
