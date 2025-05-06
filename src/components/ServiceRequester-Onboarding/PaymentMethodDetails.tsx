@@ -12,9 +12,9 @@ interface PaymentMethodDetailsProps {
   formData: {
     paymentMethod: string;
     billedTo: string;
-    cardNumber: number | string;
+    cardNumber: string;
     expiration: Date | null;
-    cvv: number | string;
+    cvv: string;
     country: string;
     [key: string]: any;
   };

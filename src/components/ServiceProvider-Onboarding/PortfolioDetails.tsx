@@ -15,7 +15,7 @@ interface PortfolioData {
   portfolioImages: File[];
   startDate: Date | null;
   endDate: Date | null;
-  projectCost: string | number;
+  projectCost: string;
 }
 
 interface PortfolioDetailsProps {

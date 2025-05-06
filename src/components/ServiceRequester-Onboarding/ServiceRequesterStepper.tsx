@@ -114,7 +114,7 @@ const ServiceRequesterSteps = () => {
     firstName: string;
     lastName: string;
     address: string;
-    phoneNumber: number | string;
+    phoneNumber: string;
     countryCode: string;
     photo: File | null;
 
@@ -126,7 +126,7 @@ const ServiceRequesterSteps = () => {
     location: string;
     jobDuration: string;
     budgetMode: string;
-    totalBudget: number | string;
+    totalBudget: string;
     experienceLevel: string;
     jobStartDate: Date | null;
     categoriesList: string[];
@@ -135,9 +135,9 @@ const ServiceRequesterSteps = () => {
     // Payment Method Details
     paymentMethod: string;
     billedTo: string;
-    cardNumber: number | string;
+    cardNumber: string;
     expiration: Date | null;
-    cvv: number | string;
+    cvv: string;
     country: string;
   }>({
     // Basic Information

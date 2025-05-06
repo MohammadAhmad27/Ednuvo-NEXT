@@ -42,7 +42,7 @@ const EditPackageDialog = ({
     description: string;
     category: string;
     pricingMode: string;
-    price: string | number;
+    price: string;
     requirements: string;
   }>({
     packageImages: [],

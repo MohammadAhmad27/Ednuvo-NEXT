@@ -25,7 +25,7 @@ interface JobDetailsProps {
     location: string;
     jobDuration: string;
     budgetMode: string;
-    totalBudget: number | string;
+    totalBudget: string;
     experienceLevel: string;
     jobStartDate: Date | null;
     categoriesList: string[];

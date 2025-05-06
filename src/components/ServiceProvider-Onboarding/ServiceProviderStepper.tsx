@@ -124,7 +124,7 @@ const ServiceProviderSteps = () => {
     firstName: string;
     lastName: string;
     address: string;
-    phoneNumber: number | string;
+    phoneNumber: string;
     countryCode: string;
     photo: File | null;
 
@@ -142,7 +142,7 @@ const ServiceProviderSteps = () => {
       portfolioImages: File[];
       startDate: Date | null;
       endDate: Date | null;
-      projectCost: string | number;
+      projectCost: string;
     }>;
 
     // Packages Detail
@@ -151,7 +151,7 @@ const ServiceProviderSteps = () => {
       title: string;
       description: string;
       pricingMode: string;
-      price: string | number;
+      price: string;
       category: string;
       requirements: string;
     }>;

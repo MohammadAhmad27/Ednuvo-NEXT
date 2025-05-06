@@ -13,7 +13,7 @@ interface PackageData {
   title: string;
   description: string;
   pricingMode: string;
-  price: string | number;
+  price: string;
   category: string;
   requirements: string;
 }

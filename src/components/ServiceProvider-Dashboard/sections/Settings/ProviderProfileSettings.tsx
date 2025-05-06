@@ -35,7 +35,7 @@ const ProviderProfileSettings = () => {
     firstName: string;
     lastName: string;
     address: string;
-    phoneNumber: number | string;
+    phoneNumber: string;
     countryCode: string;
     service: string[];
     experienceLevel: string;
