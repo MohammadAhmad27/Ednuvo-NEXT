@@ -18,18 +18,18 @@ import { Close } from "@mui/icons-material";
 
 interface JobDetailsProps {
   formData: {
-    jobTitle: string;
-    jobDescription: string;
-    jobCategory: string;
-    jobSubCategory: string;
-    location: string;
-    jobDuration: string;
-    budgetMode: string;
-    totalBudget: string;
-    experienceLevel: string;
-    jobStartDate: Date | null;
-    categoriesList: string[];
-    imagesList: File[];
+    jobTitle?: string;
+    jobDescription?: string;
+    jobCategory?: string;
+    jobSubCategory?: string;
+    location?: string;
+    jobDuration?: string;
+    budgetMode?: string;
+    totalBudget?: string;
+    experienceLevel?: string;
+    jobStartDate?: Date | null;
+    categoriesList?: string[];
+    imagesList?: File[];
     [key: string]: any;
   };
   onChange: (data: any) => void;
@@ -85,7 +85,7 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
           label="Job Title"
           placeholder="Enter job title"
           type="text"
-          value={formData?.jobTitle}
+          value={formData?.jobTitle || ""}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             onChange({ jobTitle: e?.target?.value })
           }
@@ -94,7 +94,7 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
           label="Job Description"
           placeholder="Enter job description"
           type="text"
-          value={formData?.jobDescription}
+          value={formData?.jobDescription || ""}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             onChange({ jobDescription: e?.target?.value })
           }
@@ -132,7 +132,7 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
             label="Location"
             placeholder="Enter location"
             type="text"
-            value={formData?.location}
+            value={formData?.location || ""}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               onChange({ location: e?.target?.value })
             }
@@ -175,7 +175,7 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
             label="Total Budget"
             placeholder="Enter budget"
             type="number"
-            value={formData?.totalBudget}
+            value={formData?.totalBudget || ""}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               onChange({ totalBudget: e?.target?.value })
             }

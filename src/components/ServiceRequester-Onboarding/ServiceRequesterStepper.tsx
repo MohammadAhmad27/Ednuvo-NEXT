@@ -119,18 +119,18 @@ const ServiceRequesterSteps = () => {
     photo: File | null;
 
     // Job Posting Details
-    jobTitle: string;
-    jobDescription: string;
-    jobCategory: string;
-    jobSubCategory: string;
-    location: string;
-    jobDuration: string;
-    budgetMode: string;
-    totalBudget: string;
-    experienceLevel: string;
-    jobStartDate: Date | null;
-    categoriesList: string[];
-    imagesList: File[];
+    jobTitle?: string;
+    jobDescription?: string;
+    jobCategory?: string;
+    jobSubCategory?: string;
+    location?: string;
+    jobDuration?: string;
+    budgetMode?: string;
+    totalBudget?: string;
+    experienceLevel?: string;
+    jobStartDate?: Date | null;
+    categoriesList?: string[];
+    imagesList?: File[];
 
     // Payment Method Details
     paymentMethod: string;
@@ -140,35 +140,35 @@ const ServiceRequesterSteps = () => {
     cvv: string;
     country: string;
   }>({
-    // Basic Information
-    firstName: "",
-    lastName: "",
-    address: "",
-    phoneNumber: "",
-    countryCode: "+966",
-    photo: null,
+  // Basic Information (required)
+  firstName: "",
+  lastName: "",
+  address: "",
+  phoneNumber: "",
+  countryCode: "+966",
+  photo: null,
 
-    // Job Posting Details
-    jobTitle: "",
-    jobDescription: "",
-    jobCategory: "",
-    jobSubCategory: "",
-    location: "",
-    jobDuration: "",
-    budgetMode: "",
-    totalBudget: "",
-    experienceLevel: "",
-    jobStartDate: null as Date | null,
-    categoriesList: [] as string[],
-    imagesList: [] as File[],
+  // Job Posting Details (optional)
+  jobTitle: "",
+  jobDescription: "",
+  jobCategory: "",
+  jobSubCategory: "",
+  location: "",
+  jobDuration: "",
+  budgetMode: "",
+  totalBudget: "",
+  experienceLevel: "",
+  jobStartDate: null as Date | null,
+  categoriesList: [] as string[],
+  imagesList: [] as File[],
 
-    // Payment Method Detais
-    paymentMethod: "razorpay",
-    billedTo: "",
-    cardNumber: "",
-    expiration: null as Date | null,
-    cvv: "",
-    country: "",
+  // Payment Method Details (required)
+  paymentMethod: "razorpay",
+  billedTo: "",
+  cardNumber: "",
+  expiration: null as Date | null,
+  cvv: "",
+  country: "",
   });
 
   const handleNext = () => {
@@ -235,6 +235,15 @@ const ServiceRequesterSteps = () => {
           >
             Back
           </button>
+
+          {activeStep === 1 && (
+            <button
+              onClick={() => setActiveStep(activeStep + 1)}
+              className="bg-white text-[14px] font-medium text-primary border border-primary rounded-full px-6 py-2"
+            >
+              Skip
+            </button>
+          )}
 
           <button
             onClick={handleNext}
