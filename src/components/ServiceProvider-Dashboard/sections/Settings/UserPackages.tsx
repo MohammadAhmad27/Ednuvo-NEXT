@@ -231,7 +231,7 @@ const UserPackages = () => {
       />
       <Snackbar
         open={alertState?.open}
-        autoHideDuration={6000}
+        autoHideDuration={5000}
         onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       >

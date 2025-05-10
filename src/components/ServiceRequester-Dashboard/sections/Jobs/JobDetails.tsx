@@ -576,7 +576,7 @@ function ReviewForm() {
       {/* Character Limit Alert */}
       <Snackbar
         open={alertOpen}
-        autoHideDuration={6000}
+        autoHideDuration={5000}
         onClose={handleAlertClose}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       >

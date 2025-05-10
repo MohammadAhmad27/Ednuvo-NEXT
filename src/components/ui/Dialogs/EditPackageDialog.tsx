@@ -30,8 +30,16 @@ const EditPackageDialog = ({
   onSave,
   packageToEdit,
 }: EditPackageDialogProps) => {
-  const [alertOpen, setAlertOpen] = useState<boolean>(false);
-  const [snackMessage, setSnackMessage] = useState<string>("");
+  const [alertState, setAlertState] = useState<{
+    open: boolean;
+    message: string;
+    severity: "success" | "warning" | "error" | "info";
+  }>({
+    open: false,
+    message: "",
+    severity: "success",
+  });
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [isCategoryModalOpen, setIsCategoryModalOpen] =
     useState<boolean>(false);
@@ -105,15 +113,18 @@ const EditPackageDialog = ({
     // Validate required fields
     if (
       !formData?.packageImages[0] ||
-      !formData?.title ||
-      !formData?.description ||
-      !formData?.category ||
-      !formData?.price ||
-      !formData?.pricingMode ||
-      !formData?.requirements
+      !formData?.title.trim() ||
+      !formData?.description.trim() ||
+      !formData?.category.trim() ||
+      !formData?.price.trim() ||
+      !formData?.pricingMode.trim() ||
+      !formData?.requirements.trim()
     ) {
-      setSnackMessage("Please fill all required fields!");
-      setAlertOpen(true);
+      setAlertState({
+        open: true,
+        message: "Please fill all required fields!",
+        severity: "warning",
+      });
       return;
     }
 
@@ -122,10 +133,10 @@ const EditPackageDialog = ({
     // Create updated package object
     const updatedPackage: PackageCard = {
       ...packageToEdit,
-          bgImg: formData?.packageImages?.map((file) => {
-            if (typeof file === "string") return file; // Keep existing URLs
-            return URL.createObjectURL(file); // Create URLs for new files
-          }),
+      bgImg: formData?.packageImages?.map((file) => {
+        if (typeof file === "string") return file; // Keep existing URLs
+        return URL.createObjectURL(file); // Create URLs for new files
+      }),
       title: formData?.title,
       desc: formData?.description,
       category: formData?.category,
@@ -399,19 +410,18 @@ const EditPackageDialog = ({
           setIsCategoryModalOpen(false);
         }}
       />
-
       <Snackbar
-        open={alertOpen}
-        autoHideDuration={6000}
-        onClose={() => setAlertOpen(false)}
+        open={alertState?.open}
+        autoHideDuration={5000}
+        onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       >
         <Alert
-          onClose={() => setAlertOpen(false)}
-          severity="warning"
+          onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
+          severity={alertState?.severity}
           sx={{ width: "100%" }}
         >
-          {snackMessage}
+          {alertState?.message}
         </Alert>
       </Snackbar>
     </>

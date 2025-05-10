@@ -33,8 +33,15 @@ const EditQuestionDialog = ({
   serviceCategories,
   questionData,
 }: EditQuestionModalProps) => {
-  const [alertOpen, setAlertOpen] = useState<boolean>(false);
-  const [snackMessage, setSnackMessage] = useState<string>("");
+  const [alertState, setAlertState] = useState<{
+    open: boolean;
+    message: string;
+    severity: "success" | "warning" | "error" | "info";
+  }>({
+    open: false,
+    message: "",
+    severity: "success",
+  });
   const [formData, setFormData] = useState<TestQuestions>({
     id: 0,
     question: "",
@@ -76,8 +83,11 @@ const EditQuestionDialog = ({
       formData.options.some((opt) => !opt.value.trim()) ||
       !formData.correctAnswer.trim()
     ) {
-      setSnackMessage("Please fill all fields!");
-      setAlertOpen(true);
+      setAlertState({
+        open: true,
+        message: "Please fill all required fields!",
+        severity: "warning",
+      });
       return;
     }
 
@@ -86,8 +96,11 @@ const EditQuestionDialog = ({
     );
 
     if (!isValidAnswer) {
-      setSnackMessage("Correct answer must match one of the options!");
-      setAlertOpen(true);
+      setAlertState({
+        open: true,
+        message: "Correct answer must match one of the options!",
+        severity: "warning",
+      });
       return;
     }
 
@@ -209,19 +222,18 @@ const EditQuestionDialog = ({
           </button>
         </DialogActions>
       </Dialog>
-
       <Snackbar
-        open={alertOpen}
-        autoHideDuration={6000}
-        onClose={() => setAlertOpen(false)}
+        open={alertState?.open}
+        autoHideDuration={5000}
+        onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       >
         <Alert
-          onClose={() => setAlertOpen(false)}
-          severity="warning"
+          onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
+          severity={alertState?.severity}
           sx={{ width: "100%" }}
         >
-          {snackMessage}
+          {alertState?.message}
         </Alert>
       </Snackbar>
     </>

@@ -24,8 +24,15 @@ const AddQuestionModal = ({
   onAddQuestion,
   serviceCategories,
 }: AddQuestionModalProps) => {
-  const [alertOpen, setAlertOpen] = useState<boolean>(false);
-  const [snackMessage, setSnackMessage] = useState<string>("");
+  const [alertState, setAlertState] = useState<{
+    open: boolean;
+    message: string;
+    severity: "success" | "warning" | "error" | "info";
+  }>({
+    open: false,
+    message: "",
+    severity: "success",
+  });
   const [formData, setFormData] = useState<TestQuestions>({
     id: 0,
     question: "",
@@ -57,13 +64,16 @@ const AddQuestionModal = ({
 
   const handleSubmit = () => {
     if (
-      !formData.question ||
-      !formData.serviceCategory ||
-      formData.options.some((opt) => !opt.value) ||
-      !formData.correctAnswer
+      !formData.question.trim() ||
+      !formData.serviceCategory.trim() ||
+      formData.options.some((opt) => !opt.value.trim()) ||
+      !formData.correctAnswer.trim()
     ) {
-      setSnackMessage("Please fill all fields!");
-      setAlertOpen(true);
+      setAlertState({
+        open: true,
+        message: "Please fill all required fields!",
+        severity: "warning",
+      });
       return;
     }
     onAddQuestion(formData);
@@ -185,7 +195,6 @@ const AddQuestionModal = ({
             />
           </div>
         </DialogContent>
-
         <DialogActions>
           <button
             onClick={handleSubmit}
@@ -195,19 +204,18 @@ const AddQuestionModal = ({
           </button>
         </DialogActions>
       </Dialog>
-
       <Snackbar
-        open={alertOpen}
-        autoHideDuration={6000}
-        onClose={() => setAlertOpen(false)}
+        open={alertState?.open}
+        autoHideDuration={5000}
+        onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       >
         <Alert
-          onClose={() => setAlertOpen(false)}
-          severity="warning"
+          onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
+          severity={alertState?.severity}
           sx={{ width: "100%" }}
         >
-          {snackMessage}
+          {alertState?.message}
         </Alert>
       </Snackbar>
     </>
