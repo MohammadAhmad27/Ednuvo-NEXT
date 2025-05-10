@@ -181,7 +181,7 @@ const ProviderProfileSettings = () => {
     }
   };
 
-  console.log("ProfileFormData: ", formData);
+  console.log("ProviderFormData: ", formData);
 
   return (
     <>
@@ -484,6 +484,15 @@ const ProviderProfileSettings = () => {
               </div>
             </Link>
           )}
+        </div>
+        {/* buttons */}
+        <div className="w-full h-full flex justify-end items-end gap-2 mt-6">
+          <button className="text-[14px] font-medium text-primary border border-primary rounded-full text-center px-6 py-[6px]">
+            Cancel
+          </button>
+          <button className="text-[14px] font-medium text-white bg-primary rounded-full text-center px-6 py-[6px]">
+            Save Changes
+          </button>
         </div>
       </div>
       <AddPackageDialog

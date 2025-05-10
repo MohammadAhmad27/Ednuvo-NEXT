@@ -68,7 +68,7 @@ const PasswordAndSecurity = () => {
           onClick={handleSave}
           className="w-full bg-primary text-[18px] font-medium text-white text-center rounded-full py-2 px-4"
         >
-          Save
+          Save Changes
         </button>
       </div>
     </div>
