@@ -5,7 +5,8 @@ import { useState, useEffect } from "react";
 import { Alert, Snackbar } from "@mui/material";
 
 const RequesterProfileSettings = () => {
-  const [formData, setFormData] = useState<{
+  // Original data state (will only be updated on save)
+  const [originalData, setOriginalData] = useState<{
     photo: File | null;
     firstName: string;
     lastName: string;
@@ -20,6 +21,15 @@ const RequesterProfileSettings = () => {
     phoneNumber: "",
     countryCode: "+966",
   });
+
+  // Working copy state (modified in the UI)
+  const [formData, setFormData] = useState(originalData);
+
+  // Update working copy when original data changes
+  useEffect(() => {
+    setFormData(originalData);
+  }, [originalData]);
+
   const [alertState, setAlertState] = useState<{
     open: boolean;
     message: string;
@@ -30,27 +40,172 @@ const RequesterProfileSettings = () => {
     severity: "success",
   });
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, boolean>>({});
 
-  const handleFormChange = (data: any) => {
-    setFormData((prev) => ({ ...prev, ...data }));
+  // Check if all required fields are filled
+  const validateForm = () => {
+    const errors: Record<string, boolean> = {};
+    let isValid = true;
+
+    if (!formData?.photo) {
+      errors.photo = true;
+      isValid = false;
+    }
+    if (!formData?.firstName.trim()) {
+      errors.firstName = true;
+      isValid = false;
+    }
+    if (!formData?.lastName.trim()) {
+      errors.lastName = true;
+      isValid = false;
+    }
+    if (!formData?.address.trim()) {
+      errors.address = true;
+      isValid = false;
+    }
+    if (!formData?.phoneNumber.trim()) {
+      errors.phoneNumber = true;
+      isValid = false;
+    }
+    setFieldErrors(errors);
+    return isValid;
   };
 
-  useEffect(() => {
-    if (formData?.photo && !photoPreview) {
+  // Check if form has any changes
+  const hasChanges = () => {
+    // Compare photo separately since File objects can't be stringified
+    const photoChanged =
+      (formData?.photo === null && originalData?.photo !== null) ||
+      (formData?.photo !== null && originalData?.photo === null) ||
+      (formData?.photo instanceof File &&
+        originalData?.photo instanceof File &&
+        formData?.photo.name !== originalData?.photo.name) ||
+      (formData?.photo instanceof File &&
+        !(originalData?.photo instanceof File)) ||
+      (!(formData?.photo instanceof File) &&
+        originalData?.photo instanceof File);
+
+    if (photoChanged) return true;
+
+    // Create copies of the objects without the photo property
+    const formDataCopy = { ...formData, photo: null };
+    const originalDataCopy = { ...originalData, photo: null };
+
+    // Compare the rest of the data
+    return JSON.stringify(formDataCopy) !== JSON.stringify(originalDataCopy);
+  };
+
+  // Check if form is empty
+  const isEmptyForm = () => {
+    const { countryCode, ...rest } = formData;
+    return Object.values(rest).every(
+      (value) =>
+        value === null ||
+        value === "" ||
+        (Array.isArray(value) && value.length === 0)
+    );
+  };
+
+  const handleSaveChanges = () => {
+    // First validate all required fields
+    if (!validateForm()) {
+      setAlertState({
+        open: true,
+        message: "Please fill all required fields!",
+        severity: "warning",
+      });
+      return;
+    }
+
+    if (isEmptyForm()) {
+      setAlertState({
+        open: true,
+        message: "Please fill in some data before saving!",
+        severity: "warning",
+      });
+      return;
+    }
+
+    if (!hasChanges()) {
+      setAlertState({
+        open: true,
+        message: "No changes detected to save!",
+        severity: "info",
+      });
+      return;
+    }
+
+    // Update original data
+    setOriginalData({
+      ...formData,
+      // If a new photo was uploaded, keep the reference
+      photo:
+        formData?.photo instanceof File ? formData?.photo : originalData?.photo,
+    });
+
+    setAlertState({
+      open: true,
+      message: "Changes saved successfully!",
+      severity: "success",
+    });
+  };
+
+  const handleCancel = () => {
+    if (isEmptyForm()) {
+      setAlertState({
+        open: true,
+        message: "No data to discard!",
+        severity: "info",
+      });
+      return;
+    }
+
+    if (!hasChanges()) {
+      setAlertState({
+        open: true,
+        message: "No changes detected to cancel!",
+        severity: "info",
+      });
+      return;
+    }
+
+    // Reset form data
+    setFormData(originalData);
+
+    // Update photo preview
+    if (originalData.photo instanceof File) {
+      // Create new preview URL for the original photo
       const reader = new FileReader();
       reader.onload = (e) => {
         if (e?.target?.result) {
           setPhotoPreview(e?.target?.result as string);
         }
       };
-      reader?.readAsDataURL(formData?.photo);
+      reader.readAsDataURL(originalData.photo);
+    } else {
+      setPhotoPreview(null);
     }
-  }, [formData?.photo, photoPreview]);
+
+    setAlertState({
+      open: true,
+      message: "Changes discarded",
+      severity: "info",
+    });
+  };
+
+  const handleFormChange = (data: any) => {
+    setFormData((prev) => ({ ...prev, ...data }));
+  };
 
   const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event?.target?.files && event?.target?.files[0]) {
       const file = event?.target?.files[0];
-      handleFormChange({ photo: file });
+
+      // Update form data
+      setFormData((prev) => ({
+        ...prev,
+        photo: file,
+      }));
 
       // Create preview URL
       const reader = new FileReader();
@@ -59,11 +214,18 @@ const RequesterProfileSettings = () => {
           setPhotoPreview(e?.target?.result as string);
         }
       };
-      reader?.readAsDataURL(file);
+      reader.readAsDataURL(file);
     }
   };
 
-  console.log("ReuquesterFormData: ", formData);
+  // Clean up photo preview when component unmounts
+  useEffect(() => {
+    return () => {
+      if (photoPreview) {
+        URL.revokeObjectURL(photoPreview);
+      }
+    };
+  }, [photoPreview]);
 
   return (
     <>
@@ -182,10 +344,16 @@ const RequesterProfileSettings = () => {
         </div>
         {/* buttons */}
         <div className="w-full h-full flex justify-end items-end gap-2 mt-6">
-          <button className="text-[14px] font-medium text-primary border border-primary rounded-full text-center px-6 py-[6px]">
+          <button
+            onClick={handleCancel}
+            className="text-[14px] font-medium text-primary border border-primary rounded-full text-center px-6 py-[6px]"
+          >
             Cancel
           </button>
-          <button className="text-[14px] font-medium text-white bg-primary rounded-full text-center px-6 py-[6px]">
+          <button
+            onClick={handleSaveChanges}
+            className="text-[14px] font-medium text-white bg-primary rounded-full text-center px-6 py-[6px]"
+          >
             Save Changes
           </button>
         </div>

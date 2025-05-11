@@ -105,18 +105,49 @@ const ProviderProfileSettings = () => {
   const handleFormChange = (data: any) => {
     setFormData((prev) => ({ ...prev, ...data }));
   };
+  const [fieldErrors, setFieldErrors] = useState<Record<string, boolean>>({});
+
+  // Check if all required fields are filled
+  const validateForm = () => {
+    const errors: Record<string, boolean> = {};
+    let isValid = true;
+
+    if (!formData?.photo) {
+      errors.photo = true;
+      isValid = false;
+    }
+    if (!formData?.firstName.trim()) {
+      errors.firstName = true;
+      isValid = false;
+    }
+    if (!formData?.lastName.trim()) {
+      errors.lastName = true;
+      isValid = false;
+    }
+    if (!formData?.address.trim()) {
+      errors.address = true;
+      isValid = false;
+    }
+    if (!formData?.phoneNumber.trim()) {
+      errors.phoneNumber = true;
+      isValid = false;
+    }
+    setFieldErrors(errors);
+    return isValid;
+  };
+
 
   // Check if form has any changes
   // Custom deep comparison function that handles File objects
   const hasChanges = () => {
     // Compare photo separately since File objects can't be stringified
     const photoChanged = 
-      (formData.photo === null && originalData.photo !== null) ||
-      (formData.photo !== null && originalData.photo === null) ||
-      (formData.photo instanceof File && originalData.photo instanceof File && 
-       formData.photo.name !== originalData.photo.name) ||
-      (formData.photo instanceof File && !(originalData.photo instanceof File)) ||
-      (!(formData.photo instanceof File) && originalData.photo instanceof File);
+      (formData?.photo === null && originalData?.photo !== null) ||
+      (formData?.photo !== null && originalData?.photo === null) ||
+      (formData?.photo instanceof File && originalData?.photo instanceof File && 
+       formData?.photo.name !== originalData.photo.name) ||
+      (formData?.photo instanceof File && !(originalData?.photo instanceof File)) ||
+      (!(formData?.photo instanceof File) && originalData?.photo instanceof File);
 
     if (photoChanged) return true;
 
@@ -140,6 +171,16 @@ const ProviderProfileSettings = () => {
   };
 
   const handleSaveChanges = () => {
+        // First validate all required fields
+        if (!validateForm()) {
+          setAlertState({
+            open: true,
+            message: "Please fill all required fields!",
+            severity: "warning",
+          });
+          return;
+        }
+
     if (isEmptyForm()) {
       setAlertState({
         open: true,
@@ -572,7 +613,7 @@ const ProviderProfileSettings = () => {
           </div>
           <PackageCardComponent
             packageData={formData?.packages}
-            limit={false}
+            limit={true}
             show={false}
             image={false}
             onEdit={(pkg) => {
@@ -614,7 +655,7 @@ const ProviderProfileSettings = () => {
           </div>
           <AllPortfolioCardComponent
             portfolioData={formData?.portfolios}
-            limit={false}
+            limit={true}
             image={true}
             onEdit={(portfolio) => {
               setEditingPortfolio(portfolio);
