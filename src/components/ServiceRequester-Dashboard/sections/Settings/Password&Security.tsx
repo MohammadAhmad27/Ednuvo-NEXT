@@ -1,77 +1,195 @@
 import MUITextField from "@/components/ui/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Alert, Snackbar } from "@mui/material";
 
 const PasswordAndSecurity = () => {
-  const [oldPassword, setOldPassword] = useState<string>("");
-  const [newPassword, setNewPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [originalData, setOriginalData] = useState<{
+    oldPassword: string;
+    newPassword: string;
+    confirmPassword: string;
+  }>({
+    oldPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
 
-  // Individual password visibility states
+  const [formData, setFormData] = useState(originalData);
+
+  useEffect(() => {
+    setFormData(originalData);
+  }, [originalData]);
+
+  const [fieldErrors, setFieldErrors] = useState<Record<string, boolean>>({});
+  const [alertState, setAlertState] = useState<{
+    open: boolean;
+    message: string;
+    severity: "success" | "warning" | "error" | "info";
+  }>({
+    open: false,
+    message: "",
+    severity: "success",
+  });
+
+  // Password visibility states
   const [showOldPassword, setShowOldPassword] = useState<boolean>(false);
   const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
 
+  // Check if all required fields are filled and valid
+  const validateForm = () => {
+    const errors: Record<string, boolean> = {};
+    let isValid = true;
+
+    if (!formData?.oldPassword?.trim()) {
+      errors.oldPassword = true;
+      isValid = false;
+    }
+    if (!formData?.newPassword?.trim()) {
+      errors.newPassword = true;
+      isValid = false;
+    }
+    if (!formData?.confirmPassword?.trim()) {
+      errors.confirmPassword = true;
+      isValid = false;
+    }
+
+    setFieldErrors(errors);
+    return isValid;
+  };
+
+  // Check if there are any changes from original data
+  const hasChanges = () => {
+    return JSON.stringify(formData) !== JSON.stringify(originalData);
+  };
+
   const handleSave = () => {
-    console.log("OldPassword: ", oldPassword);
-    console.log("NewPassword: ", newPassword);
-    console.log("ConfirmPassword: ", confirmPassword);
+    if (!validateForm()) {
+      setAlertState({
+        open: true,
+        message: "Please fill all required fields!",
+        severity: "warning",
+      });
+      return;
+    }
+
+    const passwordLength =
+      formData?.oldPassword?.length < 5 ||
+      formData?.newPassword?.length < 5 ||
+      formData?.confirmPassword?.length < 5;
+    if (passwordLength) {
+      setAlertState({
+        open: true,
+        message: "Password must be at least 5 characters long!",
+        severity: "warning",
+      });
+      return;
+    }
+    const mismatch = formData?.newPassword !== formData?.confirmPassword;
+    if (mismatch) {
+      setAlertState({
+        open: true,
+        message: "New password and confirm password don't match!",
+        severity: "warning",
+      });
+      return;
+    }
+
+    if (!hasChanges()) {
+      setAlertState({
+        open: true,
+        message: "No changes detected to save!",
+        severity: "info",
+      });
+      return;
+    }
+
+    setOriginalData(formData);
+    setAlertState({
+      open: true,
+      message: "Password changed successfully!",
+      severity: "success",
+    });
+
+    setShowOldPassword(false);
+    setShowNewPassword(false);
+    setShowConfirmPassword(false);
+  };
+
+  const handleFormChange = (field: keyof typeof formData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   return (
-    <div className="w-full h-full flex flex-col justify-start items-center gap-6 px-5 py-10">
-      <div className="w-2/5">
-        <MUITextField
-          label="Old Password"
-          type="password"
-          value={oldPassword}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setOldPassword(e.target.value)
-          }
-          placeholder="Enter your old password"
-          showPassword={showOldPassword}
-          setShowPassword={setShowOldPassword}
-        />
-      </div>
-      <div className="w-2/5 space-y-3">
-        <MUITextField
-          label="New Password"
-          type="password"
-          value={newPassword}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setNewPassword(e.target.value)
-          }
-          placeholder="Enter your new password"
-          showPassword={showNewPassword}
-          setShowPassword={setShowNewPassword}
-        />
-        <p className="text-[12px] font-normal text-darkgray">
-          Use 8+ characters with a mix of uppercase, lowercase, numbers, and
-          special symbols (e.g., !@#$).
-        </p>
-      </div>
-      <div className="w-2/5">
-        <MUITextField
-          label="Confirm Password"
-          type="password"
-          value={confirmPassword}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setConfirmPassword(e.target.value)
-          }
-          placeholder="Confirm your new password"
-          showPassword={showConfirmPassword}
-          setShowPassword={setShowConfirmPassword}
-        />
-      </div>
-      <div className="w-2/5">
-        <button
-          onClick={handleSave}
-          className="w-full bg-primary text-[18px] font-medium text-white text-center rounded-full py-2 px-4"
+    <>
+      <div className="w-full h-full flex flex-col justify-start items-center gap-6 px-5 py-10">
+        <div className="w-2/5">
+          <MUITextField
+            label="Old Password"
+            type="password"
+            value={formData?.oldPassword}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              handleFormChange("oldPassword", e.target.value)
+            }
+            placeholder="Enter your old password"
+            showPassword={showOldPassword}
+            setShowPassword={setShowOldPassword}
+          />
+        </div>
+        <div className="w-2/5 space-y-3">
+          <MUITextField
+            label="New Password"
+            type="password"
+            value={formData?.newPassword}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              handleFormChange("newPassword", e.target.value)
+            }
+            placeholder="Enter your new password"
+            showPassword={showNewPassword}
+            setShowPassword={setShowNewPassword}
+          />
+          <p className="text-[12px] font-normal text-darkgray">
+            Use 8+ characters with a mix of uppercase, lowercase, numbers, and
+            special symbols (e.g., !@#$).
+          </p>
+        </div>
+        <div className="w-2/5">
+          <MUITextField
+            label="Confirm Password"
+            type="password"
+            value={formData?.confirmPassword}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              handleFormChange("confirmPassword", e.target.value)
+            }
+            placeholder="Confirm your new password"
+            showPassword={showConfirmPassword}
+            setShowPassword={setShowConfirmPassword}
+          />
+        </div>
+        <div className="w-2/5">
+          <button
+            onClick={handleSave}
+            className="w-full bg-primary text-[18px] font-medium text-white text-center rounded-full py-2 px-4"
+          >
+            Save Changes
+          </button>
+        </div>
+        <Snackbar
+          open={alertState.open}
+          autoHideDuration={5000}
+          onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         >
-          Save Changes
-        </button>
+          <Alert
+            onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
+            severity={alertState.severity}
+            sx={{ width: "100%" }}
+          >
+            {alertState.message}
+          </Alert>
+        </Snackbar>
       </div>
-    </div>
+    </>
   );
 };
 

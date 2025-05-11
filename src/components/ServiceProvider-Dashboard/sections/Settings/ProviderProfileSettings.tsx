@@ -132,28 +132,48 @@ const ProviderProfileSettings = () => {
       errors.phoneNumber = true;
       isValid = false;
     }
+    if (!formData?.service?.length) {
+      errors.service = true;
+      isValid = false;
+    }
+    if (!formData?.experienceLevel.trim()) {
+      errors.experienceLevel = true;
+      isValid = false;
+    }
+    if (!formData?.about.trim()) {
+      errors.about = true;
+      isValid = false;
+    }
+    if (!formData?.skills?.length) {
+      errors.skills = true;
+      isValid = false;
+    }
+    //
+
     setFieldErrors(errors);
     return isValid;
   };
-
 
   // Check if form has any changes
   // Custom deep comparison function that handles File objects
   const hasChanges = () => {
     // Compare photo separately since File objects can't be stringified
-    const photoChanged = 
+    const photoChanged =
       (formData?.photo === null && originalData?.photo !== null) ||
       (formData?.photo !== null && originalData?.photo === null) ||
-      (formData?.photo instanceof File && originalData?.photo instanceof File && 
-       formData?.photo.name !== originalData.photo.name) ||
-      (formData?.photo instanceof File && !(originalData?.photo instanceof File)) ||
-      (!(formData?.photo instanceof File) && originalData?.photo instanceof File);
+      (formData?.photo instanceof File &&
+        originalData?.photo instanceof File &&
+        formData?.photo.name !== originalData.photo.name) ||
+      (formData?.photo instanceof File &&
+        !(originalData?.photo instanceof File)) ||
+      (!(formData?.photo instanceof File) &&
+        originalData?.photo instanceof File);
 
     if (photoChanged) return true;
 
     // Create copies of the objects without the photo property
-    const formDataCopy = {...formData, photo: null};
-    const originalDataCopy = {...originalData, photo: null};
+    const formDataCopy = { ...formData, photo: null };
+    const originalDataCopy = { ...originalData, photo: null };
 
     // Compare the rest of the data
     return JSON.stringify(formDataCopy) !== JSON.stringify(originalDataCopy);
@@ -171,15 +191,15 @@ const ProviderProfileSettings = () => {
   };
 
   const handleSaveChanges = () => {
-        // First validate all required fields
-        if (!validateForm()) {
-          setAlertState({
-            open: true,
-            message: "Please fill all required fields!",
-            severity: "warning",
-          });
-          return;
-        }
+    // First validate all required fields
+    if (!validateForm()) {
+      setAlertState({
+        open: true,
+        message: "Please fill all required fields!",
+        severity: "warning",
+      });
+      return;
+    }
 
     if (isEmptyForm()) {
       setAlertState({
@@ -203,7 +223,8 @@ const ProviderProfileSettings = () => {
     setOriginalData({
       ...formData,
       // If a new photo was uploaded, keep the reference
-      photo: formData?.photo instanceof File ? formData?.photo : originalData?.photo
+      photo:
+        formData?.photo instanceof File ? formData?.photo : originalData?.photo,
     });
 
     setAlertState({
@@ -213,7 +234,7 @@ const ProviderProfileSettings = () => {
     });
   };
 
-    const handleCancel = () => {
+  const handleCancel = () => {
     if (isEmptyForm()) {
       setAlertState({
         open: true,
@@ -234,7 +255,7 @@ const ProviderProfileSettings = () => {
 
     // Reset form data
     setFormData(originalData);
-    
+
     // Update photo preview
     if (originalData?.photo instanceof File) {
       // Create new preview URL for the original photo
@@ -283,7 +304,6 @@ const ProviderProfileSettings = () => {
     setIsDeletePackageModalOpen(false);
     setPackageToDelete(null);
   };
-
 
   // Portfolio Deletion
   const handleDeletePortfolioInitiate = (portfolio: PortfolioCard) => {
@@ -351,7 +371,7 @@ const ProviderProfileSettings = () => {
   const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event?.target?.files && event?.target?.files[0]) {
       const file = event?.target?.files[0];
-      
+
       // Revoke previous preview URL if it exists
       if (photoPreview) {
         URL.revokeObjectURL(photoPreview);
@@ -360,11 +380,11 @@ const ProviderProfileSettings = () => {
       // Create new preview URL
       const previewUrl = URL.createObjectURL(file);
       setPhotoPreview(previewUrl);
-      
+
       // Update form data
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        photo: file
+        photo: file,
       }));
     }
   };
