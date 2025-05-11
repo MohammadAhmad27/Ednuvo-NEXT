@@ -11,11 +11,11 @@ import {
 import Image from "next/image";
 import MUITextField from "../TextField";
 import MUIAutoComplete from "../AutoComplete";
-import { Alert, Snackbar } from "@mui/material";
 import { pricingModes } from "@/app/service-provider-onboarding/content";
 import { Close } from "@mui/icons-material";
 import { PackageCard } from "@/interfaces/ServiceRequesterDashboard";
 import BrowseAllCategories from "./AllCategoriesDialog";
+import { useToast } from "@/context/ToastContext";
 
 interface AddPackageDialogProps {
   open: boolean;
@@ -30,15 +30,7 @@ const AddPackageDialog = ({
   onAddPackage,
   currentPackages,
 }: AddPackageDialogProps) => {
-  const [alertState, setAlertState] = useState<{
-    open: boolean;
-    message: string;
-    severity: "success" | "warning" | "error" | "info";
-  }>({
-    open: false,
-    message: "",
-    severity: "success",
-  });
+  const { showToast } = useToast();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [isCategoryModalOpen, setIsCategoryModalOpen] =
     useState<boolean>(false);
@@ -103,11 +95,7 @@ const AddPackageDialog = ({
       !formData?.pricingMode.trim() ||
       !formData?.requirements.trim()
     ) {
-      setAlertState({
-        open: true,
-        message: "Please fill all required fields!",
-        severity: "warning",
-      });
+      showToast("Please fill all required fields!", "warning");
       return;
     }
 
@@ -396,20 +384,6 @@ const AddPackageDialog = ({
           setIsCategoryModalOpen(false);
         }}
       />
-      <Snackbar
-        open={alertState?.open}
-        autoHideDuration={5000}
-        onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      >
-        <Alert
-          onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
-          severity={alertState?.severity}
-          sx={{ width: "100%" }}
-        >
-          {alertState?.message}
-        </Alert>
-      </Snackbar>
     </>
   );
 };

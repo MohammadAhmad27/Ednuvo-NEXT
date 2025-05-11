@@ -6,9 +6,10 @@ import type { Category } from "@/interfaces/Admin";
 import AddCategoryDialog from "@/components/ui/Dialogs/AddCategoryDialog";
 import DeleteDialog from "@/components/ui/Dialogs/DeleteDialog";
 import EditCategoryDialog from "@/components/ui/Dialogs/EditCategoryDialog";
-import { Alert, Snackbar } from "@mui/material";
+import { useToast } from "@/context/ToastContext";
 
 const Category = () => {
+  const { showToast } = useToast();
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
   const [categoryData, setCategoryData] = useState<Category[]>(initialData);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
@@ -17,15 +18,6 @@ const Category = () => {
   );
   const [isEditDialogOpen, setIsEditDialogOpen] = useState<boolean>(false);
   const [categoryToEdit, setCategoryToEdit] = useState<Category | null>(null);
-  const [alertState, setAlertState] = useState<{
-    open: boolean;
-    message: string;
-    severity: "success" | "warning" | "error" | "info";
-  }>({
-    open: false,
-    message: "",
-    severity: "success",
-  });
 
   // Add Category
   const handleAddCategory = (newCategory: {
@@ -42,11 +34,7 @@ const Category = () => {
       })),
     };
     setCategoryData((prev) => [...prev, formattedCategory]);
-    setAlertState({
-      open: true,
-      message: "Category added successfully!",
-      severity: "success",
-    });
+    showToast("Category added successfully!", "success");
   };
 
   // Delete Category
@@ -67,11 +55,7 @@ const Category = () => {
       );
       setIsDeleteDialogOpen(false);
       setCategoryToDelete(null);
-      setAlertState({
-        open: true,
-        message: "Category deleted successfully!",
-        severity: "success",
-      });
+      showToast("Category deleted successfully!", "success");
     }
   };
 
@@ -85,14 +69,9 @@ const Category = () => {
     setCategoryData((prev) =>
       prev?.map((cat) => (cat?.id === updated?.id ? updated : cat))
     );
-    setAlertState({
-      open: true,
-      message: "Category updated successfully!",
-      severity: "success",
-    });
+    showToast("Category updated successfully!", "success");
   };
-
-  console.log(categoryData);
+  
   return (
     <>
       {categoryData && categoryData?.length ? (
@@ -163,20 +142,6 @@ const Category = () => {
         category={categoryToEdit}
         onSave={handleUpdateCategory}
       />
-      <Snackbar
-        open={alertState?.open}
-        autoHideDuration={5000}
-        onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      >
-        <Alert
-          onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
-          severity={alertState?.severity}
-          sx={{ width: "100%" }}
-        >
-          {alertState?.message}
-        </Alert>
-      </Snackbar>
     </>
   );
 };

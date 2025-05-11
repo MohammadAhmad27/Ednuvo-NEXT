@@ -8,7 +8,7 @@ import EditPackageDialog from "@/components/ui/Dialogs/EditPackageDialog";
 import { PackageCard } from "@/interfaces/ServiceRequesterDashboard";
 import Image from "next/image";
 import Link from "next/link";
-import { Alert, Snackbar } from "@mui/material";
+import { useToast } from "@/context/ToastContext";
 
 const UserPackages = () => {
   const [formData, setFormData] = useState<{
@@ -16,15 +16,8 @@ const UserPackages = () => {
   }>({
     packages: packageCardData,
   });
-  const [alertState, setAlertState] = useState<{
-    open: boolean;
-    message: string;
-    severity: "success" | "warning" | "error" | "info";
-  }>({
-    open: false,
-    message: "",
-    severity: "success",
-  });
+
+  const { showToast } = useToast();
   const [isAddPackageModalOpen, setIsAddPackageModalOpen] =
     useState<boolean>(false);
   const [isEditPackageModalOpen, setIsEditPackageModalOpen] =
@@ -50,11 +43,7 @@ const UserPackages = () => {
           (pkg) => pkg?.id !== packageToDelete?.id
         ),
       });
-      setAlertState({
-        open: true,
-        message: "Package deleted successfully!",
-        severity: "success",
-      });
+      showToast("Package deleted successfully!", "success");
     }
     setIsDeletePackageModalOpen(false);
     setPackageToDelete(null);
@@ -192,11 +181,7 @@ const UserPackages = () => {
           handleFormChange({
             packages: [...formData?.packages, newPackage],
           });
-          setAlertState({
-            open: true,
-            message: "Package added successfully!",
-            severity: "success",
-          });
+          showToast("Package added successfully!", "success");
         }}
         currentPackages={formData?.packages}
       />
@@ -212,11 +197,7 @@ const UserPackages = () => {
               pkg?.id === updatedPackage?.id ? updatedPackage : pkg
             ),
           });
-          setAlertState({
-            open: true,
-            message: "Package updated successfully!",
-            severity: "success",
-          });
+          showToast("Package updated successfully!", "success");
         }}
         packageToEdit={editingPackage}
       />
@@ -229,20 +210,6 @@ const UserPackages = () => {
         confirmText="Delete"
         cancelText="Cancel"
       />
-      <Snackbar
-        open={alertState?.open}
-        autoHideDuration={5000}
-        onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      >
-        <Alert
-          onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
-          severity={alertState?.severity}
-          sx={{ width: "100%" }}
-        >
-          {alertState?.message}
-        </Alert>
-      </Snackbar>
     </>
   );
 };

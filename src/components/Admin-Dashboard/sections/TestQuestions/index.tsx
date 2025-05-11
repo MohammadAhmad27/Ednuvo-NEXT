@@ -7,22 +7,14 @@ import TestQuestionsTable from "@/components/ui/Tables/TestQuestionsTable";
 import type { TestQuestions as TestQuestionsType } from "@/interfaces/Admin";
 import Image from "next/image";
 import { useState } from "react";
-import { Alert, Snackbar } from "@mui/material";
+import { useToast } from "@/context/ToastContext";
 
 const TestQuestions = () => {
+  const { showToast } = useToast();
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
   const [questionToDelete, setQuestionToDelete] = useState<string | null>(null);
-  const [alertState, setAlertState] = useState<{
-    open: boolean;
-    message: string;
-    severity: "success" | "warning" | "error" | "info";
-  }>({
-    open: false,
-    message: "",
-    severity: "success",
-  });
   const [currentQuestion, setCurrentQuestion] =
     useState<TestQuestionsType | null>(null);
   const [testQuestions, setTestQuestions] =
@@ -45,11 +37,7 @@ const TestQuestions = () => {
       id: nextId,
     };
     setTestQuestions((prev) => [...prev, questionWithId]);
-    setAlertState({
-      open: true,
-      message: "Question added successfully!",
-      severity: "success",
-    });
+    showToast("Question added successfully!", "success");
   };
 
   // Edit Question
@@ -57,11 +45,7 @@ const TestQuestions = () => {
     setTestQuestions((prev) =>
       prev?.map((q) => (q?.id === editedQuestion?.id ? editedQuestion : q))
     );
-    setAlertState({
-      open: true,
-      message: "Question updated successfully!",
-      severity: "success",
-    });
+    showToast("Question updated successfully!", "success");
   };
 
   const handleEditClick = (question: TestQuestionsType) => {
@@ -83,11 +67,7 @@ const TestQuestions = () => {
     }
     setIsDeleteDialogOpen(false);
     setQuestionToDelete(null);
-    setAlertState({
-      open: true,
-      message: "Question deleted successfully!",
-      severity: "success",
-    });
+    showToast("Question deleted successfully!", "success");
   };
 
   const handleDeleteCancel = () => {
@@ -194,20 +174,6 @@ const TestQuestions = () => {
         confirmText="Delete"
         cancelText="Cancel"
       />
-           <Snackbar
-              open={alertState?.open}
-              autoHideDuration={5000}
-              onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
-              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-            >
-              <Alert
-                onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
-                severity={alertState?.severity}
-                sx={{ width: "100%" }}
-              >
-                {alertState?.message}
-              </Alert>
-            </Snackbar>
     </>
   );
 };

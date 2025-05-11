@@ -8,7 +8,7 @@ import { PortfolioCard } from "@/interfaces/ServiceRequesterDashboard";
 import AddPortfolioDialog from "@/components/ui/Dialogs/AddPortfolioDialog";
 import EditPortfolioDialog from "@/components/ui/Dialogs/EditPortfolioDialog";
 import DeleteDialog from "@/components/ui/Dialogs/DeleteDialog";
-import { Alert, Snackbar } from "@mui/material";
+import { useToast } from "@/context/ToastContext";
 
 const UserPortfolios = () => {
   const [formData, setFormData] = useState<{
@@ -16,15 +16,8 @@ const UserPortfolios = () => {
   }>({
     portfolios: portfolioData,
   });
-  const [alertState, setAlertState] = useState<{
-    open: boolean;
-    message: string;
-    severity: "success" | "warning" | "error" | "info";
-  }>({
-    open: false,
-    message: "",
-    severity: "success",
-  });
+
+  const { showToast } = useToast();
   const [isAddPortfolioModalOpen, setIsAddPortfolioModalOpen] =
     useState<boolean>(false);
   const [isEditPortfolioModalOpen, setIsEditPortfolioModalOpen] =
@@ -51,11 +44,7 @@ const UserPortfolios = () => {
           (portfolio) => portfolio?.id !== editingPortfolio?.id
         ),
       });
-      setAlertState({
-        open: true,
-        message: "Portfolio deleted successfully!",
-        severity: "success",
-      });
+      showToast("Portfolio deleted successfully!", "success");
     }
     setIsDeletePortfolioModalOpen(false);
     setEditingPortfolio(null);
@@ -187,11 +176,7 @@ const UserPortfolios = () => {
           handleFormChange({
             portfolios: [...formData?.portfolios, newPortfolio],
           });
-          setAlertState({
-            open: true,
-            message: "Portfolio added successfully!",
-            severity: "success",
-          });
+          showToast("Portfolio added successfully!", "success");
         }}
         currentPortfolios={formData?.portfolios}
       />
@@ -209,11 +194,7 @@ const UserPortfolios = () => {
                 : portfolio
             ),
           });
-          setAlertState({
-            open: true,
-            message: "Portfolio updated successfully!",
-            severity: "success",
-          });
+          showToast("Portfolio updated successfully!", "success");
         }}
         portfolioToEdit={editingPortfolio}
       />
@@ -226,20 +207,6 @@ const UserPortfolios = () => {
         confirmText="Delete"
         cancelText="Cancel"
       />
-      <Snackbar
-        open={alertState?.open}
-        autoHideDuration={5000}
-        onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      >
-        <Alert
-          onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
-          severity={alertState?.severity}
-          sx={{ width: "100%" }}
-        >
-          {alertState?.message}
-        </Alert>
-      </Snackbar>
     </>
   );
 };

@@ -12,7 +12,6 @@ import MUITextField from "@/components/ui/TextField";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import Chip from "@mui/material/Chip";
-import { Alert, Snackbar } from "@mui/material";
 import {
   packageCardData,
   portfolioData,
@@ -29,6 +28,7 @@ import AllPortfolioCardComponent from "@/components/ui/Cards/AllPortfolioCard";
 import EditPackageDialog from "@/components/ui/Dialogs/EditPackageDialog";
 import DeleteDialog from "@/components/ui/Dialogs/DeleteDialog";
 import EditPortfolioDialog from "@/components/ui/Dialogs/EditPortfolioDialog";
+import { useToast } from "@/context/ToastContext";
 
 const ProviderProfileSettings = () => {
   // Original data state (will only be updated on save)
@@ -68,16 +68,8 @@ const ProviderProfileSettings = () => {
     setFormData(originalData);
   }, [originalData]);
 
+  const { showToast } = useToast();
   const [selectedSkill, setSelectedSkill] = useState<string>("");
-  const [alertState, setAlertState] = useState<{
-    open: boolean;
-    message: string;
-    severity: "success" | "warning" | "error" | "info";
-  }>({
-    open: false,
-    message: "",
-    severity: "success",
-  });
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   // Package
   const [isAddPackageModalOpen, setIsAddPackageModalOpen] =
@@ -193,29 +185,17 @@ const ProviderProfileSettings = () => {
   const handleSaveChanges = () => {
     // First validate all required fields
     if (!validateForm()) {
-      setAlertState({
-        open: true,
-        message: "Please fill all required fields!",
-        severity: "warning",
-      });
+      showToast("Please fill all required fields!", "warning");
       return;
     }
 
     if (isEmptyForm()) {
-      setAlertState({
-        open: true,
-        message: "Please fill in some data before saving!",
-        severity: "warning",
-      });
+      showToast("Please fill in some data before saving!", "warning");
       return;
     }
 
     if (!hasChanges()) {
-      setAlertState({
-        open: true,
-        message: "No changes detected to save!",
-        severity: "info",
-      });
+      showToast("No changes detected to save!", "info");
       return;
     }
 
@@ -227,29 +207,17 @@ const ProviderProfileSettings = () => {
         formData?.photo instanceof File ? formData?.photo : originalData?.photo,
     });
 
-    setAlertState({
-      open: true,
-      message: "Changes saved successfully!",
-      severity: "success",
-    });
+    showToast("Changes saved successfully!", "success");
   };
 
   const handleCancel = () => {
     if (isEmptyForm()) {
-      setAlertState({
-        open: true,
-        message: "No data to discard!",
-        severity: "info",
-      });
+      showToast("No data to discard!", "info");
       return;
     }
 
     if (!hasChanges()) {
-      setAlertState({
-        open: true,
-        message: "No changes detected to cancel!",
-        severity: "info",
-      });
+      showToast("No changes detected to cancel!", "info");
       return;
     }
 
@@ -270,11 +238,7 @@ const ProviderProfileSettings = () => {
       URL.revokeObjectURL(photoPreview);
     }
 
-    setAlertState({
-      open: true,
-      message: "Changes discarded",
-      severity: "info",
-    });
+    showToast("Changes discarded!", "info");
   };
 
   // Package Deletion
@@ -290,11 +254,7 @@ const ProviderProfileSettings = () => {
           (pkg) => pkg?.id !== packageToDelete?.id
         ),
       });
-      setAlertState({
-        open: true,
-        message: "Package deleted successfully!",
-        severity: "success",
-      });
+      showToast("Package deleted successfully!", "success");
     }
     setIsDeletePackageModalOpen(false);
     setPackageToDelete(null);
@@ -318,11 +278,7 @@ const ProviderProfileSettings = () => {
           (portfolio) => portfolio?.id !== editingPortfolio?.id
         ),
       });
-      setAlertState({
-        open: true,
-        message: "Portfolio deleted successfully!",
-        severity: "success",
-      });
+      showToast("Portfolio deleted successfully!", "success");
     }
     setIsDeletePortfolioModalOpen(false);
     setEditingPortfolio(null);
@@ -559,21 +515,16 @@ const ProviderProfileSettings = () => {
               className="bg-primary rounded-full text-[14px] font-medium text-white text-center px-6 py-3"
               onClick={() => {
                 if (!selectedSkill) {
-                  setAlertState({
-                    open: true,
-                    message: "Please add a skill!",
-                    severity: "warning",
-                  });
+                  showToast("Please add a skill!", "warning");
+
                   return;
                 }
 
                 if (formData?.skills?.includes(selectedSkill)) {
-                  setAlertState({
-                    open: true,
-                    message:
-                      "This skill is already added. Please select a different skill!",
-                    severity: "warning",
-                  });
+                  showToast(
+                    "This skill is already added. Please select a different skill!",
+                    "warning"
+                  );
                   return;
                 }
 
@@ -716,11 +667,7 @@ const ProviderProfileSettings = () => {
           handleFormChange({
             packages: [...formData?.packages, newPackage],
           });
-          setAlertState({
-            open: true,
-            message: "Package added successfully!",
-            severity: "success",
-          });
+          showToast("Package added successfully!", "success");
         }}
         currentPackages={formData?.packages}
       />
@@ -736,11 +683,7 @@ const ProviderProfileSettings = () => {
               pkg?.id === updatedPackage?.id ? updatedPackage : pkg
             ),
           });
-          setAlertState({
-            open: true,
-            message: "Package updated successfully!",
-            severity: "success",
-          });
+          showToast("Package updated successfully!", "success");
         }}
         packageToEdit={editingPackage}
       />
@@ -760,11 +703,7 @@ const ProviderProfileSettings = () => {
           handleFormChange({
             portfolios: [...formData?.portfolios, newPortfolio],
           });
-          setAlertState({
-            open: true,
-            message: "Portfolio added successfully!",
-            severity: "success",
-          });
+          showToast("Portfolio added successfully!", "success");
         }}
         currentPortfolios={formData?.portfolios}
       />
@@ -782,11 +721,7 @@ const ProviderProfileSettings = () => {
                 : portfolio
             ),
           });
-          setAlertState({
-            open: true,
-            message: "Portfolio updated successfully!",
-            severity: "success",
-          });
+          showToast("Portfolio updated successfully!", "success");
         }}
         portfolioToEdit={editingPortfolio}
       />
@@ -799,20 +734,6 @@ const ProviderProfileSettings = () => {
         confirmText="Delete"
         cancelText="Cancel"
       />
-      <Snackbar
-        open={alertState?.open}
-        autoHideDuration={5000}
-        onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      >
-        <Alert
-          onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
-          severity={alertState?.severity}
-          sx={{ width: "100%" }}
-        >
-          {alertState?.message}
-        </Alert>
-      </Snackbar>
     </>
   );
 };

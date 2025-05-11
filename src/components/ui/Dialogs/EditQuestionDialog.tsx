@@ -9,7 +9,7 @@ import type { TestQuestions } from "@/interfaces/Admin";
 import Image from "next/image";
 import MUIAutoComplete from "../AutoComplete";
 import MUITextField from "../TextField";
-import { Alert, Snackbar } from "@mui/material";
+import { useToast } from "@/context/ToastContext";
 
 interface EditQuestionModalProps {
   isModalOpen: boolean;
@@ -33,15 +33,7 @@ const EditQuestionDialog = ({
   serviceCategories,
   questionData,
 }: EditQuestionModalProps) => {
-  const [alertState, setAlertState] = useState<{
-    open: boolean;
-    message: string;
-    severity: "success" | "warning" | "error" | "info";
-  }>({
-    open: false,
-    message: "",
-    severity: "success",
-  });
+  const { showToast } = useToast();
   const [formData, setFormData] = useState<TestQuestions>({
     id: 0,
     question: "",
@@ -83,11 +75,7 @@ const EditQuestionDialog = ({
       formData.options.some((opt) => !opt.value.trim()) ||
       !formData.correctAnswer.trim()
     ) {
-      setAlertState({
-        open: true,
-        message: "Please fill all required fields!",
-        severity: "warning",
-      });
+      showToast("Please fill all required fields!", "warning");
       return;
     }
 
@@ -96,11 +84,7 @@ const EditQuestionDialog = ({
     );
 
     if (!isValidAnswer) {
-      setAlertState({
-        open: true,
-        message: "Correct answer must match one of the options!",
-        severity: "warning",
-      });
+      showToast("Correct answer must match one of the options!", "warning");
       return;
     }
 
@@ -113,130 +97,110 @@ const EditQuestionDialog = ({
   );
 
   return (
-    <>
-      <Dialog
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        fullWidth
-        maxWidth="md"
-        sx={{
-          "& .MuiDialog-paper": {
-            backgroundColor: "#FFFFFF",
-            color: "#222222",
-            borderRadius: "32px",
-            boxShadow: "0px 4px 134px 0px #46B7D11F",
-            border: "1px solid #E5E5E5",
-            padding: "0px",
-          },
-          "& .MuiDialogTitle-root": {
-            margin: "20px !important",
-            padding: "13px 18px !important",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            borderRadius: "16px",
-            backgroundColor: "#EEFCEE",
-          },
-          "& .MuiDialogContent-root": {
-            padding: "0px 20px 20px 20px !important",
-            display: "flex",
-            flexDirection: "column",
-          },
-          "& .MuiDialogActions-root": {
-            padding: "0px 20px 15px 20px !important",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          },
-        }}
-      >
-        <DialogTitle>
-          <h2 className="text-[20px] font-semibold text-black">
-            Edit Question
-          </h2>
-          <Image
-            onClick={() => setIsModalOpen(false)}
-            src="/service-provider-onboarding/close.svg"
-            alt="close-icon"
-            width={20}
-            height={20}
-            className="object-cover cursor-pointer"
+    <Dialog
+      open={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+      fullWidth
+      maxWidth="md"
+      sx={{
+        "& .MuiDialog-paper": {
+          backgroundColor: "#FFFFFF",
+          color: "#222222",
+          borderRadius: "32px",
+          boxShadow: "0px 4px 134px 0px #46B7D11F",
+          border: "1px solid #E5E5E5",
+          padding: "0px",
+        },
+        "& .MuiDialogTitle-root": {
+          margin: "20px !important",
+          padding: "13px 18px !important",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          borderRadius: "16px",
+          backgroundColor: "#EEFCEE",
+        },
+        "& .MuiDialogContent-root": {
+          padding: "0px 20px 20px 20px !important",
+          display: "flex",
+          flexDirection: "column",
+        },
+        "& .MuiDialogActions-root": {
+          padding: "0px 20px 15px 20px !important",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        },
+      }}
+    >
+      <DialogTitle>
+        <h2 className="text-[20px] font-semibold text-black">Edit Question</h2>
+        <Image
+          onClick={() => setIsModalOpen(false)}
+          src="/service-provider-onboarding/close.svg"
+          alt="close-icon"
+          width={20}
+          height={20}
+          className="object-cover cursor-pointer"
+        />
+      </DialogTitle>
+
+      <DialogContent>
+        <div className="w-full flex flex-col gap-6 py-2">
+          <MUIAutoComplete
+            label="Category"
+            width="100%"
+            placeholder="Select Category"
+            options={serviceCategories}
+            value={formData?.serviceCategory}
+            onChange={(event: React.SyntheticEvent, newValue: string | null) =>
+              handleChange("serviceCategory", newValue ?? "")
+            }
           />
-        </DialogTitle>
 
-        <DialogContent>
-          <div className="w-full flex flex-col gap-6 py-2">
-            <MUIAutoComplete
-              label="Category"
-              width="100%"
-              placeholder="Select Category"
-              options={serviceCategories}
-              value={formData?.serviceCategory}
-              onChange={(
-                event: React.SyntheticEvent,
-                newValue: string | null
-              ) => handleChange("serviceCategory", newValue ?? "")}
-            />
-
-            <div className="w-full">
-              <MUITextField
-                label="Question"
-                placeholder="Enter Question"
-                value={formData?.question}
-                onChange={(e) => handleChange("question", e.target.value)}
-              />
-            </div>
-
-            <div className="w-full grid grid-cols-2 gap-4">
-              {formData.options.map((opt, index) => (
-                <MUITextField
-                  key={opt.label}
-                  label={`Option ${opt.label.replace(")", "")}`}
-                  placeholder={opt.label}
-                  value={opt?.value}
-                  onChange={(e) => handleOptionChange(index, e.target.value)}
-                />
-              ))}
-            </div>
-
-            <MUIAutoComplete
-              label="Correct Answer"
-              width="100%"
-              placeholder="Select Option"
-              options={correctAnswerOptions}
-              value={formData?.correctAnswer}
-              onChange={(
-                event: React.SyntheticEvent,
-                newValue: string | null
-              ) => handleChange("correctAnswer", newValue ?? "")}
+          <div className="w-full">
+            <MUITextField
+              label="Question"
+              placeholder="Enter Question"
+              value={formData?.question}
+              onChange={(e) => handleChange("question", e.target.value)}
             />
           </div>
-        </DialogContent>
 
-        <DialogActions>
-          <button
-            onClick={handleSubmit}
-            className="text-[14px] font-medium bg-primary text-white rounded-full px-6 py-2"
-          >
-            Edit Question
-          </button>
-        </DialogActions>
-      </Dialog>
-      <Snackbar
-        open={alertState?.open}
-        autoHideDuration={5000}
-        onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      >
-        <Alert
-          onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
-          severity={alertState?.severity}
-          sx={{ width: "100%" }}
+          <div className="w-full grid grid-cols-2 gap-4">
+            {formData.options.map((opt, index) => (
+              <MUITextField
+                key={opt.label}
+                label={`Option ${opt.label.replace(")", "")}`}
+                placeholder={opt.label}
+                value={opt?.value}
+                onChange={(e) => handleOptionChange(index, e.target.value)}
+              />
+            ))}
+          </div>
+
+          <MUIAutoComplete
+            label="Correct Answer"
+            width="100%"
+            placeholder="Select Option"
+            options={correctAnswerOptions}
+            value={formData?.correctAnswer}
+            onChange={(event: React.SyntheticEvent, newValue: string | null) =>
+              handleChange("correctAnswer", newValue ?? "")
+            }
+          />
+        </div>
+      </DialogContent>
+
+      <DialogActions>
+        <button
+          onClick={handleSubmit}
+          className="text-[14px] font-medium bg-primary text-white rounded-full px-6 py-2"
         >
-          {alertState?.message}
-        </Alert>
-      </Snackbar>
-    </>
+          Edit Question
+        </button>
+      </DialogActions>
+    </Dialog>
   );
 };
 

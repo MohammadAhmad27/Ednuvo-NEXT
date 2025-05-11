@@ -1,8 +1,9 @@
 import MUITextField from "@/components/ui/TextField";
 import { useEffect, useState } from "react";
-import { Alert, Snackbar } from "@mui/material";
+import { useToast } from "@/context/ToastContext";
 
 const PasswordAndSecurity = () => {
+  const { showToast } = useToast();
   const [originalData, setOriginalData] = useState<{
     oldPassword: string;
     newPassword: string;
@@ -20,15 +21,6 @@ const PasswordAndSecurity = () => {
   }, [originalData]);
 
   const [fieldErrors, setFieldErrors] = useState<Record<string, boolean>>({});
-  const [alertState, setAlertState] = useState<{
-    open: boolean;
-    message: string;
-    severity: "success" | "warning" | "error" | "info";
-  }>({
-    open: false,
-    message: "",
-    severity: "success",
-  });
 
   // Password visibility states
   const [showOldPassword, setShowOldPassword] = useState<boolean>(false);
@@ -65,11 +57,7 @@ const PasswordAndSecurity = () => {
 
   const handleSave = () => {
     if (!validateForm()) {
-      setAlertState({
-        open: true,
-        message: "Please fill all required fields!",
-        severity: "warning",
-      });
+      showToast("Please fill all required fields!", "warning");
       return;
     }
 
@@ -78,38 +66,23 @@ const PasswordAndSecurity = () => {
       formData?.newPassword?.length < 5 ||
       formData?.confirmPassword?.length < 5;
     if (passwordLength) {
-      setAlertState({
-        open: true,
-        message: "Password must be at least 5 characters long!",
-        severity: "warning",
-      });
+      showToast("Password must be at least 5 characters long!", "warning");
       return;
     }
+
     const mismatch = formData?.newPassword !== formData?.confirmPassword;
     if (mismatch) {
-      setAlertState({
-        open: true,
-        message: "New password and confirm password don't match!",
-        severity: "warning",
-      });
+      showToast("New password and confirm password don't match!", "warning");
       return;
     }
 
     if (!hasChanges()) {
-      setAlertState({
-        open: true,
-        message: "No changes detected to save!",
-        severity: "info",
-      });
+      showToast("No changes detected to save!", "info");
       return;
     }
 
     setOriginalData(formData);
-    setAlertState({
-      open: true,
-      message: "Password changed successfully!",
-      severity: "success",
-    });
+    showToast("Password changed successfully!", "success");
 
     setShowOldPassword(false);
     setShowNewPassword(false);
@@ -121,75 +94,59 @@ const PasswordAndSecurity = () => {
   };
 
   return (
-    <>
-      <div className="w-full h-full flex flex-col justify-start items-center gap-6 px-5 py-10">
-        <div className="w-2/5">
-          <MUITextField
-            label="Old Password"
-            type="password"
-            value={formData?.oldPassword}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              handleFormChange("oldPassword", e.target.value)
-            }
-            placeholder="Enter your old password"
-            showPassword={showOldPassword}
-            setShowPassword={setShowOldPassword}
-          />
-        </div>
-        <div className="w-2/5 space-y-3">
-          <MUITextField
-            label="New Password"
-            type="password"
-            value={formData?.newPassword}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              handleFormChange("newPassword", e.target.value)
-            }
-            placeholder="Enter your new password"
-            showPassword={showNewPassword}
-            setShowPassword={setShowNewPassword}
-          />
-          <p className="text-[12px] font-normal text-darkgray">
-            Use 8+ characters with a mix of uppercase, lowercase, numbers, and
-            special symbols (e.g., !@#$).
-          </p>
-        </div>
-        <div className="w-2/5">
-          <MUITextField
-            label="Confirm Password"
-            type="password"
-            value={formData?.confirmPassword}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              handleFormChange("confirmPassword", e.target.value)
-            }
-            placeholder="Confirm your new password"
-            showPassword={showConfirmPassword}
-            setShowPassword={setShowConfirmPassword}
-          />
-        </div>
-        <div className="w-2/5">
-          <button
-            onClick={handleSave}
-            className="w-full bg-primary text-[18px] font-medium text-white text-center rounded-full py-2 px-4"
-          >
-            Save Changes
-          </button>
-        </div>
-        <Snackbar
-          open={alertState.open}
-          autoHideDuration={5000}
-          onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
-          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-        >
-          <Alert
-            onClose={() => setAlertState((prev) => ({ ...prev, open: false }))}
-            severity={alertState.severity}
-            sx={{ width: "100%" }}
-          >
-            {alertState.message}
-          </Alert>
-        </Snackbar>
+    <div className="w-full h-full flex flex-col justify-start items-center gap-6 px-5 py-10">
+      <div className="w-2/5">
+        <MUITextField
+          label="Old Password"
+          type="password"
+          value={formData?.oldPassword}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleFormChange("oldPassword", e.target.value)
+          }
+          placeholder="Enter your old password"
+          showPassword={showOldPassword}
+          setShowPassword={setShowOldPassword}
+        />
       </div>
-    </>
+      <div className="w-2/5 space-y-3">
+        <MUITextField
+          label="New Password"
+          type="password"
+          value={formData?.newPassword}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleFormChange("newPassword", e.target.value)
+          }
+          placeholder="Enter your new password"
+          showPassword={showNewPassword}
+          setShowPassword={setShowNewPassword}
+        />
+        <p className="text-[12px] font-normal text-darkgray">
+          Use 8+ characters with a mix of uppercase, lowercase, numbers, and
+          special symbols (e.g., !@#$).
+        </p>
+      </div>
+      <div className="w-2/5">
+        <MUITextField
+          label="Confirm Password"
+          type="password"
+          value={formData?.confirmPassword}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleFormChange("confirmPassword", e.target.value)
+          }
+          placeholder="Confirm your new password"
+          showPassword={showConfirmPassword}
+          setShowPassword={setShowConfirmPassword}
+        />
+      </div>
+      <div className="w-2/5">
+        <button
+          onClick={handleSave}
+          className="w-full bg-primary text-[18px] font-medium text-white text-center rounded-full py-2 px-4"
+        >
+          Save Changes
+        </button>
+      </div>
+    </div>
   );
 };
 
