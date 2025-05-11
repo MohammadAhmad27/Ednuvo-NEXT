@@ -107,8 +107,25 @@ const ProviderProfileSettings = () => {
   };
 
   // Check if form has any changes
+  // Custom deep comparison function that handles File objects
   const hasChanges = () => {
-    return JSON.stringify(formData) !== JSON.stringify(originalData);
+    // Compare photo separately since File objects can't be stringified
+    const photoChanged = 
+      (formData.photo === null && originalData.photo !== null) ||
+      (formData.photo !== null && originalData.photo === null) ||
+      (formData.photo instanceof File && originalData.photo instanceof File && 
+       formData.photo.name !== originalData.photo.name) ||
+      (formData.photo instanceof File && !(originalData.photo instanceof File)) ||
+      (!(formData.photo instanceof File) && originalData.photo instanceof File);
+
+    if (photoChanged) return true;
+
+    // Create copies of the objects without the photo property
+    const formDataCopy = {...formData, photo: null};
+    const originalDataCopy = {...originalData, photo: null};
+
+    // Compare the rest of the data
+    return JSON.stringify(formDataCopy) !== JSON.stringify(originalDataCopy);
   };
 
   // Check if form is empty (excluding skills, packages, portfolios which have initial values)
@@ -141,14 +158,21 @@ const ProviderProfileSettings = () => {
       return;
     }
 
-    setOriginalData(formData);
+    // Update original data
+    setOriginalData({
+      ...formData,
+      // If a new photo was uploaded, keep the reference
+      photo: formData?.photo instanceof File ? formData?.photo : originalData?.photo
+    });
+
     setAlertState({
       open: true,
       message: "Changes saved successfully!",
       severity: "success",
     });
   };
-  const handleCancel = () => {
+
+    const handleCancel = () => {
     if (isEmptyForm()) {
       setAlertState({
         open: true,
@@ -167,11 +191,23 @@ const ProviderProfileSettings = () => {
       return;
     }
 
-    // Reset form data and photo preview
+    // Reset form data
     setFormData(originalData);
-    setPhotoPreview(
-      originalData?.photo ? URL.createObjectURL(originalData?.photo) : null
-    );
+    
+    // Update photo preview
+    if (originalData?.photo instanceof File) {
+      // Create new preview URL for the original photo
+      const previewUrl = URL.createObjectURL(originalData?.photo);
+      setPhotoPreview(previewUrl);
+    } else {
+      setPhotoPreview(null);
+    }
+
+    // Revoke current preview URL if it exists
+    if (photoPreview) {
+      URL.revokeObjectURL(photoPreview);
+    }
+
     setAlertState({
       open: true,
       message: "Changes discarded",
@@ -274,14 +310,21 @@ const ProviderProfileSettings = () => {
   const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event?.target?.files && event?.target?.files[0]) {
       const file = event?.target?.files[0];
-      handleFormChange({ photo: file });
-
-      // Create preview URL and revoke previous one
+      
+      // Revoke previous preview URL if it exists
       if (photoPreview) {
         URL.revokeObjectURL(photoPreview);
       }
+
+      // Create new preview URL
       const previewUrl = URL.createObjectURL(file);
       setPhotoPreview(previewUrl);
+      
+      // Update form data
+      setFormData(prev => ({
+        ...prev,
+        photo: file
+      }));
     }
   };
 
