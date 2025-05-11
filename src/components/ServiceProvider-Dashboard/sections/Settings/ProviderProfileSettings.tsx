@@ -31,7 +31,8 @@ import DeleteDialog from "@/components/ui/Dialogs/DeleteDialog";
 import EditPortfolioDialog from "@/components/ui/Dialogs/EditPortfolioDialog";
 
 const ProviderProfileSettings = () => {
-  const [formData, setFormData] = useState<{
+  // Original data state (will only be updated on save)
+  const [originalData, setOriginalData] = useState<{
     photo: File | null;
     firstName: string;
     lastName: string;
@@ -58,6 +59,15 @@ const ProviderProfileSettings = () => {
     packages: packageCardData,
     portfolios: portfolioData,
   });
+
+  // Working copy state (modified in the UI)
+  const [formData, setFormData] = useState(originalData);
+
+  // Update working copy when original data changes
+  useEffect(() => {
+    setFormData(originalData);
+  }, [originalData]);
+
   const [selectedSkill, setSelectedSkill] = useState<string>("");
   const [alertState, setAlertState] = useState<{
     open: boolean;
@@ -94,6 +104,79 @@ const ProviderProfileSettings = () => {
 
   const handleFormChange = (data: any) => {
     setFormData((prev) => ({ ...prev, ...data }));
+  };
+
+  // Check if form has any changes
+  const hasChanges = () => {
+    return JSON.stringify(formData) !== JSON.stringify(originalData);
+  };
+
+  // Check if form is empty (excluding skills, packages, portfolios which have initial values)
+  const isEmptyForm = () => {
+    const { skills, packages, portfolios, ...rest } = formData;
+    return Object.values(rest).every(
+      (value) =>
+        value === null ||
+        value === "" ||
+        (Array.isArray(value) && value.length === 0)
+    );
+  };
+
+  const handleSaveChanges = () => {
+    if (isEmptyForm()) {
+      setAlertState({
+        open: true,
+        message: "Please fill in some data before saving!",
+        severity: "warning",
+      });
+      return;
+    }
+
+    if (!hasChanges()) {
+      setAlertState({
+        open: true,
+        message: "No changes detected to save!",
+        severity: "info",
+      });
+      return;
+    }
+
+    setOriginalData(formData);
+    setAlertState({
+      open: true,
+      message: "Changes saved successfully!",
+      severity: "success",
+    });
+  };
+  const handleCancel = () => {
+    if (isEmptyForm()) {
+      setAlertState({
+        open: true,
+        message: "No data to discard!",
+        severity: "info",
+      });
+      return;
+    }
+
+    if (!hasChanges()) {
+      setAlertState({
+        open: true,
+        message: "No changes detected to cancel!",
+        severity: "info",
+      });
+      return;
+    }
+
+    // Reset form data and photo preview
+    setFormData(originalData);
+    setPhotoPreview(
+      originalData?.photo ? URL.createObjectURL(originalData?.photo) : null
+    );
+    setAlertState({
+      open: true,
+      message: "Changes discarded",
+      severity: "info",
+    });
   };
 
   // Package Deletion
@@ -153,31 +236,52 @@ const ProviderProfileSettings = () => {
     setEditingPortfolio(null);
   };
 
+  // useEffect(() => {
+  //   if (formData?.photo && !photoPreview) {
+  //     const reader = new FileReader();
+  //     reader.onload = (e) => {
+  //       if (e?.target?.result) {
+  //         setPhotoPreview(e?.target?.result as string);
+  //       }
+  //     };
+  //     reader?.readAsDataURL(formData?.photo);
+  //   }
+  // }, [formData?.photo, photoPreview]);
   useEffect(() => {
-    if (formData?.photo && !photoPreview) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        if (e?.target?.result) {
-          setPhotoPreview(e?.target?.result as string);
-        }
-      };
-      reader?.readAsDataURL(formData?.photo);
-    }
-  }, [formData?.photo, photoPreview]);
+    return () => {
+      if (photoPreview) {
+        URL.revokeObjectURL(photoPreview);
+      }
+    };
+  }, [photoPreview]);
+
+  // const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (event?.target?.files && event?.target?.files[0]) {
+  //     const file = event?.target?.files[0];
+  //     handleFormChange({ photo: file });
+
+  //     // Create preview URL
+  //     const reader = new FileReader();
+  //     reader.onload = (e) => {
+  //       if (e?.target?.result) {
+  //         setPhotoPreview(e?.target?.result as string);
+  //       }
+  //     };
+  //     reader?.readAsDataURL(file);
+  //   }
+  // };
 
   const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event?.target?.files && event?.target?.files[0]) {
       const file = event?.target?.files[0];
       handleFormChange({ photo: file });
 
-      // Create preview URL
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        if (e?.target?.result) {
-          setPhotoPreview(e?.target?.result as string);
-        }
-      };
-      reader?.readAsDataURL(file);
+      // Create preview URL and revoke previous one
+      if (photoPreview) {
+        URL.revokeObjectURL(photoPreview);
+      }
+      const previewUrl = URL.createObjectURL(file);
+      setPhotoPreview(previewUrl);
     }
   };
 
@@ -425,7 +529,7 @@ const ProviderProfileSettings = () => {
           </div>
           <PackageCardComponent
             packageData={formData?.packages}
-            // limit={false}
+            limit={false}
             show={false}
             image={false}
             onEdit={(pkg) => {
@@ -467,7 +571,7 @@ const ProviderProfileSettings = () => {
           </div>
           <AllPortfolioCardComponent
             portfolioData={formData?.portfolios}
-            limit={true}
+            limit={false}
             image={true}
             onEdit={(portfolio) => {
               setEditingPortfolio(portfolio);
@@ -487,10 +591,16 @@ const ProviderProfileSettings = () => {
         </div>
         {/* buttons */}
         <div className="w-full h-full flex justify-end items-end gap-2 mt-6">
-          <button className="text-[14px] font-medium text-primary border border-primary rounded-full text-center px-6 py-[6px]">
+          <button
+            className="text-[14px] font-medium text-primary border border-primary rounded-full text-center px-6 py-[6px]"
+            onClick={handleCancel}
+          >
             Cancel
           </button>
-          <button className="text-[14px] font-medium text-white bg-primary rounded-full text-center px-6 py-[6px]">
+          <button
+            className="text-[14px] font-medium text-white bg-primary rounded-full text-center px-6 py-[6px]"
+            onClick={handleSaveChanges}
+          >
             Save Changes
           </button>
         </div>
