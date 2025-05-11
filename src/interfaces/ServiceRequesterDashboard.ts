@@ -180,3 +180,13 @@ export interface ReviewCategory {
   question: string;
   rating: number;
 }
+
+export interface RequesterPayment {
+  id: number;
+  date: string;
+  serviceProvider: string;
+  orderId: string;
+  serviceTitle: string;
+  amountPaid: number;
+  status: string;
+}
