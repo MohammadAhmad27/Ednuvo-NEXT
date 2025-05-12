@@ -9,6 +9,7 @@ import ApplicationSubmission from "../ui/Dialogs/ApplicationSubmissionDialog";
 import JobPostingDetails from "./JobPostingDetails";
 import PaymentMethodDetails from "./PaymentMethodDetails";
 import { navigationButtons } from "@/app/service-requester-onboarding/content";
+import { useToast } from "@/context/ToastContext";
 
 // Custom connector centered vertically
 const CustomConnector = styled(StepConnector)(() => ({
@@ -108,6 +109,7 @@ const steps = [
 const ServiceRequesterSteps = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { showToast } = useToast();
 
   const [formData, setFormData] = useState<{
     // Basic Information
@@ -140,39 +142,136 @@ const ServiceRequesterSteps = () => {
     cvv: string;
     country: string;
   }>({
-  // Basic Information (required)
-  firstName: "",
-  lastName: "",
-  address: "",
-  phoneNumber: "",
-  countryCode: "+966",
-  photo: null,
+    // Basic Information (required)
+    firstName: "",
+    lastName: "",
+    address: "",
+    phoneNumber: "",
+    countryCode: "+966",
+    photo: null,
 
-  // Job Posting Details (optional)
-  jobTitle: "",
-  jobDescription: "",
-  jobCategory: "",
-  jobSubCategory: "",
-  location: "",
-  jobDuration: "",
-  budgetMode: "",
-  totalBudget: "",
-  experienceLevel: "",
-  jobStartDate: null as Date | null,
-  categoriesList: [] as string[],
-  imagesList: [] as File[],
+    // Job Posting Details (optional)
+    jobTitle: "",
+    jobDescription: "",
+    jobCategory: "",
+    jobSubCategory: "",
+    location: "",
+    jobDuration: "",
+    budgetMode: "",
+    totalBudget: "",
+    experienceLevel: "",
+    jobStartDate: null as Date | null,
+    categoriesList: [] as string[],
+    imagesList: [] as File[],
 
-  // Payment Method Details (required)
-  paymentMethod: "razorpay",
-  billedTo: "",
-  cardNumber: "",
-  expiration: null as Date | null,
-  cvv: "",
-  country: "",
+    // Payment Method Details (required)
+    paymentMethod: "razorpay",
+    billedTo: "",
+    cardNumber: "",
+    expiration: null as Date | null,
+    cvv: "",
+    country: "",
   });
+  // Helper to check if job details are either all empty or all filled
+  const isJobDetailsValid = (): boolean => {
+    const jobFields = [
+      "jobTitle",
+      "jobDescription",
+      "jobCategory",
+      "jobSubCategory",
+      "location",
+      "jobDuration",
+      "budgetMode",
+      "totalBudget",
+      "experienceLevel",
+      "jobStartDate",
+      "categoriesList",
+      "imagesList",
+    ];
+
+    const allEmpty = jobFields.every((key) => {
+      const value = formData[key as keyof typeof formData];
+      return Array.isArray(value) ? value.length === 0 : !value;
+    });
+
+    const allFilled = jobFields.every((key) => {
+      const value = formData[key as keyof typeof formData];
+      return Array.isArray(value) ? value.length > 0 : !!value;
+    });
+
+    return allEmpty || allFilled;
+  };
+
+  // Helper to check if any job field is filled
+  const hasAnyJobFieldFilled = (): boolean => {
+    const jobFields = [
+      "jobTitle",
+      "jobDescription",
+      "jobCategory",
+      "jobSubCategory",
+      "location",
+      "jobDuration",
+      "budgetMode",
+      "totalBudget",
+      "experienceLevel",
+      "jobStartDate",
+      "categoriesList",
+      "imagesList",
+    ];
+
+    return jobFields.some((key) => {
+      const value = formData[key as keyof typeof formData];
+      return Array.isArray(value) ? value.length > 0 : !!value;
+    });
+  };
 
   const handleNext = () => {
+    // Step 0: Basic Information validation
+    if (activeStep === 0) {
+      if (
+        !formData?.photo ||
+        !formData?.firstName.trim() ||
+        !formData?.lastName.trim() ||
+        !formData?.address.trim() ||
+        !formData?.phoneNumber.trim()
+      ) {
+        showToast("Please fill all required fields!", "warning");
+        return;
+      }
+    }
+
+    // Step 1: Job Posting Details validation
+    else if (activeStep === 1) {
+      const anyFilled = hasAnyJobFieldFilled();
+      const allValid = isJobDetailsValid();
+
+      if (anyFilled && !allValid) {
+        showToast(
+          "Please either fill all job details or leave all fields empty to skip this step!",
+          "warning"
+        );
+        return;
+      }
+    }
+
+    // Step 2: Payment Method validation
+    else if (activeStep === 2) {
+      if (
+        !formData?.paymentMethod.trim() ||
+        !formData?.billedTo.trim() ||
+        !formData?.cardNumber.trim() ||
+        !formData?.expiration ||
+        !formData?.cvv.trim() ||
+        !formData?.country.trim()
+      ) {
+        showToast("Please fill all required fields!", "warning");
+        return;
+      }
+    }
+
+    // If all validations pass, proceed to next step or submit
     if (activeStep === steps.length - 1) {
+      showToast("Onbaording complete!", "info");
       setIsModalOpen(true);
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -238,7 +337,16 @@ const ServiceRequesterSteps = () => {
 
           {activeStep === 1 && (
             <button
-              onClick={() => setActiveStep(activeStep + 1)}
+              onClick={() => {
+                if (!isJobDetailsValid()) {
+                  showToast(
+                    "Please either fill all job details or leave all fields empty to skip this step!",
+                    "warning"
+                  );
+                  return;
+                }
+                setActiveStep(activeStep + 1);
+              }}
               className="bg-white text-[14px] font-medium text-primary border border-primary rounded-full px-6 py-2"
             >
               Skip
@@ -247,7 +355,7 @@ const ServiceRequesterSteps = () => {
 
           <button
             onClick={handleNext}
-            className="bg-primary text-[14px] font-medium text-white border border-primary rounded-full px-6 py-2"
+            className="bg-primary text-[14px] font-medium text-white border border-primary rounded-full px-6 py-2 cursor-pointer"
           >
             {activeStep === steps.length - 1
               ? "Submit for verification"
