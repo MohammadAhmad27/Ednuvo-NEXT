@@ -33,9 +33,14 @@ interface JobDetailsProps {
     [key: string]: any;
   };
   onChange: (data: any) => void;
+  showParagraph?: boolean;
 }
 
-const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
+const JobPostingDetails = ({
+  formData,
+  onChange,
+  showParagraph = true,
+}: JobDetailsProps) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [images, setImages] = useState<File[]>(formData?.imagesList || []);
   const [selectedCategories, setSelectedCategories] = useState<string[]>(
@@ -75,11 +80,12 @@ const JobPostingDetails = ({ formData, onChange }: JobDetailsProps) => {
 
   return (
     <div>
-      <p className="text-[14px] text-primary font-normal mb-8">
-        Let's start by setting up your profile. Enter your name, address, and
-        phone number to help clients identify and contact you.
-      </p>
-
+      {showParagraph && (
+        <p className="text-[14px] text-primary font-normal mb-8">
+          Let's start by setting up your profile. Enter your name, address, and
+          phone number to help clients identify and contact you.
+        </p>
+      )}
       <div className="w-full space-y-4 mb-6">
         <MUITextField
           label="Job Title"
