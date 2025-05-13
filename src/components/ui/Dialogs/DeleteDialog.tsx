@@ -52,7 +52,7 @@ const DeleteDialog = ({
     >
       <DialogContent>
         <Image
-          src="/admin/delete.svg"
+          src={confirmText === "Logout" ? "/admin/logout.svg" : "/admin/delete.svg"}
           alt="delete-icon"
           width={40}
           height={40}
