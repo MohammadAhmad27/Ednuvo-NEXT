@@ -15,7 +15,7 @@ const WithdrawBalanceDialog = ({ open, onClose }: ConfirmDialogProps) => {
   const user: any = { paymentMethod: "visa" };
 
   const amount = parseFloat(value); // Convert input to number
-  const canWithdraw = !isNaN(amount) && amount > 10;
+  const canWithdraw = !isNaN(amount) && amount > 0;
 
   return (
     <Dialog
@@ -71,7 +71,7 @@ const WithdrawBalanceDialog = ({ open, onClose }: ConfirmDialogProps) => {
           />
         </div>
 
-        <div className="mt-[21px]">
+        <div className="mt-[20px]">
           {paymentMethodImages
             ?.filter((item) => item.label === user?.paymentMethod)
             ?.map((item) => {
@@ -110,7 +110,9 @@ const WithdrawBalanceDialog = ({ open, onClose }: ConfirmDialogProps) => {
         </div>
       </DialogContent>
       <DialogActions>
-        <button className="bg-white border border-primary rounded-full text-center text-[16px] font-medium text-primary px-7 py-2">
+        <button 
+          onClick={onClose}
+        className="bg-white border border-primary rounded-full text-center text-[16px] font-medium text-primary px-7 py-2">
           Cancel
         </button>
         <button

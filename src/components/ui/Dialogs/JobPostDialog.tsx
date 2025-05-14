@@ -52,6 +52,24 @@ const JobPostDialog = ({ open, onClose }: JobPostDialogProps) => {
   };
 
   const handlePostJob = () => {
+    if (
+      !formData?.jobTitle.trim() ||
+      !formData?.jobDescription.trim() ||
+      !formData?.jobCategory.trim() ||
+      !formData?.jobSubCategory.trim() ||
+      !formData?.location.trim() ||
+      !formData?.jobDuration.trim() ||
+      !formData?.budgetMode.trim() ||
+      !formData?.totalBudget.trim() ||
+      !formData?.experienceLevel.trim() ||
+      !formData?.jobStartDate ||
+      !formData?.categoriesList.length ||
+      !formData?.imagesList.length
+    ) {
+      showToast("Please fill all required fields!", "warning");
+      return;
+    }
+
     showToast("Job posted successfully!", "success");
     onClose();
     setFormData({

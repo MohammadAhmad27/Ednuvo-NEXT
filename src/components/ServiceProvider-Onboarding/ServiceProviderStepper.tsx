@@ -11,6 +11,7 @@ import StepConnector, {
 } from "@mui/material/StepConnector";
 import ApplicationSubmission from "../ui/Dialogs/ApplicationSubmissionDialog";
 import { navigationButtons } from "@/app/service-provider-onboarding/content";
+import { useToast } from "@/context/ToastContext";
 
 // Custom connector centered vertically
 const CustomConnector = styled(StepConnector)(() => ({
@@ -91,33 +92,11 @@ function CustomStepIcon(props: {
   );
 }
 
-// Step content components
-const steps = [
-  {
-    label: "Basic Information",
-    component: BasicInformation,
-  },
-  {
-    label: "Service & Experience Details",
-    component: ServiceExperience,
-  },
-  {
-    label: "Portfolio Details",
-    component: PortfolioDetails,
-  },
-  {
-    label: "Packages Detail",
-    component: PackageDetails,
-  },
-  {
-    label: "Verification Document",
-    component: VerificationDocument,
-  },
-];
-
 const ServiceProviderSteps = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { showToast } = useToast();
+
 
   const [formData, setFormData] = useState<{
     // Basic Information
@@ -203,20 +182,110 @@ const ServiceProviderSteps = () => {
     verificationDocument: [] as File[],
   });
 
-  const handleNext = () => {
-    if (activeStep === steps.length - 1) {
-      setIsModalOpen(true);
-    } else {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    }
+  const handleFormChange = (data: any) => {
+    setFormData((prev) => ({ ...prev, ...data }));
   };
+
+  // Add these validation functions in your ServiceProviderSteps.tsx
+const validateBasicInformation = (data: any) => {
+  return (
+    data?.firstName?.trim() !== "" &&
+    data?.lastName?.trim() !== "" &&
+    data?.address?.trim() !== "" &&
+    data?.phoneNumber?.trim() !== "" &&
+    data?.photo !== null
+  );
+};
+
+const validateServiceExperience = (data: any) => {
+  return (
+    data?.serviceCategories?.length > 0 &&
+    data?.experienceLevel?.trim() !== "" &&
+    data?.startTime !== null &&
+    data?.endTime !== null
+  );
+};
+
+const validatePortfolioDetails = (data: any) => {
+  return data?.portfolios?.every((portfolio: any) => {
+    return (
+      portfolio?.projectTitle?.trim() !== "" &&
+      portfolio?.projectDescription?.trim() !== "" &&
+      portfolio?.skills.length > 0 &&
+      portfolio?.portfolioImages?.length > 0 &&
+      portfolio?.startDate !== null &&
+      portfolio?.endDate !== null &&
+      portfolio?.projectCost?.trim() !== ""
+    );
+  });
+};
+
+const validatePackageDetails = (data: any) => {
+  return data?.packages?.every((pkg: any) => {
+    return (
+      pkg?.title?.trim() !== "" &&
+      pkg?.description?.trim() !== "" &&
+      pkg?.pricingMode?.trim() !== "" &&
+      pkg?.price?.trim() !== "" &&
+      pkg?.category?.trim() !== "" &&
+      pkg?.requirements?.trim() !== "" &&
+      pkg?.packageImages?.length > 0
+    );
+  });
+};
+
+const validateVerificationDocument = (data: any) => {
+  return data.verificationDocument?.length >= 2;
+};
+
+
+// Step content components
+const steps = [
+  {
+    label: "Basic Information",
+    component: BasicInformation,
+    validate: validateBasicInformation,
+  },
+  {
+    label: "Service & Experience Details",
+    component: ServiceExperience,
+    validate: validateServiceExperience,
+  },
+  {
+    label: "Portfolio Details",
+    component: PortfolioDetails,
+    validate: validatePortfolioDetails,
+  },
+  {
+    label: "Packages Detail",
+    component: PackageDetails,
+    validate: validatePackageDetails,
+  },
+  {
+    label: "Verification Document",
+    component: VerificationDocument,
+    validate: validateVerificationDocument,
+  },
+];
+
+const handleNext = () => {
+  const currentStep = steps[activeStep];
+  
+  if (!currentStep?.validate(formData)) {
+    showToast("Please fill all required fields!", "warning");
+    return;
+  }
+
+  if (activeStep === steps?.length - 1) {
+    showToast("Onbaording complete!", "info");
+    setIsModalOpen(true);
+  } else {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  }
+};
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleFormChange = (data: any) => {
-    setFormData((prev) => ({ ...prev, ...data }));
   };
 
   const CurrentStepComponent = steps[activeStep].component;
