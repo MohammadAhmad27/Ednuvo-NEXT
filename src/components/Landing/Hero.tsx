@@ -7,14 +7,14 @@ const Hero = () => {
   return (
     <div className="w-full bg-primary overflow-hidden flex justify-between items-start gap-10 bg-[url(/landing/hero/lining-group.svg)] bg-cover bg-no-repeat max-md:px-4 md:px-8 lg:px-10 xl:px-20 pt-10 max-md:pb-32 md:pb-36 lg:pb-40">
       <div className="max-lg:w-full lg:w-[55%] xl:w-3/5 flex flex-col gap-4">
-        <h1 className="max-md:text-[28px] md:text-[36px] lg:text-[40px] xl:text-[60px] font-extrabold text-white max-lg:leading-tight lg:leading-none max-lg:text-center md:max-lg:max-w-[500px] md:max-lg:mx-auto lg:max-w-[800px]">
+        <h1 className="max-md:text-[28px] md:text-[36px] lg:text-[40px] xl:text-[60px] font-extrabold text-white max-lg:leading-tight lg:leading-none max-lg:text-center max-2xs:w-full 2xs:max-xs:w-[300px] xs:max-md:w-[380px] md:max-w-[500px] lg:max-w-[800px] max-lg:mx-auto">
           Find The Expert Service Providers For Your Home
         </h1>
-        <p className="max-md:text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] text-white font-normal max-lg:text-center max-w-[740px]">
+        <p className="max-md:text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] text-white font-normal max-lg:text-center max-w-[740px] max-lg:w-[90%] max-lg:mx-auto">
           Work with talented people at the most affordable price to get the most
           out of your time and cost
         </p>
-        <div className="bg-white flex justify-between items-center gap-3 p-2 max-w-[730px] rounded-full my-3">
+        <div className="bg-white flex justify-between items-center gap-3 p-2 max-w-[730px] max-lg:w-[90%] max-lg:mx-auto rounded-full my-3">
           <Image
             src="/landing/hero/search.svg"
             alt="search-icon"
