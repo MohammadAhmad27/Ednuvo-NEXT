@@ -40,12 +40,32 @@ body {
   background: #5bbb7b;
 }
 
+.slider-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 45px;
+}
+
+.swiper-pagination {
+  position: absolute !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .swiper-pagination-bullet {
-  background-color: #FFFFFF !important;
-  opacity: 0.7 !important;
+  background: #d9d9d9 !important;
+  opacity: 1 !important;
+  width: 8px !important;
+  height: 8px !important;
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #1f4b3f !important;
+  background: #5bbb7b !important;
   opacity: 1 !important;
+  width: 10px !important;
+  height: 10px !important;
 }

@@ -41,7 +41,7 @@ export const serviceButtons: ServiceButton[] = [
   { id: 1, label: "Plumbing Services" },
   { id: 2, label: "Electrical Services" },
   { id: 3, label: "Cleaning Services" },
-  { id: 4, label: "Tiling & Flooring Services" },
+  { id: 4, label: "Tiling & Flooring" },
 ];
 
 export const plumbingServices: ServiceCard[] = [

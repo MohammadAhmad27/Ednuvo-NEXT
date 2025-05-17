@@ -96,7 +96,7 @@ const PortfolioDialog = ({
                   alt={`project-image-${index}`}
                   width={100}
                   height={100}
-                  className="object-cover w-full h-[340px] rounded-2xl"
+                  className="object-cover w-full h-[340px] rounded-2xl cursor-pointer"
                 />
               </SwiperSlide>
             ))}

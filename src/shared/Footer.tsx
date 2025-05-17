@@ -4,19 +4,19 @@ import { bottomLinks, footerData, socialIcons } from "@/constants";
 
 const Footer = () => {
   return (
-    <footer className="w-full overflow-hidden bg-primary rounded-tr-[60px] -mt-24 z-10 px-20 pt-20 pb-5">
+    <footer className="w-full overflow-hidden bg-primary max-lg:rounded-tr-[36px] rounded-tr-[60px] -mt-24 z-10 max-md:px-4 md:px-8 lg:px-10 xl:px-20 max-md:pt-10 md:pt-14 lg:pt-16 max-md:pb-11 md:pb-14 lg:pb-16">
       {/* Top Section */}
-      <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-6">
         {footerData?.map((section) => (
           <div key={section?.id}>
-            <h3 className="text-[16px] font-medium text-white mb-3">
+            <h3 className="max-md:text-[14px] md:text-[16px] font-medium text-white mb-3">
               {section?.title}
             </h3>
             <ul className="space-y-3">
               {section?.items?.map((item, index) => (
                 <li
                   key={index}
-                  className="text-[14px] font-normal text-white cursor-pointer"
+                  className="max-md:text-[12px] md:text-[14px] font-normal text-white cursor-pointer"
                 >
                   {item}
                 </li>
@@ -29,9 +29,9 @@ const Footer = () => {
       <div className="mt-10 mb-5 w-full border-t border-[#E2E8F0]" />
 
       {/* Bottom Section */}
-      <div className="w-full flex flex-col md:flex-row items-center justify-between gap-2">
+      <div className="w-full flex flex-col md:flex-row items-center justify-between max-md:gap-4 gap-2">
         {/* Left */}
-        <p className="text-[16px] font-normal text-white">
+        <p className="max-md:text-[13px] text-[16px] font-normal text-white">
           @ 2025 Ednuvo. All rights reserved
         </p>
 
@@ -43,7 +43,7 @@ const Footer = () => {
               <Link
                 key={link?.id}
                 href={link?.href}
-                className="text-[16px] font-normal text-white cursor-pointer"
+                className="max-md:text-[13px] text-[16px] font-normal text-white cursor-pointer"
               >
                 {link?.label}
               </Link>
@@ -64,8 +64,8 @@ const Footer = () => {
                 <Image
                   src={social?.icon}
                   alt={social?.label}
-                  width={20}
-                  height={20}
+                  width={25}
+                  height={25}
                   className="object-cover"
                 />
               </a>
@@ -73,7 +73,7 @@ const Footer = () => {
           </div>
 
           {/* App Store Button */}
-          <a
+          {/* <a
             href="#"
             target="_blank"
             rel="noopener noreferrer"
@@ -87,7 +87,7 @@ const Footer = () => {
               height={85}
               className="object-cover"
             />
-          </a>
+          </a> */}
         </div>
       </div>
     </footer>

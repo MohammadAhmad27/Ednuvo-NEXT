@@ -1,6 +1,5 @@
 "use client";
 import { useRef, ReactNode } from "react";
-import "./slider.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -80,14 +79,14 @@ const Slider = <T,>({ cards, renderCard, itemsPerSlide }: SliderProps<T>) => {
         }}
         pagination={{
           clickable: true,
-          el: ".swiper-pagination",
+          el: ".popular-swiper-pagination",
         }}
         className="w-full"
       >
         {slides}
       </Swiper>
       {/* Add an explicit pagination container */}
-      <div className="swiper-pagination"></div>
+      <div className="popular-swiper-pagination swiper-pagination"></div>
     </div>
   );
 };

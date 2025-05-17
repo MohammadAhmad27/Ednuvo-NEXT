@@ -4,7 +4,7 @@ import { authButtons, navigation } from "@/constants";
 
 const Navbar = () => {
   return (
-    <nav className="w-full overflow-hidden bg-primary flex justify-between items-center gap-2 border-b-[1px] border-gray px-20 py-4">
+    <nav className="w-full overflow-hidden bg-primary flex justify-between items-center gap-2 border-b-[1px] border-gray max-md:px-4 md:px-8 lg:px-10 xl:px-20 py-4">
       {/* Left Side: Logo + Navigation Links */}
       <div className="flex items-center gap-8">
         <Link href="/">
@@ -17,11 +17,11 @@ const Navbar = () => {
           />
         </Link>
 
-        <ul className="flex items-center gap-4">
+        <ul className="flex items-center gap-4 max-lg:hidden">
           {navigation?.map((item) => (
             <li key={item?.id}>
               <Link href={item?.href}>
-                <p className="text-[16px] font-medium text-white">
+                <p className="lg:text-[14px] xl:text-[16px] font-medium text-white text-nowrap">
                   {item?.label}
                 </p>
               </Link>
@@ -30,9 +30,10 @@ const Navbar = () => {
         </ul>
       </div>
       {/* Right Side: Auth Links */}
-      <div className="flex items-center gap-5">
+      {/*  above lg */}
+      <div className="flex items-center gap-5 max-lg:hidden">
         <Link href="/service-provider-onboarding">
-          <p className="text-[16px] font-medium text-white mr-4">
+          <p className="lg:text-[14px] xl:text-[16px] font-medium text-white text-nowrap  xl:mr-4">
             Become a Service Provider
           </p>
         </Link>
@@ -41,9 +42,9 @@ const Navbar = () => {
             <li key={item?.id}>
               <Link href={item?.href}>
                 <p
-                  className={`text-[16px] font-medium ${
+                  className={`lg:text-[14px] xl:text-[16px] font-medium ${
                     item?.label === "Sign Up"
-                      ? "text-lightblack bg-white px-5 py-2 rounded-full"
+                      ? "text-lightblack bg-white px-4 py-2 rounded-full"
                       : "text-white"
                   }`}
                 >
@@ -53,6 +54,21 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
+      </div>
+      {/* below lg */}
+      <div className="flex items-center gap-4 lg:hidden">
+        <Link href="/signup">
+          <p className="max-md:text-[12px] md:text-[14px] font-medium text-lightblack bg-white px-4 py-2 rounded-full">
+            Sign Up
+          </p>
+        </Link>
+        <Image
+          src="/navbar/menu.svg"
+          alt="menu-icon"
+          width={33}
+          height={33}
+          className="object-cover"
+        />
       </div>
     </nav>
   );
